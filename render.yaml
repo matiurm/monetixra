@@ -1,0 +1,32 @@
+# Render Blueprint for Monetixra Backend
+# This file auto-configures the backend service on Render
+
+services:
+  # Backend Web Service
+  - type: web
+    name: monetixra-backend
+    env: node
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        value: https://rgximkhnhxgaonrxzzxl.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU
+      - key: METERED_API_KEY
+        value: ffb21c8dfcff4bf229f8973e77541a11edc0
+      - key: GOOGLE_API_KEY
+        value: AIzaSyCCGkyMBXiByuRV8qFfLRAWPrfFNRQOhoI
+      - key: GOOGLE_VISION_KEY
+        value: AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg
+      - key: VAPID_EMAIL
+        value: mailto:myworktoolsp3@gmail.com
+    # Auto-deploy on push to main
+    autoDeploy: true
