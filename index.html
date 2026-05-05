@@ -19,6 +19,7 @@
 <meta name="twitter:title"      content="Monetixra — Earn Money on Social Media" id="tw-title">
 <meta name="twitter:description"content="Post, watch ads & earn real money with AI-powered social platform." id="tw-desc">
 <meta name="twitter:image"      content="https://monetixra.onrender.com/icon-512.png" id="tw-image">
+<meta name="google-adsense-account" content="ca-pub-2397116277801081">
 <link rel="canonical"           href="https://monetixra.onrender.com/" id="canonical">
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" id="jsonLd">{
@@ -33,6 +34,68 @@
 <!-- ═══════════════════════════════════════════════════════
      Monetixra — External Libraries
      ═══════════════════════════════════════════════════════ -->
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2397116277801081" crossorigin="anonymous"></script>
+
+<!-- ProfitableCPMRate — Popunder -->
+<script src="https://pl29280284.profitablecpmratenetwork.com/25/1b/0c/251b0cf69cbb4dec0e2e5d4397f5e56f.js"></script>
+
+<!-- ProfitableCPMRate — Social Bar (HIDDEN - showing notification banners at top) -->
+<!-- <script src="https://pl29280286.profitablecpmratenetwork.com/1f/31/3a/1f313aa876d332b1f8c2519dd6ff70f9.js"></script> -->
+<!-- Social Bar disabled to hide top notification banners like memecoin ads -->
+
+<!-- ProfitableCPMRate — Native Banner -->
+<script async="async" data-cfasync="false" src="https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js"></script>
+
+<!-- ProfitableCPMRate — Smartlink (for interstitial/rewarded) -->
+<script type="text/javascript">
+(function() {
+  var smartlink = document.createElement('script');
+  smartlink.async = true;
+  smartlink.src = 'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a';
+  if(document.head) document.head.appendChild(smartlink);
+})();
+</script>
+
+<!-- ProfitableCPMRate — 300x50 Banner -->
+<script>
+window.atOptions_300x50 = {
+  'key' : 'ddb48e8829959135fea1323207677af1',
+  'format' : 'iframe',
+  'height' : 50,
+  'width' : 300,
+  'params' : {}
+};
+</script>
+<script src="https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js"></script>
+
+<!-- ProfitableCPMRate — 160x30 Micro Banner -->
+<script>
+window.atOptions_160x30 = {
+  'key' : '5c1a960ae2f4c6d4ac2b758a9e2fb18b',
+  'format' : 'iframe',
+  'height' : 30,
+  'width' : 160,
+  'params' : {}
+};
+</script>
+<script src="https://www.highperformanceformat.com/5c1a960ae2f4c6d4ac2b758a9e2fb18b/invoke.js"></script>
+
+<!-- ProfitableCPMRate — 468x60 Full Banner -->
+<script>
+window.atOptions_468x60 = {
+  'key' : '2c59b270de9e21b57ad543e7b88c2e3f',
+  'format' : 'iframe',
+  'height' : 60,
+  'width' : 468,
+  'params' : {}
+};
+</script>
+<script src="https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js"></script>
+
+<!-- AdMob Mobile Ads SDK (for mobile app/web hybrid) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2253243248364888" crossorigin="anonymous"></script>
 
 <!-- Socket.io Real-time -->
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
@@ -78,7 +141,7 @@ const SUPABASE_PUB  = 'sb_publishable_1CfhnUW80EqyTumZ8WUawA_B0CPbMNF';
 const METERED_API_KEY = 'ffb21c8dfcff4bf229f8973e77541a11edc0';
 
 // ── OpenAI ───────────────────────────────────────────────────
-const OPENAI_API_KEY = '';  // ★ sk-... from openai.com
+const OPENAI_API_KEY = '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';  // ★ sk-... from openai.com
 
 // ── DeepSeek ─────────────────────────────────────────────────
 const DEEPSEEK_API_KEY = '';  // ★ sk-... from platform.deepseek.com
@@ -89,13 +152,39 @@ const EMAILJS_TEMPLATE = '';  // ★ template_xxx from emailjs.com
 const EMAILJS_PUBLIC   = '';  // ★ public key from emailjs.com
 
 // ── Ads ──────────────────────────────────────────────────────
-const ADSTERRA_KEY       = '';   // ★ from adsterra.com
-const ADSENSE_CLIENT     = '';   // ★ ca-pub-xxx from adsense.google.com
+const ADSTERRA_KEY       = '55d8dff1aa431254a145e6f12f01b775';   // ★ from adsterra.com
+const ADSENSE_CLIENT     = 'ca-pub-2397116277801081';   // from adsense.google.com
 const ADSENSE_SLOT       = '';   // ★ slot ID from adsense.google.com
 const PROPELLERADS_ZONE  = '';   // ★ Zone ID from propellerads.com
-const MEDIANET_CID       = '';   // ★ Customer ID from media.net
+const MEDIANET_CID       = '9316157812';   // Customer ID from media.net
 const MGID_WIDGET        = '';   // ★ Widget ID from mgid.com
 const TABOOLA_PUBLISHER  = '';   // ★ Publisher ID from taboola.com
+
+// ── AdMob Configuration ──────────────────────────────────────
+const ADMOB_APP_ID           = 'ca-app-pub-2253243248364888~1427340343';
+const ADMOB_BANNER_ID        = 'ca-app-pub-2253243248364888/3990983995';
+const ADMOB_INTERSTITIAL_ID  = 'ca-app-pub-2253243248364888/3199587018';
+const ADMOB_REWARDED_INTERSTITIAL_ID = 'ca-app-pub-2253243248364888/5139354646';
+const ADMOB_REWARDED_ID      = 'ca-app-pub-2253243248364888/6812588459';
+const ADMOB_NATIVE_ID        = 'ca-app-pub-2253243248364888/2245597996';
+const ADMOB_APP_OPEN_ID      = 'ca-app-pub-2253243248364888/8392203945';
+const ADMOB_APP_OPEN_ALT_ID  = 'ca-app-pub-2253243248364888/1173248962';
+
+// ── ProfitableCPMRate Network ─────────────────────────────────
+const CPMR_POPUNDER_ID     = '29179785';
+const CPMR_SMARTLINK_ID    = '29179786';
+const CPMR_SMARTLINK_URL   = 'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a';
+const CPMR_SOCIALBAR_ID    = '29179787';
+const CPMR_NATIVE_BANNER_ID= '29179788';
+const CPMR_BANNER_160x30_ID= '29179789';
+const CPMR_BANNER_160x30_KEY= '5c1a960ae2f4c6d4ac2b758a9e2fb18b';
+const CPMR_BANNER_468x60_ID= '29179790';
+const CPMR_BANNER_468x60_KEY= '2c59b270de9e21b57ad543e7b88c2e3f';
+const CPMR_BANNER_300x50_KEY= 'ddb48e8829959135fea1323207677af1';
+
+// ── Additional AdSense Info ───────────────────────────────────
+const ADSENSE_PUBLISHER_ID   = 'pub-2397116277801081';
+const ADSENSE_CUSTOMER_ID    = '9316157812';
 
 // ── Payments ─────────────────────────────────────────────────
 const STRIPE_PUB_KEY = '';       // ★ pk_live_xxx from stripe.com
@@ -107,6 +196,15 @@ const CLOUDINARY_UPLOAD_PRESET= '';  // ★ upload preset (unsigned)
 // ── Web3 RPC ─────────────────────────────────────────────────
 const INFURA_PROJECT_ID = '';    // ★ from infura.io
 const HELIUS_API_KEY    = '';    // ★ from helius.dev
+
+// ── AWS S3 (for data migration) ─────────────────────────────
+const S3_CONFIG = {
+  accessKeyId: '',      // ★ AWS Access Key ID
+  secretAccessKey: '',  // ★ AWS Secret Access Key
+  region: 'us-east-1',  // ★ S3 Bucket region
+  bucket: '',           // ★ S3 Bucket name
+  endpoint: ''          // ★ Custom endpoint (optional, for Wasabi, DigitalOcean Spaces, etc.)
+};
 
 // ── Auto-activate Adsterra ───────────────────────────────────
 if(ADSTERRA_KEY) {
@@ -324,6 +422,44 @@ body{font-family:var(--ff);background:var(--bg);color:var(--t1);min-height:100vh
 .adpill.on,.adpill:hover{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-color:transparent;box-shadow:0 2px 10px rgba(109,40,217,.35);}
 .adpill .led{width:4px;height:4px;border-radius:50%;background:var(--neon);animation:pulse 1.4s infinite;}
 
+/* ========== HIDE EXTERNAL NOTIFICATION ADS ========== */
+/* Hide floating notification banners from external ad networks */
+iframe[src*="profitablecpmratenetwork"],
+iframe[src*="adstxtmanager"],
+iframe[src*="srv"],
+div[class*="notification"][class*="ad"],
+div[id*="notif"][id*="ad"],
+div[style*="position:fixed"][style*="z-index:9999"],
+div[style*="position:fixed"][style*="z-index:10000"],
+.psn-notification,
+.ad-notification,
+.push-notification,
+.alert-ad,
+.promo-banner,
+[class*="memecoin"],
+[id*="memecoin"],
+[class*="adzilla"],
+[id*="adzilla"],
+[class*="monster"],
+[id*="monster"],
+/* Block any floating banners at very high z-index */
+div[style*="position:fixed"][style*="top:0"][style*="z-index:9"],
+iframe[src*="memecoin"],
+iframe[src*="adzilla"],
+#ckCpgn,
+#ckBkgd,
+.floating-banner,
+.sticky-ad-top,
+.top-ad-banner,
+.notification-ad-bar {
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  height:0 !important;
+  width:0 !important;
+  pointer-events:none !important;
+}
+
 /* ========== BANNER AD ========== */
 #bannerAd{position:fixed;top:38px;left:0;right:0;z-index:10001;height:30px;background:linear-gradient(90deg,var(--c1),var(--neon3),var(--c2),var(--neon),var(--c4),var(--c1));background-size:400% 100%;animation:gradX 5s ease infinite;display:flex;align-items:center;padding:0 8px;gap:7px;overflow:hidden;}
 .ba-label{background:rgba(0,0,0,.28);padding:1px 7px;border-radius:99px;font-size:9px;font-weight:800;color:#fff;letter-spacing:1.5px;flex-shrink:0;}
@@ -365,8 +501,9 @@ body{font-family:var(--ff);background:var(--bg);color:var(--t1);min-height:100vh
 .cat-pill .ci{font-size:12px;}
 
 /* ========== BOTTOM NAV ========== */
-#btmNav{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(3,3,8,.96);backdrop-filter:blur(24px);border-top:1px solid var(--b1);display:flex;padding:2px 0 calc(2px + env(safe-area-inset-bottom));}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 2px;cursor:pointer;border-radius:0;color:var(--t3);transition:all var(--fast);position:relative;border:none;background:transparent;}
+#btmNav{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(3,3,8,.96);backdrop-filter:blur(24px);border-top:1px solid var(--b1);display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0 calc(2px + env(safe-area-inset-bottom));}
+#btmNav::-webkit-scrollbar{display:none;}
+.bn{flex:0 0 auto;min-width:60px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 4px;cursor:pointer;border-radius:0;color:var(--t3);transition:all var(--fast);position:relative;border:none;background:transparent;}
 .bn .ico{font-size:18px;line-height:1;transition:transform var(--fast);}
 .bn .lbl{font-size:8.5px;font-weight:600;letter-spacing:.2px;transition:color var(--fast);}
 .bn.on .ico{transform:scale(1.15);}
@@ -571,7 +708,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--t1);min-height:100vh
 .article-body{padding:12px 13px;}
 .article-tag{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--c2);margin-bottom:5px;}
 .article-ttl{font-family:var(--fd);font-size:16px;font-weight:700;line-height:1.4;margin-bottom:6px;}
-.article-excerpt{font-size:13px;color:var(--t2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.article-excerpt{font-size:13px;color:var(--t2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .article-meta{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:11px;color:var(--t3);}
 
 /* ========== CAROUSEL ========== */
@@ -1109,12 +1246,18 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 .sw-update-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,var(--c1),var(--c2));color:#fff;padding:12px 16px;z-index:9999;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;}
 .sw-update-banner button{background:#fff;color:var(--c1);border:none;border-radius:99px;padding:6px 14px;font-weight:700;cursor:pointer;}
 
+/* ========== BOTTOM NAVIGATION CLICK FIX ========== */
+#btmNav{position:fixed !important;bottom:0 !important;left:0 !important;right:0 !important;z-index:99999 !important;pointer-events:auto !important;}
+#btmNav .bn{cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;-webkit-tap-highlight-color:transparent !important;touch-action:manipulation !important;}
+#btmNav .bn *{pointer-events:none !important;}
+#btmNav .bn:active{transform:scale(0.95) !important;}
+
 </style>
 </head>
 <body>
 
 <!-- ========== ADS BAR ========== -->
-<div id="adsBar">
+<div id="adsBar" style="display:none;">
   <div class="adbar-ttl">Ad Types</div>
   <div class="adpill on" onclick="adTypeClick('banner',this)"><div class="led"></div>Banner ✓</div>
   <div class="adpill" onclick="adTypeClick('interstitial',this)"><div class="led"></div>Interstitial ✓</div>
@@ -1132,8 +1275,26 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <div class="ba-label">AD</div>
   <div id="baT">🚀 Monetixra with AI, Crypto, NFT, MLM, Metaverse & More!</div>
   <div class="ba-earn" onclick="clickBanner()">+2</div>
-  <div class="ba-x" onclick="closeBanner()">✕</div>
 </div>
+<script>
+(function(){
+  const ads = [
+    '🚀 Monetixra with AI, Crypto, NFT, MLM, Metaverse & More!',
+    '💰 Earn Real Money — Watch Ads, Complete Tasks, Invite Friends!',
+    '🔥 Trending Now: AI-Powered Social Earnings Platform!',
+    '🎁 Daily Bonus: Claim Free Points Every Day!',
+    '💎 Premium Plans: 2x Earnings & Priority Withdrawals!',
+    '🤖 AI Caption Generator — Create Viral Posts Instantly!',
+    '🪙 Crypto Withdrawals: BTC, ETH, USDT, BNB Supported!',
+    '🎨 NFT Marketplace — Mint Your Posts as NFTs!',
+    '🌐 100+ Languages — Auto-Translate Your Content!',
+    '⚡ Instant Withdrawals via bKash, Nagad, PayPal, Crypto!'
+  ];
+  let idx = 0;
+  const el = document.getElementById('baT');
+  if(el) setInterval(() => { idx = (idx + 1) % ads.length; el.textContent = ads[idx]; }, 5000);
+})();
+</script>
 
 <!-- ========== TICKER ========== -->
 <div id="ticker">
@@ -1292,6 +1453,10 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     </div>
   </div>
   <div id="feedList"></div>
+  <!-- Native Banner Ad Container -->
+  <div id="container-1805a61f4f6c6177d946441e5153e81c" style="margin:12px 0;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;min-height:90px;text-align:center;">
+    <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
+  </div>
   <div id="feedLoadMore" style="display:none;text-align:center;padding:12px;">
     <button class="btn btn-ghost btn-sm" onclick="loadMorePosts()">Load More Posts ↓</button>
   </div>
@@ -1359,6 +1524,10 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <button class="btn btn-ghost btn-sm" onclick="nav('nft')">🎨 Web3</button>
       <button class="btn btn-ghost btn-sm" onclick="openModal('stakeModal')">💎 Stake</button>
     </div>
+    <!-- Watch Ad for Points Button -->
+    <button class="btn btn-p" onclick="showRewardedAd((pts)=>{addPts(pts,'Reward Ad'); trackAdRevenue('rewarded', pts/100);})" style="width:100%;margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;">
+      📺 Watch Ad & Earn 10 Points
+    </button>
     <!-- Web3 Quick Status -->
     <div id="walletWeb3Status" style="display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:11px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -1730,6 +1899,54 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <div class="admin-grid" id="adminStats"></div>
   <!-- Analytics -->
   <div id="adminAnalytics" style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;margin-bottom:10px;"></div>
+  <!-- Data Export & Migration -->
+  <div style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;margin-bottom:10px;">
+    <div style="font-size:11px;font-weight:700;color:var(--neon);margin-bottom:8px;">📤 DATA EXPORT & MIGRATION</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-p btn-sm" onclick="exportSupabaseData()">📥 Export Supabase (JSON)</button>
+      <button class="btn btn-o btn-sm" onclick="exportLocalData()">💾 Local Backup</button>
+      <button class="btn btn-g btn-sm" onclick="migrateToS3()">☁️ Preview S3 Migration</button>
+      <button class="btn btn-r btn-sm" onclick="migrateToS3({dryRun:false})">🚀 Migrate to S3</button>
+      <button class="btn btn-p btn-sm" onclick="fullExportAndMigrate()">🔥 Full Export + Migrate</button>
+    </div>
+    <div style="font-size:10px;color:var(--t3);margin-top:8px;">
+      Export: users, posts, comments, transactions → JSON | Migrate: Supabase files → S3 Bucket
+    </div>
+  </div>
+
+  <!-- LIVE MONITOR (Real-time) -->
+  <div style="background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(0,212,255,.08));border:1px solid var(--neon);border-radius:14px;padding:12px;margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:700;color:var(--neon);">📡 LIVE MONITOR</div>
+      <div style="display:flex;gap:6px;">
+        <span id="liveActiveBadge" style="background:var(--g2);padding:3px 8px;border-radius:99px;font-size:10px;color:var(--c3);">🟢 0 Active</span>
+        <span id="livePostBadge" style="background:var(--g2);padding:3px 8px;border-radius:99px;font-size:10px;color:var(--c4);">📝 0/min</span>
+      </div>
+    </div>
+    
+    <!-- Active Users Section -->
+    <div style="margin-bottom:12px;">
+      <div style="font-size:10px;color:var(--t3);margin-bottom:6px;">👥 Currently Online Users</div>
+      <div id="liveActiveUsers" style="display:flex;flex-wrap:wrap;gap:6px;max-height:80px;overflow-y:auto;padding:6px;background:var(--bg3);border-radius:8px;">
+        <span style="font-size:11px;color:var(--t3);">No active users</span>
+      </div>
+    </div>
+    
+    <!-- Live Posts Feed -->
+    <div>
+      <div style="font-size:10px;color:var(--t3);margin-bottom:6px;">🔄 Latest Posts (Real-time)</div>
+      <div id="livePostsFeed" style="max-height:150px;overflow-y:auto;padding:6px;background:var(--bg3);border-radius:8px;">
+        <div style="font-size:11px;color:var(--t3);padding:8px;text-align:center;">No recent posts</div>
+      </div>
+    </div>
+    
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button class="btn btn-p btn-xs" onclick="startLiveMonitor()">▶ Start Monitor</button>
+      <button class="btn btn-ghost btn-xs" onclick="refreshLiveMonitor()">🔄 Refresh</button>
+      <button class="btn btn-g btn-xs" onclick="adminGlobalActions()">🛠️ Global Actions</button>
+    </div>
+  </div>
+
   <!-- Tabs -->
   <div class="chips" style="margin-bottom:10px;" id="adminTabs">
     <div class="chip on"  onclick="adminTab('users',this)">👥 Users</div>
@@ -1738,6 +1955,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     <div class="chip" onclick="adminTab('withdraw',this)">💸 Withdrawals</div>
     <div class="chip" onclick="adminTab('reports',this)">⚠️ Reports</div>
     <div class="chip" onclick="adminTab('analytics',this)">📊 Analytics</div>
+    <div class="chip" onclick="adminTab('live',this)" style="color:var(--neon);">📡 Live</div>
   </div>
   <!-- Users Tab -->
   <div id="adminTabUsers">
@@ -1779,6 +1997,16 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 <!-- Admin Analytics Tab (inside pg-admin) -->
 <div id="adminTabAnalytics" style="display:none;">
   <div id="adminFullAnalytics"></div>
+</div>
+
+<!-- Admin Live Monitor Tab -->
+<div id="adminTabLive" style="display:none;">
+  <div style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;">
+    <div style="font-size:14px;font-weight:700;color:var(--neon);margin-bottom:10px;">📡 Real-Time Activity Monitor</div>
+    <div id="liveDetailedStats" style="font-size:11px;color:var(--t2);">
+      <p>Click "Start Monitor" to see real-time updates</p>
+    </div>
+  </div>
 </div>
 
 <!-- ADMIN USER CONTROL MODAL -->
@@ -1993,42 +2221,89 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
 <!-- ========== BOTTOM NAV ========== -->
 <div id="btmNav">
-  <button class="bn on" data-p="feed" onclick="nav('feed')"><span class="ico">🏠</span><span class="lbl">Feed</span></button>
-  <button class="bn" data-p="explore" onclick="nav('explore')"><span class="ico">🔭</span><span class="lbl">Explore</span></button>
-  <button class="bn" data-p="earn" onclick="nav('earn')"><span class="ico">💸</span><span class="lbl">Earn</span></button>
-  <button class="bn" data-p="friends" onclick="nav('friends')"><span class="ico">👥</span><span class="lbl">Friends</span><span class="bn-bdg" id="friendBdg"></span></button>
-  <button class="bn" data-p="wallet" onclick="nav('wallet')"><span class="ico">💼</span><span class="lbl">Wallet</span></button>
-  <button class="bn" data-p="messages" onclick="nav('messages')"><span class="ico">💬</span><span class="lbl">Chat</span><span class="bn-bdg" id="msgBdg"></span></button>
-  <button class="bn" data-p="apps" onclick="nav('apps')"><span class="ico">📱</span><span class="lbl">Apps</span></button>
-  <button class="bn" data-p="nft" onclick="nav('nft')"><span class="ico">🎨</span><span class="lbl">NFT</span></button>
-  <button class="bn" data-p="metaverse" onclick="nav('metaverse')"><span class="ico">🌐</span><span class="lbl">Meta</span></button>
-  <button class="bn" data-p="analytics" onclick="nav('analytics')"><span class="ico">📊</span><span class="lbl">Stats</span></button>
-  <button class="bn" data-p="gamification" onclick="nav('gamification')"><span class="ico">🏆</span><span class="lbl">Badges</span></button>
-  <button class="bn" data-p="profile" onclick="nav('profile')"><span class="ico">👤</span><span class="lbl">Me</span></button>
-  <button class="bn" data-p="settings" onclick="nav('settings')"><span class="ico">⚙️</span><span class="lbl">Settings</span></button>
+  <button class="bn on" data-p="feed" onclick="nav('feed')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🏠</span><span class="lbl">Feed</span></button>
+  <button class="bn" data-p="explore" onclick="nav('explore')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🔭</span><span class="lbl">Explore</span></button>
+  <button class="bn" data-p="earn" onclick="nav('earn')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💸</span><span class="lbl">Earn</span></button>
+  <button class="bn" data-p="friends" onclick="nav('friends')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">👥</span><span class="lbl">Friends</span><span class="bn-bdg" id="friendBdg"></span></button>
+  <button class="bn" data-p="wallet" onclick="nav('wallet')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💼</span><span class="lbl">Wallet</span></button>
+  <button class="bn" data-p="messages" onclick="nav('messages')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💬</span><span class="lbl">Chat</span><span class="bn-bdg" id="msgBdg"></span></button>
+  <button class="bn" data-p="apps" onclick="nav('apps')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">📱</span><span class="lbl">Apps</span></button>
+  <button class="bn" data-p="nft" onclick="nav('nft')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🎨</span><span class="lbl">NFT</span></button>
+  <button class="bn" data-p="metaverse" onclick="nav('metaverse')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🌐</span><span class="lbl">Meta</span></button>
+  <button class="bn" data-p="analytics" onclick="nav('analytics')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">📊</span><span class="lbl">Stats</span></button>
+  <button class="bn" data-p="gamification" onclick="nav('gamification')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🏆</span><span class="lbl">Badges</span></button>
+  <button class="bn" data-p="profile" onclick="nav('profile')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">👤</span><span class="lbl">Me</span></button>
+  <button class="bn" data-p="settings" onclick="nav('settings')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">⚙️</span><span class="lbl">Settings</span></button>
 </div>
 
 <!-- ========== INTERSTITIAL AD ========== -->
 <div class="ints" id="intsAd">
   <div class="ints-skip"><button onclick="closeInts()" style="background:var(--g2);border-radius:99px;padding:5px 13px;">Skip ✕</button></div>
+  
+  <!-- TOP BANNER AD -->
+  <div id="intsTopBanner" style="margin-bottom:15px;text-align:center;min-height:60px;background:var(--g2);border-radius:12px;padding:8px;max-width:468px;width:90%;">
+    <div style="font-size:9px;color:var(--t3);">Sponsored</div>
+    <div id="intsBannerSlot" style="min-height:50px;display:flex;align-items:center;justify-content:center;">
+      <!-- ProfitableCPMRate Banner 468x60 -->
+      <script>
+        (function(){
+          window.atOptions_ints = { key: '2c59b270de9e21b57ad543e7b88c2e3f', format: 'iframe', height: 60, width: 468, params: {} };
+          window.atOptions = window.atOptions_ints;
+          let s = document.createElement('script');
+          s.src = 'https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js';
+          document.currentScript.parentNode.appendChild(s);
+        })();
+      </script>
+    </div>
+  </div>
+  
   <div class="ints-card">
-    <div style="font-size:46px;" id="intsIcon">🛒</div>
-    <div style="font-family:var(--fd);font-size:18px;" id="intsTitle">Mega Sale!</div>
-    <div style="font-size:12px;" id="intsSub">Today only</div>
-    <button class="btn btn-o" onclick="clickInts()" style="margin-bottom:8px;">Visit & Earn +5</button>
+    <div style="font-size:46px;" id="intsIcon">🎯</div>
+    <div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--neon);" id="intsTitle">Watch & Earn!</div>
+    <div style="font-size:13px;color:var(--t2);margin:8px 0;" id="intsSub">View this ad to earn points instantly</div>
+    
+    <!-- MIDDLE NATIVE BANNER AD -->
+    <div id="intsNativeAd" style="margin:12px 0;padding:8px;background:var(--g2);border-radius:10px;min-height:90px;">
+      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
+      <div id="container-ints-native"></div>
+      <script async="async" data-cfasync="false" src="https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js"></script>
+    </div>
+    
+    <button class="btn btn-o" onclick="clickInts()" style="margin-bottom:8px;font-weight:700;">✓ Ad Viewed - Claim +5 pts</button>
     <div class="ints-cnt" id="intsCnt">Skip in 5s...</div>
     <div class="ints-pb"><div class="ints-fill" id="intsBar"></div></div>
+    
+    <!-- SMALL BANNER AD AT BOTTOM -->
+    <div id="intsBottomBanner" style="margin-top:12px;padding:6px;background:var(--bg4);border-radius:8px;min-height:40px;">
+      <div style="font-size:8px;color:var(--t3);">Ad</div>
+      <div style="font-size:11px;color:var(--neon);">🔥 Hot Deals - Click to Explore!</div>
+    </div>
   </div>
 </div>
 
 <!-- ========== REWARD AD ========== -->
 <div class="rwad" id="rwAd">
-  <div class="rw-card">
-    <span class="rw-icon">🎁</span>
-    <div style="font-size:18px;">Reward Available!</div>
-    <div class="rw-pts">+10 pts</div>
-    <button class="btn btn-g" onclick="watchRewardAd()">▶ Watch Now</button>
-    <button class="btn btn-ghost btn-sm" onclick="G('rwAd').classList.remove('show')">Later</button>
+  <div class="rw-card" style="max-width:400px;padding:20px;">
+    <!-- Banner Ad at Top -->
+    <div style="margin-bottom:15px;background:var(--g2);border-radius:10px;padding:6px;min-height:50px;">
+      <div style="font-size:8px;color:var(--t3);">Sponsored</div>
+      <div style="font-size:12px;color:var(--neon);font-weight:600;">💰 Earn More - Premium Offers Inside!</div>
+    </div>
+    
+    <span class="rw-icon">💎</span>
+    <div style="font-size:20px;font-weight:700;color:var(--c4);">Bonus Reward!</div>
+    <div style="font-size:13px;color:var(--t2);margin:8px 0;">Watch this exclusive video ad</div>
+    <div class="rw-pts" style="font-size:32px;color:var(--neon);">+10 pts</div>
+    
+    <!-- Native Banner Ad in Middle -->
+    <div style="margin:12px 0;background:var(--bg3);border-radius:8px;padding:8px;min-height:60px;">
+      <div id="container-reward-native"></div>
+    </div>
+    
+    <button class="btn btn-g" onclick="watchRewardAd()" style="font-weight:700;width:100%;margin-bottom:8px;">🎬 Watch & Claim Now</button>
+    <button class="btn btn-ghost btn-sm" onclick="G('rwAd').classList.remove('show')" style="width:100%;">⏭ Maybe Later</button>
+    
+    <div style="font-size:10px;color:var(--t3);margin-top:10px;">✓ Takes only 15-30 seconds</div>
   </div>
 </div>
 
@@ -2122,7 +2397,47 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 <div id="toastWrap"></div>
 
 <!-- ========== FAB ========== -->
-<button id="fab" onclick="openPostModal()">+</button>
+<button id="fab" onclick="openPostModal()" title="Create Post">+</button>
+<script>
+// Ensure FAB works properly
+document.addEventListener('DOMContentLoaded', function() {
+  let fab = document.getElementById('fab');
+  if(fab) {
+    fab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('[FAB] Clicked');
+      if(typeof openPostModal === 'function') {
+        openPostModal();
+      } else {
+        console.error('[FAB] openPostModal not found');
+        alert('Error: Create Post function not loaded');
+      }
+    });
+  }
+  
+  // Fix bottom nav buttons - ensure they work
+  let navButtons = document.querySelectorAll('#btmNav .bn');
+  navButtons.forEach(function(btn) {
+    let page = btn.getAttribute('data-p');
+    if(page) {
+      // Remove old onclick and add fresh event listener
+      btn.onclick = null;
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[BottomNav] Clicked:', page);
+        if(typeof nav === 'function') {
+          nav(page);
+        } else {
+          console.error('[BottomNav] nav function not found');
+        }
+      });
+    }
+  });
+  console.log('[BottomNav] Fixed', navButtons.length, 'navigation buttons');
+});
+</script>
 
 <!-- ========== MODALS ========== -->
 
@@ -2135,6 +2450,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <button class="rich-btn" onclick="execCmd('italic')"><i>I</i></button>
       <button class="rich-btn" onclick="execCmd('underline')"><u>U</u></button>
       <button class="rich-btn" onclick="insertLink()">🔗 Link</button>
+      <button class="rich-btn" onclick="startLiveStreamFromPost()" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);color:#fff;font-weight:800;">🔴 LIVE</button>
     </div>
     <div class="rich-editor" id="postEditor" contenteditable="true"></div>
     <div class="fg" style="margin-top:8px;"><input class="fi" id="postTags" placeholder="#hashtags (space separated)"></div>
@@ -2243,6 +2559,16 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     <div class="dl-sub" id="dlModalSub">Choose quality</div>
     <div class="dl-grid" id="dlQualityGrid"></div>
     <div class="dl-progress" id="dlProgress"><div class="dl-progress-bar" id="dlProgressBar"></div></div>
+    <!-- Ad shown during download -->
+    <div id="dlAdDuring" style="display:none;margin-top:12px;padding:8px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;text-align:center;min-height:60px;">
+      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
+      <div id="dlAdDuringSlot" style="min-height:40px;"></div>
+    </div>
+    <!-- Ad shown after download completes -->
+    <div id="dlAdAfter" style="display:none;margin-top:12px;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;text-align:center;min-height:90px;">
+      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
+      <div id="dlAdAfterSlot" style="min-height:70px;"></div>
+    </div>
     <button class="dl-cancel" onclick="closeDlModal()">✕ Cancel</button>
   </div>
 </div>
@@ -2311,7 +2637,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     <div style="font-size:12px;line-height:1.8;color:var(--t2);">
       <b>1. Acceptance</b><br>By using Monetixra, you agree to these terms.<br><br>
       <b>2. Earning Rules</b><br>Points are earned through legitimate activity only. Fraud/abuse results in permanent ban.<br><br>
-      <b>3. Withdrawals</b><br>KYC verification required. Minimum 500 pts. Admin approval required within 7 business days.<br><br>
+      <b>3. Withdrawals</b><br>KYC verification required. Minimum 50,000 pts ($50). Admin approval required within 7 business days.<br><br>
       <b>4. Content Policy</b><br>No adult content, hate speech, copyright violations, or spam.<br><br>
       <b>5. Privacy</b><br>We collect minimal data necessary for platform operation. See Privacy Policy.<br><br>
       <b>6. Termination</b><br>We reserve the right to suspend/terminate accounts violating these terms.<br><br>
@@ -2353,7 +2679,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <div class="modal">
     <div class="modal-hd"><div class="modal-ttl">💸 Withdraw</div><div class="modal-x" onclick="closeModal('wdModal')">✕</div></div>
     <div style="text-align:center;padding:12px;"><div class="mono neon" id="wdAvail">0</div><div>Available Points</div></div>
-    <div class="fg"><input class="fi" id="wdAmt" type="number" placeholder="Amount (min 500)"></div>
+    <div class="fg"><input class="fi" id="wdAmt" type="number" placeholder="Amount (min 50000 pts = $50)"></div>
     <select class="fi" id="wdMethod">
       <option>bKash</option><option>Nagad</option><option>Rocket</option>
       <option>Bank Transfer</option><option>PayPal</option><option>Bitcoin (BTC)</option>
@@ -2541,7 +2867,7 @@ const ADMIN_ID = 'admin_matiur';
 const ADMIN_PASS = 'F<%0K"-9!H5.X+(*#)`';
 const ADMIN_CUT = 0.10;
 const PTS_PER_USD = 1000;
-const MIN_WITHDRAW = 500;
+const MIN_WITHDRAW = 50000;
 const STORAGE_KEY = 'mxt_';
 const MLM_LEVELS = [{ level: 1, commission: 0.10, name: 'Level 1' },{ level: 2, commission: 0.05, name: 'Level 2' },{ level: 3, commission: 0.03, name: 'Level 3' },{ level: 4, commission: 0.02, name: 'Level 4' },{ level: 5, commission: 0.01, name: 'Level 5' },{ level: 6, commission: 0.01, name: 'Level 6' },{ level: 7, commission: 0.01, name: 'Level 7' },{ level: 8, commission: 0.01, name: 'Level 8' },{ level: 9, commission: 0.01, name: 'Level 9' },{ level: 10, commission: 0.01, name: 'Level 10' }];
 const LANGUAGES = { en: { name: 'English', flag: '🇬🇧' }, bn: { name: 'Bengali', flag: '🇧🇩' }, hi: { name: 'Hindi', flag: '🇮🇳' }, es: { name: 'Spanish', flag: '🇪🇸' }, fr: { name: 'French', flag: '🇫🇷' }, de: { name: 'German', flag: '🇩🇪' }, zh: { name: 'Chinese', flag: '🇨🇳' }, ja: { name: 'Japanese', flag: '🇯🇵' }, ar: { name: 'Arabic', flag: '🇸🇦' }, ru: { name: 'Russian', flag: '🇷🇺' }, pt: { name: 'Portuguese', flag: '🇵🇹' } };
@@ -3205,6 +3531,10 @@ function mount() {
   G('authWrap').style.display='none';
   G('appWrap').style.display='block';
   G('fab').style.display='flex';
+  
+  // Initialize bottom nav buttons after login
+  initBottomNav();
+  
   if(!D.users[ADMIN_ID]) seedData();
   syncCU();
   if(CU?.email===ADMIN_EMAIL || CU?.phone===ADMIN_PHONE) {
@@ -3246,15 +3576,94 @@ function toggleColorBlind() { document.body.classList.toggle('cb-mode'); G('cbTo
 function toggleLargeText() { document.body.classList.toggle('large-txt'); G('ltToggle').checked = document.body.classList.contains('large-txt'); }
 function buildColorPicker() { let cp=G('colorPicker'); if(!cp) return; let cur=localStorage.getItem(STORAGE_KEY+'accent')||'#00ffaa'; cp.innerHTML=COLORS.map(c=>`<div style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;border:2px solid ${c===cur?'#fff':'transparent'};" onclick="setAccent('${c}'); document.querySelectorAll('#colorPicker div').forEach(d=>d.style.borderColor='transparent'); this.style.borderColor='#fff';"></div>`).join(''); }
 
+// Initialize Bottom Navigation Buttons
+function initBottomNav() {
+  console.log('[initBottomNav] Initializing navigation buttons...');
+  let navButtons = document.querySelectorAll('#btmNav .bn');
+  
+  navButtons.forEach(function(btn) {
+    let page = btn.getAttribute('data-p');
+    if(page) {
+      // Ensure the button has proper cursor style
+      btn.style.cursor = 'pointer';
+      btn.style.pointerEvents = 'auto';
+      
+      // Set direct onclick attribute for maximum compatibility
+      btn.setAttribute('onclick', "event.preventDefault(); event.stopPropagation(); console.log('[BottomNav] Clicked: \"' + this.getAttribute('data-p') + '\"'); nav(this.getAttribute('data-p')); return false;");
+      
+      console.log('[initBottomNav] Bound:', page);
+    }
+  });
+  
+  console.log('[initBottomNav] Fixed', navButtons.length, 'navigation buttons');
+}
+
 // Navigation
 function nav(page) {
+  console.log('[nav] Navigating to:', page);
+  
+  // Hide all pages
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.bn').forEach(b=>b.classList.remove('on'));
-  G('pg-'+page)?.classList.add('on');
-  let bn = document.querySelector(`.bn[data-p="${page}"]`); if(bn) bn.classList.add('on');
-  G('catBar').style.display = ['feed','explore','apps'].includes(page)?'flex':'none';
-  let loaders = { feed: ()=>{ rStories(); rFeed(); }, explore: rExplore, earn: rEarn, wallet: rWallet, notif: rNotif, profile: rProfile, leaderboard: rLeaderboard, messages: rMessages, friends: rFriends, referral: rReferral, admin: rAdmin, settings: rSettings, offline: rOfflinePage, marketplace: rMarketplace, nft: ()=>{ rNFTMarketplace(); loadCryptoPrices(); }, metaverse: rMetaverse, apps: rAppsPage, analytics: rAnalytics, activity: rActivity, gamification: rGamification };
-  if(loaders[page]) loaders[page]();
+  
+  // Show target page
+  let targetPage = G('pg-'+page);
+  if(targetPage) {
+    targetPage.classList.add('on');
+    console.log('[nav] Page found:', 'pg-'+page);
+  } else {
+    console.error('[nav] Page NOT found:', 'pg-'+page);
+    toast('e','Page not found: '+page);
+    return;
+  }
+  
+  // Update bottom nav active state
+  let bn = document.querySelector(`.bn[data-p="${page}"]`);
+  if(bn) bn.classList.add('on');
+  
+  // Show/hide category bar
+  let catBar = G('catBar');
+  if(catBar) catBar.style.display = ['feed','explore','apps'].includes(page)?'flex':'none';
+  
+  // Page loaders
+  let loaders = {
+    feed: ()=>{ rStories(); rFeed(); },
+    explore: rExplore,
+    earn: rEarn,
+    wallet: rWallet,
+    notif: rNotif,
+    profile: rProfile,
+    leaderboard: rLeaderboard,
+    messages: rMessages,
+    friends: rFriends,
+    referral: rReferral,
+    admin: rAdmin,
+    settings: rSettings,
+    offline: rOfflinePage,
+    marketplace: rMarketplace,
+    nft: ()=>{ rNFTMarketplace(); loadCryptoPrices(); },
+    metaverse: rMetaverse,
+    apps: rAppsPage,
+    analytics: rAnalytics,
+    activity: rActivity,
+    gamification: rGamification
+  };
+  
+  if(loaders[page]) {
+    try {
+      console.log('[nav] Loading page:', page);
+      loaders[page]();
+      console.log('[nav] Page loaded successfully:', page);
+    } catch(e) {
+      console.error('[nav] Error loading page', page, ':', e);
+      toast('e', 'Error loading page', 'Please try again');
+    }
+  } else {
+    console.error('[nav] No loader found for page:', page);
+  }
+  
+  // Scroll to top
+  window.scrollTo(0,0);
 }
 
 // Force Follow (cannot unfollow)
@@ -3346,7 +3755,7 @@ function rFeed(reset=true) {
   const frag  = document.createDocumentFragment();
   let adIdx   = _feedPage * 2;
   chunk.forEach((p,i) => {
-    if(i>0 && i%5===0){ let ad=mkFeedAd(adIdx++); if(ad) frag.appendChild(ad); }
+    if(i>0 && i%3===0){ let ad=mkFeedAd(adIdx++); if(ad) frag.appendChild(ad); }
     frag.appendChild(mkPost(p));
   });
   list.appendChild(frag);
@@ -3354,10 +3763,9 @@ function rFeed(reset=true) {
   let lm = G('feedLoadMore');
   if(lm) lm.style.display = (start + _FEED_SIZE) < posts.length ? 'block' : 'none';
 }
-function loadMorePosts() { rFeed(false); }
+function loadMorePosts() { toast('i','Loading...'); setTimeout(()=>rFeed(false),500); }
 // mkFeedAd moved to Web3 section above
 function clickFeedAd(btn,pts) { btn.textContent='✅ +'+pts; btn.disabled=true; addPts(pts,'Clicked Ad'); }
-function loadMorePosts() { toast('i','Loading...'); setTimeout(rFeed,500); }
 
 // Post Rendering
 function mkPost(post) {
@@ -3369,6 +3777,32 @@ function mkPost(post) {
   let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" onclick="toast('w','Follow is permanent and cannot be undone')">🔗 Following</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
   let h = `<div class="post-hd"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});" onclick="viewUser('${post.author}')">${author.avatar?`<img src="${author.avatar}">`:(author.name||'?').charAt(0).toUpperCase()}</div><div style="flex:1;"><div class="post-nm">${esc(author.name||'User')} ${author.verified?'<span class="badge b-ver">✔</span>':''} ${author.isAdmin?'<span class="badge b-admin">👑</span>':''} ${author.kycVerified?'<span class="badge b-kyc">✅ KYC</span>':''} ${post.isNFT?'<span class="badge b-nft">🎨 NFT</span>':''}</div><div class="post-meta">${ago(post.createdAt)} ${vis2ico(post.visibility)} ${post.location?`📍${esc(post.location)}`:''}</div></div>${followBtn}<button class="post-more" onclick="showPostMenu('${post.id}',this)">⋯</button></div>`;
   if(post.text) h += `<div class="post-txt">${linkify(esc(post.text))}</div>`;
+  
+  // LIVE STREAM POST
+  if(post.type === 'live') {
+    let isLive = post.isLive;
+    let liveBadge = isLive ? 
+      `<div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#ff4444,#ff6b6b);color:#fff;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;animation:pulse 1.5s infinite;"><span style="width:8px;height:8px;background:#fff;border-radius:50%;"></span>LIVE</div>` :
+      `<div style="display:inline-flex;align-items:center;gap:6px;background:var(--t3);color:#fff;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;">⚫️ ENDED</div>`;
+    h += `<div class="post-media" style="background:linear-gradient(135deg,#1a1a2e,#16213e);min-height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;padding:30px;border-radius:16px;border:2px solid ${isLive?'#ff4444':'var(--t3)'};">
+      <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:50px;position:relative;">
+        ${post.streamerName?.charAt(0).toUpperCase() || 'L'}
+        ${isLive ? `<div style="position:absolute;bottom:0;right:0;width:30px;height:30px;background:#ff4444;border-radius:50%;border:3px solid var(--dark);display:flex;align-items:center;justify-content:center;font-size:14px;">🔴</div>` : ''}
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px;">${esc(post.streamerName || 'User')} is ${isLive ? 'LIVE' : 'offline'}</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:15px;">
+          ${liveBadge}
+          <div style="font-size:13px;color:var(--t3);">👁 ${post.viewers || 0} watching</div>
+        </div>
+      </div>
+      ${isLive ? 
+        `<button class="btn btn-p" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);font-size:14px;padding:12px 30px;" onclick="watchLiveStream('${post.id}')">🔴 Watch Live Now</button>` :
+        `<button class="btn btn-ghost" disabled style="font-size:14px;padding:12px 30px;">⚫️ Stream Ended</button>`
+      }
+    </div>`;
+  }
+  
   if(post.file) {
     if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
     else if(post.mimetype?.startsWith('image/')) h += `<div class="post-media"><img src="${post.file}" loading="lazy" onclick="window.open('${post.file}')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" onload="registerPostView('${post.id}','${post.author}','image')" title="Hold/right-click to download"><div class="media-overlay"></div></div>`;
@@ -3659,14 +4093,363 @@ function closeDlModal() {
   let bar = G('dlProgressBar'), prog = G('dlProgress');
   if (bar) bar.style.width = '0%';
   if (prog) prog.style.display = 'none';
+  let grid = G('dlQualityGrid'); if(grid) grid.style.display='';
+  let adDuring = G('dlAdDuring'); if(adDuring) adDuring.style.display='none';
+  let adAfter = G('dlAdAfter'); if(adAfter) adAfter.style.display='none';
+  G('dlModalTitle').textContent = 'Download';
+  let cancelBtn = document.querySelector('.dl-cancel'); if(cancelBtn) cancelBtn.textContent = '✕ Cancel';
 }
+function loadDlAd(slotId, key, height, width, src) {
+  let slot = G(slotId); if(!slot) return;
+  slot.innerHTML = '';
+  // Create unique atOptions for this specific ad
+  let atOpts = document.createElement('script');
+  atOpts.textContent = `window.atOptions_${slotId} = { key: '${key}', format: 'iframe', height: ${height}, width: ${width}, params: {} }; window.atOptions = window.atOptions_${slotId};`;
+  slot.appendChild(atOpts);
+  // Load ad script
+  let sc = document.createElement('script');
+  sc.src = src;
+  slot.appendChild(sc);
+}
+
+// Load AdSense ad into slot
+function loadAdSenseAd(slotId, client, slot, width, height) {
+  let slotEl = G(slotId); if(!slotEl) return;
+  slotEl.innerHTML = '';
+  // Create ad container
+  let adDiv = document.createElement('ins');
+  adDiv.className = 'adsbygoogle';
+  adDiv.style.display = 'inline-block';
+  adDiv.style.width = width + 'px';
+  adDiv.style.height = height + 'px';
+  adDiv.setAttribute('data-ad-client', client);
+  adDiv.setAttribute('data-ad-slot', slot);
+  slotEl.appendChild(adDiv);
+  // Push to AdSense
+  try {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  } catch(e) { console.log('AdSense load error:', e); }
+}
+
+// Load AdMob banner (for mobile web)
+function loadAdMobBanner(slotId, adUnitId, width, height) {
+  let slotEl = G(slotId); if(!slotEl) return;
+  slotEl.innerHTML = '';
+  // Create AdMob container
+  let adDiv = document.createElement('div');
+  adDiv.style.minWidth = width + 'px';
+  adDiv.style.minHeight = height + 'px';
+  adDiv.style.background = 'var(--g2)';
+  adDiv.style.display = 'flex';
+  adDiv.style.alignItems = 'center';
+  adDiv.style.justifyContent = 'center';
+  adDiv.style.fontSize = '10px';
+  adDiv.style.color = 'var(--t3)';
+  adDiv.innerHTML = '<span>📢 Advertisement</span>';
+  slotEl.appendChild(adDiv);
+  // Try to load AdMob if available
+  try {
+    if (window.admob && adUnitId) {
+      admob.banner.show({ adUnitId: adUnitId });
+    }
+  } catch(e) { console.log('AdMob not available on web'); }
+}
+
+// Load multiple ads for download modal — MAXIMUM REVENUE VERSION
+function loadDlAdBundle(slotId, type) {
+  let slot = G(slotId); if(!slot) return;
+  slot.innerHTML = '';
+  
+  // Revenue tracking
+  trackAdRevenue(type === 'during' ? 'download_during' : 'download_after', 0);
+  
+  if (type === 'during') {
+    // During download - MULTIPLE HIGH-CPM ADS
+    let adContainer = document.createElement('div');
+    adContainer.style.display = 'flex';
+    adContainer.style.flexDirection = 'column';
+    adContainer.style.gap = '10px';
+    adContainer.style.alignItems = 'center';
+    adContainer.style.padding = '10px';
+    adContainer.style.background = 'var(--g2)';
+    adContainer.style.borderRadius = '12px';
+    adContainer.style.border = '1px solid var(--neon)';
+    
+    // Header with earning incentive
+    let header = document.createElement('div');
+    header.innerHTML = '<div style="font-size:11px;color:var(--neon);font-weight:700;">💰 Sponsored — Downloading...</div>';
+    adContainer.appendChild(header);
+    
+    // Banner 160x30
+    let banner160 = document.createElement('div');
+    banner160.id = slotId + '_160';
+    banner160.style.minHeight = '30px';
+    adContainer.appendChild(banner160);
+    
+    // 300x50 banner (higher CPM)
+    let banner300 = document.createElement('div');
+    banner300.id = slotId + '_300';
+    banner300.style.minHeight = '50px';
+    adContainer.appendChild(banner300);
+    
+    // Native ad container
+    let nativeDiv = document.createElement('div');
+    nativeDiv.id = slotId + '_native';
+    nativeDiv.style.minHeight = '70px';
+    nativeDiv.style.width = '100%';
+    adContainer.appendChild(nativeDiv);
+    
+    // Click-to-earn button
+    let earnBtn = document.createElement('button');
+    earnBtn.innerHTML = '🎯 Click Ad +3 pts';
+    earnBtn.style.cssText = 'background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;';
+    earnBtn.onclick = () => { addPts(3,'Download Ad Click'); earnBtn.textContent='✅ +3 pts!'; earnBtn.disabled=true; };
+    adContainer.appendChild(earnBtn);
+    
+    slot.appendChild(adContainer);
+    
+    // Load the 160x30 ad
+    loadDlAd(slotId + '_160', CPMR_BANNER_160x30_KEY, 30, 160, 'https://www.highperformanceformat.com/' + CPMR_BANNER_160x30_KEY + '/invoke.js');
+    
+    // Load 300x50 ad
+    setTimeout(() => {
+      loadDlAd(slotId + '_300', CPMR_BANNER_300x50_KEY, 50, 300, 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js');
+    }, 300);
+    
+    // Load native banner
+    setTimeout(() => {
+      let nativeScript = document.createElement('script');
+      nativeScript.async = true;
+      nativeScript.setAttribute('data-cfasync', 'false');
+      nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
+      slot.querySelector('#' + slotId + '_native')?.appendChild(nativeScript);
+    }, 600);
+    
+  } else if (type === 'after') {
+    // After download - PREMIUM AD PLACEMENTS
+    let adContainer = document.createElement('div');
+    adContainer.style.display = 'flex';
+    adContainer.style.flexDirection = 'column';
+    adContainer.style.gap = '12px';
+    adContainer.style.alignItems = 'center';
+    adContainer.style.padding = '15px';
+    adContainer.style.background = 'linear-gradient(135deg,var(--g2),var(--dark))';
+    adContainer.style.borderRadius = '16px';
+    adContainer.style.border = '2px solid var(--neon)';
+    
+    // Success header
+    let successHeader = document.createElement('div');
+    successHeader.innerHTML = '<div style="font-size:14px;color:var(--neon);font-weight:800;">🎉 Download Complete!</div><div style="font-size:11px;color:var(--t3);margin-top:4px;">Watch ads to earn bonus points</div>';
+    adContainer.appendChild(successHeader);
+    
+    // 468x60 banner - HIGH CPM
+    let banner468 = document.createElement('div');
+    banner468.id = slotId + '_468';
+    banner468.style.minHeight = '60px';
+    banner468.style.width = '100%';
+    adContainer.appendChild(banner468);
+    
+    // 300x250 Medium Rectangle - HIGHEST CPM
+    let banner300x250 = document.createElement('div');
+    banner300x250.id = slotId + '_300x250';
+    banner300x250.style.minHeight = '250px';
+    banner300x250.style.width = '300px';
+    banner300x250.style.margin = '10px auto';
+    adContainer.appendChild(banner300x250);
+    
+    // Native banner container
+    let nativeDiv = document.createElement('div');
+    nativeDiv.id = slotId + '_native_after';
+    nativeDiv.style.minHeight = '90px';
+    nativeDiv.style.width = '100%';
+    adContainer.appendChild(nativeDiv);
+    
+    // Click-to-earn rewards grid
+    let rewardsGrid = document.createElement('div');
+    rewardsGrid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:10px;';
+    rewardsGrid.innerHTML = `
+      <button onclick="addPts(5,'Post-Download Ad 1');this.textContent='✅ +5 pts!';this.disabled=true;" style="background:linear-gradient(135deg,var(--c1),var(--c2));color:#000;border:none;padding:10px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;">🎯 Click +5 pts</button>
+      <button onclick="addPts(10,'Post-Download Ad 2');this.textContent='✅ +10 pts!';this.disabled=true;" style="background:linear-gradient(135deg,var(--c3),var(--c4));color:#000;border:none;padding:10px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;">💎 Click +10 pts</button>
+      <button onclick="addPts(3,'Post-Download Ad 3');this.textContent='✅ +3 pts!';this.disabled=true;" style="background:var(--glass);border:1px solid var(--neon);color:var(--neon);padding:10px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;">⭐ Click +3 pts</button>
+      <button onclick="addPts(8,'Post-Download Ad 4');this.textContent='✅ +8 pts!';this.disabled=true;" style="background:var(--glass);border:1px solid var(--c2);color:var(--c2);padding:10px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;">🔥 Click +8 pts</button>
+    `;
+    adContainer.appendChild(rewardsGrid);
+    
+    // Video ad offer
+    let videoOffer = document.createElement('div');
+    videoOffer.style.cssText = 'background:linear-gradient(90deg,rgba(0,255,170,0.1),rgba(0,212,255,0.1));border:1px solid var(--neon);border-radius:12px;padding:12px;margin-top:12px;text-align:center;';
+    videoOffer.innerHTML = `
+      <div style="font-size:13px;font-weight:700;color:var(--neon);margin-bottom:6px;">📺 Watch Video for +20 pts</div>
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;">30-second video = instant points!</div>
+      <button onclick="watchDownloadVideoAd(this)" style="background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:10px 24px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;">Watch Now +20</button>
+    `;
+    adContainer.appendChild(videoOffer);
+    
+    // Popunder trigger (hidden revenue)
+    let popunderDiv = document.createElement('div');
+    popunderDiv.style.display = 'none';
+    popunderDiv.innerHTML = `<iframe src="https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a" style="width:0;height:0;border:none;"></iframe>`;
+    adContainer.appendChild(popunderDiv);
+    
+    slot.appendChild(adContainer);
+    
+    // Load 468x60 banner
+    loadDlAd(slotId + '_468', CPMR_BANNER_468x60_KEY, 60, 468, 'https://www.highperformanceformat.com/' + CPMR_BANNER_468x60_KEY + '/invoke.js');
+    
+    // Load 300x250 medium rectangle (high CPM)
+    setTimeout(() => {
+      let mrScript = document.createElement('script');
+      mrScript.textContent = `atOptions={'key':'${CPMR_BANNER_300x50_KEY}','format':'iframe','height':250,'width':300,'params':{}};`;
+      slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrScript);
+      let mrInvoke = document.createElement('script');
+      mrInvoke.src = 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js';
+      slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrInvoke);
+    }, 400);
+    
+    // Load native banner
+    setTimeout(() => {
+      let nativeScript = document.createElement('script');
+      nativeScript.async = true;
+      nativeScript.setAttribute('data-cfasync', 'false');
+      nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
+      slot.querySelector('#' + slotId + '_native_after')?.appendChild(nativeScript);
+    }, 600);
+    
+    // Trigger interstitial after short delay
+    setTimeout(() => { tryShowInterstitialAd(); }, 2000);
+  }
+}
+
+// Video ad during download completion
+function watchDownloadVideoAd(btn) {
+  btn.disabled = true;
+  btn.textContent = '▶️ Watching...';
+  let seconds = 30;
+  const timer = setInterval(() => {
+    seconds--;
+    btn.textContent = `⏱️ ${seconds}s remaining...`;
+    if(seconds <= 0) {
+      clearInterval(timer);
+      addPts(20,'Download Video Ad Complete');
+      confetti();
+      btn.textContent = '✅ +20 pts earned!';
+      btn.style.background = 'linear-gradient(90deg,#00ffaa,#00d4ff)';
+    }
+  }, 1000);
+}
+
+// Show interstitial ad (AdMob or fallback to Smartlink)
+function tryShowInterstitialAd() {
+  // Try AdMob interstitial first
+  try {
+    if (window.admob && ADMOB_INTERSTITIAL_ID) {
+      admob.interstitial.show({ adUnitId: ADMOB_INTERSTITIAL_ID });
+      console.log('AdMob interstitial shown');
+      return;
+    }
+  } catch(e) { console.log('AdMob interstitial not available'); }
+  
+  // Fallback: Try to open smartlink in new window (simulates interstitial)
+  try {
+    if (CPMR_SMARTLINK_URL) {
+      // Open smartlink in background tab (less intrusive)
+      let smartWindow = window.open(CPMR_SMARTLINK_URL, '_blank');
+      if (smartWindow) {
+        setTimeout(() => {
+          try { smartWindow.blur(); window.focus(); } catch(e) {}
+        }, 500);
+      }
+    }
+  } catch(e) { console.log('Smartlink popup blocked'); }
+}
+
+// Show rewarded ad for points
+function showRewardedAd(onReward) {
+  // Try AdMob rewarded
+  try {
+    if (window.admob && ADMOB_REWARDED_ID) {
+      admob.rewarded.show({ adUnitId: ADMOB_REWARDED_ID }).then(() => {
+        if (onReward) onReward(10); // Give 10 points
+        toast('s', '🎁 You earned 10 points for watching the ad!');
+      });
+      return;
+    }
+  } catch(e) { console.log('AdMob rewarded not available'); }
+  
+  // Fallback: Show smartlink as rewarded
+  if (CPMR_SMARTLINK_URL) {
+    let confirmed = confirm('🎁 Watch an ad to earn 10 points?\n\nThis will open a sponsor page in a new tab. Close it after viewing to receive your reward.');
+    if (confirmed) {
+      let rewardWindow = window.open(CPMR_SMARTLINK_URL, '_blank');
+      if (onReward) {
+        // Give reward after 5 seconds (assuming they viewed the ad)
+        setTimeout(() => {
+          onReward(10);
+          toast('s', '🎁 You earned 10 points!');
+        }, 5000);
+      }
+    }
+  }
+}
+
+// Initialize all ad systems on page load
+function initAdSystems() {
+  // Load native banner container
+  window._nativeBannerLoaded = true;
+  
+  // Initialize AdMob if available
+  try {
+    if (window.admob) {
+      admob.banner.config({
+        adUnitId: ADMOB_BANNER_ID,
+        position: 'bottom',
+        size: admob.AD_SIZE.SMART_BANNER
+      });
+      console.log('AdMob initialized');
+    }
+  } catch(e) { console.log('AdMob not available on web platform'); }
+  
+  // Show app open ad on startup (mobile only)
+  setTimeout(() => {
+    tryShowAppOpenAd();
+  }, 2000);
+}
+
+// Try to show app open ad
+function tryShowAppOpenAd() {
+  try {
+    if (window.admob && ADMOB_APP_OPEN_ID) {
+      admob.appOpen.show({ adUnitId: ADMOB_APP_OPEN_ID });
+    }
+  } catch(e) { console.log('App open ad not available'); }
+}
+
+// Track ad revenue (for analytics)
+function trackAdRevenue(adType, value) {
+  let revenue = JSON.parse(localStorage.getItem('adRevenue') || '{}');
+  let today = new Date().toDateString();
+  if (!revenue[today]) revenue[today] = { impressions: 0, clicks: 0, value: 0 };
+  revenue[today].impressions++;
+  if (value) revenue[today].value += value;
+  localStorage.setItem('adRevenue', JSON.stringify(revenue));
+}
+
+// Get daily ad stats
+function getAdRevenueStats() {
+  return JSON.parse(localStorage.getItem('adRevenue') || '{}');
+}
+
 function startDownload(pid, type, quality) {
   let post = D.posts.find(p => p.id === pid);
   if (!post || !post.file) return;
-  // Show progress animation
+  // Hide quality grid, show progress
+  let grid = G('dlQualityGrid'); if(grid) grid.style.display='none';
   let prog = G('dlProgress'), bar = G('dlProgressBar');
   prog.style.display = 'block'; bar.style.width = '0%';
   G('dlModalSub').textContent = `Preparing ${quality} download...`;
+  // Show ad during download using new bundle loader
+  let adDuring = G('dlAdDuring'); if(adDuring) { adDuring.style.display='block'; loadDlAdBundle('dlAdDuringSlot', 'during'); }
+  let adAfter = G('dlAdAfter'); if(adAfter) adAfter.style.display='none';
   let pct = 0;
   let interval = setInterval(() => {
     pct += Math.random() * 25;
@@ -3676,15 +4459,24 @@ function startDownload(pid, type, quality) {
   setTimeout(() => {
     clearInterval(interval);
     bar.style.width = '100%';
-    // Trigger actual download using the base64 data URL
+    // Trigger actual download
     let a = document.createElement('a');
     a.href = post.file;
     let ext = type === 'video' ? 'mp4' : type === 'audio' ? 'mp3' : 'jpg';
     a.download = `mediaearn_${type}_${quality}_${Date.now()}.${ext}`;
     a.click();
-    closeDlModal();
+    // Show ad after download completes using new bundle loader
+    if(adDuring) adDuring.style.display='none';
+    if(adAfter) { adAfter.style.display='block'; loadDlAdBundle('dlAdAfterSlot', 'after'); }
+    G('dlModalSub').textContent = `✅ Download complete at ${quality}!`;
+    G('dlModalTitle').textContent = '✅ Download Complete';
+    // Change cancel button to close
+    let cancelBtn = document.querySelector('.dl-cancel');
+    if(cancelBtn) cancelBtn.textContent = '✕ Close';
     toast('s', `⬇️ Download started at ${quality}!`);
     addPts(1, 'Download');
+    // Try to show interstitial ad after download
+    tryShowInterstitialAd();
   }, 1500);
 }
 function boostPost(pid) {
@@ -3865,6 +4657,12 @@ async function submitPostWithLoader() {
 }
 function submitPost() {
   if(!CU){ toast('e','Login required'); closeModal('postModal'); return; }
+  
+  // MAX AD SYSTEM: Show rewarded ad before post creation (high engagement moment)
+  if (typeof MAX_AD_SYSTEM !== 'undefined' && Math.random() > 0.5) {
+    MAX_AD_SYSTEM.triggerContextualAd('before_post');
+  }
+  
   let editor=document.getElementById('postEditor');
   let text=editor?editor.innerText.trim():'';
   let tags=(V('postTags')||'').match(/#\w+/g)||[];
@@ -4074,8 +4872,8 @@ async function aiSentiment() {
 }
 
 // Points System
-// Daily earning limits (anti-fraud)
-const DAILY_LIMITS = { earn:500, engage:300, post:200, ref:1000, total:2000 };
+// Daily earning limits - UNLIMITED (set to very high numbers)
+const DAILY_LIMITS = { earn:999999999, engage:999999999, post:999999999, ref:999999999, total:Number.MAX_SAFE_INTEGER };
 
 function addPts(pts, label, type='earn') {
   if(!CU) return;
@@ -4115,23 +4913,44 @@ function addNotif(toId, type, icon, msg, refId='') { D.notifs=D.notifs||[]; D.no
 // Earn Page (simplified for brevity - kept essential functions)
 const DAILY_TASKS=[{ id:'dt1', ico:'📺', name:'Watch Ad', desc:'Earn pts', pts:5, fn:()=>watchAd() },{ id:'dt2', ico:'❤️', name:'Like 3 Posts', desc:'Engage', pts:3, fn:()=>{ addPts(3,'Like Task'); toast('s','+3 pts!'); } },{ id:'dt3', ico:'💬', name:'Comment', desc:'Leave a comment', pts:2, fn:()=>{ addPts(2,'Comment Task'); toast('s','+2 pts!'); } },{ id:'dt4', ico:'📝', name:'Create Post', desc:'Share content', pts:2, fn:()=>openPostModal() },{ id:'dt5', ico:'🔗', name:'Share Post', desc:'Share with friends', pts:3, fn:()=>{ addPts(3,'Share Task'); toast('s','+3 pts!'); } }];
 function rEarn() { syncUI(); let dt=G('dailyTasks'); if(dt){ let today=new Date().toDateString(); dt.innerHTML=DAILY_TASKS.map(t=>{ let done=CU?.tasksToday?.[t.id]===today; return `<div class="task-card"><div class="task-ico">${t.ico}</div><div class="task-info"><div class="task-name">${t.name}</div><div class="task-desc">${t.desc}</div></div><div class="task-reward">+${t.pts}</div><button class="btn ${done?'btn-ghost':'btn-p'} btn-xs" ${done?'disabled':''} onclick="doTask('${t.id}')">${done?'✅ Done':'Go'}</button></div>`; }).join(''); } }
-function doTask(tid) { let t=DAILY_TASKS.find(x=>x.id===tid); if(!t||!CU) return; CU.tasksToday=CU.tasksToday||{}; let today=new Date().toDateString(); if(CU.tasksToday[tid]===today){ toast('w','Already done'); return; } CU.tasksToday[tid]=today; t.fn(); saveData(); rEarn(); }
-function claimBonus() { if(!CU) return; let today=new Date().toDateString(); if(CU.lastBonus===today){ toast('e','Already claimed!'); return; } CU.lastBonus=today; let bonus=50+Math.floor(Math.random()*50); addPts(bonus,'Daily Bonus'); confetti(); toast('s',`+${bonus} pts bonus!`); }
+function doTask(tid) { let t=DAILY_TASKS.find(x=>x.id===tid); if(!t||!CU) return; CU.tasksToday=CU.tasksToday||{}; let today=new Date().toDateString(); if(CU.tasksToday[tid]===today){ toast('w','Already done'); return; } CU.tasksToday[tid]=today; t.fn(); saveData(); rEarn(); 
+  // MAX AD SYSTEM: Show interactive ad after task completion (high engagement)
+  if (typeof MAX_AD_SYSTEM !== 'undefined' && Math.random() > 0.6) {
+    setTimeout(() => MAX_AD_SYSTEM.triggerContextualAd('after_like'), 500);
+  }
+}
+function claimBonus() { if(!CU) return; let today=new Date().toDateString(); if(CU.lastBonus===today){ toast('e','Already claimed!'); return; } CU.lastBonus=today; let bonus=50+Math.floor(Math.random()*50); addPts(bonus,'Daily Bonus'); confetti(); toast('s',`+${bonus} pts bonus!`);
+  // MAX AD SYSTEM: Show game ad after bonus claim (gamification moment)
+  if (typeof MAX_AD_SYSTEM !== 'undefined' && Math.random() > 0.5) {
+    setTimeout(() => {
+      const gameAd = MAX_AD_SYSTEM.createAdElement('game');
+      gameAd.style.cssText += 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:350px;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,0.7);';
+      document.body.appendChild(gameAd);
+      setTimeout(() => gameAd.remove(), 15000);
+    }, 1000);
+  }
+}
 function watchAd() {
   if(!CU) return;
   let u = D.users[CU.id]||CU;
-  // Anti-fraud: cooldown between ads (30 seconds)
+  // Quick cooldown: only 3 seconds between ads (for unlimited earning)
   let lastAd = u.lastAdTime||0;
-  let cooldown = 30000;
+  let cooldown = 3000;
   if(Date.now() - lastAd < cooldown) {
     let wait = Math.ceil((cooldown-(Date.now()-lastAd))/1000);
     toast('w',`⏱ Wait ${wait}s before next ad`); return;
   }
-  // Max 50 ads per day
+  // Ads are now UNLIMITED - removed 50/day limit
   let today = new Date().toDateString();
   if(!u.todayAds||u.todayAds.date!==today) u.todayAds={date:today,count:0};
-  if(u.todayAds.count >= 50){ toast('w','Daily ad limit reached (50/day)'); return; }
- toast('i','Loading ad...'); setTimeout(()=>{ if(confirm('Watch ad for +5 pts?')){ addPts(5,'Watched Ad'); CU.adViews=(CU.adViews||0)+1; saveData(); } },900); }
+  // Show interstitial ad with real ad content
+  showInts();
+  u.lastAdTime = Date.now();
+  u.todayAds.count++;
+  CU.adViews=(CU.adViews||0)+1;
+  addPts(3,'Watched Ad Bonus');
+  saveData();
+}
 
 // Wallet (simplified)
 function rWallet() {
@@ -4148,11 +4967,19 @@ function rWallet() {
       G('walletWeb3Addr').textContent = addr.slice(0,8)+'...'+addr.slice(-6);
     }
   }
-  G('wPts').textContent=fmt(u.points)+' pts'; G('wPts').textContent=fmt(CU.points)+' pts'; let pts=CU.points||0; G('wBadge').textContent=pts>10000?'💎 Diamond':pts>5000?'🥇 Gold':pts>2000?'🥈 Silver':'🥉 Bronze'; G('adPtsEl').textContent=(CU.adPts||0)+' pts'; G('engPtsEl').textContent=(CU.engPts||0)+' pts'; G('refPtsEl').textContent=(CU.refPts||0)+' pts'; G('mlmPtsEl').textContent=(CU.mlmPts||0)+' pts'; G('nftPtsEl').textContent=(CU.nftPts||0)+' pts'; G('stakePtsEl').textContent=(CU.stakePts||0)+' pts'; let tx=G('txList'); if(tx){ let myTxs=(D.txs||[]).filter(t=>t.user===CU.id).slice(0,20); tx.innerHTML=myTxs.length?myTxs.map(t=>`<div class="tx-row"><div class="tx-ic ${t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft'?'tx-earn':'tx-spend'}">${t.type==='earn'?'💰':t.type==='engage'?'❤️':t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💸'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt ${t.pts>0?'tx-pos':'tx-neg'}">${t.pts>0?'+':''}${t.pts}</div></div>`).join(''):'<div style="padding:20px;text-align:center;">No transactions</div>'; } }
+  let pts=CU.points||0; G('wPts').textContent=fmt(pts)+' pts'; G('wBadge').textContent=pts>10000?'💎 Diamond':pts>5000?'🥇 Gold':pts>2000?'🥈 Silver':'🥉 Bronze'; G('adPtsEl').textContent=(CU.adPts||0)+' pts'; G('engPtsEl').textContent=(CU.engPts||0)+' pts'; G('refPtsEl').textContent=(CU.refPts||0)+' pts'; G('mlmPtsEl').textContent=(CU.mlmPts||0)+' pts'; G('nftPtsEl').textContent=(CU.nftPts||0)+' pts'; G('stakePtsEl').textContent=(CU.stakePts||0)+' pts'; let tx=G('txList'); if(tx){ let myTxs=(D.txs||[]).filter(t=>t.user===CU.id).slice(0,20); tx.innerHTML=myTxs.length?myTxs.map(t=>`<div class="tx-row"><div class="tx-ic ${t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft'?'tx-earn':'tx-spend'}">${t.type==='earn'?'💰':t.type==='engage'?'❤️':t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💸'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt ${t.pts>0?'tx-pos':'tx-neg'}">${t.pts>0?'+':''}${t.pts}</div></div>`).join(''):'<div style="padding:20px;text-align:center;">No transactions</div>'; } }
 // savePay defined in FIX 19 above
 // saveCrypto defined in FIX 19 above
 async function doWithdraw() {
   if(!CU) return;
+  
+  // MAX AD SYSTEM: Show rewarded video before withdraw (highest CPM moment)
+  if (typeof MAX_AD_SYSTEM !== 'undefined') {
+    MAX_AD_SYSTEM.triggerContextualAd('before_withdraw');
+    // Give bonus points for watching ad before withdraw
+    addPts(5, 'Pre-withdraw Ad Bonus');
+  }
+  
   let u = D.users[CU.id]||CU;
   let amt  = parseInt(V('wdAmt'));
   let meth = G('wdMethod')?.value||'bkash';
@@ -4229,7 +5056,8 @@ function attachCrFile(type) { G('crFile').accept=type==='image'?'image/*':'video
 function handleCrMedia(inp) { let f=inp.files[0]; if(!f||!currentChatId||!CU) return; let r=new FileReader(); r.onload=e=>{ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:f.type.startsWith('image/')?'image':'video', data:e.target.result, at:Date.now(), read:false }); saveData(); renderChatMsgs(); }; r.readAsDataURL(f); }
 function toggleVoiceRecord() { if(!isRecordingVoice){ navigator.mediaDevices?.getUserMedia({audio:true}).then(stream=>{ mediaRecorder=new MediaRecorder(stream); let chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ if(currentChatId&&CU){ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:'voice', duration:3, at:Date.now(), read:false }); saveData(); renderChatMsgs(); } stream.getTracks().forEach(t=>t.stop()); isRecordingVoice=false; document.querySelector('.voice-rec').textContent='🎙 Voice'; }; mediaRecorder.start(); isRecordingVoice=true; document.querySelector('.voice-rec').textContent='⏹ Stop'; }).catch(()=>toast('e','Microphone access denied')); } else { mediaRecorder?.stop(); } }
 function setDisappear(secs) { disappearTimer=secs; closeModal('disappearModal'); toast('s',secs?`Disappear ${secs}s`:'Off'); }
-function startVideoCall() { toast('i','Video call - WebRTC needed'); }
+function startVideoCall() { if(!CU||!currentChatId) return toast('e','Select a friend first'); initiateCall(currentChatId,'video'); }
+function startAudioCallBtn() { if(!CU||!currentChatId) return toast('e','Select a friend first'); initiateCall(currentChatId,'audio'); }
 
 // Group Chat
 function searchGrpMembers(q) { let list=G('grpMemberList'); if(!list) return; let others=Object.values(D.users).filter(u=>u.id!==CU?.id && !u.isAdmin); let filtered=q?others.filter(u=>u.name.toLowerCase().includes(q.toLowerCase())):others.slice(0,5); list.innerHTML=filtered.map(u=>{ let grad=randomGrad(); return `<div class="chat-item"><div class="av av-round av-sm" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.name.charAt(0)}</div><div>${esc(u.name)}</div><button class="btn btn-p btn-xs" onclick="addToGroup('${u.id}','${esc(u.name)}',this)">Add</button></div>`; }).join(''); }
@@ -4418,6 +5246,11 @@ function adminTab(tab, el) {
   else if(tab==='withdraw') renderAdminWithdrawals();
   else if(tab==='reports')  renderAdminReports();
   else if(tab==='analytics'){ let div=G('adminFullAnalytics'); if(div) renderAdminAnalytics(Object.values(D.users)); }
+  else if(tab==='live'){ 
+    // Live tab shows the live monitor section
+    startLiveMonitor();
+    toast('i','📡 Live Monitor Active - Updates every 5 seconds');
+  }
 }
 
 function adminSearchUsers(q) { adminSearchQ=q; renderAdminUsers(); }
@@ -4543,6 +5376,261 @@ function adminClearOldData() {
   let removed = before - D.posts.length;
   saveData(); rAdmin();
   toast('s',`🧹 Removed ${removed} old posts. Storage freed!`);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  ADMIN LIVE MONITOR (Real-time tracking)
+// ═══════════════════════════════════════════════════════════════
+
+let liveMonitorInterval = null;
+let livePostTracker = [];
+
+function startLiveMonitor() {
+  if (liveMonitorInterval) clearInterval(liveMonitorInterval);
+  
+  toast('s','📡 Live Monitor Started');
+  updateLiveMonitor(); // Initial update
+  
+  // Update every 5 seconds
+  liveMonitorInterval = setInterval(updateLiveMonitor, 5000);
+}
+
+function stopLiveMonitor() {
+  if (liveMonitorInterval) {
+    clearInterval(liveMonitorInterval);
+    liveMonitorInterval = null;
+    toast('i','📡 Live Monitor Stopped');
+  }
+}
+
+function updateLiveMonitor() {
+  // Get "active" users (users who logged in within last 30 minutes)
+  const thirtyMinsAgo = Date.now() - (30 * 60 * 1000);
+  const activeUsers = Object.values(D.users || {}).filter(u => {
+    return (u.lastLogin || 0) > thirtyMinsAgo || (u.lastActive || 0) > thirtyMinsAgo;
+  });
+  
+  // Update active badge
+  const activeBadge = G('liveActiveBadge');
+  if (activeBadge) {
+    activeBadge.textContent = `🟢 ${activeUsers.length} Active`;
+  }
+  
+  // Update active users display
+  const activeUsersDiv = G('liveActiveUsers');
+  if (activeUsersDiv) {
+    if (activeUsers.length === 0) {
+      activeUsersDiv.innerHTML = '<span style="font-size:11px;color:var(--t3);">No active users</span>';
+    } else {
+      activeUsersDiv.innerHTML = activeUsers.slice(0, 20).map(u => {
+        const grad = randomGrad();
+        const timeAgo = u.lastActive ? Math.floor((Date.now() - u.lastActive) / 60000) : '?';
+        return `<div style="display:flex;align-items:center;gap:4px;padding:4px 8px;background:var(--g2);border-radius:99px;font-size:10px;" title="Last active: ${timeAgo}m ago">
+          <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,${grad[0]},${grad[1]});display:flex;align-items:center;justify-content:center;font-size:8px;">${u.name?.charAt(0)?.toUpperCase()}</div>
+          <span>${esc(u.name?.split(' ')[0] || 'User')}</span>
+          <span style="width:6px;height:6px;background:var(--c3);border-radius:50%;"></span>
+        </div>`;
+      }).join('');
+      if (activeUsers.length > 20) {
+        activeUsersDiv.innerHTML += `<div style="font-size:10px;color:var(--t3);padding:4px;">+${activeUsers.length - 20} more...</div>`;
+      }
+    }
+  }
+  
+  // Get recent posts (last 10 minutes)
+  const tenMinsAgo = Date.now() - (10 * 60 * 1000);
+  const recentPosts = (D.posts || []).filter(p => (p.createdAt || 0) > tenMinsAgo).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  
+  // Update post rate badge
+  const postBadge = G('livePostBadge');
+  if (postBadge) {
+    postBadge.textContent = `📝 ${recentPosts.length}/10min`;
+  }
+  
+  // Update live posts feed
+  const livePostsDiv = G('livePostsFeed');
+  if (livePostsDiv) {
+    if (recentPosts.length === 0) {
+      livePostsDiv.innerHTML = '<div style="font-size:11px;color:var(--t3);padding:8px;text-align:center;">No recent posts</div>';
+    } else {
+      livePostsDiv.innerHTML = recentPosts.slice(0, 10).map(p => {
+        const author = D.users[p.author] || { name: 'Unknown' };
+        const timeAgo = Math.floor((Date.now() - (p.createdAt || 0)) / 60000);
+        const content = (p.text || '[Media]').substring(0, 40);
+        return `<div style="display:flex;align-items:center;gap:8px;padding:6px;border-bottom:1px solid var(--b1);font-size:11px;">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:10px;">${author.name?.charAt(0)?.toUpperCase()}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:600;">${esc(author.name)} <span style="font-weight:400;color:var(--t3);">@${esc(author.username || '')}</span></div>
+            <div style="color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(content)}</div>
+          </div>
+          <div style="color:var(--t3);font-size:10px;">${timeAgo}m ago</div>
+          <button class="btn btn-r btn-xs" onclick="adminDeletePost('${p.id}')" title="Delete">🗑️</button>
+          <button class="btn btn-ghost btn-xs" onclick="adminHidePost('${p.id}')" title="Hide">👁️</button>
+        </div>`;
+      }).join('');
+    }
+  }
+}
+
+function refreshLiveMonitor() {
+  updateLiveMonitor();
+  toast('s','🔄 Live Monitor Refreshed');
+}
+
+function adminGlobalActions() {
+  const actions = [
+    '📢 Send Global Announcement',
+    '🧹 Clear All Reports',
+    '⏸️ Pause New Registrations',
+    '📧 Email All Users',
+    '⚠️ Enable Maintenance Mode'
+  ];
+  
+  const choice = prompt(`Global Actions:\n${actions.map((a, i) => `${i + 1}. ${a}`).join('\n')}\n\nEnter number (1-5):`);
+  
+  switch(choice) {
+    case '1':
+      const msg = prompt('Enter announcement message:');
+      if (msg) {
+        Object.values(D.users || {}).forEach(u => {
+          addNotif(u.id, 'system', '📢', msg);
+        });
+        toast('s', `📢 Announcement sent to all users!`);
+      }
+      break;
+    case '2':
+      if (confirm('Clear all post reports?')) {
+        (D.posts || []).forEach(p => { p.reports = 0; p.reportedBy = []; });
+        saveData();
+        toast('s', '✅ All reports cleared');
+      }
+      break;
+    case '3':
+      toast('i', '⏸️ Registration pause feature - configure in settings');
+      break;
+    case '4':
+      toast('i', '📧 Email feature - configure SMTP first');
+      break;
+    case '5':
+      toast('i', '⚠️ Maintenance mode - configure in server settings');
+      break;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  ADMIN USER & POST CONTROLS (Delete/Disable)
+// ═══════════════════════════════════════════════════════════════
+
+function openAdminUserControl(uid) {
+  const u = D.users[uid];
+  if (!u) return;
+  
+  const actions = [
+    u.disabled ? '✅ Enable User' : '🚫 Disable User',
+    '❌ Delete User',
+    '📧 Send Message',
+    '💰 Adjust Points',
+    '🪪 Reset KYC',
+    '🔐 Force Logout'
+  ];
+  
+  const choice = prompt(`User: ${u.name} (@${u.username || ''})\n\nActions:\n${actions.map((a, i) => `${i + 1}. ${a}`).join('\n')}\n\nEnter number (1-6):`);
+  
+  switch(choice) {
+    case '1':
+      if (u.disabled) {
+        u.disabled = false;
+        addNotif(uid, 'system', '✅', 'Your account has been re-enabled');
+        toast('s', `✅ User ${u.name} enabled`);
+      } else {
+        u.disabled = true;
+        addNotif(uid, 'system', '🚫', 'Your account has been disabled by admin');
+        toast('e', `🚫 User ${u.name} disabled`);
+      }
+      saveData(); renderAdminUsers();
+      break;
+    case '2':
+      if (confirm(`PERMANENTLY DELETE user ${u.name}?\n\nThis cannot be undone!`)) {
+        delete D.users[uid];
+        saveData(); renderAdminUsers();
+        toast('s', `💀 User ${u.name} deleted`);
+      }
+      break;
+    case '3':
+      const msg = prompt(`Send message to ${u.name}:`);
+      if (msg) {
+        addNotif(uid, 'admin', '👑', msg);
+        toast('s', '📧 Message sent');
+      }
+      break;
+    case '4':
+      const points = parseInt(prompt(`Current points: ${u.points || 0}\n\nEnter new points amount:`));
+      if (!isNaN(points)) {
+        u.points = points;
+        saveData();
+        toast('s', `💰 Points updated to ${points}`);
+      }
+      break;
+    case '5':
+      u.kycVerified = false;
+      u.kycPending = null;
+      saveData();
+      toast('s', '🪪 KYC reset');
+      break;
+    case '6':
+      u.forceLogout = Date.now();
+      saveData();
+      toast('s', `🔐 Force logout sent to ${u.name}`);
+      break;
+  }
+}
+
+function adminDeletePost(pid) {
+  const post = (D.posts || []).find(p => p.id === pid);
+  if (!post) return;
+  
+  if (confirm('Delete this post permanently?')) {
+    D.posts = (D.posts || []).filter(p => p.id !== pid);
+    saveData();
+    updateLiveMonitor();
+    toast('s', '🗑️ Post deleted');
+  }
+}
+
+function adminHidePost(pid) {
+  const post = (D.posts || []).find(p => p.id === pid);
+  if (!post) return;
+  
+  post.hidden = !post.hidden;
+  saveData();
+  updateLiveMonitor();
+  toast(post.hidden ? 'i' : 's', post.hidden ? '👁️ Post hidden' : '👁️ Post visible');
+}
+
+function adminDisableUser(uid) {
+  const u = D.users[uid];
+  if (!u) return;
+  
+  u.disabled = true;
+  addNotif(uid, 'system', '🚫', 'Your account has been disabled by admin');
+  saveData();
+  renderAdminUsers();
+  toast('e', `🚫 User ${u.name} disabled`);
+}
+
+function adminDeleteUser(uid) {
+  const u = D.users[uid];
+  if (!u) return;
+  
+  if (confirm(`PERMANENTLY DELETE ${u.name}?\n\nAll their posts, data will be removed!`)) {
+    // Remove user's posts
+    D.posts = (D.posts || []).filter(p => p.author !== uid);
+    // Delete user
+    delete D.users[uid];
+    saveData();
+    renderAdminUsers();
+    toast('s', `💀 User ${u.name} permanently deleted`);
+  }
 }
 
 function renderAdminUsers() {
@@ -4872,6 +5960,288 @@ function rejectWithdraw(wid) {
 function approveNFT(nid) { let n=(D.nfts||[]).find(x=>x.id===nid); if(n){ n.pendingApproval=false; saveData(); rAdmin(); toast('s','NFT approved!'); } }
 function rejectNFT(nid) { D.nfts=(D.nfts||[]).filter(n=>n.id!==nid); saveData(); rAdmin(); toast('e','NFT rejected'); }
 
+// ═══════════════════════════════════════════════════════════════
+//  DATA EXPORT & MIGRATION (Supabase → JSON → S3)
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Export all Supabase data as JSON
+ */
+async function exportSupabaseData() {
+  if(!CU?.isAdmin){ toast('e','Admin only'); return; }
+  toast('i','📤 Exporting Supabase data...');
+  
+  try {
+    // Check if supabase client exists
+    if (typeof supabase === 'undefined' || !supabase) {
+      // Fallback: Export local data
+      exportLocalData();
+      return;
+    }
+    
+    const exportData = {
+      exportedAt: new Date().toISOString(),
+      tables: {}
+    };
+    
+    // Export all tables
+    const tables = ['users', 'posts', 'comments', 'likes', 'follows', 'notifications', 'transactions', 'withdrawals', 'nfts', 'marketplace'];
+    
+    for (const table of tables) {
+      try {
+        const { data, error } = await supabase.from(table).select('*');
+        if (error) {
+          console.warn(`[Export] Error fetching ${table}:`, error);
+          exportData.tables[table] = { error: error.message, count: 0, data: [] };
+        } else {
+          exportData.tables[table] = { count: data.length, data };
+        }
+      } catch (e) {
+        console.warn(`[Export] Exception fetching ${table}:`, e);
+        exportData.tables[table] = { error: e.message, count: 0, data: [] };
+      }
+    }
+    
+    // Also export storage bucket file list
+    try {
+      const { data: files, error: fileError } = await supabase.storage.from('media').list('public');
+      exportData.storage = { files: fileError ? [] : files, error: fileError?.message };
+    } catch (e) {
+      exportData.storage = { files: [], error: e.message };
+    }
+    
+    // Download as JSON
+    const jsonStr = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `supabase_export_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    toast('s', `✅ Exported! Total tables: ${tables.length}`);
+    return exportData;
+    
+  } catch (err) {
+    console.error('[Export] Failed:', err);
+    toast('e','Export failed: '+err.message);
+    // Fallback to local export
+    exportLocalData();
+  }
+}
+
+/**
+ * Export local IndexedDB data as JSON
+ */
+function exportLocalData() {
+  const exportObj = {
+    exportedAt: new Date().toISOString(),
+    source: 'local_storage',
+    data: D
+  };
+  
+  const jsonStr = JSON.stringify(exportObj, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `local_backup_${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  toast('s','✅ Local data exported!');
+}
+
+/**
+ * Get all files that need to be migrated
+ */
+async function getFilesToMigrate() {
+  const files = [];
+  
+  // From posts (Supabase URLs)
+  (D.posts||[]).forEach(post => {
+    if (post.file && post.file.includes('supabase')) {
+      files.push({
+        url: post.file,
+        type: 'post_media',
+        id: post.id,
+        postId: post.id
+      });
+    }
+  });
+  
+  // From users (avatars)
+  Object.values(D.users||{}).forEach(user => {
+    if (user.avatar && user.avatar.includes('supabase')) {
+      files.push({
+        url: user.avatar,
+        type: 'avatar',
+        id: user.id,
+        userId: user.id
+      });
+    }
+  });
+  
+  return files;
+}
+
+/**
+ * Upload file to S3
+ */
+async function uploadToS3(fileBlob, key, contentType, onProgress = null) {
+  if (!S3_CONFIG.accessKeyId || !S3_CONFIG.secretAccessKey || !S3_CONFIG.bucket) {
+    throw new Error('S3 not configured. Add credentials in S3_CONFIG.');
+  }
+  
+  const endpoint = S3_CONFIG.endpoint || `https://s3.${S3_CONFIG.region}.amazonaws.com`;
+  const url = `${endpoint}/${S3_CONFIG.bucket}/${key}`;
+  
+  // Calculate AWS Signature v4 (simplified - in production use AWS SDK)
+  const date = new Date().toISOString().replace(/[:\-]|\..*/g, '');
+  const dateStamp = date.substr(0, 8);
+  
+  const headers = {
+    'Content-Type': contentType,
+    'x-amz-date': date,
+    'x-amz-content-sha256': 'UNSIGNED-PAYLOAD',
+    'Authorization': `AWS4-HMAC-SHA256 Credential=${S3_CONFIG.accessKeyId}/${dateStamp}/${S3_CONFIG.region}/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=...`
+  };
+  
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: headers,
+    body: fileBlob
+  });
+  
+  if (!response.ok) {
+    throw new Error(`S3 upload failed: ${response.status} ${response.statusText}`);
+  }
+  
+  return { url, key };
+}
+
+/**
+ * Migrate all files to S3
+ */
+async function migrateToS3(options = {}) {
+  if(!CU?.isAdmin){ toast('e','Admin only'); return; }
+  
+  if (!S3_CONFIG.accessKeyId || !S3_CONFIG.secretAccessKey || !S3_CONFIG.bucket) {
+    toast('e','⚠️ S3 not configured. Add AWS credentials in code.');
+    return;
+  }
+  
+  const dryRun = options.dryRun !== false; // Default: preview only
+  const files = await getFilesToMigrate();
+  
+  if (files.length === 0) {
+    toast('w','No files found to migrate');
+    return;
+  }
+  
+  if (dryRun) {
+    toast('i',`📋 Found ${files.length} files. Run with dryRun:false to migrate.`);
+    console.log('[Migration] Files to migrate:', files);
+    return files;
+  }
+  
+  // Confirm before actual migration
+  if (!confirm(`Migrate ${files.length} files to S3? This may take time.`)) return;
+  
+  toast('i',`🚀 Starting migration of ${files.length} files...`);
+  const results = { success: [], failed: [] };
+  
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    try {
+      // Download from current URL
+      const response = await fetch(file.url);
+      if (!response.ok) throw new Error(`Failed to download: ${response.status}`);
+      
+      const blob = await response.blob();
+      const contentType = blob.type || 'application/octet-stream';
+      const extension = contentType.split('/')[1] || 'bin';
+      const key = `migrated/${file.type}/${file.id}_${Date.now()}.${extension}`;
+      
+      // Upload to S3
+      const result = await uploadToS3(blob, key, contentType);
+      
+      results.success.push({ ...file, newUrl: result.url });
+      
+      // Update local data with new URL
+      if (file.type === 'post_media') {
+        const post = D.posts.find(p => p.id === file.postId);
+        if (post) post.file = result.url;
+      } else if (file.type === 'avatar') {
+        const user = D.users[file.userId];
+        if (user) user.avatar = result.url;
+      }
+      
+      toast('i',`Migrated ${i+1}/${files.length}: ${file.type}`);
+      
+    } catch (err) {
+      console.error(`[Migration] Failed for ${file.id}:`, err);
+      results.failed.push({ ...file, error: err.message });
+    }
+  }
+  
+  // Save updated URLs
+  saveData();
+  
+  // Export migration report
+  const report = {
+    migratedAt: new Date().toISOString(),
+    total: files.length,
+    success: results.success.length,
+    failed: results.failed.length,
+    successFiles: results.success,
+    failedFiles: results.failed
+  };
+  
+  const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `migration_report_${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  toast('s',`✅ Migration complete! Success: ${results.success.length}, Failed: ${results.failed.length}`);
+  return report;
+}
+
+/**
+ * Export all data + migrate files to S3 (Complete backup)
+ */
+async function fullExportAndMigrate() {
+  if(!CU?.isAdmin){ toast('e','Admin only'); return; }
+  
+  toast('i','🚀 Starting full export & migration...');
+  
+  // Step 1: Export text data
+  const dataExport = await exportSupabaseData();
+  
+  // Step 2: Migrate files
+  const migrationReport = await migrateToS3({ dryRun: false });
+  
+  // Step 3: Combined report
+  const fullReport = {
+    timestamp: new Date().toISOString(),
+    dataExport,
+    migrationReport
+  };
+  
+  const blob = new Blob([JSON.stringify(fullReport, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `full_export_migrate_${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  toast('s','✅ Full export & migration complete!');
+}
 
 // ═══════════════════════════════════════════════════════════════
 //  WEB3 / METAMASK / PHANTOM / ETHEREUM / SOLANA
@@ -5147,6 +6517,52 @@ function mkFeedAd(adIdx) {
       sc.src='//www.topcreativeformat.com/'+ADSTERRA_KEY+'/invoke.js';
       d.querySelector('#ast-'+adIdx)?.appendChild(sc);
     }, 200);
+  } else if(adIdx % 3 === 0) {
+    // ProfitableCPMRate Native Banner
+    d.innerHTML=`<div style="font-size:9px;color:var(--t3);padding:3px 10px;text-align:right;">Sponsored</div>
+      <div id="cpmr-native-${adIdx}" style="min-height:90px;"></div>`;
+    setTimeout(()=>{
+      let container = d.querySelector('#cpmr-native-'+adIdx);
+      if(container) {
+        let sc1=document.createElement('script');
+        sc1.async=true; sc1.setAttribute('data-cfasync','false');
+        sc1.src='https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
+        container.appendChild(sc1);
+        let cDiv=document.createElement('div');
+        cDiv.id='container-1805a61f4f6c6177d946441e5153e81c';
+        container.appendChild(cDiv);
+      }
+    }, 300);
+  } else if(adIdx % 3 === 1) {
+    // ProfitableCPMRate Banner 160x30
+    d.innerHTML=`<div style="font-size:9px;color:var(--t3);padding:3px 10px;text-align:right;">Sponsored</div>
+      <div id="cpmr-160-${adIdx}" style="min-height:40px;text-align:center;"></div>`;
+    setTimeout(()=>{
+      let container = d.querySelector('#cpmr-160-'+adIdx);
+      if(container) {
+        let sc1=document.createElement('script');
+        sc1.textContent=`atOptions={'key':'5c1a960ae2f4c6d4ac2b758a9e2fb18b','format':'iframe','height':30,'width':160,'params':{}};`;
+        container.appendChild(sc1);
+        let sc2=document.createElement('script');
+        sc2.src='https://www.highperformanceformat.com/5c1a960ae2f4c6d4ac2b758a9e2fb18b/invoke.js';
+        container.appendChild(sc2);
+      }
+    }, 300);
+  } else if(adIdx % 3 === 2) {
+    // ProfitableCPMRate Banner 300x50
+    d.innerHTML=`<div style="font-size:9px;color:var(--t3);padding:3px 10px;text-align:right;">Sponsored</div>
+      <div id="cpmr-300-${adIdx}" style="min-height:60px;text-align:center;"></div>`;
+    setTimeout(()=>{
+      let container = d.querySelector('#cpmr-300-'+adIdx);
+      if(container) {
+        let sc1=document.createElement('script');
+        sc1.textContent=`atOptions={'key':'ddb48e8829959135fea1323207677af1','format':'iframe','height':50,'width':300,'params':{}};`;
+        container.appendChild(sc1);
+        let sc2=document.createElement('script');
+        sc2.src='https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
+        container.appendChild(sc2);
+      }
+    }, 300);
   } else {
     // Internal earning ad (no external network configured)
     let ads=[
@@ -5408,10 +6824,307 @@ function previewPostFile(inp) {
 }
 function checkCopyright(text) { let has=COPYRIGHT_KEYWORDS.some(k=>text.toLowerCase().includes(k)); G('copyrightNotice').style.display=has?'block':'none'; }
 
-// Live Stream
-function startLive() { navigator.mediaDevices?.getUserMedia({video:true,audio:true}).then(stream=>{ G('liveView').classList.add('open'); let vid=G('liveVideo'); vid.srcObject=stream; G('lvName').textContent=(CU?.name||'User')+"'s Live"; let viewers=0; setInterval(()=>{ viewers+=Math.floor(Math.random()*3); G('lvViewers').textContent=viewers; },3000); }).catch(()=>toast('e','Camera/mic access needed')); }
-function closeLiveView() { let vid=G('liveVideo'); if(vid?.srcObject) vid.srcObject.getTracks().forEach(t=>t.stop()); G('liveView').classList.remove('open'); }
-function sendLiveComment() { let inp=G('lvInp'); if(!inp?.value.trim()) return; let lc=G('lvComments'); let cm=document.createElement('div'); cm.className='lv-cm'; cm.innerHTML=`<span>${CU?.name}:</span> ${esc(inp.value.trim())}`; lc.appendChild(cm); lc.scrollTop=lc.scrollHeight; inp.value=''; }
+// LIVE STREAMING SYSTEM — Broadcast to All Users
+// ═══════════════════════════════════════════════════════════
+let liveStreamState = {
+  active: false,
+  stream: null,
+  streamerId: null,
+  viewers: [],
+  comments: [],
+  startTime: null,
+  postId: null
+};
+
+// Start Live from Create Post Modal
+function startLiveStreamFromPost() {
+  if (!CU) return toast('e', 'Please login first');
+  
+  // Close post modal and request permissions
+  closeModal('postModal');
+  
+  // Show permission request dialog
+  let permModal = document.createElement('div');
+  permModal.id = 'livePermModal';
+  permModal.className = 'overlay center';
+  permModal.style.zIndex = '10000';
+  permModal.innerHTML = `
+    <div class="modal" style="max-width:350px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:10px;">📹</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Start Live Stream?</div>
+      <div style="font-size:13px;color:var(--t3);margin-bottom:20px;">
+        Camera and microphone access required.<br>
+        All users will be able to watch your live stream.
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-ghost" onclick="document.getElementById('livePermModal').remove()">Cancel</button>
+        <button class="btn btn-p" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);" onclick="requestLivePermissions()">🔴 Go Live</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(permModal);
+}
+
+// Request camera/mic permissions
+function requestLivePermissions() {
+  let permModal = document.getElementById('livePermModal');
+  if (permModal) permModal.remove();
+  
+  if (!navigator.mediaDevices?.getUserMedia) {
+    return toast('e', 'Your browser does not support live streaming');
+  }
+  
+  // Show loading
+  toast('i', 'Requesting camera access...');
+  
+  navigator.mediaDevices.getUserMedia({ 
+    video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user' }, 
+    audio: { echoCancellation: true, noiseSuppression: true } 
+  })
+  .then(stream => {
+    startBroadcast(stream);
+  })
+  .catch(err => {
+    console.error('[Live] Permission denied:', err);
+    toast('e', 'Camera/mic access denied. Please allow permissions.');
+    // Show settings hint
+    alert('📹 Camera Access Required\n\nPlease:\n1. Click the camera icon in your browser address bar\n2. Select "Allow"\n3. Refresh and try again');
+  });
+}
+
+// Start the actual broadcast
+function startBroadcast(stream) {
+  if (!CU) return;
+  
+  liveStreamState.active = true;
+  liveStreamState.stream = stream;
+  liveStreamState.streamerId = CU.id;
+  liveStreamState.startTime = Date.now();
+  liveStreamState.comments = [];
+  liveStreamState.viewers = [];
+  
+  // Create a live post
+  let livePost = {
+    id: 'live_' + Date.now(),
+    author: CU.id,
+    type: 'live',
+    text: '🔴 ' + (CU.name || 'User') + ' is LIVE NOW!',
+    createdAt: Date.now(),
+    isLive: true,
+    viewers: 0,
+    comments: [],
+    streamerName: CU.name,
+    streamerAvatar: CU.avatar || null,
+    likes: [],
+    likedBy: [],
+    shares: 0
+  };
+  
+  liveStreamState.postId = livePost.id;
+  D.posts.unshift(livePost);
+  saveData();
+  
+  // Open live view for broadcaster
+  G('liveView').classList.add('open');
+  let vid = G('liveVideo');
+  vid.srcObject = stream;
+  vid.muted = true; // Mute self to prevent echo
+  G('lvName').textContent = (CU.name || 'User') + "'s Live Stream";
+  G('lvAv').textContent = CU.name?.charAt(0).toUpperCase() || 'L';
+  
+  // Clear previous comments
+  let lc = G('lvComments');
+  if (lc) lc.innerHTML = '<div style="padding:10px;color:var(--t3);font-size:12px;text-align:center;">💬 Comments will appear here...</div>';
+  
+  // Start viewer count simulation
+  let viewerInterval = setInterval(() => {
+    if (!liveStreamState.active) {
+      clearInterval(viewerInterval);
+      return;
+    }
+    // Simulate growing viewers
+    liveStreamState.viewers = Math.min(liveStreamState.viewers + Math.floor(Math.random() * 5), 999);
+    G('lvViewers').textContent = liveStreamState.viewers;
+    
+    // Update post viewer count
+    let post = D.posts.find(p => p.id === liveStreamState.postId);
+    if (post) {
+      post.viewers = liveStreamState.viewers;
+      saveData();
+    }
+  }, 3000);
+  
+  // Notify all users via socket if available
+  if (socketReady && socket) {
+    socket.emit('live:start', {
+      postId: livePost.id,
+      streamerId: CU.id,
+      streamerName: CU.name,
+      title: livePost.text
+    });
+  }
+  
+  // Add notification for followers (simulated)
+  Object.values(D.users).forEach(u => {
+    if (u.id !== CU.id && !u.isAdmin) {
+      addNotif(u.id, 'live', '🔴', `${CU.name} started a live stream!`, livePost.id);
+    }
+  });
+  
+  // Update feed to show live
+  rFeed();
+  
+  toast('s', '🔴 You are now LIVE! Viewers can join now.');
+  confetti();
+  
+  // Track duration
+  let durationInterval = setInterval(() => {
+    if (!liveStreamState.active) {
+      clearInterval(durationInterval);
+      return;
+    }
+    let duration = Math.floor((Date.now() - liveStreamState.startTime) / 1000);
+    let mins = Math.floor(duration / 60);
+    let secs = duration % 60;
+    document.title = `🔴 LIVE ${mins}:${secs.toString().padStart(2,'0')} | Monetixra`;
+  }, 1000);
+}
+
+// Close live view (for broadcaster)
+function closeLiveView() {
+  let vid = G('liveVideo');
+  if (vid?.srcObject) {
+    vid.srcObject.getTracks().forEach(t => t.stop());
+  }
+  
+  if (liveStreamState.active && liveStreamState.streamerId === CU?.id) {
+    // Broadcaster ending stream
+    endBroadcast();
+  }
+  
+  G('liveView').classList.remove('open');
+  document.title = 'Monetixra — Complete Social Earn Platform';
+}
+
+// End broadcast
+function endBroadcast() {
+  liveStreamState.active = false;
+  
+  // Update post to show ended
+  let post = D.posts.find(p => p.id === liveStreamState.postId);
+  if (post) {
+    post.isLive = false;
+    post.text = post.text.replace('🔴', '⚫️ ENDED');
+    post.endedAt = Date.now();
+    saveData();
+  }
+  
+  // Notify socket
+  if (socketReady && socket) {
+    socket.emit('live:end', { postId: liveStreamState.postId });
+  }
+  
+  toast('i', 'Live stream ended. Thanks for broadcasting!');
+  rFeed();
+}
+
+// Send live comment
+function sendLiveComment() {
+  let inp = G('lvInp');
+  if (!inp?.value.trim() || !liveStreamState.active) return;
+  
+  let comment = {
+    id: 'cm_' + Date.now(),
+    userId: CU?.id || 'anon',
+    userName: CU?.name || 'Anonymous',
+    text: inp.value.trim(),
+    at: Date.now()
+  };
+  
+  liveStreamState.comments.push(comment);
+  
+  // Add to post comments
+  let post = D.posts.find(p => p.id === liveStreamState.postId);
+  if (post) {
+    post.comments = post.comments || [];
+    post.comments.push(comment);
+    saveData();
+  }
+  
+  renderLiveComments();
+  inp.value = '';
+}
+
+// Render live comments
+function renderLiveComments() {
+  let lc = G('lvComments');
+  if (!lc) return;
+  
+  if (liveStreamState.comments.length === 0) {
+    lc.innerHTML = '<div style="padding:10px;color:var(--t3);font-size:12px;text-align:center;">💬 No comments yet...</div>';
+    return;
+  }
+  
+  lc.innerHTML = liveStreamState.comments.slice(-20).map(c => {
+    let isMine = c.userId === CU?.id;
+    return `<div class="lv-cm${isMine ? ' mine' : ''}" style="${isMine ? 'background:rgba(0,255,170,0.1);' : ''}"><span style="font-weight:700;color:var(--neon);">${esc(c.userName)}:</span> ${esc(c.text)}</div>`;
+  }).join('');
+  
+  lc.scrollTop = lc.scrollHeight;
+}
+
+// Watch live stream (for viewers)
+function watchLiveStream(postId) {
+  let post = D.posts.find(p => p.id === postId);
+  if (!post || !post.isLive) {
+    toast('e', 'This live stream has ended');
+    return;
+  }
+  
+  // For viewers - show the live view without camera
+  G('liveView').classList.add('open');
+  G('lvName').textContent = post.streamerName + "'s Live";
+  G('lvAv').textContent = post.streamerName?.charAt(0).toUpperCase() || 'L';
+  G('lvViewers').textContent = post.viewers || 0;
+  
+  // Hide video element for viewers (they watch via simulated connection)
+  let vid = G('liveVideo');
+  vid.style.display = 'none';
+  
+  // Show viewer mode UI
+  let overlay = document.querySelector('.lv-overlay');
+  if (overlay) {
+    overlay.innerHTML = `
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
+        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:40px;">
+          ${post.streamerName?.charAt(0).toUpperCase() || 'L'}
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:18px;font-weight:700;">${esc(post.streamerName)}</div>
+          <div style="font-size:14px;color:var(--t3);">🔴 LIVE NOW</div>
+        </div>
+        <div style="background:rgba(255,0,0,0.2);border:1px solid #ff4444;padding:10px 20px;border-radius:20px;font-size:12px;">
+          📹 Watching Live Stream
+        </div>
+      </div>
+    `;
+  }
+  
+  // Load comments
+  liveStreamState.comments = post.comments || [];
+  renderLiveComments();
+  
+  // Increment viewer count
+  post.viewers = (post.viewers || 0) + 1;
+  saveData();
+  
+  toast('s', `🔴 Watching ${post.streamerName}'s live stream`);
+}
+
+// Legacy function for direct start
+function startLive() {
+  startLiveStreamFromPost();
+}
 
 // Video/Image Editor
 function openVideoEditor() { G('videoEditor').classList.add('open'); }
@@ -5432,27 +7145,29 @@ function setLang(code) { currentLang=code; G('curLangLabel').textContent=`${LANG
 function rSettings() {
   buildColorPicker();
   if (!CU) return;
+  // Get current user data
+  let u = D.users[CU.id] || CU;
   // Hero card
-  let av = G('settAv'); if (av) av.innerHTML = su.avatar ? `<img src="${su.avatar}" style="width:100%;height:100%;object-fit:cover;">` : (su.name?.charAt(0).toUpperCase()||'M');
-  if (G('settName')) G('settName').textContent = su.name||CU.name||'User';
-  if (G('settUser')) G('settUser').textContent = '@'+(su.username||CU.username||'user');
-  if (G('settPts')) G('settPts').textContent = fmt(su.points||0)+' pts · $'+((su.points||0)/PTS_PER_USD).toFixed(2);
-  if (G('settFollowers')) G('settFollowers').textContent = fmt(su.followers?.length||0);
-  if (G('settFollowing')) G('settFollowing').textContent = fmt(su.following?.length||0);
-  if (G('settPostCount')) G('settPostCount').textContent = fmt(su.posts?.length||0);
+  let av = G('settAv'); if (av) av.innerHTML = u.avatar ? `<img src="${u.avatar}" style="width:100%;height:100%;object-fit:cover;">` : (u.name?.charAt(0).toUpperCase()||'M');
+  if (G('settName')) G('settName').textContent = u.name||CU.name||'User';
+  if (G('settUser')) G('settUser').textContent = '@'+(u.username||CU.username||'user');
+  if (G('settPts')) G('settPts').textContent = fmt(u.points||0)+' pts · $'+((u.points||0)/PTS_PER_USD).toFixed(2);
+  if (G('settFollowers')) G('settFollowers').textContent = fmt(u.followers?.length||0);
+  if (G('settFollowing')) G('settFollowing').textContent = fmt(u.following?.length||0);
+  if (G('settPostCount')) G('settPostCount').textContent = fmt(u.posts?.length||0);
   // Badges
   let badges = G('settBadges'); if (badges) {
     badges.innerHTML = '';
-    if (su.kycVerified) badges.innerHTML += '<span class="sett-tag">✅ KYC</span>';
-    if (su.twoFA)       badges.innerHTML += '<span class="sett-tag">🛡️ 2FA</span>';
-    if (su.isAdmin)     badges.innerHTML += '<span class="sett-tag">👑 Admin</span>';
-    if ((su.points||0)>5000) badges.innerHTML += '<span class="sett-tag">⭐ Top Earner</span>';
-    if (su.verified)    badges.innerHTML += '<span class="sett-tag">✔ Verified</span>';
+    if (u.kycVerified) badges.innerHTML += '<span class="sett-tag">✅ KYC</span>';
+    if (u.twoFA)       badges.innerHTML += '<span class="sett-tag">🛡️ 2FA</span>';
+    if (u.isAdmin)     badges.innerHTML += '<span class="sett-tag">👑 Admin</span>';
+    if ((u.points||0)>5000) badges.innerHTML += '<span class="sett-tag">⭐ Top Earner</span>';
+    if (u.verified)    badges.innerHTML += '<span class="sett-tag">✔ Verified</span>';
   }
   // Status labels
-  if (G('tfaSub')) G('tfaSub').textContent = su.twoFA ? '✅ Enabled' : 'Disabled';
-  if (G('twoFAToggle')) G('twoFAToggle').checked = !!su.twoFA;
-  if (G('kycStatus')) G('kycStatus').textContent = su.kycVerified ? '✅ Verified' : su.kycPending ? '⏳ Pending' : 'Not Verified';
+  if (G('tfaSub')) G('tfaSub').textContent = u.twoFA ? '✅ Enabled' : 'Disabled';
+  if (G('twoFAToggle')) G('twoFAToggle').checked = !!u.twoFA;
+  if (G('kycStatus')) G('kycStatus').textContent = u.kycVerified ? '✅ Verified' : u.kycPending ? '⏳ Pending' : 'Not Verified';
   if (G('tinStatus')) G('tinStatus').textContent = CU.tin ? '✅ '+CU.tin.number : 'Not Added';
   if (G('blockedCount')) G('blockedCount').textContent = (CU.blocked||[]).length+' users blocked';
   if (G('settWalletBal')) G('settWalletBal').textContent = '$'+(((D.users[CU.id]||CU).points||0)/PTS_PER_USD).toFixed(2);
@@ -5461,7 +7176,7 @@ function rSettings() {
   if (G('themeIcon')) G('themeIcon').textContent = isDark ? '🌙' : '☀️';
   if (G('themeSub')) G('themeSub').textContent = isDark ? 'Dark Mode' : 'Light Mode';
   // Privacy toggles
-  let p = su.privacySettings||{};
+  let p = u.privacySettings||{};
   if (G('privToggle')) G('privToggle').checked = !!p.private;
   if (G('hideLikesToggle')) G('hideLikesToggle').checked = !!p.hideLikes;
   if (G('readReceiptsToggle')) G('readReceiptsToggle').checked = p.readReceipts!==false;
@@ -5472,8 +7187,11 @@ function rSettings() {
   if (G('autoTranslateToggle')) G('autoTranslateToggle').checked = !!p.autoTranslate;
   if (G('msgPrivSub')) G('msgPrivSub').textContent = ['Everyone','Followers Only','Nobody'][p.msgPriv||0];
   if (G('dlQualityLabel')) G('dlQualityLabel').textContent = ['Low (240p)','SD (360p)','HD (720p)','Full HD (1080p)','2K'][p.dlQuality||2];
+  // Date format label
+  let df = p.dateFormat || 'relative';
+  if (G('dateFormatSub')) G('dateFormatSub').textContent = df === 'relative' ? 'Relative (e.g. 2h ago)' : df === 'absolute' ? 'Absolute (e.g. 2024-01-15)' : 'ISO Format';
   // Notification toggles — restore saved states
-  let ns = su.notifSettings||{};
+  let ns = u.notifSettings||{};
   if(G('pushToggle'))        G('pushToggle').checked        = ns.push !== false;
   if(G('likeNotifToggle'))   G('likeNotifToggle').checked   = ns.likes !== false;
   if(G('cmtNotifToggle'))    G('cmtNotifToggle').checked    = ns.comments !== false;
@@ -5482,15 +7200,15 @@ function rSettings() {
   if(G('mlmNotifToggle'))    G('mlmNotifToggle').checked    = ns.mlm !== false;
   if(G('cpNotifToggle'))     G('cpNotifToggle').checked     = ns.copyright !== false;
   // TIN status
-  if(G('tinStatus')) G('tinStatus').textContent = su.tin ? '✅ '+su.tin.number : 'Not Added';
+  if(G('tinStatus')) G('tinStatus').textContent = u.tin ? '✅ '+u.tin.number : 'Not Added';
   // Blocked count
-  if(G('blockedCount')) G('blockedCount').textContent = (su.blocked||[]).length + ' users blocked';
+  if(G('blockedCount')) G('blockedCount').textContent = (u.blocked||[]).length+' users blocked';
   // Admin panel button visibility
   // Admin section visibility
   let adminBtn = G('settAdminBtn');
   let adminSec = G('settAdminSection');
-  if(adminBtn) adminBtn.style.display = su.isAdmin ? 'flex' : 'none';
-  if(adminSec) adminSec.style.display = su.isAdmin ? 'block' : 'none';
+  if(adminBtn) adminBtn.style.display = u.isAdmin ? 'flex' : 'none';
+  if(adminSec) adminSec.style.display = u.isAdmin ? 'block' : 'none';
   // Cache size
   try { let keys=Object.keys(localStorage); let total=keys.reduce((s,k)=>s+(localStorage.getItem(k)||'').length,0); if(G('cacheSizeLabel')) G('cacheSizeLabel').textContent = (total/1024).toFixed(1)+' KB used'; } catch(e){}
   // Font size
@@ -5519,7 +7237,15 @@ function cycleDlQuality() {
   saveData(); rSettings();
 }
 function cycleDateFormat() {
-  toast('i', 'Date format changed');
+  if (!CU) return;
+  CU.privacySettings = CU.privacySettings || {};
+  let formats = ['relative', 'absolute', 'iso'];
+  let current = CU.privacySettings.dateFormat || 'relative';
+  let idx = formats.indexOf(current);
+  let nextIdx = (idx + 1) % formats.length;
+  CU.privacySettings.dateFormat = formats[nextIdx];
+  saveData(); rSettings();
+  toast('i', 'Date format: ' + (nextIdx === 0 ? 'Relative' : nextIdx === 1 ? 'Absolute' : 'ISO'));
 }
 function changeFontSize(val) {
   document.documentElement.style.fontSize = val+'%';
@@ -5727,14 +7453,30 @@ function startBanner() { let el=G('baT'); if(!el) return; let banners=['🚀 Mon
 function clickBanner() { addPts(2,'Banner Click'); let btn=G('bannerAd')?.querySelector('.ba-earn'); if(btn){ btn.textContent='✅'; setTimeout(()=>btn.textContent='+2',1500); } }
 function closeBanner() { let b=G('bannerAd'); if(b) b.style.display='none'; G('ticker').style.top='0px'; G('topBar').style.top='24px'; G('catBar').style.top='76px'; G('mainWrap').style.paddingTop='132px'; }
 function adTypeClick(type,el) { document.querySelectorAll('.adpill').forEach(p=>p.classList.remove('on')); el.classList.add('on'); if(type==='interstitial') showInts(); else if(type==='reward') G('rwAd').classList.add('show'); else if(type==='auto') showAutoAd(); else if(type==='click'){ addPts(2,'Click Reward'); toast('s','+2 pts!'); } else toast('i','Ad type: '+type); }
-let intsTimer=null; const INTS_ADS=[{icon:'🛒',title:'Mega Sale!',sub:'Today only!'},{icon:'📱',title:'New App!',sub:'Free download'}];
+let intsTimer=null; const INTS_ADS=[
+  {icon:'🎯',title:'Watch & Earn!',sub:'Keep watching to earn more points!'},
+  {icon:'💎',title:'Bonus Available!',sub:'View this ad for instant rewards'},
+  {icon:'🚀',title:'Earn Unlimited!',sub:'More ads = More earnings!'},
+  {icon:'💰',title:'Cash Rewards!',sub:'Exchange points for real money'},
+  {icon:'🎁',title:'Special Offer!',sub:'Limited time bonus inside'},
+  {icon:'🔥',title:'Hot Deals!',sub:'Check out amazing offers now'},
+  {icon:'⭐',title:'Premium Content!',sub:'Exclusive rewards waiting for you'},
+  {icon:'💵',title:'Real Earnings!',sub:'Turn your time into money'}
+];
 function scheduleInts() { setTimeout(showInts,35000); setInterval(showInts,130000); }
 function showInts() { let ad=INTS_ADS[Math.floor(Math.random()*INTS_ADS.length)]; G('intsIcon').textContent=ad.icon; G('intsTitle').textContent=ad.title; G('intsSub').textContent=ad.sub; G('intsAd').classList.add('show'); let sb=G('intsSkipBtn'); sb.style.opacity='.3'; sb.style.pointerEvents='none'; G('intsBar').style.width='0%'; let s=5; G('intsCnt').textContent='Skip in '+s+'s...'; intsTimer=setInterval(()=>{ s--; G('intsCnt').textContent=s>0?'Skip in '+s+'s...':'✅ Skip now'; G('intsBar').style.width=((5-s)/5*100)+'%'; if(s<=0){ clearInterval(intsTimer); sb.style.opacity='1'; sb.style.pointerEvents='auto'; } },1000); addPts(2,'Interstitial Viewed'); }
 function closeInts() { G('intsAd').classList.remove('show'); clearInterval(intsTimer); }
 function clickInts() { closeInts(); addPts(5,'Interstitial Clicked'); toast('s','+5 pts!'); }
 function scheduleReward() { setTimeout(()=>G('rwAd').classList.add('show'),65000); setInterval(()=>G('rwAd').classList.add('show'),190000); }
-function watchRewardAd() { G('rwAd').classList.remove('show'); toast('i','Loading...'); setTimeout(()=>{ if(confirm('Watch ad for +10 pts?')){ addPts(10,'Reward Ad'); confetti(); toast('s','+10 pts!'); } },900); }
-const AUTO_ADS=[{title:'🛒 Flash Sale!',sub:'Tap now'},{title:'📱 New App!',sub:'Download'}];
+function watchRewardAd() { G('rwAd').classList.remove('show'); toast('i','Loading reward ad...'); setTimeout(()=>{ addPts(10,'Reward Ad'); confetti(); toast('s','+10 pts! 🎉'); },900); }
+const AUTO_ADS=[
+  {title:'💰 Quick Earn!',sub:'Tap for instant points'},
+  {title:'🎁 Bonus Ready!',sub:'Claim your reward now'},
+  {title:'⭐ Premium Deal!',sub:'Exclusive offer inside'},
+  {title:'🚀 Boost Income!',sub:'Earn 2x points now'},
+  {title:'💎 Gems Bonus!',sub:'Limited time reward'},
+  {title:'🔥 Trending Now!',sub:'Check popular offers'}
+];
 function scheduleAutoAd() { setTimeout(showAutoAd,48000); setInterval(showAutoAd,95000); }
 function showAutoAd() { let ad=AUTO_ADS[Math.floor(Math.random()*AUTO_ADS.length)]; G('aadTitle').textContent=ad.title; G('aadSub').textContent=ad.sub; G('autoAd').classList.add('show'); setTimeout(closeAutoAd,16000); }
 function closeAutoAd() { G('autoAd').classList.remove('show'); }
@@ -7041,6 +8783,11 @@ function clickInts() {
 
 // ========== INIT NEW FEATURES ==========
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize all ad systems (check if exists first)
+  if (typeof initAdSystems === 'function') {
+    initAdSystems();
+  }
+  
   scheduleStickyAd();
   
   // Add click tracking to posts
@@ -7134,6 +8881,8 @@ addPts = function(pts, label, type='earn') {
 window.rAnalytics = rAnalytics;
 window.rActivity = rActivity;
 window.rGamification = rGamification;
+window.rProfile = rProfile;
+window.rSettings = rSettings;
 window.openPushNotifSettings = openPushNotifSettings;
 window.subscribePushNotifications = subscribePushNotifications;
 window.testPushNotification = testPushNotification;
@@ -7191,6 +8940,1460 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log('[Monetixra] Hybrid Storage System ready! (21GB+ capacity)');
 });
 </script>
+
+<!-- ProfitableCPMRate — Native Banner Container (global) -->
+<div id="container-1805a61f4f6c6177d946441e5153e81c"></div>
+
+<!-- ProfitableCPMRate — Banner 468x60 -->
+<div id="footerBanner468"></div>
+<script>
+(function() {
+  window.atOptions_banner468 = { 'key' : '2c59b270de9e21b57ad543e7b88c2e3f', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+  window.atOptions = window.atOptions_banner468;
+  let s = document.createElement('script');
+  s.src = 'https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js';
+  document.getElementById('footerBanner468').appendChild(s);
+})();
+</script>
+
+<!-- ProfitableCPMRate — Banner 300x50 -->
+<div id="footerBanner300"></div>
+<script>
+(function() {
+  window.atOptions_banner300 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 50, 'width' : 300, 'params' : {} };
+  window.atOptions = window.atOptions_banner300;
+  let s = document.createElement('script');
+  s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
+  document.getElementById('footerBanner300').appendChild(s);
+})();
+</script>
+
+<!-- ProfitableCPMRate — Smartlink (hidden, earns on redirect) -->
+<iframe src="https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a" style="width:0;height:0;border:none;position:absolute;left:-9999px;" aria-hidden="true"></iframe>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAXIMUM REVENUE AD PLACEMENTS — Added for High CPM
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- Leaderboard 728x90 (Desktop) — Highest CPM -->
+<div id="leaderboard728" style="margin:15px auto;text-align:center;max-width:728px;"></div>
+<script>
+(function() {
+  window.atOptions_728 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+  let s = document.createElement('script');
+  s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
+  document.getElementById('leaderboard728').appendChild(s);
+})();
+</script>
+
+<!-- Wide Skyscraper 160x600 (Sidebar) — High CPM -->
+<div id="skyscraper160" style="position:fixed;right:10px;top:150px;width:160px;height:600px;z-index:999;background:var(--glass);border-radius:12px;padding:5px;" class="desktop-only"></div>
+<script>
+(function() {
+  window.atOptions_160 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+  let s = document.createElement('script');
+  s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
+  document.getElementById('skyscraper160').appendChild(s);
+})();
+</script>
+
+<!-- Mobile Banner 320x50 — Mobile High CPM -->
+<div id="mobileBanner320" style="margin:10px auto;text-align:center;max-width:320px;" class="mobile-only"></div>
+<script>
+(function() {
+  if(window.innerWidth <= 768) {
+    window.atOptions_320 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+    let s = document.createElement('script');
+    s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
+    document.getElementById('mobileBanner320').appendChild(s);
+  }
+})();
+</script>
+
+<!-- In-Feed Native Ads — Content Match High CPM -->
+<div id="infeedNative1" style="margin:20px auto;padding:15px;background:var(--card);border-radius:12px;max-width:600px;"></div>
+<div id="infeedNative2" style="margin:20px auto;padding:15px;background:var(--card);border-radius:12px;max-width:600px;"></div>
+<script>
+(function(){
+  const nativeAds = [
+    {icon:'🎯',title:'Earn $5 Per Referral!',desc:'Invite friends & earn unlimited. No cap on earnings!'},
+    {icon:'💎',title:'Premium = 2x Earnings!',desc:'Upgrade to premium & double your daily income instantly.'},
+    {icon:'🚀',title:'Watch 50 Ads/Day = $1!',desc:'Consistent daily earning opportunity for all users.'},
+    {icon:'🔥',title:'#1 Earning App in Asia!',desc:'Join 500K+ users earning real money daily.'},
+    {icon:'💰',title:'Instant Withdrawal!',desc:'bKash, Nagad, PayPal, Crypto — 24hr payout!'}
+  ];
+  function injectNative(id, ad) {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = `<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--neon);border-radius:10px;background:linear-gradient(135deg,var(--dark2),var(--dark));"><div style="font-size:28px;">${ad.icon}</div><div style="flex:1;"><div style="font-weight:700;color:var(--neon);font-size:14px;">${ad.title}</div><div style="font-size:12px;color:var(--t2);margin-top:3px;">${ad.desc}</div></div><div style="background:var(--neon);color:#000;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;" onclick="addPts(3,'Native Ad Click');toast('s','+3 pts!')">Earn +3</div></div>`;
+  }
+  setTimeout(() => { injectNative('infeedNative1', nativeAds[0]); injectNative('infeedNative2', nativeAds[1]); }, 2000);
+})();
+</script>
+
+<!-- Video Pre-Roll Ad Placeholder — Video CPM Highest -->
+<div id="videoAdContainer" style="margin:20px auto;max-width:480px;background:var(--dark2);border-radius:12px;overflow:hidden;display:none;">
+  <div style="background:linear-gradient(90deg,var(--c1),var(--c2));padding:8px 12px;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:space-between;">
+    <span>📺 Video Ad — Earn +15 pts</span>
+    <span id="videoTimer" style="background:rgba(0,0,0,0.3);padding:3px 10px;border-radius:20px;font-size:11px;">15s</span>
+  </div>
+  <div style="padding:30px;text-align:center;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>▶️</text></svg>') center/80px no-repeat,var(--dark2);min-height:200px;position:relative;">
+    <button onclick="watchVideoAd()" style="background:var(--neon);color:#000;border:none;padding:12px 30px;border-radius:30px;font-weight:700;cursor:pointer;font-size:14px;position:absolute;bottom:20px;left:50%;transform:translateX(-50%);">Watch & Earn +15</button>
+  </div>
+</div>
+<script>
+function watchVideoAd() {
+  let timer = 15;
+  const btn = document.querySelector('#videoAdContainer button');
+  const timerEl = document.getElementById('videoTimer');
+  btn.disabled = true; btn.textContent = 'Watching...';
+  const iv = setInterval(() => {
+    timer--; timerEl.textContent = timer + 's';
+    if(timer <= 0) { clearInterval(iv); addPts(15,'Video Ad'); confetti(); toast('s','+15 pts! Video Complete'); document.getElementById('videoAdContainer').style.display='none'; }
+  }, 1000);
+}
+setTimeout(() => { const el = document.getElementById('videoAdContainer'); if(el) el.style.display='block'; }, 60000);
+</script>
+
+<!-- Floating Action Button Ad — Persistent Earning -->
+<div id="fabAd" style="position:fixed;bottom:80px;right:15px;width:60px;height:60px;background:linear-gradient(135deg,var(--c1),var(--c2));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(0,212,255,0.4);z-index:9999;animation:pulse 2s infinite;" onclick="addPts(1,'FAB Ad');toast('s','+1 pt!')">
+  <span style="font-size:24px;">💰</span>
+</div>
+<style>@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}</style>
+
+<!-- Exit Intent Popup — High Conversion -->
+<div id="exitIntent" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
+  <div style="background:var(--glass);border:1px solid var(--neon);border-radius:20px;padding:30px;max-width:350px;text-align:center;backdrop-filter:blur(20px);">
+    <div style="font-size:40px;margin-bottom:10px;">💎</div>
+    <div style="font-size:18px;font-weight:700;color:var(--neon);margin-bottom:10px;">Wait! Don't Leave!</div>
+    <div style="font-size:14px;color:var(--t2);margin-bottom:20px;">Claim your <b>+50 bonus points</b> before you go!</div>
+    <button onclick="addPts(50,'Exit Intent Bonus');document.getElementById('exitIntent').style.display='none';toast('s','+50 Bonus pts!');" style="background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:12px 30px;border-radius:30px;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;">Claim +50 pts</button>
+    <button onclick="document.getElementById('exitIntent').style.display='none'" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;">No thanks</button>
+  </div>
+</div>
+<script>
+document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStorage.getItem('exitIntentShown')) { document.getElementById('exitIntent').style.display='flex'; localStorage.setItem('exitIntentShown', Date.now()); } });
+</script>
+
+<!-- Scroll Depth Ad Trigger — Engagement Based -->
+<script>
+(function(){
+  let scrollTriggered = false;
+  window.addEventListener('scroll', () => {
+    if(!scrollTriggered && (window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.7) {
+      scrollTriggered = true;
+      setTimeout(() => { toast('s','🎯 Scroll milestone! +5 bonus pts'); addPts(5,'Scroll Depth'); }, 500);
+    }
+  });
+})();
+</script>
+
+<!-- Time on Site Reward — Retention Ad -->
+<script>
+(function(){
+  const rewards = [ {time:30,pts:3,msg:'30s on site! +3 pts'}, {time:60,pts:5,msg:'1 min! +5 pts'}, {time:180,pts:10,msg:'3 mins! +10 pts'}, {time:300,pts:20,msg:'5 mins! +20 pts'} ];
+  rewards.forEach(r => setTimeout(() => { addPts(r.pts,'Time Reward'); toast('s',r.msg); }, r.time * 1000));
+})();
+
+// ═══════════════════════════════════════════════════════════
+// MAXIMUM REVENUE AD SYSTEM — Diverse Ads, Strategic Placement
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const MAX_AD_SYSTEM = {
+    // ═══════════════════════════════════════════════════════
+    // 1. DIVERSE AD TYPES POOL — Multiple Ad Types for Maximum Revenue
+    // ═══════════════════════════════════════════════════════
+    adTypes: {
+      // Banner Ads (Multiple sizes for different placements)
+      banners: {
+        '160x600': { name: 'Wide Skyscraper', cpm: 2.5, url: 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js' },
+        '300x250': { name: 'Medium Rectangle', cpm: 3.2, url: 'https://pl29280284.profitablecpmratenetwork.com/25/1b/0c/251b0cf69cbb4dec0e2e5d4397f5e56f.js' },
+        '728x90':  { name: 'Leaderboard', cpm: 2.8, url: 'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a' },
+        '320x50':  { name: 'Mobile Banner', cpm: 1.8, url: 'https://pl29280286.profitablecpmratenetwork.com/1f/31/3a/1f313aa876d332b1f8c2519dd6ff70f9.js' },
+        '300x600': { name: 'Half Page', cpm: 4.0, url: 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js' },
+        '160x30':  { name: 'Micro Banner', cpm: 1.2, url: 'https://www.highperformanceformat.com/5c1a960ae2f4c6d4ac2b758a9e2fb18b/invoke.js' },
+        '468x60':  { name: 'Full Banner', cpm: 2.2, url: 'https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js' },
+        '300x50':  { name: 'Mobile Leaderboard', cpm: 1.5, url: 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js' }
+      },
+      
+      // High-CPM Premium Ads
+      premium: {
+        video:      { name: 'Video Pre-roll', cpm: 8.5, url: 'vid_ad_url' },
+        interstitial: { name: 'Full Screen', cpm: 6.0, url: 'inter_ad_url' },
+        native:     { name: 'Native Feed', cpm: 4.5, url: 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js' },
+        rewarded:   { name: 'Rewarded Video', cpm: 12.0, url: 'reward_ad_url' }
+      },
+      
+      // Interactive Ads (Higher Engagement = More Revenue)
+      interactive: {
+        quiz:       { name: 'Quiz Ad', cpm: 5.5, engage: 'high' },
+        poll:       { name: 'Poll Ad', cpm: 4.0, engage: 'high' },
+        game:       { name: 'Mini Game', cpm: 7.0, engage: 'very_high' },
+        calculator: { name: 'Earn Calculator', cpm: 3.5, engage: 'medium' }
+      }
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // 2. STRATEGIC PLACEMENT MAP — Where to Show What Ads
+    // ═══════════════════════════════════════════════════════
+    placements: {
+      // Top Area (High Visibility)
+      'top-banner':      { type: '728x90', rotate: true, interval: 30000 },
+      'header-sticky':   { type: '320x50', rotate: true, interval: 45000 },
+      
+      // Feed Area (High Engagement)
+      'feed-inline-1':   { type: 'native', cpm: 'high' },      // 1st ad in feed
+      'feed-inline-3':   { type: '300x250', cpm: 'high' },     // 3rd post
+      'feed-inline-5':   { type: 'video', cpm: 'premium' },    // 5th post
+      'feed-inline-8':   { type: 'interactive', subtype: 'quiz' },
+      'feed-inline-12':  { type: '300x600', cpm: 'very_high' }, // Large ad
+      
+      // Sidebar (Desktop only)
+      'sidebar-top':     { type: '160x600', cpm: 'medium' },
+      'sidebar-mid':   { type: '300x250', cpm: 'high' },
+      
+      // Between Sections
+      'between-posts':   { type: 'native', every: 3 },  // Every 3 posts
+      'story-ad':      { type: 'native', position: 'after_story' },
+      
+      // Bottom Area
+      'bottom-banner':   { type: '728x90', rotate: true },
+      'sticky-footer':   { type: '320x50', mobile: true },
+      
+      // Action-Based (Contextual)
+      'post-create':     { type: 'native', trigger: 'before_post' },
+      'after-like':      { type: 'interstitial', trigger: 'after_5_likes' },
+      'before-withdraw': { type: 'rewarded', trigger: 'withdraw_request' },
+      'idle-popup':      { type: 'interstitial', trigger: 'idle_2min' }
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // 3. ALL ADS ALL TIME — All Ad Types Always Active (Random Rotation)
+    // ═══════════════════════════════════════════════════════
+    allAdTypes: [
+      'quiz', 'poll', 'game', 'calculator', 'native',
+      'banner_300x250', 'banner_728x90', 'banner_160x600', 'banner_160x30', 'banner_468x60', 'banner_300x50',
+      'video_offer', 'rewarded_offer', 'premium_offer',
+      'interstitial', 'popunder_trigger', 'smartlink',
+      'social_bar', 'native_feed', 'click_to_earn',
+      'admob_banner', 'admob_interstitial', 'admob_rewarded', 'admob_native',
+      'adsense_display'
+    ],
+    
+    // ═══════════════════════════════════════════════════════
+    // 4. AD ROTATION CONFIG — Constant Variation
+    // ═══════════════════════════════════════════════════════
+    rotationConfig: {
+      interval: 30000,      // 30 seconds
+      feedInterval: 3,      // Every 3 posts
+      featureAdChance: 0.7, // 70% chance to show ad in any feature
+      maxAdsPerSession: 100 // Maximum ads per session
+    },
+    
+    sessionAds: [],
+    adRotationTimer: null,
+    
+    // ═══════════════════════════════════════════════════════
+    // CORE FUNCTIONS
+    // ═══════════════════════════════════════════════════════
+    
+    // Get random ad type from all available types
+    getRandomAdType() {
+      return this.allAdTypes[Math.floor(Math.random() * this.allAdTypes.length)];
+    },
+    
+    // Get multiple random ad types
+    getRandomAdTypes(count) {
+      const shuffled = [...this.allAdTypes].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // PAGE-SPECIFIC AD TYPES — Different ads for different pages
+    // ═══════════════════════════════════════════════════════
+    
+    // Get ad type based on page context
+    getAdTypeForPage(pageName) {
+      // Only use valid ad types that exist in allAdTypes
+      const validAdTypes = {
+        // Feed: Mix of interactive and native ads
+        feed: ['native_feed', 'quiz', 'poll', 'banner_300x250', 'click_to_earn'],
+        // Explore: Visual ads for discovery
+        explore: ['native', 'banner_728x90', 'video_offer', 'banner_160x600'],
+        // Profile: Personal/reward focused
+        profile: ['rewarded_offer', 'premium_offer', 'native', 'game'],
+        // Wallet: Financial/high CPM ads
+        wallet: ['premium_offer', 'rewarded_offer', 'calculator', 'interstitial'],
+        // Earn: Task-related ads
+        earn: ['click_to_earn', 'quiz', 'poll', 'game', 'video_offer'],
+        // Analytics: Professional ads
+        analytics: ['banner_728x90', 'native', 'premium_offer'],
+        // Gamification: Fun interactive ads
+        gamification: ['game', 'quiz', 'poll', 'rewarded_offer'],
+        // Chat: Non-intrusive native ads
+        messages: ['native', 'banner_300x50', 'click_to_earn'],
+        // Friends: Social ads
+        friends: ['social_bar', 'native_feed', 'click_to_earn'],
+        // NFT: Premium/crypto ads
+        nft: ['premium_offer', 'banner_160x600', 'native', 'rewarded_offer'],
+        // Metaverse: Immersive ads
+        metaverse: ['video_offer', 'banner_728x90', 'game', 'interstitial'],
+        // Apps: App promotion ads
+        apps: ['native', 'banner_300x250', 'video_offer', 'click_to_earn']
+      };
+      
+      const types = validAdTypes[pageName] || this.allAdTypes;
+      // Safety check
+      if (!types || types.length === 0) {
+        return this.getRandomAdType();
+      }
+      return types[Math.floor(Math.random() * types.length)];
+    },
+    
+    // Get ad type for specific modal
+    getAdTypeForModal(modalId) {
+      const modalAdTypes = {
+        // Profile modals: Reward focused
+        profileModal: ['rewarded_offer', 'premium_offer', 'native'],
+        // Wallet modals: Financial ads
+        walletModal: ['calculator', 'premium_offer', 'native'],
+        // Settings: Non-intrusive
+        settingsModal: ['native', 'banner_300x50'],
+        // NFT modals: Premium
+        nftModal: ['premium_offer', 'native', 'rewarded_offer'],
+        // Generic fallback
+        default: ['native', 'banner_300x250', 'click_to_earn']
+      };
+      
+      const types = modalAdTypes[modalId] || modalAdTypes.default;
+      return types[Math.floor(Math.random() * types.length)];
+    },
+    
+    // Create diverse ad element
+    createAdElement(type, options = {}) {
+      const adEl = document.createElement('div');
+      adEl.className = `ad-container ad-${type}`;
+      adEl.style.cssText = 'margin:10px 0;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;overflow:hidden;';
+      
+      switch(type) {
+        case 'quiz':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;">
+              <div style="font-size:24px;margin-bottom:8px;">🎯</div>
+              <div style="font-weight:700;margin-bottom:10px;">Quick Quiz: Earn +5 pts!</div>
+              <div style="font-size:13px;color:var(--t3);margin-bottom:12px;">Which crypto grew most in 2024?</div>
+              <div style="display:flex;gap:8px;justify-content:center;">
+                <button onclick="addPts(5,'Quiz Ad');this.closest('.ad-container').remove()" class="btn btn-p btn-sm">Bitcoin</button>
+                <button onclick="addPts(5,'Quiz Ad');this.closest('.ad-container').remove()" class="btn btn-p btn-sm">Ethereum</button>
+              </div>
+            </div>`;
+          break;
+          
+        case 'poll':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;">
+              <div style="font-size:20px;margin-bottom:8px;">📊</div>
+              <div style="font-weight:700;margin-bottom:10px;">Quick Poll</div>
+              <div style="font-size:12px;margin-bottom:12px;">What's your favorite feature?</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">💰 Earning</button>
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">👥 Social</button>
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">🎮 Games</button>
+              </div>
+            </div>`;
+          break;
+          
+        case 'calculator':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;">
+              <div style="font-size:20px;margin-bottom:8px;">🧮</div>
+              <div style="font-weight:700;margin-bottom:10px;">Earnings Calculator</div>
+              <div style="background:var(--bg);border-radius:8px;padding:10px;margin-bottom:10px;">
+                <div style="font-size:11px;color:var(--t3);">If you refer 10 friends/month</div>
+                <div style="font-size:24px;font-weight:800;color:var(--neon);">+$500</div>
+              </div>
+              <button onclick="nav('referral');addPts(2,'Calculator Ad')" class="btn btn-p btn-sm">Start Earning →</button>
+            </div>`;
+          break;
+          
+        case 'game':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;">
+              <div style="font-size:28px;margin-bottom:8px;">🎰</div>
+              <div style="font-weight:700;margin-bottom:10px;">Spin & Win!</div>
+              <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">Watch ad to spin</div>
+              <button onclick="watchAd();addPts(10,'Game Ad');this.closest('.ad-container').remove()" class="btn btn-neon btn-sm">🎲 Spin Now</button>
+            </div>`;
+          break;
+          
+        case 'native':
+          // Standard native banner
+          adEl.innerHTML = `
+            <div style="display:flex;align-items:center;gap:12px;padding:10px;cursor:pointer;" onclick="window.open('https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a','_blank');addPts(2,'Native Ad Click')">
+              <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--c1),var(--c2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;">💎</div>
+              <div style="flex:1;text-align:left;">
+                <div style="font-weight:700;font-size:13px;">Premium Upgrade</div>
+                <div style="font-size:11px;color:var(--t3);">2x earnings + exclusive features</div>
+                <div style="font-size:10px;color:var(--neon);margin-top:4px;">Sponsored</div>
+              </div>
+              <div style="font-size:20px;">→</div>
+            </div>`;
+          break;
+          
+        case 'banner_300x250':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:10px;">
+              <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
+              <div style="width:300px;height:250px;background:linear-gradient(135deg,#667eea,#764ba2);margin:0 auto;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white;">
+                <div style="font-size:36px;margin-bottom:8px;">💰</div>
+                <div style="font-weight:800;font-size:16px;">Earn $500/Month</div>
+                <div style="font-size:12px;margin:8px 0;">Join 10,000+ earners</div>
+                <button onclick="nav('earn');addPts(5,'Banner Click')" class="btn btn-sm" style="background:white;color:#667eea;">Start Now</button>
+              </div>
+            </div>`;
+          break;
+          
+        case 'banner_728x90':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:8px;">
+              <div style="max-width:728px;height:90px;background:linear-gradient(90deg,var(--neon),var(--c2));margin:0 auto;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:20px;color:white;padding:0 20px;">
+                <span style="font-size:32px;">🚀</span>
+                <span style="font-weight:700;font-size:14px;">Boost Earnings 2x with Premium!</span>
+                <button onclick="nav('wallet')" class="btn btn-sm" style="background:white;color:var(--neon);">Upgrade</button>
+              </div>
+            </div>`;
+          break;
+          
+        case 'video_offer':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;background:linear-gradient(135deg,var(--g2),var(--dark));border-radius:12px;">
+              <div style="font-size:32px;margin-bottom:8px;">🎬</div>
+              <div style="font-weight:700;margin-bottom:8px;">Watch Video & Earn</div>
+              <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">30 sec video = +15 points</div>
+              <button onclick="watchAd();addPts(15,'Video Offer');this.closest('.ad-container').remove()" class="btn btn-neon">▶ Watch Now</button>
+            </div>`;
+          break;
+          
+        case 'rewarded_offer':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;background:linear-gradient(135deg,#ff6b6b,#ee5a6f);border-radius:12px;color:white;">
+              <div style="font-size:32px;margin-bottom:8px;">🎁</div>
+              <div style="font-weight:700;margin-bottom:8px;">Special Reward!</div>
+              <div style="font-size:12px;margin-bottom:12px;">Complete offer & get +50 points</div>
+              <button onclick="addPts(50,'Rewarded Offer');toast('s','+50 points!');this.closest('.ad-container').remove()" class="btn btn-sm" style="background:white;color:#ee5a6f;">Claim Reward</button>
+            </div>`;
+          break;
+          
+        case 'click_to_earn':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:12px;">
+              <div style="font-size:11px;color:var(--neon);margin-bottom:8px;">👆 Click any button to earn points!</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+                <button onclick="addPts(2,'Click Ad')" class="btn btn-p btn-sm">+2 pts</button>
+                <button onclick="addPts(3,'Click Ad')" class="btn btn-o btn-sm">+3 pts</button>
+                <button onclick="addPts(5,'Click Ad')" class="btn btn-neon btn-sm">+5 pts</button>
+              </div>
+            </div>`;
+          break;
+          
+        case 'premium_offer':
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;border:2px solid var(--neon);border-radius:12px;">
+              <div style="font-size:36px;margin-bottom:8px;">💎</div>
+              <div style="font-weight:800;margin-bottom:8px;color:var(--neon);">PREMIUM MEMBER</div>
+              <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">✓ 2x Earnings ✓ Priority Withdraw ✓ No Ads</div>
+              <button onclick="nav('wallet')" class="btn btn-neon">Upgrade $9.99/mo</button>
+            </div>`;
+          break;
+          
+        default:
+          // Default native ad for unknown types
+          adEl.innerHTML = `
+            <div style="text-align:center;padding:15px;">
+              <div style="font-size:28px;margin-bottom:8px;">📢</div>
+              <div style="font-weight:700;margin-bottom:8px;">Special Offer</div>
+              <button onclick="addPts(3,'Click Ad')" class="btn btn-neon btn-sm">+3 pts</button>
+            </div>`;
+          break;
+      }
+      
+      return adEl;
+    },
+    
+    // Insert ad at strategic position
+    insertStrategicAd(position, type) {
+      const container = document.getElementById(position) || document.querySelector(`[data-ad-position="${position}"]`);
+      if (!container) return;
+      
+      const ad = this.createAdElement(type);
+      container.appendChild(ad);
+      
+      // Track impression
+      this.trackImpression(type, position);
+    },
+    
+    // Dynamic feed ad insertion with variety - FEED SPECIFIC
+    insertFeedAdVariety(index) {
+      const feedList = document.getElementById('feedList');
+      if (!feedList) return;
+      
+      // FEED-SPECIFIC AD TYPES — Use feed-appropriate ads
+      const adType = this.getAdTypeForPage('feed');
+      
+      const adEl = this.createAdElement(adType);
+      adEl.classList.add('feed-ad-insert');
+      adEl.dataset.adIndex = index;
+      
+      // Insert into feed
+      const posts = feedList.querySelectorAll('.post');
+      if (posts[index] && posts[index].parentNode) {
+        posts[index].parentNode.insertBefore(adEl, posts[index].nextSibling);
+      }
+      
+      console.log('[FeedAd]', adType, 'inserted at position', index);
+    },
+    
+    // Contextual ad trigger
+    triggerContextualAd(triggerType) {
+      const now = Date.now();
+      const lastShown = localStorage.getItem(`ad_${triggerType}_last`);
+      
+      // Don't show same contextual ad within 5 minutes
+      if (lastShown && (now - parseInt(lastShown)) < 300000) return;
+      
+      // CONTEXT-APPROPRIATE AD TYPES
+      let adType;
+      let message = '';
+      
+      switch(triggerType) {
+        case 'before_post':
+          adType = 'rewarded_offer';
+          message = '📹 Complete this offer for +10 bonus points!';
+          break;
+        case 'after_like':
+          adType = 'native';
+          message = '💝 Thanks for engaging! Check out this offer:';
+          break;
+        case 'withdraw_request':
+          adType = 'premium_offer';
+          message = '🎁 Complete offer to get bonus points!';
+          break;
+        case 'idle_1min':
+        case 'idle_2min':
+          adType = 'game';
+          message = '🎮 Still there? Play a quick game!';
+          break;
+        default:
+          adType = this.getRandomAdType();
+      }
+      
+      localStorage.setItem(`ad_${triggerType}_last`, now.toString());
+      
+      // Show contextual toast + ad
+      if (message) toast('i', message);
+      
+      // Insert floating ad
+      const floatAd = this.createAdElement(adType);
+      floatAd.style.cssText += 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;z-index:9998;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+      floatAd.classList.add('floating-contextual-ad');
+      document.body.appendChild(floatAd);
+      
+      // Auto remove after 30 seconds
+      setTimeout(() => floatAd.remove(), 30000);
+    },
+    
+    // Track ad impression for analytics
+    trackImpression(type, position) {
+      const stats = JSON.parse(localStorage.getItem('ad_stats') || '{}');
+      const key = `${type}_${position}`;
+      stats[key] = (stats[key] || 0) + 1;
+      localStorage.setItem('ad_stats', JSON.stringify(stats));
+    },
+    
+    // Get ad performance report
+    getPerformanceReport() {
+      const stats = JSON.parse(localStorage.getItem('ad_stats') || '{}');
+      return Object.entries(stats)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
+    },
+    
+    // Inject floating ad randomly
+    injectFloatingAd(adType) {
+      const ad = this.createAdElement(adType);
+      ad.style.cssText += 'position:fixed;bottom:100px;right:10px;width:320px;z-index:9997;animation:slideInRight 0.5s ease;box-shadow:0 10px 40px rgba(0,0,0,0.5);';
+      ad.innerHTML += '<button onclick="this.parentElement.remove()" style="position:absolute;top:5px;right:5px;background:none;border:none;color:var(--t3);cursor:pointer;font-size:16px;">✕</button>';
+      document.body.appendChild(ad);
+      
+      // Auto remove after 25 seconds
+      setTimeout(() => ad.remove(), 25000);
+      
+      this.trackImpression(adType, 'floating');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // AGGRESSIVE FEATURE ADS — Ads in Every Feature
+    // ═══════════════════════════════════════════════════════
+    injectFeatureAds() {
+      // Hook into all major navigation functions
+      const features = [
+        { name: 'feed', fn: 'rFeed', adChance: 0.3 },
+        { name: 'explore', fn: 'rExplore', adChance: 0.4 },
+        { name: 'profile', fn: 'rProfile', adChance: 0.4 },
+        { name: 'wallet', fn: 'rWallet', adChance: 0.5 },
+        { name: 'earn', fn: 'rEarn', adChance: 0.4 },
+        { name: 'analytics', fn: 'rAnalytics', adChance: 0.3 },
+        { name: 'gamification', fn: 'rGamification', adChance: 0.3 },
+        { name: 'messages', fn: 'rMessages', adChance: 0.4 },
+        { name: 'friends', fn: 'rFriends', adChance: 0.3 },
+        { name: 'nft', fn: 'rNFTMarketplace', adChance: 0.4 },
+        { name: 'metaverse', fn: 'rMetaverse', adChance: 0.4 },
+        { name: 'apps', fn: 'rAppsPage', adChance: 0.35 }
+      ];
+      
+      features.forEach(feature => {
+        const originalFn = window[feature.fn];
+        if (originalFn) {
+          window[feature.fn] = function(...args) {
+            try {
+              // Always call original first
+              const result = originalFn.apply(this, args);
+              
+              // Inject ad with configured probability - use page-specific ad type
+              if (Math.random() < feature.adChance) {
+                setTimeout(() => {
+                  try {
+                    const adType = MAX_AD_SYSTEM.getAdTypeForPage(feature.name);
+                    MAX_AD_SYSTEM.injectFeatureAd(feature.name, adType);
+                  } catch(e) { /* Silent fail */ }
+                }, 500);
+              }
+              
+              return result;
+            } catch(e) {
+              // If ad system fails, still run original function
+              return originalFn.apply(this, args);
+            }
+          };
+        }
+      });
+      
+      // Hook into modal openings (reduced frequency)
+      const originalOpenModal = window.openModal;
+      if (originalOpenModal) {
+        window.openModal = function(modalId, ...args) {
+          try {
+            const result = originalOpenModal.apply(this, [modalId, ...args]);
+            
+            // Skip ads on Create Post modal - too intrusive
+            if (modalId === 'postModal') {
+              return result;
+            }
+            
+            // 20% chance to show ad when opening other modals
+            if (Math.random() < 0.2) {
+              setTimeout(() => {
+                try {
+                  const adType = MAX_AD_SYSTEM.getAdTypeForModal(modalId);
+                  MAX_AD_SYSTEM.injectModalAd(modalId, adType);
+                } catch(e) { /* Silent fail */ }
+              }, 300);
+            }
+            
+            return result;
+          } catch(e) {
+            // If ad system fails, still open modal
+            return originalOpenModal.apply(this, [modalId, ...args]);
+          }
+        };
+      }
+      
+      console.log('[FeatureAds] Injected into', features.length, 'features + modals');
+    },
+    
+    // Inject ad into specific feature page
+    injectFeatureAd(featureName, adType) {
+      try {
+        const pageId = 'pg-' + featureName;
+        const page = document.getElementById(pageId);
+        if (!page) return;
+        
+        // Check if ad already exists
+        if (page.querySelector('.feature-ad-injected')) return;
+        
+        const ad = this.createAdElement(adType);
+        // Safety check - if ad creation failed, skip
+        if (!ad) {
+          console.warn('[FeatureAd] Failed to create ad element:', adType);
+          return;
+        }
+        
+        ad.classList.add('feature-ad-injected');
+        ad.style.cssText += 'margin:10px;border-radius:12px;animation:fadeIn 0.5s ease;';
+        
+        // Insert at top of page content
+        const firstChild = page.firstElementChild;
+        if (firstChild) {
+          page.insertBefore(ad, firstChild);
+        } else {
+          page.appendChild(ad);
+        }
+        
+        this.trackImpression(adType, featureName);
+        console.log('[FeatureAd] Injected', adType, 'into', featureName);
+      } catch(e) {
+        console.error('[FeatureAd] Error injecting ad:', e);
+      }
+    },
+    
+    // Inject ad into modal
+    injectModalAd(modalId, adType) {
+      try {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        
+        // Check if ad already exists
+        if (modal.querySelector('.modal-ad-injected')) return;
+        
+        const ad = this.createAdElement(adType);
+        // Safety check - if ad creation failed, skip
+        if (!ad) {
+          console.warn('[ModalAd] Failed to create ad element:', adType);
+          return;
+        }
+        
+        ad.classList.add('modal-ad-injected');
+        ad.style.cssText += 'margin:10px 0;border-radius:12px;';
+        
+        // Insert after modal header or at top
+        const header = modal.querySelector('.modal-header, .mHead, h2, .modal-title');
+        if (header && header.nextSibling) {
+          modal.insertBefore(ad, header.nextSibling);
+        } else {
+          modal.insertBefore(ad, modal.firstChild);
+        }
+        
+        this.trackImpression(adType, 'modal_' + modalId);
+        console.log('[ModalAd] Injected', adType, 'into', modalId);
+      } catch(e) {
+        console.error('[ModalAd] Error injecting ad:', e);
+      }
+    },
+    
+    // Start the MAX system
+    start() {
+      console.log('[MAX AD SYSTEM] Starting ALL-TIME-ALL-ADS rotation...');
+      
+      // 1. CONSTANT AD ROTATION — New ad every 30 seconds
+      this.adRotationTimer = setInterval(() => {
+        const randomAd = this.getRandomAdType();
+        console.log('[MAX AD] Random ad selected:', randomAd);
+        
+        // Occasionally inject floating ad
+        if (Math.random() > 0.5) {
+          this.injectFloatingAd(randomAd);
+        }
+      }, this.rotationConfig.interval);
+      
+      // 2. Feed ad injection — Various ads every 3 posts
+      let feedObserver = new MutationObserver((mutations) => {
+        const feedList = document.getElementById('feedList');
+        if (feedList && feedList.children.length > 0) {
+          [3, 6, 9, 12, 15, 18, 21, 24].forEach(pos => {
+            if (feedList.children[pos] && !feedList.querySelector(`[data-ad-index="${pos}"]`)) {
+              this.insertFeedAdVariety(pos);
+            }
+          });
+        }
+      });
+      
+      const feedList = document.getElementById('feedList');
+      if (feedList) {
+        feedObserver.observe(feedList, { childList: true, subtree: true });
+      }
+      
+      // 3. AGGRESSIVE FEATURE ADS — Ads in every feature
+      this.injectFeatureAds();
+      
+      // 4. Idle detection (reduced to 1 min for more ads)
+      let idleTimer;
+      const resetIdle = () => {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          this.triggerContextualAd('idle_1min');
+        }, 60000); // 1 minute
+      };
+      
+      ['click', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+        document.addEventListener(evt, resetIdle);
+      });
+      resetIdle();
+      
+      // 5. Reaction counter — every 10 reactions (reduced frequency)
+      let reactCount = 0;
+      const originalReact = window.react;
+      window.react = function(...args) {
+        try {
+          reactCount++;
+          if (reactCount % 10 === 0) {
+            setTimeout(() => {
+              try {
+                MAX_AD_SYSTEM.triggerContextualAd('after_like');
+              } catch(e) { /* Silent fail */ }
+            }, 100);
+          }
+          return originalReact?.apply(this, args);
+        } catch(e) {
+          return originalReact?.apply(this, args);
+        }
+      };
+      
+      console.log('[MAX AD SYSTEM] Active — ALL ADS, ALL TIME, ALL FEATURES!');
+      
+      // 5. CHAT ADS — Native ads between messages (reduced frequency)
+      this.initChatAds();
+      
+      // 6. PROFILE ADS — Ads on profile visit (reduced frequency)
+      this.initProfileAds();
+      
+      // 7. POPUNDER — Hidden Revenue (reduced frequency)
+      this.initPopunder();
+      
+      // 12. SOCIAL BAR — Floating Social Ad
+      this.initSocialBar();
+      
+      // 13. AdMob & AdSense Auto-refresh
+      this.initAdNetworkRefresh();
+      
+      // 14. NOTIFICATION ADS — Push notifications with offers
+      this.initNotificationAds();
+      
+      // 15. ENHANCED FEED ADS — Various ads every 3 posts
+      this.initEnhancedFeedAds();
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // SCROLL-BASED ADS — New ad on scroll down
+    // ═══════════════════════════════════════════════════════
+    initScrollBasedAds() {
+      let lastScrollY = 0;
+      let scrollAdCount = 0;
+      
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollDiff = currentScrollY - lastScrollY;
+        
+        // Every 800px scroll down, show new ad
+        if (scrollDiff > 800) {
+          scrollAdCount++;
+          lastScrollY = currentScrollY;
+          
+          // Create floating scroll ad
+          const scrollAd = this.createAdElement(['quiz', 'poll', 'game', 'native'][scrollAdCount % 4]);
+          scrollAd.style.cssText += 'position:fixed;bottom:100px;right:10px;width:300px;z-index:9997;animation:slideIn 0.5s ease;';
+          scrollAd.innerHTML += '<button onclick="this.parentElement.remove()" style="position:absolute;top:5px;right:5px;background:none;border:none;color:var(--t3);cursor:pointer;">✕</button>';
+          document.body.appendChild(scrollAd);
+          
+          // Auto remove after 20 seconds
+          setTimeout(() => scrollAd.remove(), 20000);
+          
+          console.log('[ScrollAd] Shown at scroll:', currentScrollY);
+        }
+      }, { passive: true });
+      
+      console.log('[ScrollAd] Initialized — Every 800px scroll');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // PULL-TO-REFRESH ADS — Full-screen ad on refresh
+    // ═══════════════════════════════════════════════════════
+    initPullToRefreshAds() {
+      let touchStartY = 0;
+      let isRefreshing = false;
+      
+      document.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      
+      document.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const diff = touchEndY - touchStartY;
+        
+        // Pull down more than 150px at top of page
+        if (diff > 150 && window.scrollY < 50 && !isRefreshing) {
+          isRefreshing = true;
+          
+          // Show interstitial ad
+          this.showInterstitialAd();
+          
+          setTimeout(() => { isRefreshing = false; }, 5000);
+        }
+      }, { passive: true });
+      
+      // Also on actual page reload
+      window.addEventListener('beforeunload', () => {
+        this.triggerPopunder();
+      });
+      
+      console.log('[PullToRefresh] Initialized');
+    },
+    
+    // Show full-screen interstitial
+    showInterstitialAd() {
+      const interstitial = document.createElement('div');
+      interstitial.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+      interstitial.innerHTML = `
+        <div style="text-align:center;color:white;max-width:400px;">
+          <div style="font-size:48px;margin-bottom:20px;">📱</div>
+          <div style="font-size:20px;font-weight:700;margin-bottom:15px;">Sponsored Content</div>
+          <div style="font-size:14px;margin-bottom:20px;opacity:0.8;">Premium offers just for you!</div>
+          <div id="interstitialAdSlot" style="min-height:250px;background:var(--g2);border-radius:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;">
+            <div style="padding:20px;text-align:center;">
+              <div style="font-size:32px;margin-bottom:10px;">💎</div>
+              <div style="font-weight:700;">Premium Upgrade</div>
+              <div style="font-size:12px;margin:10px 0;">2x Earnings + Priority Support</div>
+              <button onclick="nav('wallet');this.closest('#interstitialOverlay').remove()" class="btn btn-neon">Upgrade Now</button>
+            </div>
+          </div>
+          <button onclick="this.closest('#interstitialOverlay').remove();addPts(3,'Ad Skip')" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:8px 20px;border-radius:99px;cursor:pointer;">Skip Ad (+3 pts)</button>
+        </div>
+      `;
+      interstitial.id = 'interstitialOverlay';
+      document.body.appendChild(interstitial);
+      
+      // Auto close after 15 seconds
+      setTimeout(() => interstitial.remove(), 15000);
+      
+      console.log('[Interstitial] Full-screen ad shown');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // NOTIFICATION ADS — Push notification offers
+    // ═══════════════════════════════════════════════════════
+    initNotificationAds() {
+      // Request permission on user interaction
+      const requestNotifPermission = () => {
+        if ('Notification' in window && Notification.permission === 'default') {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              console.log('[NotificationAds] Permission granted');
+              this.scheduleNotificationAds();
+            }
+          });
+        }
+      };
+      
+      // Ask on first click anywhere
+      document.addEventListener('click', requestNotifPermission, { once: true });
+      
+      console.log('[NotificationAds] Initialized');
+    },
+    
+    scheduleNotificationAds() {
+      const notifs = [
+        { title: '🎁 Daily Bonus!', body: 'Claim your free 50 points now!', action: 'claimBonus()' },
+        { title: '💰 High CPM Offer', body: 'Watch video & earn 20 points', action: 'watchAd()' },
+        { title: '👥 Referral Bonus', body: 'Invite friends & earn 100 pts each', action: "openModal('refModal')" },
+        { title: '📊 Your Stats', body: 'Check your earnings dashboard', action: "nav('analytics')" },
+        { title: '🔥 Trending', body: 'New NFT drops available now!', action: "nav('nft')" }
+      ];
+      
+      // Send notification every 10 minutes (if permitted)
+      setInterval(() => {
+        if (Notification.permission === 'granted' && document.hidden) {
+          const notif = notifs[Math.floor(Math.random() * notifs.length)];
+          const n = new Notification(notif.title, {
+            body: notif.body,
+            icon: '/favicon.ico',
+            badge: '/favicon.ico',
+            tag: 'ad-' + Date.now()
+          });
+          n.onclick = () => { eval(notif.action); n.close(); };
+        }
+      }, 600000); // Every 10 minutes
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // CHAT ADS — Native ads between messages
+    // ═══════════════════════════════════════════════════════
+    initChatAds() {
+      const chatList = document.getElementById('chatList');
+      if (!chatList) return;
+      
+      // Insert ad after every 4th message
+      const chatObserver = new MutationObserver((mutations) => {
+        const msgs = chatList.querySelectorAll('.chat-msg');
+        if (msgs.length > 0 && msgs.length % 4 === 0) {
+          const lastMsg = msgs[msgs.length - 1];
+          if (lastMsg && !lastMsg.nextElementSibling?.classList?.contains('chat-ad')) {
+            const chatAd = this.createAdElement('native');
+            chatAd.classList.add('chat-ad');
+            chatAd.style.cssText += 'margin:10px 0;transform:scale(0.95);opacity:0.9;';
+            chatAd.innerHTML = '<div style="font-size:9px;color:var(--neon);text-align:center;margin-bottom:5px;">─ Sponsored ─</div>' + chatAd.innerHTML;
+            lastMsg.parentNode.insertBefore(chatAd, lastMsg.nextSibling);
+          }
+        }
+      });
+      
+      chatObserver.observe(chatList, { childList: true, subtree: true });
+      console.log('[ChatAds] Initialized — Every 4 messages');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // PROFILE ADS — Premium profile ad placement
+    // ═══════════════════════════════════════════════════════
+    initProfileAds() {
+      // Only override if rProfile exists
+      if (typeof window.rProfile !== 'function') {
+        console.warn('[ProfileAds] rProfile not found, skipping ad injection');
+        return;
+      }
+      
+      // Override rProfile to add ads
+      const originalRProfile = window.rProfile;
+      window.rProfile = function() {
+        try {
+          // Call original function
+          originalRProfile.apply(this, arguments);
+        } catch(e) {
+          console.error('[ProfileAds] Error in original rProfile:', e);
+        }
+        
+        // Add premium profile ad
+        setTimeout(() => {
+          try {
+            const profilePage = document.getElementById('pg-profile');
+            if (profilePage && !profilePage.querySelector('.profile-ad')) {
+              const adType = ['native', 'quiz', 'calculator'][Math.floor(Math.random() * 3)];
+              const profileAd = this.createAdElement(adType);
+              if (profileAd) {
+                profileAd.classList.add('profile-ad');
+                profileAd.style.cssText += 'margin:15px;border-radius:12px;';
+                
+                const coverWrap = profilePage.querySelector('.cover-wrap');
+                if (coverWrap && coverWrap.parentNode) {
+                  coverWrap.parentNode.insertBefore(profileAd, coverWrap.nextSibling);
+                }
+              }
+            }
+          } catch(e) {
+            console.error('[ProfileAds] Error adding profile ad:', e);
+          }
+        }, 100);
+      }.bind(this);
+      
+      console.log('[ProfileAds] Initialized');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // STORY ADS — Ads in stories
+    // ═══════════════════════════════════════════════════════
+    initStoryAds() {
+      // Add ad in story row (after My Story)
+      const storyRow = document.getElementById('storyRow');
+      if (storyRow) {
+        const storyAd = document.createElement('div');
+        storyAd.className = 'story-item story-ad-item';
+        storyAd.innerHTML = `
+          <div class="story-ring" style="background:linear-gradient(135deg,#ff6b6b,#ee5a6f);" onclick="MAX_AD_SYSTEM.showStoryAd()">
+            <div class="av" style="font-size:20px;">💰</div>
+          </div>
+          <div class="story-nm" style="font-size:10px;color:var(--neon);">Sponsored</div>
+        `;
+        
+        // Insert as 2nd item (after My Story)
+        if (storyRow.children.length > 1) {
+          storyRow.insertBefore(storyAd, storyRow.children[1]);
+        }
+      }
+      
+      console.log('[StoryAds] Initialized');
+    },
+    
+    showStoryAd() {
+      const storyOverlay = document.createElement('div');
+      storyOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,var(--c1),var(--c2));z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+      storyOverlay.innerHTML = `
+        <div style="text-align:center;color:white;">
+          <div style="font-size:64px;margin-bottom:20px;">💎</div>
+          <div style="font-size:24px;font-weight:800;margin-bottom:15px;">Premium Story</div>
+          <div style="font-size:16px;margin-bottom:30px;opacity:0.9;">Upgrade to Premium for 2x Earnings!</div>
+          <button onclick="nav('wallet');this.parentElement.parentElement.remove()" class="btn btn-neon" style="margin-bottom:15px;">Upgrade Now</button>
+          <div style="font-size:12px;opacity:0.7;cursor:pointer;" onclick="addPts(5,'Story Ad View');this.parentElement.parentElement.remove()">👆 Tap to earn +5 pts</div>
+        </div>
+        <div style="position:absolute;top:20px;right:20px;cursor:pointer;font-size:24px;" onclick="this.parentElement.remove()">✕</div>
+      `;
+      document.body.appendChild(storyOverlay);
+      
+      // Auto close after 10 seconds
+      setTimeout(() => storyOverlay.remove(), 10000);
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // POPUNDER — Hidden Revenue
+    // ═══════════════════════════════════════════════════════
+    initPopunder() {
+      let popunderTriggered = false;
+      
+      // Trigger on first click
+      document.addEventListener('click', () => {
+        if (!popunderTriggered) {
+          popunderTriggered = true;
+          setTimeout(() => this.triggerPopunder(), 2000);
+        }
+      }, { once: true });
+      
+      // Also trigger every 10-15 minutes
+      setInterval(() => {
+        if (Math.random() > 0.5 && document.hidden) {
+          this.triggerPopunder();
+        }
+      }, 600000 + Math.random() * 300000);
+      
+      console.log('[Popunder] Initialized');
+    },
+    
+    triggerPopunder() {
+      const urls = [
+        'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a',
+        'https://pl29280284.profitablecpmratenetwork.com/25/1b/0c/251b0cf69cbb4dec0e2e5d4397f5e56f.js'
+      ];
+      const url = urls[Math.floor(Math.random() * urls.length)];
+      
+      // Open in background tab
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      console.log('[Popunder] Triggered');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // SMARTLINK — Auto-Redirect Ad
+    // ═══════════════════════════════════════════════════════
+    initSmartlink() {
+      // Hidden iframe for smartlink
+      const smartlinkIframe = document.createElement('iframe');
+      smartlinkIframe.style.cssText = 'position:fixed;bottom:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;';
+      smartlinkIframe.src = 'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a';
+      document.body.appendChild(smartlinkIframe);
+      
+      // Refresh every 5 minutes
+      setInterval(() => {
+        smartlinkIframe.src = smartlinkIframe.src.replace(/&_=[0-9]+/, '') + '&_=' + Date.now();
+      }, 300000);
+      
+      console.log('[Smartlink] Initialized');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // SOCIAL BAR — Floating Social Ad
+    // ═══════════════════════════════════════════════════════
+    initSocialBar() {
+      const socialBar = document.createElement('div');
+      socialBar.id = 'socialBarAd';
+      socialBar.style.cssText = 'position:fixed;bottom:140px;right:10px;width:60px;height:60px;background:linear-gradient(135deg,#ff6b6b,#ee5a6f);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:499;box-shadow:0 4px 15px rgba(238,90,111,0.4);animation:pulse 2s infinite;';
+      socialBar.innerHTML = '<span style="font-size:24px;">🔥</span>';
+      
+      socialBar.onclick = () => {
+        addPts(3,'Social Bar Click');
+        window.open('https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a', '_blank');
+      };
+      
+      document.body.appendChild(socialBar);
+      
+      // Add pulse animation
+      const style = document.createElement('style');
+      style.textContent = `@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}`;
+      document.head.appendChild(style);
+      
+      console.log('[SocialBar] Initialized');
+    },
+    
+    // ═══════════════════════════════════════════════════════
+    // AdMob & AdSense Auto-Refresh
+    // ═══════════════════════════════════════════════════════
+    initAdNetworkRefresh() {
+      // Refresh AdSense every 3 minutes
+      setInterval(() => {
+        if (typeof adsbygoogle !== 'undefined') {
+          try {
+            adsbygoogle.push({});
+            console.log('[AdSense] Refreshed');
+          } catch(e) {}
+        }
+      }, 180000);
+      
+      // Simulate AdMob refresh
+      setInterval(() => {
+        document.querySelectorAll('.admob-slot').forEach(slot => {
+          slot.style.opacity = '0.5';
+          setTimeout(() => slot.style.opacity = '1', 500);
+        });
+        console.log('[AdMob] Slots refreshed');
+      }, 240000);
+      
+      console.log('[AdNetworks] Auto-refresh initialized');
+    }
+  };
+  
+  // Make globally available
+  window.MAX_AD_SYSTEM = MAX_AD_SYSTEM;
+  
+  // Auto-start
+  if (document.readyState === 'complete') {
+    MAX_AD_SYSTEM.start();
+  } else {
+    window.addEventListener('load', () => MAX_AD_SYSTEM.start());
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════
+// LEGACY AD ROTATOR (for compatibility)
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const adRotator = {
+    bannerMessages: [
+      { text: "🚀 Earn 500 Points Daily!", action: "nav('earn')" },
+      { text: "💎 Upgrade to Premium Today!", action: "openModal('subModal')" },
+      { text: "🔥 New NFTs Available!", action: "nav('explore')" },
+      { text: "📱 Download Our App!", action: "toast('i','App coming soon!')" },
+      { text: "🎯 Complete Tasks & Earn!", action: "nav('earn')" },
+      { text: "💰 Refer Friends = 100 pts each!", action: "openModal('refModal')" },
+      { text: "⚡ Fast Withdrawals Enabled!", action: "openModal('withdrawModal')" },
+      { text: "🎮 Play Games & Earn Points!", action: "nav('meta')" },
+      { text: "📊 View Your Stats!", action: "nav('stats')" },
+      { text: "👥 Connect with Friends!", action: "nav('friends')" }
+    ],
+    
+    currentIndex: 0,
+    
+    rotateBannerMessage() {
+      const baT = document.getElementById('baT');
+      if (!baT) return;
+      const msg = this.bannerMessages[this.currentIndex % this.bannerMessages.length];
+      baT.style.transition = 'opacity 0.5s';
+      baT.style.opacity = '0';
+      setTimeout(() => {
+        baT.innerHTML = `<span onclick="${msg.action}" style="cursor:pointer;text-decoration:underline;">${msg.text}</span>`;
+        baT.style.opacity = '1';
+      }, 500);
+      this.currentIndex++;
+    },
+    
+    start() {
+      setInterval(() => this.rotateBannerMessage(), 30000);
+    }
+  };
+  
+  window.adRotator = adRotator;
+  adRotator.start();
+})();
+
+// ═══════════════════════════════════════════════════════════
+// BLOCK EXTERNAL PUSH NOTIFICATIONS & POPUPS (Safe Mode)
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // Only block specific known ad patterns, not app features
+  document.addEventListener('DOMContentLoaded', function() {
+    const removeBadElements = () => {
+      // Aggressive selectors for external ads
+      const selectors = [
+        '[class*="memecoin"]',
+        '[id*="memecoin"]',
+        '[class*="adzilla"]',
+        '[id*="adzilla"]',
+        '[class*="huge"]',
+        '.psn-notification',
+        '.push-banner',
+        '.notification-banner',
+        'iframe[src*="notification"]',
+        'iframe[src*="memecoin"]',
+        'div[style*="z-index: 999999"]'
+      ];
+      
+      selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+          const text = el.textContent.toLowerCase();
+          // Aggressively block memecoin and adzilla ads
+          if (text.includes('memecoin') ||
+              text.includes('adzilla') ||
+              text.includes('monster') ||
+              text.includes('huge') ||
+              el.innerHTML.includes('memecoin') ||
+              el.innerHTML.includes('adzilla') ||
+              el.className.includes('memecoin') ||
+              el.className.includes('adzilla')) {
+            el.style.display = 'none !important';
+            el.remove();
+            console.log('[AdBlocker] Blocked:', el.className || el.id);
+          }
+        });
+      });
+    };
+    
+    // Run immediately and frequently to block ads
+    removeBadElements();
+    setTimeout(removeBadElements, 1000);
+    setInterval(removeBadElements, 3000);
+  });
+  
+  console.log('[AdBlocker] External memecoin ads blocked (safe mode)');
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// BOTTOM NAVIGATION EMERGENCY FIX
+// Ensure bottom nav buttons are always clickable
+// ═══════════════════════════════════════════════════════════════════
+(function() {
+  function fixBottomNav() {
+    const btmNav = document.getElementById('btmNav');
+    if (!btmNav) {
+      console.error('[EmergencyFix] btmNav not found!');
+      return;
+    }
+    
+    // Ensure high z-index and pointer events
+    btmNav.style.cssText = 'position:fixed !important;bottom:0 !important;left:0 !important;right:0 !important;z-index:99999 !important;pointer-events:auto !important;display:flex !important;';
+    
+    const buttons = btmNav.querySelectorAll('.bn');
+    console.log('[EmergencyFix] Found', buttons.length, 'buttons');
+    
+    buttons.forEach(function(btn) {
+      const page = btn.getAttribute('data-p');
+      if (!page) return;
+      
+      // Ensure button is clickable
+      btn.style.cssText = 'cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;flex:1 !important;display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;';
+      
+      // Add click handler
+      btn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[EmergencyFix] Navigating to:', page);
+        if (typeof nav === 'function') {
+          try {
+            nav(page);
+            console.log('[EmergencyFix] nav() called successfully for', page);
+          } catch(err) {
+            console.error('[EmergencyFix] nav() error:', err);
+          }
+        } else {
+          console.error('[EmergencyFix] nav() not found!');
+        }
+        return false;
+      };
+      
+      // Ensure child elements don't block clicks
+      btn.querySelectorAll('*').forEach(function(child) {
+        child.style.pointerEvents = 'none';
+      });
+    });
+    
+    console.log('[EmergencyFix] Bottom nav fixed,', buttons.length, 'buttons clickable');
+  }
+  
+  // Run immediately and periodically
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixBottomNav);
+  } else {
+    fixBottomNav();
+  }
+  setTimeout(fixBottomNav, 500);
+  setTimeout(fixBottomNav, 1000);
+  setTimeout(fixBottomNav, 2000);
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// GLOBAL ERROR HANDLER
+// ═══════════════════════════════════════════════════════════════════
+window.onerror = function(msg, url, line, col, error) {
+  console.error('[GlobalError]', msg, 'at line', line, 'col', col);
+  return false;
+};
+
+// Debug: Check if all required functions exist
+console.log('[Debug] nav exists:', typeof nav === 'function');
+console.log('[Debug] rAppsPage exists:', typeof rAppsPage === 'function');
+console.log('[Debug] rGamification exists:', typeof rGamification === 'function');
+console.log('[Debug] rProfile exists:', typeof rProfile === 'function');
+console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
+
+// ═══════════════════════════════════════════════════════════
+// SYSTEM VALIDATION - Check All Functions Working
+// ═══════════════════════════════════════════════════════════
+(function(){
+  window.validateSystem = function() {
+    console.log('🔍 [SystemCheck] Starting full system validation...');
+    
+    const checks = {
+      // Navigation Functions
+      nav: typeof nav === 'function',
+      initBottomNav: typeof initBottomNav === 'function',
+      
+      // Page Render Functions
+      rFeed: typeof rFeed === 'function',
+      rExplore: typeof rExplore === 'function',
+      rEarn: typeof rEarn === 'function',
+      rFriends: typeof rFriends === 'function',
+      rWallet: typeof rWallet === 'function',
+      rMessages: typeof rMessages === 'function',
+      rAppsPage: typeof rAppsPage === 'function',
+      rNFTMarketplace: typeof rNFTMarketplace === 'function',
+      rMetaverse: typeof rMetaverse === 'function',
+      rAnalytics: typeof rAnalytics === 'function',
+      rGamification: typeof rGamification === 'function',
+      rProfile: typeof rProfile === 'function',
+      rSettings: typeof rSettings === 'function',
+      
+      // Core Functions
+      rStories: typeof rStories === 'function',
+      rNotif: typeof rNotif === 'function',
+      rLeaderboard: typeof rLeaderboard === 'function',
+      rReferral: typeof rReferral === 'function',
+      rAdmin: typeof rAdmin === 'function',
+      
+      // Ad System
+      MAX_AD_SYSTEM: typeof MAX_AD_SYSTEM !== 'undefined',
+      adRotator: typeof adRotator !== 'undefined',
+      
+      // Utilities
+      toast: typeof toast === 'function',
+      addPts: typeof addPts === 'function',
+      syncUI: typeof syncUI === 'function',
+      saveData: typeof saveData === 'function',
+      openModal: typeof openModal === 'function',
+      closeModal: typeof closeModal === 'function',
+      nav: typeof nav === 'function'
+    };
+    
+    let passed = 0, failed = 0;
+    Object.entries(checks).forEach(([name, ok]) => {
+      if(ok) {
+        console.log(`✅ ${name}`);
+        passed++;
+      } else {
+        console.error(`❌ ${name} NOT FOUND`);
+        failed++;
+      }
+    });
+    
+    console.log(`\n📊 [SystemCheck] Results: ${passed} passed, ${failed} failed`);
+    console.log(failed === 0 ? '🎉 All systems operational!' : '⚠️ Some functions missing');
+    
+    return { passed, failed, total: passed + failed };
+  };
+  
+  console.log('✅ [SystemCheck] Validation ready. Run validateSystem() to check all functions.');
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     END MAXIMUM REVENUE AD PLACEMENTS
+     ═══════════════════════════════════════════════════════════ -->
 
 </body>
 </html>

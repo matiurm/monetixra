@@ -11,6 +11,20 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Serve ads.txt directly (exclude from SPA redirect)
+[[redirects]]
+  from = "/ads.txt"
+  to = "/ads.txt"
+  status = 200
+  force = false
+
+# Serve app-ads.txt directly
+[[redirects]]
+  from = "/app-ads.txt"
+  to = "/app-ads.txt"
+  status = 200
+  force = false
+
 # Redirect rules for SPA (Single Page Application)
 [[redirects]]
   from = "/*"
@@ -22,10 +36,17 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
+
+# ads.txt — no cache (must be fresh for ad networks)
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "text/plain; charset=utf-8"
 
 # Cache static assets
 [[headers]]
