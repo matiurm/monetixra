@@ -405,11 +405,18 @@ body{font-family:var(--ff);background:var(--bg);color:var(--t1);min-height:100vh
 .app-badge{background:rgba(239,68,68,.15);color:var(--c5);font-size:9px;padding:2px 6px;border-radius:99px;}
 
 /* ========== POST THREE-DOT MENU ========== */
-.post-menu-dropdown .pmd-item{padding:11px 16px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .14s;color:var(--t1);}
-.post-menu-dropdown .pmd-item:hover{background:var(--g3);}
-.post-menu-dropdown .pmd-item.danger{color:var(--c5);}
-.post-menu-dropdown .pmd-item.disabled{opacity:.45;cursor:not-allowed;}
-.post-menu-dropdown .pmd-item+.pmd-item{border-top:1px solid var(--b1);}
+.post-more{cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:10 !important;background:transparent !important;border:none !important;padding:4px 8px !important;font-size:22px !important;color:var(--t3) !important;line-height:1 !important;}
+.post-more:hover{color:var(--t1) !important;background:rgba(255,255,255,.05) !important;border-radius:6px !important;}
+.post-menu-dropdown{position:fixed !important;z-index:99999 !important;background:var(--bg3) !important;border:1px solid var(--b2) !important;border-radius:14px !important;box-shadow:0 8px 32px rgba(0,0,0,.4) !important;overflow:auto !important;max-height:60vh !important;min-width:200px !important;pointer-events:auto !important;}
+.post-menu-dropdown .pmd-item{padding:11px 16px !important;font-size:13px !important;font-weight:600 !important;cursor:pointer !important;display:flex !important;align-items:center !important;gap:9px !important;transition:background .14s !important;color:var(--t1) !important;pointer-events:auto !important;}
+.post-menu-dropdown .pmd-item:hover{background:var(--g3) !important;}
+.post-menu-dropdown .pmd-item.danger{color:var(--c5) !important;}
+.post-menu-dropdown .pmd-item.disabled{opacity:.45 !important;cursor:not-allowed !important;pointer-events:none !important;}
+.post-menu-dropdown .pmd-item+.pmd-item{border-top:1px solid var(--b1) !important;}
+
+/* Flower button styles */
+.pa.flowered{background:linear-gradient(135deg,#ff69b4,#ff1493);color:#fff;}
+.flowered .pa-cnt{color:#fff;}
 
 /* adsBar hidden: shift everything up by 38px */
 #bannerAd{top:0 !important;}
@@ -657,6 +664,11 @@ iframe[src*="adzilla"],
 .react-btn:hover{background:var(--g3);}
 .react-btn.active{background:linear-gradient(135deg,rgba(109,40,217,.2),rgba(236,72,153,.1));border-color:rgba(109,40,217,.35);}
 .react-float{position:absolute;font-size:22px;pointer-events:none;animation:reactionPop .8s forwards;}
+/* Long-press reaction picker */
+.reaction-picker{position:fixed;background:var(--bg3);border:1px solid var(--b2);border-radius:99px;padding:8px 12px;display:flex;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:99999;animation:scaleIn .15s var(--ease);}
+.reaction-picker .rp-emoji{font-size:28px;cursor:pointer;transition:transform .15s;}
+.reaction-picker .rp-emoji:hover{transform:scale(1.3);}
+.reaction-picker::before{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--bg3);}
 .post-acts{display:flex;border-top:1px solid var(--b1);}
 .pa{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:9px 4px;background:none;border:none;color:var(--t3);font-size:12px;font-weight:600;cursor:pointer;transition:all var(--fast);border-radius:0;}
 .pa:hover{background:var(--g2);color:var(--t1);}
@@ -2539,6 +2551,12 @@ document.addEventListener('DOMContentLoaded', function() {
         </label>
       </div>
     </div>
+    <!-- File Upload for APK/Direct Download -->
+    <div style="margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:700;color:var(--t3);margin-bottom:6px;">📥 Upload File (APK, ZIP, etc. - Optional)</div>
+      <input type="file" id="appFileUpload" class="fi" accept=".apk,.zip,.exe,.dmg,.pkg" onchange="handleAppFileUpload(this)">
+      <div id="appFilePreview" style="font-size:11px;color:var(--neon);margin-top:4px;"></div>
+    </div>
     <div class="fg"><textarea class="fi" id="appDesc" placeholder="Description" rows="3"></textarea></div>
     <div class="fg"><input class="fi" id="appVersion" placeholder="Version (e.g. 1.0.0)"></div>
     <div class="fg"><input class="fi" id="appCategory" placeholder="Category (e.g. Games, Tools, Social, Finance...)"></div>
@@ -2887,17 +2905,20 @@ const MAX_ADS_PER_DAY   = 50;   // max ads user can watch per day
 const MAX_TASKS_PER_DAY = 30;   // max tasks
 const MAX_REF_BONUS     = 10;   // max referral bonuses per day
 
-// Helpers
+// ── Core Utilities ───────────────────────────────
 const G = id => document.getElementById(id);
 const V = id => { let e = G(id); return e ? e.value.trim() : ''; };
+const setV = (id, val) => { let e = G(id); if(e) e.value = val; };
+const hide = id => { let e = G(id); if(e) e.style.display = 'none'; };
+const show = id => { let e = G(id); if(e) e.style.display = 'block'; };
+const flex = id => { let e = G(id); if(e) e.style.display = 'flex'; };
 
-// ── Password hashing (SHA-256) ───────────────────────────────
+// ── Password hashing (SHA-256) with Fallback ───────────────────────────────
 async function hashPass(pw) {
   try {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw + 'mxt_salt_2025'));
     return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
   } catch(e) {
-    // Fallback: simple obfuscation if SubtleCrypto not available
     let h = 0;
     for(let i=0;i<pw.length;i++) h = Math.imul(31,h)+pw.charCodeAt(i)|0;
     return 'fb_' + Math.abs(h).toString(16) + pw.length;
@@ -3008,35 +3029,87 @@ function checkAchievements() {
 }
 
 // ===== FIXED Storage & Session =====
+// Media Storage using IndexedDB for larger quota
+const MediaDB = {
+  db: null,
+  async init() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('MonetixraMedia', 1);
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => { this.db = req.result; resolve(); };
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if(!db.objectStoreNames.contains('media')) db.createObjectStore('media', {keyPath: 'id'});
+      };
+    });
+  },
+  async save(id, data) {
+    if(!this.db) await this.init();
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['media'], 'readwrite');
+      const store = tx.objectStore('media');
+      const req = store.put({id, data, savedAt: Date.now()});
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  },
+  async get(id) {
+    if(!this.db) await this.init();
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(['media'], 'readonly');
+      const store = tx.objectStore('media');
+      const req = store.get(id);
+      req.onsuccess = () => resolve(req.result?.data || null);
+      req.onerror = () => resolve(null);
+    });
+  },
+  async delete(id) {
+    if(!this.db) await this.init();
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(['media'], 'readwrite');
+      const store = tx.objectStore('media');
+      store.delete(id);
+      tx.oncomplete = () => resolve();
+    });
+  }
+};
+
+// Initialize MediaDB on load
+MediaDB.init().catch(e => console.warn('MediaDB init failed:', e));
+
 function saveData() {
   try {
-    // Strip large base64 from posts to prevent localStorage overflow
-    // BUT keep Supabase URLs intact (they start with http, not data:)
+    // Aggressively store large base64 files in IndexedDB
     let lite = JSON.parse(JSON.stringify(D));
     lite.posts = (lite.posts||[]).map(p => {
       let pp = {...p};
-      // Only trim base64 data URLs, keep http URLs (Supabase permanent storage)
-      if(pp.file && pp.file.length > 50000 && pp.file.startsWith('data:')) {
-        pp.file = pp.file.substring(0,50000);
-        pp.fileTrimmed = true;
+      if(pp.file && pp.file.length > 20000 && pp.file.startsWith('data:')) {
+        MediaDB.save('post_'+pp.id, pp.file).catch(() => {});
+        pp.file = 'db://post_'+pp.id;
+        pp.fileInDB = true;
       }
       return pp;
     });
-    // Also trim avatar if very large (only base64)
     Object.values(lite.users||{}).forEach(u => {
-      if(u.avatar && u.avatar.length > 30000 && u.avatar.startsWith('data:')) u.avatar = u.avatar.substring(0,30000);
+      if(u.avatar && u.avatar.length > 20000 && u.avatar.startsWith('data:')) {
+        MediaDB.save('avatar_'+u.id, u.avatar).catch(() => {});
+        u.avatar = 'db://avatar_'+u.id;
+        u.avatarInDB = true;
+      }
     });
+    
     let str = JSON.stringify(lite);
     try {
       localStorage.setItem(STORAGE_KEY+'data', str);
     } catch(qe) {
-      // QuotaExceededError: trim further and retry
-      lite.posts = (lite.posts||[]).slice(0,20).map(p=>({...p, file: p.file?.startsWith('http') ? p.file : null, fileTrimmed: !p.file?.startsWith('http')}));
-      try { localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(lite)); } catch(e2) {}
+      console.warn('LocalStorage Quota Exceeded. Trimming posts...');
+      // Keep only last 50 posts and retry
+      lite.posts = (lite.posts||[]).slice(0,50);
+      localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(lite));
     }
   } catch(e) { console.warn('saveData error:', e); }
 }
-function loadData() {
+async function loadData() {
   try {
     let raw = localStorage.getItem(STORAGE_KEY+'data');
     if(raw) {
@@ -3049,21 +3122,99 @@ function loadData() {
       if(saved.stories)     saved.stories     = saved.stories.filter(s => s.id !== 's1');
       if(saved.marketplace) saved.marketplace = saved.marketplace.filter(m => m.id !== 'm1');
       Object.assign(D, saved);
+      
+      // Restore media files from IndexedDB
+      await MediaDB.init();
+      
+      // Restore post media files
+      for(let p of (D.posts||[])) {
+        if(p.file && p.file.startsWith('db://')) {
+          const dbKey = p.file.replace('db://', '');
+          const realData = await MediaDB.get(dbKey);
+          if(realData) {
+            p.file = realData;
+            p.fileInDB = false; // Reset flag since file is now restored
+          } else {
+            console.warn('Failed to restore media for post:', p.id);
+            p.file = null; // Fallback if media not found
+          }
+        }
+      }
+      
+      // Restore user avatars
+      for(let u of Object.values(D.users||{})) {
+        if(u.avatar && u.avatar.startsWith('db://')) {
+          const dbKey = u.avatar.replace('db://', '');
+          const realData = await MediaDB.get(dbKey);
+          if(realData) {
+            u.avatar = realData;
+            u.avatarInDB = false;
+          } else {
+            console.warn('Failed to restore avatar for user:', u.id);
+            u.avatar = null;
+          }
+        }
+      }
+      
+      // Save the restored data to ensure consistency
+      saveData();
     }
-  } catch(e) {
-    console.warn('loadData error:', e);
-    D = { users:{}, posts:[], txs:[], notifs:[], chats:{}, stories:[], groups:[], marketplace:[], nfts:[], apps:[], withdrawals:[] };
-  }
+  } catch(e) { console.warn('loadData error:', e); }
+}
+
+// Time-based multiplier for dynamic point system
+function getTimeBasedMultiplier() {
+  const hour = new Date().getHours();
+  const dayOfWeek = new Date().getDay();
+  
+  // Weekend bonus (Saturday, Sunday)
+  const weekendBonus = (dayOfWeek === 0 || dayOfWeek === 6) ? 1.2 : 1.0;
+  
+  // Time-based multiplier:
+  // Early morning (5-8): 0.8x (slow start)
+  // Morning peak (9-11): 1.5x (high engagement)
+  // Lunch (12-14): 1.2x (moderate)
+  // Afternoon (15-17): 1.0x (normal)
+  // Evening peak (18-21): 1.8x (highest engagement)
+  // Night (22-4): 0.6x (lowest)
+  let timeMultiplier;
+  if (hour >= 5 && hour < 8) timeMultiplier = 0.8;
+  else if (hour >= 9 && hour < 11) timeMultiplier = 1.5;
+  else if (hour >= 12 && hour < 14) timeMultiplier = 1.2;
+  else if (hour >= 15 && hour < 17) timeMultiplier = 1.0;
+  else if (hour >= 18 && hour < 21) timeMultiplier = 1.8;
+  else timeMultiplier = 0.6;
+  
+  return timeMultiplier * weekendBonus;
+}
+
+// Initialize data if empty
+function initData() {
+  if (!D) D = {};
+  if (!D.users) D.users = {};
+  if (!D.posts) D.posts = [];
+  if (!D.txs) D.txs = [];
+  if (!D.notifs) D.notifs = [];
+  if (!D.chats) D.chats = {};
+  if (!D.stories) D.stories = [];
+  if (!D.groups) D.groups = {};
+  if (!D.marketplace) D.marketplace = [];
+  if (!D.nfts) D.nfts = [];
+  if (!D.apps) D.apps = [];
+  if (!D.withdrawals) D.withdrawals = [];
+  
   // Always ensure admin exists
-  if(!D.users || !Object.keys(D.users).length) seedData();
   if(!D.users[ADMIN_ID]) seedData();
-  // Always reset admin to correct credentials (plain text for login compatibility)
-  D.users[ADMIN_ID].email    = ADMIN_EMAIL;
-  D.users[ADMIN_ID].phone    = ADMIN_PHONE;
-  D.users[ADMIN_ID].password = ADMIN_PASS;  // keep plain for consistent login
-  D.users[ADMIN_ID].isAdmin  = true;
-  D.users[ADMIN_ID].kycVerified = true;
-  D.users[ADMIN_ID].verified = true;
+  
+  // Always reset admin to correct credentials
+  if (D.users[ADMIN_ID]) {
+    D.users[ADMIN_ID].email    = ADMIN_EMAIL;
+    D.users[ADMIN_ID].phone    = ADMIN_PHONE;
+    D.users[ADMIN_ID].password = ADMIN_PASS;
+    D.users[ADMIN_ID].isAdmin  = true;
+    D.users[ADMIN_ID].kycVerified = true;
+    D.users[ADMIN_ID].verified = true;
+  }
 }
 // FIXED: save only user ID, not full object
 function saveSession() {
@@ -3237,28 +3388,38 @@ async function doLogin() {
     let pw = V('liPw');
     if(!id) return toast('e','Enter your email, phone or username');
     if(!pw) return toast('e','Enter your password');
+    
+    // Ensure D and D.users are initialized
+    if (!D) D = { users: {} };
+    if (!D.users) D.users = {};
+
     // Brute force protection
     let attempts = parseInt(sessionStorage.getItem('mxt_attempts')||'0');
-    if(attempts >= 5) return toast('e','Too many attempts. Refresh the page and try again.');
+    if(attempts >= 10) return toast('e','Too many attempts. Refresh the page and try again.');
+    
     // Find user
     let foundUid = null;
     let idLower = id.toLowerCase();
     for(let k in D.users) {
       let u = D.users[k];
+      if(!u) continue;
       if((u.email||'').toLowerCase()===idLower ||
          (u.phone||'')=== id ||
          (u.username||'').toLowerCase()===idLower) {
         foundUid = k; break;
       }
     }
+    
     if(!foundUid) {
       sessionStorage.setItem('mxt_attempts', attempts+1);
       return toast('e','No account found with that email/phone/username');
     }
+    
     let u = D.users[foundUid];
     // Password check: support plain text (legacy) and hashed
     let pwHash = await hashPass(pw);
     let match = false;
+    
     if(u.password === pw) {
       // Plain text match — migrate to hash
       match = true;
@@ -3266,17 +3427,21 @@ async function doLogin() {
     } else if(u.password === pwHash) {
       match = true;
     }
+    
     if(!match) {
       sessionStorage.setItem('mxt_attempts', attempts+1);
       return toast('e','Incorrect password. Try again.');
     }
+    
     sessionStorage.removeItem('mxt_attempts');
     if(u.disabled && foundUid !== ADMIN_ID)    return toast('e','Your account has been disabled. Contact support.');
     if(u.deactivated && foundUid !== ADMIN_ID) return toast('e','Your account is deactivated. Contact support.');
+    
     // Ensure admin flag
     if(foundUid === ADMIN_ID || u.email === ADMIN_EMAIL || u.phone === ADMIN_PHONE) {
       u.isAdmin = true;
     }
+    
     D.cur = foundUid;
     CU    = D.users[foundUid];
     saveSession();
@@ -3285,7 +3450,7 @@ async function doLogin() {
     toast('s','✅ Welcome back, '+CU.name+'!');
   } catch(err) {
     console.error('[doLogin]', err);
-    toast('e','Login error. Please try again.');
+    toast('e','Login error: ' + err.message);
   }
 }
 async function sendRegOtp() {
@@ -3349,6 +3514,11 @@ async function doRegister() {
     let pw  = V('rgPw');
     let pw2 = V('rgPw2');
     let ref = V('rgRef').trim().toUpperCase();
+    
+    // Ensure D and D.users are initialized
+    if (!D) D = { users: {} };
+    if (!D.users) D.users = {};
+
     // Validate fields
     if(!nm || nm.length < 2)  return toast('e','Enter your full name (minimum 2 characters)');
     if(!un || un.length < 3)  return toast('e','Username must be at least 3 characters');
@@ -3356,23 +3526,29 @@ async function doRegister() {
     if(!id)                   return toast('e','Enter your email or phone number');
     if(!pw || pw.length < 6)  return toast('e','Password must be at least 6 characters');
     if(pw !== pw2)            return toast('e','Passwords do not match');
+    
     // Verify OTP
     let otpEntered = '';
     for(let i=0;i<6;i++) { let el=G('ob'+i); otpEntered += el ? (el.value||'') : ''; }
+    
     if(!D.otp?.reg?.code) return toast('e','No OTP found. Click "Send OTP" first.');
     if(D.otp.reg.id !== id) return toast('e','OTP was sent to a different email/phone.');
     if(Date.now() > (D.otp.reg.exp||0)) return toast('e','OTP expired. Click "Send OTP" again.');
     if(String(D.otp.reg.code) !== otpEntered) return toast('e','Wrong OTP. Check and try again.');
+    
     // Check duplicates
     for(let k in D.users) {
       let u = D.users[k];
+      if(!u) continue;
       if((u.email||'')=== id || (u.phone||'')=== id) return toast('e','Email/phone already registered. Sign in instead.');
       if((u.username||'')=== un) return toast('e','Username taken. Choose a different one.');
     }
+    
     // Create account
     let newId   = 'u'+Date.now()+Math.random().toString(36).slice(2,6);
     let isEmail = id.includes('@');
     let pwHash  = await hashPass(pw);
+    
     D.users[newId] = {
       id: newId, name: nm, username: un,
       email: isEmail ? id : '',
@@ -3388,9 +3564,10 @@ async function doRegister() {
       notifSettings:{}, privacySettings:{},
       createdAt: Date.now()
     };
+    
     // Referral bonus
     if(ref) {
-      let ru = Object.values(D.users).find(u => (u.refCode||'')=== ref);
+      let ru = Object.values(D.users).find(u => u && (u.refCode||'')=== ref);
       if(ru) {
         ru.refs = ru.refs||[]; ru.refs.push(newId);
         D.users[newId].referredBy = ru.id;
@@ -3401,6 +3578,7 @@ async function doRegister() {
         toast('i','Referral code applied! +10 bonus pts');
       }
     }
+    
     // Signup tx
     D.txs = D.txs||[];
     D.txs.unshift({ id:'t'+Date.now(), type:'bonus', label:'Signup bonus', pts:50, at:Date.now(), user:newId });
@@ -3413,7 +3591,7 @@ async function doRegister() {
     confetti();
   } catch(err) {
     console.error('[doRegister]', err);
-    toast('e','Registration failed. Please try again.');
+    toast('e','Registration failed: ' + err.message);
   }
 }
 async function sendForgotOtp() {
@@ -3541,6 +3719,36 @@ function mount() {
     CU.isAdmin=true;
     if(D.users[CU.id]) D.users[CU.id].isAdmin=true;
   }
+  
+  // Track user login and online status
+  if(CU) {
+    let today = new Date().toDateString();
+    let u = D.users[CU.id];
+    if(u) {
+      u.lastLogin = today;
+      u.loginCount = (u.loginCount || 0) + 1;
+      u.isOnline = true;
+      u.lastActive = Date.now();
+    }
+    saveData();
+    
+    // Update last active periodically
+    setInterval(() => {
+      if(CU && D.users[CU.id]) {
+        D.users[CU.id].lastActive = Date.now();
+      }
+    }, 60000); // Every minute
+    
+    // Mark offline on page unload
+    window.addEventListener('beforeunload', () => {
+      if(CU && D.users[CU.id]) {
+        D.users[CU.id].isOnline = false;
+        D.users[CU.id].lastActive = Date.now();
+        saveData();
+      }
+    });
+  }
+  
   syncUI(); nav('feed'); startBanner(); scheduleInts(); scheduleReward(); scheduleAutoAd();
   let light = localStorage.getItem(STORAGE_KEY+'light'); if(light==='1') { document.body.classList.add('lm'); }
   let accent = localStorage.getItem(STORAGE_KEY+'accent'); if(accent) setAccent(accent);
@@ -3733,7 +3941,25 @@ function closeStoryView() { G('storyView').classList.remove('open'); }
 // Feed
 let _feedPage = 0;
 const _FEED_SIZE = 10;
-const _allPosts = () => [...D.posts||[]].sort((a,b)=>b.createdAt-a.createdAt);
+
+// Filter posts by privacy settings
+function canViewPost(post) {
+  if(!CU) return post.visibility === 'public'; // Non-logged users see only public
+  if(post.author === CU.id) return true; // Author can always see their own posts
+  if(CU.isAdmin) return true; // Admin can see all posts
+  if(post.visibility === 'public') return true; // Public posts visible to all
+  if(post.visibility === 'friends') {
+    // Friends only - check if current user is following the author
+    let author = D.users[post.author];
+    if(!author) return false;
+    let isFriend = (author.following?.includes(CU.id) || author.autoFriends?.includes(CU.id) || (author.forceFollowed||[]).includes(CU.id));
+    return isFriend;
+  }
+  if(post.visibility === 'private') return false; // Private posts only visible to author
+  return true;
+}
+
+const _allPosts = () => [...(D.posts||[])].filter(canViewPost).sort((a,b)=>b.createdAt-a.createdAt);
 
 function rFeed(reset=true) {
   let list = G('feedList'); if(!list||!CU) return;
@@ -3774,7 +4000,7 @@ function mkPost(post) {
   let grad = randomGrad();
   let d = document.createElement('div'); d.className='post'; d.dataset.postId=post.id;
   let isFollowingAuthor = post.author !== CU?.id && (CU?.following?.includes(post.author) || CU?.autoFriends?.includes(post.author) || (CU?.forceFollowed||[]).includes(post.author));
-  let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" onclick="toast('w','Follow is permanent and cannot be undone')">🔗 Following</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
+  let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" onclick="unfriendUser('${post.author}')">❌ Unfriend</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
   let h = `<div class="post-hd"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});" onclick="viewUser('${post.author}')">${author.avatar?`<img src="${author.avatar}">`:(author.name||'?').charAt(0).toUpperCase()}</div><div style="flex:1;"><div class="post-nm">${esc(author.name||'User')} ${author.verified?'<span class="badge b-ver">✔</span>':''} ${author.isAdmin?'<span class="badge b-admin">👑</span>':''} ${author.kycVerified?'<span class="badge b-kyc">✅ KYC</span>':''} ${post.isNFT?'<span class="badge b-nft">🎨 NFT</span>':''}</div><div class="post-meta">${ago(post.createdAt)} ${vis2ico(post.visibility)} ${post.location?`📍${esc(post.location)}`:''}</div></div>${followBtn}<button class="post-more" onclick="showPostMenu('${post.id}',this)">⋯</button></div>`;
   if(post.text) h += `<div class="post-txt">${linkify(esc(post.text))}</div>`;
   
@@ -3820,7 +4046,15 @@ function mkPost(post) {
     h += `<div class="react-btn ${active}" onclick="react('${post.id}','${key}','${emoji}')">${emoji}${cnt?`<span class="rcnt">${cnt}</span>`:''}</div>`;
   });
   h += `</div>`;
-  h += `<div class="post-acts"><button class="pa ${isLiked?'liked':''}" onclick="likePost('${post.id}',this)">${isLiked?'❤️':'🤍'} <span class="pa-cnt">${fmt(post.likedBy?.length||0)}</span></button><button class="pa" onclick="toggleCmts('${post.id}')">💬 <span class="pa-cnt">${fmt(post.comments?.length||0)}</span></button><button class="pa" onclick="openShareModal('${post.id}')">🔗</button><span style="margin-left:auto;color:var(--c4);font-family:var(--fm);">+${post.pts||0}</span></div>`;
+  // Check if user has flowered this post
+  let hasFlowered = post.floweredBy?.includes(CU?.id) || false;
+  h += `<div class="post-acts">
+    <button class="pa ${hasFlowered?'flowered':''}" onclick="toggleFlower('${post.id}',this)" title="Send Flower">🌸 <span class="pa-cnt">${fmt(post.floweredBy?.length||0)}</span></button>
+    <button class="pa ${isLiked?'liked':''}" onmousedown="handleLikePressStart('${post.id}',this,event)" onmouseup="handleLikePressEnd('${post.id}',this,event)" onmouseleave="if(longPressTimer){clearTimeout(longPressTimer);longPressTimer=null;}" ontouchstart="handleLikePressStart('${post.id}',this,event)" ontouchend="handleLikePressEnd('${post.id}',this,event)" onclick="event.preventDefault();">${isLiked?'❤️':'🤍'} <span class="pa-cnt">${fmt(post.likedBy?.length||0)}</span></button>
+    <button class="pa" onclick="toggleCmts('${post.id}')">💬 <span class="pa-cnt">${fmt(post.comments?.length||0)}</span></button>
+    <button class="pa" onclick="openShareModal('${post.id}')">🔗</button>
+    <span style="margin-left:auto;color:var(--c4);font-family:var(--fm);">+${post.pts||0}</span>
+  </div>`;
   h += `<div class="comments-wrap" id="cmts-${post.id}" style="display:none;">${renderComments(post.comments||[],post.id)}<div class="cm-inp-row"><div class="av av-round av-xs">${CU?.name?.charAt(0)||'?'}</div><textarea class="cm-inp" id="cmInp-${post.id}" placeholder="Comment..." rows="1"></textarea><button class="cm-send-btn" onclick="addComment('${post.id}')">➤</button></div></div>`;
   d.innerHTML = h;
   if(post.type === 'text' && !post.file) { setTimeout(() => registerPostView(post.id, post.author, 'text'), 1000); }
@@ -3867,6 +4101,33 @@ function renderComments(cmts,pid) {
     let g=randomGrad();
     let isOwn = c.by === CU?.id;
     let editedTag = c.edited ? '<span class="cm-edited-tag">(edited)</span>' : '';
+    
+    // Render replies
+    let repliesHtml = '';
+    if(c.replies && c.replies.length > 0) {
+      repliesHtml = c.replies.map(r => {
+        let ru = D.users[r.by] || {};
+        let rg = randomGrad();
+        let rIsOwn = r.by === CU?.id;
+        return `<div class="comment reply" id="cm-${r.id}">
+          <div class="av av-round av-xs" style="background:linear-gradient(135deg,${rg[0]},${rg[1]});">${ru.name?.charAt(0)||'?'}</div>
+          <div class="cm-bub" style="flex:1;">
+            <div class="cm-nm" style="display:flex;align-items:center;justify-content:space-between;">
+              <span>${esc(ru.name||'User')}</span>
+              ${rIsOwn ? `<div style="display:flex;gap:2px;">
+                <button class="cm-menu-btn" onclick="deleteReply('${pid}','${c.id}','${r.id}')" title="Delete">🗑️</button>
+              </div>` : ''}
+            </div>
+            <div class="cm-txt">${esc(r.text)}</div>
+            <div class="cm-acts">
+              <span class="cm-act" onclick="reactComment('${pid}','${r.id}','👍')">👍 ${r.likes||0}</span>
+              <span class="cm-act" style="color:var(--t3);">${ago(r.at)}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    
     return `<div class="comment" id="cm-${c.id}">
       <div class="av av-round av-xs" style="background:linear-gradient(135deg,${g[0]},${g[1]});">${au.name?.charAt(0)||'?'}</div>
       <div class="cm-bub" style="flex:1;">
@@ -3885,7 +4146,7 @@ function renderComments(cmts,pid) {
           <span class="cm-reaction" onclick="reactComment('${pid}','${c.id}','😮')">😮</span>
         </div>
         <div class="cm-acts">
-          <span class="cm-act" onclick="showReplyBox('${c.id}')">↩ Reply</span>
+          <span class="cm-act" onclick="showReplyBox('${c.id}')">↩ Reply (${c.replies?.length||0})</span>
           <span class="cm-act" style="color:var(--t3);">${ago(c.at)}</span>
         </div>
       </div>
@@ -3893,7 +4154,8 @@ function renderComments(cmts,pid) {
     <div id="replyBox-${c.id}" style="display:none;margin-left:40px;" class="cm-inp-row">
       <textarea class="cm-inp" id="rInp-${c.id}" placeholder="Reply..."></textarea>
       <button class="cm-send-btn" onclick="addReply('${pid}','${c.id}')">➤</button>
-    </div>`;
+    </div>
+    ${repliesHtml}`;
   }).join('');
 }
 function editComment(pid, cid) {
@@ -3935,6 +4197,23 @@ function deleteComment(pid, cid) {
   refreshPost(pid);
   toast('s', '🗑️ Comment deleted');
 }
+function deleteReply(pid, cid, rid) {
+  if (!confirm('Delete this reply?')) return;
+  let post = D.posts.find(p => p.id === pid); if (!post) return;
+  let findAndDeleteReply = (cmts) => {
+    for(let c of cmts||[]){
+      if(c.id === cid && c.replies) {
+        c.replies = c.replies.filter(r => r.id !== rid);
+        return true;
+      }
+    }
+    return false;
+  };
+  findAndDeleteReply(post.comments);
+  saveData();
+  refreshPost(pid);
+  toast('s', '🗑️ Reply deleted');
+}
 function toggleCmts(pid) { let el=G(`cmts-${pid}`); if(el) el.style.display=el.style.display==='none'?'block':'none'; }
 function showReplyBox(cid) { let box=G(`replyBox-${cid}`); if(box) box.style.display=box.style.display==='none'?'flex':'none'; }
 function addComment(pid) {
@@ -3954,6 +4233,89 @@ function react(pid,key,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post||
 function spawnReaction(pid,emoji) { let el=document.querySelector(`[data-post-id="${pid}"]`); if(!el) return; let f=document.createElement('div'); f.className='react-float'; f.textContent=emoji; f.style.cssText=`left:${20+Math.random()*60}%;top:50%;`; el.style.position='relative'; el.appendChild(f); setTimeout(()=>f.remove(),800); }
 function refreshReacts(pid,post) { let bar=G(`react-${pid}`); if(!bar) return; bar.innerHTML=''; ['👍','❤️','😂','😮','😢','😡','🔥','💎'].forEach(emoji=>{ let key={'👍':'like','❤️':'love','😂':'haha','😮':'wow','😢':'sad','😡':'angry','🔥':'fire','💎':'diamond'}[emoji]; let cnt=post.reactions?.[key]?.length||0; let active=post.reactions?.[key]?.includes(CU?.id)?'active':''; let btn=document.createElement('div'); btn.className=`react-btn ${active}`; btn.onclick=()=>react(pid,key,emoji); btn.innerHTML=`${emoji}${cnt?`<span class="rcnt">${cnt}</span>`:''}`; bar.appendChild(btn); }); }
 function likePost(pid,btn) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.likedBy=post.likedBy||[]; let idx=post.likedBy.indexOf(CU.id); if(idx>-1){ post.likedBy.splice(idx,1); btn.classList.remove('liked'); btn.innerHTML='🤍 <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; } else { post.likedBy.push(CU.id); btn.classList.add('liked'); btn.innerHTML='❤️ <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; addPts(3,'Liked','engage'); addNotif(post.author,'like','❤️',`${CU.name} liked your post`,pid); } saveData(); }
+function toggleFlower(pid, btn) {
+  if(!CU) return;
+  let post = D.posts.find(p => p.id === pid);
+  if(!post) return;
+  
+  post.floweredBy = post.floweredBy || [];
+  let idx = post.floweredBy.indexOf(CU.id);
+  
+  if(idx > -1) {
+    // Remove flower
+    post.floweredBy.splice(idx, 1);
+    btn.classList.remove('flowered');
+    btn.innerHTML = '🌸 <span class="pa-cnt">' + fmt(post.floweredBy.length) + '</span>';
+  } else {
+    // Add flower
+    post.floweredBy.push(CU.id);
+    btn.classList.add('flowered');
+    btn.innerHTML = '🌸 <span class="pa-cnt">' + fmt(post.floweredBy.length) + '</span>';
+    addPts(5, 'Flower Sent', 'engage');
+    addNotif(post.author, 'flower', '🌸', `${CU.name} sent you a flower`, pid);
+  }
+  
+  saveData();
+  refreshPost(pid);
+}
+
+// Long-press reaction picker
+let longPressTimer = null;
+let isLongPress = false;
+const LONG_PRESS_DURATION = 500; // ms
+
+function showReactionPicker(pid, btn) {
+  // Remove any existing picker
+  document.querySelectorAll('.reaction-picker').forEach(p => p.remove());
+  
+  let reactions = ['👍','❤️','😂','😮','😢','😡','🔥','💎','🌸','🎉'];
+  let picker = document.createElement('div');
+  picker.className = 'reaction-picker';
+  picker.innerHTML = reactions.map(e => `<span class="rp-emoji" onclick="selectReaction('${pid}','${e}');hideReactionPicker()">${e}</span>`).join('');
+  
+  let rect = btn.getBoundingClientRect();
+  picker.style.left = (rect.left + rect.width/2 - 150) + 'px';
+  picker.style.top = (rect.top - 70) + 'px';
+  
+  document.body.appendChild(picker);
+  
+  // Auto-hide after 3 seconds
+  setTimeout(() => { if(picker.parentNode) picker.remove(); }, 3000);
+}
+
+function hideReactionPicker() {
+  document.querySelectorAll('.reaction-picker').forEach(p => p.remove());
+}
+
+function selectReaction(pid, emoji) {
+  let keyMap = {'👍':'like','❤️':'love','😂':'haha','😮':'wow','😢':'sad','😡':'angry','🔥':'fire','💎':'diamond','🌸':'flower','🎉':'party'};
+  let key = keyMap[emoji] || 'like';
+  react(pid, key, emoji);
+  addPts(2, 'Reaction ' + emoji, 'engage');
+}
+
+function handleLikePressStart(pid, btn, e) {
+  if(e) e.preventDefault();
+  isLongPress = false;
+  longPressTimer = setTimeout(() => {
+    isLongPress = true;
+    showReactionPicker(pid, btn);
+  }, LONG_PRESS_DURATION);
+}
+
+function handleLikePressEnd(pid, btn, e) {
+  if(e) e.preventDefault();
+  if(longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+  if(!isLongPress) {
+    // Normal click - do like
+    likePost(pid, btn);
+  }
+  isLongPress = false;
+}
+
 function sharePost(pid) { let post=D.posts.find(p=>p.id===pid); if(post) { post.shares=(post.shares||0)+1; navigator.clipboard?.writeText(location.href); toast('s','Link copied!'); addPts(5,'Shared','engage'); saveData(); } }
 function toggleSchedule(cb) {
   let picker = G('schedulePicker');
@@ -3997,7 +4359,8 @@ function showPostMenu(pid, anchor) {
     if (!isFollowing && !isForceFollowed) {
       items.push({ ico: '➕', label: 'Follow (Permanent)', fn: `permanentFollow('${post.author}','${pid}')` });
     } else {
-      items.push({ ico: '🔗', label: 'Following (Locked)', fn: `toast('w','Follow is permanent and cannot be undone')`, disabled: true });
+      items.push({ ico: '❌', label: 'Unfriend', fn: `unfriendUser('${post.author}')`, danger: true });
+      items.push({ ico: '🔗', label: 'Following', fn: `toast('i','You are following this user')`, disabled: true });
     }
     items.push({ ico: '💬', label: 'Message User', fn: `openChat('${post.author}')` });
     items.push({ ico: '🚫', label: 'Report Post', fn: `reportPost('${pid}')` });
@@ -4039,6 +4402,68 @@ function permanentFollow(uid, pid) {
   if (!CU.forceFollowed.includes(uid)) CU.forceFollowed.push(uid);
   forceFollow(uid); // uses existing forceFollow for full logic (followers, autoFriends, notifications, toast)
   if (pid) setTimeout(() => refreshPost(pid), 200);
+}
+
+// Unfriend / Remove friend functionality
+function unfriendUser(uid) {
+  if (!CU || uid === CU.id) return;
+  let target = D.users[uid];
+  if (!target) { toast('e', 'User not found'); return; }
+  
+  // Remove from all friend lists
+  let wasFollowing = CU.following?.includes(uid);
+  let wasAutoFriend = CU.autoFriends?.includes(uid);
+  let wasForceFollowed = CU.forceFollowed?.includes(uid);
+  
+  if (!wasFollowing && !wasAutoFriend && !wasForceFollowed) {
+    toast('w', 'You are not following this user');
+    return;
+  }
+  
+  // Remove from current user's lists
+  CU.following = (CU.following||[]).filter(id => id !== uid);
+  CU.autoFriends = (CU.autoFriends||[]).filter(id => id !== uid);
+  CU.forceFollowed = (CU.forceFollowed||[]).filter(id => id !== uid);
+  
+  // Remove from target's followers
+  target.followers = (target.followers||[]).filter(id => id !== CU.id);
+  target.autoFriends = (target.autoFriends||[]).filter(id => id !== CU.id);
+  
+  // Update user's following count in data
+  if(D.users[CU.id]) {
+    D.users[CU.id].following = CU.following;
+    D.users[CU.id].autoFriends = CU.autoFriends;
+    D.users[CU.id].forceFollowed = CU.forceFollowed;
+  }
+  if(D.users[uid]) {
+    D.users[uid].followers = target.followers;
+    D.users[uid].autoFriends = target.autoFriends;
+  }
+  
+  saveData();
+  syncCU();
+  toast('s', `❌ Unfriended ${target.name || 'user'}`);
+  addNotif(uid, 'friend', '👋', `${CU.name} unfriended you`);
+  
+  // Refresh UI
+  refreshAllPosts();
+  updateFriendsBadge();
+}
+
+function refreshAllPosts() {
+  // Refresh all visible posts to update follow/unfollow buttons
+  document.querySelectorAll('.post').forEach(postEl => {
+    let pid = postEl.dataset.postId;
+    if(pid) refreshPost(pid);
+  });
+}
+
+// Check if user can unfollow (for menu display)
+function canUnfollow(uid) {
+  if (!CU || uid === CU.id) return false;
+  return (CU.following||[]).includes(uid) || 
+         (CU.autoFriends||[]).includes(uid) || 
+         (CU.forceFollowed||[]).includes(uid);
 }
 function reportPost(pid) { toast('w', '🚩 Post reported for review'); addNotif(D.posts.find(p=>p.id===pid)?.author||'', 'report', '🚩', 'Your post was reported'); }
 function hidePost(pid) { let el = document.querySelector(`[data-post-id="${pid}"]`); if (el) { el.style.transition='all .3s'; el.style.opacity='0'; el.style.height='0'; el.style.overflow='hidden'; setTimeout(() => el.remove(), 300); } toast('i', 'Post hidden'); }
@@ -4548,15 +4973,41 @@ function previewAppLink(val) {
   else if (val.length > 5) prev.innerHTML = `<div style="color:var(--c5);font-size:11px;font-weight:700;">🚫 Only play.google.com and apps.apple.com are allowed</div>`;
   else prev.innerHTML = '';
 }
+
+// App file upload handling
+let appUploadFileData = null;
+let appUploadFileName = null;
+function handleAppFileUpload(input) {
+  let file = input.files[0];
+  if (!file) return;
+  let preview = G('appFilePreview');
+  if (file.size > 50 * 1024 * 1024) { // 50MB limit
+    toast('e', 'File too large! Max 50MB allowed.');
+    input.value = '';
+    return;
+  }
+  let reader = new FileReader();
+  reader.onload = e => {
+    appUploadFileData = e.target.result;
+    appUploadFileName = file.name;
+    if (preview) preview.innerHTML = `📦 ${file.name} (${(file.size/1024/1024).toFixed(2)} MB) ✅ Ready`;
+  };
+  reader.readAsDataURL(file);
+}
 function submitApp() {
   let name=V('appName'), link=V('appLink'), desc=V('appDesc'), icon=V('appIcon'), version=V('appVersion')||'1.0', category=V('appCategory')||'General';
-  if(!name || !link){ toast('e','Name and link required'); return; }
+  if(!name){ toast('e','App name required'); return; }
+  // Allow link OR file upload
+  let hasLink = link && link.startsWith('http');
+  let hasFile = appUploadFileData !== null;
+  if(!hasLink && !hasFile){ toast('e','Please provide either an app link OR upload a file'); return; }
+  
   // Detect store type from radio or URL
   let radioType = document.querySelector('input[name="appType"]:checked')?.value || 'other';
-  let isPlay = link.includes('play.google.com') || radioType==='playstore';
-  let isApple = link.includes('apps.apple.com') || radioType==='appstore';
-  let isApk = radioType==='apk' || link.match(/\.apk(\?|$)/i);
-  let isWeb = radioType==='web' || link.match(/^https?:\/\//i);
+  let isPlay = link && link.includes('play.google.com') || radioType==='playstore';
+  let isApple = link && link.includes('apps.apple.com') || radioType==='appstore';
+  let isApk = radioType==='apk' || (link && link.match(/\.apk(\?|$)/i)) || (appUploadFileName && appUploadFileName.match(/\.apk$/i));
+  let isWeb = radioType==='web' || (link && link.match(/^https?:\/\//i));
   // Determine store label & icon
   let storeType, storeLabel, storeIcon;
   if(isPlay){ storeType='playstore'; storeLabel='Play Store'; storeIcon='🤖'; }
@@ -4564,15 +5015,26 @@ function submitApp() {
   else if(isApk){ storeType='apk'; storeLabel='APK Direct'; storeIcon='📦'; }
   else if(isWeb){ storeType='web'; storeLabel='Web App'; storeIcon='🌐'; }
   else{ storeType='other'; storeLabel='Other'; storeIcon='🔗'; }
-  // Validate link has http
-  if(!link.startsWith('http')){ toast('e','Please enter a valid URL starting with http/https'); return; }
-  // Check for duplicate link
-  let existing = (D.apps||[]).find(a => a.link === link);
+  
+  // If file uploaded, use it as the link
+  let finalLink = hasFile ? appUploadFileData : link;
+  
+  // Check for duplicate
+  let existing = (D.apps||[]).find(a => a.link === finalLink || a.name === name);
   if(existing){ toast('w','⚠️ This app is already listed.'); return; }
   let screenshots = V('appScreenshots') ? V('appScreenshots').split(',').map(s=>s.trim()).filter(Boolean) : [];
-  let app={ id:'app'+Date.now(), name, link, desc, icon:icon||'📱', version, category, storeType, storeLabel, storeIcon, screenshots, uploadedBy:CU.id, uploadedAt:Date.now(), status:'approved', installedBy:[], rating:(4+Math.random()).toFixed(1), totalInstalls:Math.floor(Math.random()*1000) };
+  let app={ id:'app'+Date.now(), name, link: finalLink, desc, icon:icon||'📱', version, category, storeType, storeLabel, storeIcon, screenshots, uploadedBy:CU.id, uploadedAt:Date.now(), status:'approved', installedBy:[], rating:(4+Math.random()).toFixed(1), totalInstalls:Math.floor(Math.random()*1000), hasFile: hasFile, fileName: appUploadFileName };
   D.apps=D.apps||[];
   D.apps.unshift(app);
+  
+  // Reset file upload data
+  appUploadFileData = null;
+  appUploadFileName = null;
+  let fileInput = G('appFileUpload');
+  if(fileInput) fileInput.value = '';
+  let preview = G('appFilePreview');
+  if(preview) preview.innerHTML = '';
+  
   saveData();
   closeModal('appUploadModal');
   toast('s',`✅ App "${name}" published as ${storeIcon} ${storeLabel}!`);
@@ -4871,13 +5333,84 @@ async function aiSentiment() {
   } catch(e){ toast('i','Sentiment: Positive 😊'); }
 }
 
-// Points System
+// Points System with Decay
 // Daily earning limits - UNLIMITED (set to very high numbers)
 const DAILY_LIMITS = { earn:999999999, engage:999999999, post:999999999, ref:999999999, total:Number.MAX_SAFE_INTEGER };
+
+// Points decay configuration
+const POINTS_DECAY = {
+  basePoints: 50,           // Start with 50 points per ad
+  minPoints: 3,             // Minimum 3 points (never goes below this)
+  decayRate: 0.85,        // Each ad watched reduces points by 15%
+  resetHours: 24,         // Reset after 24 hours
+  adsWatchedKey: 'adsWatchedToday'
+};
+
+// Get current points per ad with decay applied
+function getDecayedPoints() {
+  if(!CU) return POINTS_DECAY.minPoints;
+  let u = D.users[CU.id] || CU;
+  let td = new Date().toDateString();
+  
+  // Check if it's a new day (reset counter)
+  if(u.lastAdDate !== td) {
+    u.adsWatchedToday = 0;
+    u.lastAdDate = td;
+    u.pointsDecayMultiplier = 1.0;
+  }
+  
+  // Calculate decay: base * (decayRate ^ adsWatched)
+  let adsWatched = u.adsWatchedToday || 0;
+  let decayMultiplier = Math.pow(POINTS_DECAY.decayRate, adsWatched);
+  let points = Math.max(POINTS_DECAY.minPoints, Math.floor(POINTS_DECAY.basePoints * decayMultiplier));
+  
+  return points;
+}
+
+// Increment ad watch counter
+function incrementAdWatch() {
+  if(!CU) return;
+  let u = D.users[CU.id] || CU;
+  let td = new Date().toDateString();
+  
+  if(u.lastAdDate !== td) {
+    u.adsWatchedToday = 0;
+    u.lastAdDate = td;
+  }
+  u.adsWatchedToday = (u.adsWatchedToday || 0) + 1;
+  saveData();
+}
 
 function addPts(pts, label, type='earn') {
   if(!CU) return;
   let u = D.users[CU.id] || CU;
+  
+  // Apply time-based multiplier for dynamic earnings
+  let timeMultiplier = getTimeBasedMultiplier();
+  let adjustedPts = Math.floor(pts * timeMultiplier);
+  
+  // Apply decay for ad earnings
+  if(type === 'earn' && label && (label.includes('Ad') || label.includes('ad') || label.includes('Watch'))) {
+    let decayedPoints = getDecayedPoints();
+    adjustedPts = Math.min(adjustedPts, decayedPoints); // Use the lower of actual or decayed
+    incrementAdWatch();
+    
+    // Show decay notification
+    let nextPoints = Math.max(POINTS_DECAY.minPoints, Math.floor(POINTS_DECAY.basePoints * Math.pow(POINTS_DECAY.decayRate, u.adsWatchedToday)));
+    if(nextPoints > POINTS_DECAY.minPoints) {
+      setTimeout(() => {
+        toast('i', `📉 Next ad: +${nextPoints} pts (watch more ads to earn more!)`);
+      }, 1500);
+    }
+  }
+  
+  // Show time multiplier notification for significant changes
+  if(timeMultiplier > 1.2 && type !== 'earn') {
+    toast('i', `⏰ Time bonus! ${Math.floor(timeMultiplier * 100)}% multiplier applied`);
+  }
+  
+  pts = adjustedPts;
+  
   let adminCut=Math.floor(pts*ADMIN_CUT);
   let userPts=pts-adminCut;
   // Anti-fraud: check daily limit
@@ -5190,10 +5723,18 @@ function rAdmin() {
   let users = Object.values(D.users);
   let allPosts = D.posts||[];
   let revenue = (D.users[ADMIN_ID]?.adminRevenue||0);
+  let today = new Date().toDateString();
+  
+  // Calculate active users (logged in today)
+  let activeToday = users.filter(u => u.lastLogin === today || u.todayPts?.date === today).length;
+  let onlineNow = users.filter(u => u.isOnline || (u.lastActive && (Date.now() - u.lastActive) < 300000)).length; // 5 min threshold
+  
   // Build analytics
   renderAdminAnalytics(users);
   if(G('adminStats')) G('adminStats').innerHTML = `
     <div class="admin-stat"><div class="as-i">👥</div><div class="as-n">${users.length}</div><div class="as-l">Total Users</div></div>
+    <div class="admin-stat"><div class="as-i">🟢</div><div class="as-n">${onlineNow}</div><div class="as-l">Online Now</div></div>
+    <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${activeToday}</div><div class="as-l">Active Today</div></div>
     <div class="admin-stat"><div class="as-i">✅</div><div class="as-n">${users.filter(u=>u.kycVerified).length}</div><div class="as-l">KYC Verified</div></div>
     <div class="admin-stat"><div class="as-i">📋</div><div class="as-n">${allPosts.length}</div><div class="as-l">Total Posts</div></div>
     <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${(D.withdrawals||[]).filter(w=>w.status==='pending').length}</div><div class="as-l">Withdrawals</div></div>
@@ -7785,44 +8326,69 @@ function declineCall(){
 function startVideoCall(){ if(currentChatId){ startCall(currentChatId,'video'); } else { toast('e','Open a chat first'); } }
 function startAudioCallBtn(){ if(currentChatId){ startCall(currentChatId,'audio'); } else { toast('e','Open a chat first'); } }
 
-window.addEventListener('load', ()=>{
-  loadData(); loadSession(); syncCU(); applyTheme();
-  initSocket();
-  if(CU && D.users[CU.id]) { G('authWrap').style.display='none'; G('appWrap').style.display='block'; G('fab').style.display='flex'; syncUI(); nav('feed'); startBanner(); scheduleInts(); scheduleReward(); scheduleAutoAd(); checkAutoDeleteOnLoad(); }
-  else{ G('authWrap').style.display='flex'; }
-  document.querySelectorAll('.overlay').forEach(o=>{ o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }); });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open')); });
-  // Apply saved theme
-  applyTheme(localStorage.getItem('mxt_theme') || 'dark');
-  // Auto-save every 30 seconds to prevent data loss
-  setInterval(()=>{ if(CU){ syncCU(); saveData(); saveSession(); } }, 30000);
-  // Check scheduled posts every minute
-  setInterval(()=>{ if(CU) checkScheduledPosts(); }, 60000);
-  // Load crypto prices on start
-  setTimeout(loadCryptoPrices, 2000);
-  // EmailJS init if configured
-  if(EMAILJS_PUBLIC && typeof emailjs !== 'undefined') {
-    try { emailjs.init(EMAILJS_PUBLIC); console.log('[EmailJS] Initialized'); } catch(e){}
+// ── Startup & Lifecycle ───────────────────────────────
+window.addEventListener('load', async () => {
+  try {
+    initData();      // 1. Initialize empty structures
+    await loadData(); // 2. Load from LocalStorage/IndexedDB
+    initData();      // 3. Ensure integrity after load
+    loadSession();   // 4. Restore current user session
+    syncCU();        // 5. Sync current user object
+    
+    // Apply theme correctly
+    let savedTheme = localStorage.getItem(STORAGE_KEY+'theme') || 'dark';
+    if(typeof applyTheme === 'function') applyTheme(savedTheme);
+    
+    if(typeof initSocket === 'function') initSocket();
+    
+    if(CU && D.users[CU.id]) { 
+      if(G('authWrap')) G('authWrap').style.display = 'none';
+      if(G('appWrap')) G('appWrap').style.display = 'block';
+      if(G('fab')) G('fab').style.display = 'flex';
+      syncUI(); 
+      nav('feed'); 
+      if(typeof startBanner === 'function') startBanner(); 
+      if(typeof scheduleInts === 'function') scheduleInts(); 
+      if(typeof scheduleReward === 'function') scheduleReward(); 
+      if(typeof scheduleAutoAd === 'function') scheduleAutoAd(); 
+      if(typeof checkAutoDeleteOnLoad === 'function') checkAutoDeleteOnLoad(); 
+    } else { 
+      if(G('authWrap')) G('authWrap').style.display = 'flex';
+      if(typeof authTab === 'function') authTab('login');
+    }
+  } catch (err) {
+    console.error('Critical Startup Error:', err);
   }
-  // Web Push init (after 3 seconds to not interrupt UX)
-  setTimeout(()=>{ if(CU) requestNotifPermission(); }, 3000);
-  // Handle bKash/Nagad payment callbacks
-  (()=>{
-    let params = new URLSearchParams(window.location.search);
-    let bkashS = params.get('bkash');
-    let nagadS = params.get('nagad');
-    if(bkashS === 'success') { setTimeout(()=>toast('s','✅ bKash payment completed!'),800); history.replaceState({},'','/'); }
-    if(nagadS === 'Success') { setTimeout(()=>toast('s','✅ Nagad payment completed!'),800); history.replaceState({},'','/'); }
-  })();
-  // Handle payment callbacks (bKash/Nagad redirect)
-  (()=>{
-    let params = new URLSearchParams(window.location.search);
-    if(params.get('bkash')==='success') { toast('s','✅ bKash payment completed!'); history.replaceState({},'','/'); }
-    if(params.get('nagad')==='Success') { toast('s','✅ Nagad payment completed!'); history.replaceState({},'','/'); }
-  })();
-  // Sync before page unload
-  window.addEventListener('beforeunload', ()=>{ if(CU){ syncCU(); saveData(); saveSession(); } });
 });
+
+// ── Global Event Handlers ───────────────────────────────
+document.querySelectorAll('.overlay').forEach(o => { 
+  o.addEventListener('click', e => { if(e.target === o) o.classList.remove('open'); }); 
+});
+
+document.addEventListener('keydown', e => { 
+  if(e.key === 'Escape') document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); 
+});
+
+// Auto-save & Maintenance
+setInterval(() => { if(CU){ syncCU(); saveData(); saveSession(); } }, 30000);
+setInterval(() => { if(CU) checkScheduledPosts(); }, 60000);
+setTimeout(loadCryptoPrices, 2000);
+
+// Sync before page unload
+window.addEventListener('beforeunload', () => { if(CU){ syncCU(); saveData(); saveSession(); } });
+
+// EmailJS init if configured
+if(typeof EMAILJS_PUBLIC !== 'undefined' && typeof emailjs !== 'undefined') {
+  try { emailjs.init(EMAILJS_PUBLIC); } catch(e){}
+}
+
+// Payment Callbacks
+(() => {
+  let params = new URLSearchParams(window.location.search);
+  if(params.get('bkash') === 'success') { setTimeout(() => toast('s','✅ bKash payment completed!'), 800); history.replaceState({},'','/'); }
+  if(params.get('nagad') === 'Success') { setTimeout(() => toast('s','✅ Nagad payment completed!'), 800); history.replaceState({},'','/'); }
+})();
 
 
 
@@ -10388,6 +10954,263 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   };
   
   console.log('✅ [SystemCheck] Validation ready. Run validateSystem() to check all functions.');
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// WEBSITE SPEED OPTIMIZATION
+// ═══════════════════════════════════════════════════════════════════
+(function() {
+  // 1. Lazy load images with better performance
+  const lazyLoadImages = () => {
+    const images = document.querySelectorAll('img[data-src]');
+    if (images.length === 0) return;
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          img.classList.add('loaded');
+          observer.unobserve(img);
+        }
+      });
+    }, { 
+      rootMargin: '100px',
+      threshold: 0.1
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+  };
+  
+  // 2. Optimize post rendering with virtual scrolling
+  let postVirtualScroll = {
+    container: null,
+    items: [],
+    visibleStart: 0,
+    visibleEnd: 20,
+    itemHeight: 300,
+    buffer: 5,
+    
+    init(container) {
+      this.container = container;
+      this.setupScrollListener();
+      this.renderVisible();
+    },
+    
+    setupScrollListener() {
+      let ticking = false;
+      this.container.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            this.updateVisibleRange();
+            this.renderVisible();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    },
+    
+    updateVisibleRange() {
+      const scrollTop = this.container.scrollTop;
+      const containerHeight = this.container.clientHeight;
+      
+      this.visibleStart = Math.max(0, Math.floor(scrollTop / this.itemHeight) - this.buffer);
+      this.visibleEnd = Math.min(this.items.length, Math.ceil((scrollTop + containerHeight) / this.itemHeight) + this.buffer);
+    },
+    
+    renderVisible() {
+      // Implementation for virtual scrolling would go here
+      // For now, just ensure we don't render too many posts at once
+      const posts = document.querySelectorAll('.post');
+      if (posts.length > 50) {
+        for (let i = 50; i < posts.length; i++) {
+          posts[i].style.display = 'none';
+        }
+      }
+    }
+  };
+  
+  // 3. Cache DOM queries
+  const cache = new Map();
+  function G(id) {
+    if (cache.has(id)) return cache.get(id);
+    const element = document.getElementById(id);
+    if (element) cache.set(id, element);
+    return element;
+  }
+  
+  // 4. Debounce expensive operations
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // 5. Optimize feed rendering
+  const optimizedRenderFeed = debounce(() => {
+    if (typeof rFeed === 'function') {
+      rFeed(false);
+    }
+  }, 100);
+  
+  // 6. Preload critical resources
+  const preloadCritical = () => {
+    const criticalImages = document.querySelectorAll('img[data-critical]');
+    criticalImages.forEach(img => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = img.dataset.src;
+      document.head.appendChild(link);
+    });
+  };
+  
+  // 2. Debounce function for scroll/resize events
+  window.debounce = function(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+  
+  // 3. Throttle function for high-frequency events
+  window.throttle = function(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  };
+  
+  // 4. Optimized scroll handler
+  let ticking = false;
+  window.optimizedScroll = function(callback) {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        callback();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+  
+  // 5. Preload critical resources
+  const preloadResources = () => {
+    const criticalResources = [
+      '/fonts/inter.woff2',
+      '/fonts/jetbrains.woff2'
+    ];
+    criticalResources.forEach(href => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = href;
+      link.as = 'font';
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    });
+  };
+  
+  // 6. Cache frequently accessed DOM elements
+  window.DOMCache = {
+    elements: {},
+    get(id) {
+      if (!this.elements[id]) {
+        this.elements[id] = document.getElementById(id);
+      }
+      return this.elements[id];
+    },
+    clear() {
+      this.elements = {};
+    }
+  };
+  
+  // Override G function to use cache
+  const originalG = window.G;
+  window.G = function(id) {
+    return window.DOMCache.get(id) || originalG(id);
+  };
+  
+  // 7. Virtual scrolling for long lists
+  window.VirtualScroll = {
+    itemHeight: 100,
+    container: null,
+    totalItems: 0,
+    visibleItems: 10,
+    scrollTop: 0,
+    init(container, totalItems, renderFn) {
+      this.container = container;
+      this.totalItems = totalItems;
+      this.renderFn = renderFn;
+      this.setup();
+    },
+    setup() {
+      if (!this.container) return;
+      this.container.style.overflow = 'auto';
+      this.container.style.position = 'relative';
+      this.update();
+      this.container.addEventListener('scroll', window.throttle(() => this.update(), 16));
+    },
+    update() {
+      if (!this.container) return;
+      this.scrollTop = this.container.scrollTop;
+      const startIdx = Math.floor(this.scrollTop / this.itemHeight);
+      const endIdx = Math.min(startIdx + this.visibleItems, this.totalItems);
+      this.renderFn(startIdx, endIdx);
+    }
+  };
+  
+  // 8. Batch DOM updates
+  window.batchDOMUpdates = function(updates) {
+    requestAnimationFrame(() => {
+      updates.forEach(update => update());
+    });
+  };
+  
+  // 9. Compress images before upload
+  window.compressImage = function(dataUrl, maxWidth = 1200, quality = 0.8) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = Math.min(1, maxWidth / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = dataUrl;
+    });
+  };
+  
+  // Initialize optimizations when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      lazyLoadImages();
+      preloadResources();
+    });
+  } else {
+    lazyLoadImages();
+    preloadResources();
+  }
+  
+  console.log('[SpeedOpt] Website optimizations loaded');
 })();
 </script>
 
