@@ -140,6 +140,111 @@ const GOOGLE_VISION_KEY = 'AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg';
 const SUPABASE_URL  = 'https://rgximkhnhxgaonrxzzxl.supabase.co';
 const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
 const SUPABASE_PUB  = 'sb_publishable_1CfhnUW80EqyTumZ8WUawA_B0CPbMNF';
+const SUPABASE_CLIENT_KEY = SUPABASE_PUB || SUPABASE_KEY;
+let supabaseClient = null;
+
+function initSupabaseClient() {
+  if (supabaseClient) return supabaseClient;
+  if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
+    console.warn('[Supabase] JS library not loaded');
+    return null;
+  }
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_CLIENT_KEY);
+  return supabaseClient;
+}
+
+function isSupabaseReady() {
+  return !!initSupabaseClient();
+}
+
+async function supabaseSignIn(email, password) {
+  const supabase = initSupabaseClient();
+  if (!supabase) return { data: null, error: { message: 'Supabase unavailable' } };
+  return await supabase.auth.signInWithPassword({ email, password });
+}
+
+async function supabaseSignUp(email, password, metadata = {}) {
+  const supabase = initSupabaseClient();
+  if (!supabase) return { data: null, error: { message: 'Supabase unavailable' } };
+  return await supabase.auth.signUp({ email, password }, { data: metadata });
+}
+
+async function supabaseSendPasswordReset(email) {
+  const supabase = initSupabaseClient();
+  if (!supabase) return { data: null, error: { message: 'Supabase unavailable' } };
+  return await supabase.auth.resetPasswordForEmail(email, { redirectTo: location.href });
+}
+
+async function supabaseSignOut() {
+  const supabase = initSupabaseClient();
+  if (!supabase) return { data: null, error: { message: 'Supabase unavailable' } };
+  return await supabase.auth.signOut();
+}
+
+async function uploadBackupToSupabase() {
+  if (!CU || !isSupabaseReady()) return null;
+  try {
+    const backup = {
+      backupAt: new Date().toISOString(),
+      userId: CU.id,
+      data: D
+    };
+    const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
+    const url = await uploadToSupabase(blob, 'application/json', 'media');
+    if (url) {
+      console.log('[CloudBackup] Uploaded backup to Supabase', url);
+    }
+    return url;
+  } catch (err) {
+    console.warn('[CloudBackup] Upload failed', err);
+    return null;
+  }
+}
+
+async function listSupabaseBackupFiles(prefix) {
+  if (!isSupabaseReady()) return [];
+  try {
+    const r = await fetch(`${SUPABASE_URL}/storage/v1/object/list/media?prefix=${encodeURIComponent(prefix)}`, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    if (!r.ok) return [];
+    const data = await r.json();
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.warn('[CloudBackup] List failed', err);
+    return [];
+  }
+}
+
+async function restoreLatestCloudBackup() {
+  if (!CU || !isSupabaseReady()) return toast('e','Login and Supabase required');
+  const prefix = `backups/${CU.id}/`;
+  const files = await listSupabaseBackupFiles(prefix);
+  if (!files.length) return toast('w','No cloud backups found');
+  const latest = files.sort((a,b) => new Date(b.updated_at||b.created_at) - new Date(a.updated_at||a.created_at))[0];
+  const url = `${SUPABASE_URL}/storage/v1/object/public/media/${latest.name}`;
+  const response = await fetch(url);
+  if (!response.ok) return toast('e','Restore download failed');
+  const backup = await response.json();
+  if (!backup?.data) return toast('e','Invalid backup format');
+  localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(backup.data));
+  if (backup.data.cur) localStorage.setItem(STORAGE_KEY+'session', backup.data.cur);
+  toast('s','✅ Cloud backup restored. Reloading...');
+  setTimeout(() => location.reload(), 800);
+}
+
+async function syncCloudBackup() {
+  if (!CU || !isSupabaseReady()) return;
+  try {
+    await uploadBackupToSupabase();
+  } catch (err) {
+    console.warn('[CloudBackup] sync failed', err);
+  }
+}
 
 // ── Metered TURN (WebRTC) ────────────────────────────────────
 const METERED_API_KEY = 'ffb21c8dfcff4bf229f8973e77541a11edc0';
@@ -3137,10 +3242,31 @@ const MediaDB = {
 // Initialize MediaDB on load
 MediaDB.init().catch(e => console.warn('MediaDB init failed:', e));
 
+function shrinkStoragePayload(lite) {
+  if(lite.posts && lite.posts.length > 50) {
+    lite.posts = lite.posts.slice(-50);
+  }
+  if(lite.chats && typeof lite.chats === 'object') {
+    Object.keys(lite.chats).forEach(room => {
+      if(Array.isArray(lite.chats[room]) && lite.chats[room].length > 100) {
+        lite.chats[room] = lite.chats[room].slice(-100);
+      }
+    });
+  }
+  if(lite.notifs && Array.isArray(lite.notifs) && lite.notifs.length > 200) {
+    lite.notifs = lite.notifs.slice(-200);
+  }
+  if(lite.txs && Array.isArray(lite.txs) && lite.txs.length > 100) {
+    lite.txs = lite.txs.slice(-100);
+  }
+  return lite;
+}
+
 function saveData() {
   try {
     // Aggressively store large base64 files in IndexedDB
     let lite = JSON.parse(JSON.stringify(D));
+    lite._storageVersion = STORAGE_VERSION;
     lite.posts = (lite.posts||[]).map(p => {
       let pp = {...p};
       if(pp.file && pp.file.length > 20000 && pp.file.startsWith('data:')) {
@@ -3162,9 +3288,8 @@ function saveData() {
     try {
       localStorage.setItem(STORAGE_KEY+'data', str);
     } catch(qe) {
-      console.warn('LocalStorage Quota Exceeded. Trimming posts...');
-      // Keep only last 50 posts and retry
-      lite.posts = (lite.posts||[]).slice(0,50);
+      console.warn('LocalStorage Quota Exceeded. Trimming storage payload...');
+      lite = shrinkStoragePayload(lite);
       localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(lite));
     }
   } catch(e) { console.warn('saveData error:', e); }
@@ -3174,6 +3299,10 @@ async function loadData() {
     let raw = localStorage.getItem(STORAGE_KEY+'data');
     if(raw) {
       let saved = JSON.parse(raw);
+      if(saved._storageVersion && saved._storageVersion !== STORAGE_VERSION) {
+        console.log('[loadData] legacy storage version', saved._storageVersion);
+      }
+      delete saved._storageVersion;
       // Remove legacy demo users
       ['u_alice','u_bob','u_carol','u_dave','u_emma'].forEach(k => {
         if(saved.users) delete saved.users[k];
@@ -3453,6 +3582,58 @@ async function doLogin() {
     if (!D) D = { users: {} };
     if (!D.users) D.users = {};
 
+    // Supabase auth for email logins
+    if (id.includes('@') && isSupabaseReady()) {
+      const { data: authData, error: authError } = await supabaseSignIn(id, pw);
+      if (!authError && authData?.user) {
+        let authUid = authData.user.id;
+        let foundUid = null;
+        let idLower = id.toLowerCase();
+        for (let k in D.users) {
+          let u = D.users[k];
+          if (!u) continue;
+          if (u.authUid === authUid || (u.email||'').toLowerCase() === idLower) {
+            foundUid = k; break;
+          }
+        }
+        if (!foundUid) {
+          let newId = 'u' + Date.now() + Math.random().toString(36).slice(2,6);
+          D.users[newId] = {
+            id: newId,
+            authUid,
+            name: id.split('@')[0],
+            username: id.split('@')[0],
+            email: id,
+            password: await hashPass(pw),
+            points: 50,
+            verified: true,
+            followers: [],
+            following: [],
+            refs: [],
+            refCode: 'MX' + Math.random().toString(36).slice(2,8).toUpperCase(),
+            savedPosts: [],
+            blocked: [],
+            tasksToday: {},
+            twoFA: false,
+            kycVerified: false,
+            createdAt: Date.now()
+          };
+          foundUid = newId;
+        }
+        D.cur = foundUid;
+        CU = D.users[foundUid];
+        saveSession();
+        saveData();
+        syncCloudBackup();
+        mount();
+        toast('s','✅ Logged in with Supabase as '+CU.name+'!');
+        return;
+      }
+      if (authError && authError.message && !authError.message.toLowerCase().includes('invalid login credentials')) {
+        console.warn('[Supabase login]', authError.message);
+      }
+    }
+
     // Brute force protection
     let attempts = parseInt(sessionStorage.getItem('mxt_attempts')||'0');
     if(attempts >= 10) return toast('e','Too many attempts. Refresh the page and try again.');
@@ -3624,6 +3805,22 @@ async function doRegister() {
       notifSettings:{}, privacySettings:{},
       createdAt: Date.now()
     };
+
+    if (isEmail && isSupabaseReady()) {
+      const { data: regData, error: regError } = await supabaseSignUp(id, pw, {
+        name: nm,
+        username: un,
+        refCode: D.users[newId].refCode,
+        localId: newId
+      });
+      if (regError) {
+        console.warn('[Supabase signup]', regError.message);
+        toast('w','Account created locally, but cloud signup failed. Please try again later.');
+      } else if (regData?.user) {
+        D.users[newId].authUid = regData.user.id;
+        D.users[newId].verified = true;
+      }
+    }
     
     // Referral bonus
     if(ref) {
@@ -3658,6 +3855,15 @@ async function sendForgotOtp() {
   try {
     let id = V('fiId').trim();
     if(!id) return toast('e','Enter your registered email or phone number');
+    // Supabase password reset for email users
+    if (id.includes('@') && isSupabaseReady()) {
+      const { data, error } = await supabaseSendPasswordReset(id);
+      if (!error) {
+        toast('s','📧 Password reset email sent to '+id);
+        return;
+      }
+      console.warn('[Supabase reset]', error.message);
+    }
     // Find account
     let foundUid = null;
     for(let k in D.users) {
@@ -3723,6 +3929,11 @@ function logout() {
   // CRITICAL: must save D.cur=null BEFORE reload
   D.cur = null;
   CU    = null;
+  if (isSupabaseReady()) {
+    supabaseSignOut().catch(err => {
+      console.warn('[Supabase signout]', err.message || err);
+    });
+  }
   try {
     localStorage.setItem(STORAGE_KEY+'session', '');
     // Also clear cur from the stored data object
@@ -9563,6 +9774,9 @@ window.checkPaywall = checkPaywall;
 
 <!-- Large File Storage (MEGA) - 20GB -->
 <script src="js/mega-storage.js"></script>
+
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 
 <!-- Real-time Subscriptions (Supabase) -->
 <script src="js/supabase-realtime.js"></script>
