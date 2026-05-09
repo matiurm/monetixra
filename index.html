@@ -117,6 +117,10 @@ window.atOptions_468x60 = {
 <!-- PWA Manifest -->
 <link rel="manifest" href="/manifest.json">
 
+<!-- Monetixra Advanced Modules -->
+<script defer src="js/advanced-post-interactions.js"></script>
+<script defer src="js/media-storage-manager.js"></script>
+
 <!-- ─── AD CONFIGURATION ─────────────────────────────────
   Replace values below with your real keys to activate ads
   ──────────────────────────────────────────────────────── -->
@@ -659,6 +663,8 @@ iframe[src*="adzilla"],
 .post-media img:hover{transform:scale(1.01);}
 .post-media video{width:100%;max-height:380px;background:#000;display:block;}
 .post-media audio{width:100%;padding:10px 13px;}
+.post-preview-floating{transition:transform .25s ease,box-shadow .25s ease;}
+.post-preview-floating.floating{transform:translateY(-14px) scale(1.02);box-shadow:0 18px 42px rgba(0,0,0,.25);}
 .reaction-bar{display:flex;flex-wrap:wrap;gap:4px;padding:7px 13px;border-bottom:1px solid var(--b1);}
 .react-btn{background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:3px 8px;font-size:12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:3px;}
 .react-btn:hover{background:var(--g3);}
@@ -1263,6 +1269,60 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 #btmNav .bn{cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;-webkit-tap-highlight-color:transparent !important;touch-action:manipulation !important;}
 #btmNav .bn *{pointer-events:none !important;}
 #btmNav .bn:active{transform:scale(0.95) !important;}
+
+/* ════════════════════════════════════════════════════════════ */
+/* ADVANCED POST INTERACTIONS STYLES */
+/* ════════════════════════════════════════════════════════════ */
+
+/* Flower Button Enhanced */
+.flower-btn{background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(236,72,153,.06)) !important;border:1px solid rgba(0,255,170,.15) !important;transition:all .2s;}
+.flower-btn:hover{background:linear-gradient(135deg,rgba(0,255,170,.15),rgba(236,72,153,.12)) !important;border-color:rgba(236,72,153,.35) !important;transform:scale(1.05);}
+
+/* Share Modal */
+.share-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center;}
+.share-modal .modal-bg{position:absolute;inset:0;}
+.share-modal .modal-card{width:100%;max-width:500px;background:var(--bg3);border:1px solid var(--b2);border-radius:24px 24px 0 0;padding:20px 16px;position:relative;z-index:1;animation:slideUp .3s var(--ease);max-height:60vh;overflow-y:auto;}
+.share-modal .modal-card button{display:none;}
+
+/* Share Grid */
+.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;}
+.share-icon{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.share-icon:hover{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;transform:scale(1.05);}
+.share-icon .emoji{font-size:28px;display:block;}
+.share-icon .label{font-size:10px;font-weight:700;color:var(--t2);}
+.share-icon:hover .label{color:#fff;}
+
+/* Comment Reactions */
+.cm-reacts{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;}
+.cm-reaction{font-size:12px;cursor:pointer;opacity:.6;transition:opacity .15s;padding:2px 6px;background:var(--g2);border-radius:6px;}
+.cm-reaction:hover{opacity:1;background:var(--g3);}
+
+/* Comment Edit Box */
+.cm-edit-inp{width:100%;background:var(--g2);border:1px solid var(--neon);border-radius:8px;padding:6px 8px;color:var(--t1);font-size:13px;outline:none;margin-top:5px;font-family:var(--ff);}
+.cm-edited-tag{font-size:9px;color:var(--t3);margin-left:5px;font-style:italic;}
+
+/* Media Upload Progress */
+.media-upload-progress{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--b2);border-radius:99px;padding:8px 16px;display:flex;align-items:center;gap:10px;z-index:10000;animation:slideUp .3s ease;}
+.media-upload-progress .spinner{width:16px;height:16px;border:2px solid var(--g3);border-top-color:var(--neon);border-radius:50%;animation:spin 1s linear infinite;}
+.media-upload-progress .text{font-size:12px;color:var(--t2);}
+
+/* Storage Stats */
+.storage-stats{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.05));border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:12px;margin-bottom:10px;}
+.storage-stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.storage-stat-row:last-child{border-bottom:none;}
+.storage-stat-label{font-size:12px;font-weight:600;color:var(--t2);}
+.storage-stat-value{font-size:13px;font-weight:700;color:var(--neon);font-family:var(--fm);}
+
+/* Call Recording UI */
+.call-recording{position:fixed;bottom:100px;right:12px;background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;z-index:10000;animation:slideUp .3s ease;}
+.call-recording .record-dot{width:8px;height:8px;background:var(--c5);border-radius:50%;animation:pulse 1s infinite;}
+.call-recording .timer{font-size:12px;font-weight:700;color:var(--c5);font-family:var(--fm);}
+
+/* Media Gallery Modal */
+.media-gallery{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.9);padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;overflow-y:auto;}
+.media-gallery-item{aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--b2);cursor:pointer;position:relative;background:var(--g3);}
+.media-gallery-item img,.media-gallery-item video{width:100%;height:100%;object-fit:cover;}
+.media-gallery-item.selected::after{content:'';position:absolute;inset:0;border:2px solid var(--neon);border-radius:12px;}
 
 </style>
 </head>
@@ -2893,7 +2953,7 @@ let D = { users: {}, posts: [], txs: [], notifs: [], chats: {}, stories: [], gro
 let CU = null;
 let currentChatId = null;
 let activeCat = 'all';
-let pfData = null, pfMime = null, pfName = null;
+let pfData = null, pfMime = null, pfName = null, pfFile = null;
 let grpMems = [];
 let disappearTimer = 0;
 let isRecordingVoice = false;
@@ -3869,12 +3929,48 @@ function nav(page) {
   } else {
     console.error('[nav] No loader found for page:', page);
   }
-  
-  // Scroll to top
-  window.scrollTo(0,0);
 }
 
 // Force Follow (cannot unfollow)
+// Modified Follow Function (Permanent Follow)
+function toggleFollow(uid) {
+  if(!CU || CU.id === uid) return;
+  let target = D.users[uid];
+  if(!target) return;
+  
+  CU.following = CU.following || [];
+  if(CU.following.includes(uid)) {
+    toast('i', 'You are already following this user. Only they can remove you.');
+    return; // USER CANNOT UNFOLLOW
+  }
+  
+  CU.following.push(uid);
+  target.followers = target.followers || [];
+  target.followers.push(CU.id);
+  
+  addPts(10, 'Followed User', 'engage');
+  addNotif(uid, 'follow', '👤', `${CU.name} started following you`);
+  saveData(); syncUI();
+  toast('s', '✅ Following ' + target.name);
+}
+
+// Function for user to remove their own followers (The one who is being followed)
+function removeFollower(uid) {
+  if(!CU) return;
+  let followerIdx = CU.followers?.indexOf(uid);
+  if(followerIdx > -1) {
+    if(!confirm('Are you sure you want to remove this follower?')) return;
+    CU.followers.splice(followerIdx, 1);
+    let followerObj = D.users[uid];
+    if(followerObj && followerObj.following) {
+      let fIdx = followerObj.following.indexOf(CU.id);
+      if(fIdx > -1) followerObj.following.splice(fIdx, 1);
+    }
+    saveData(); syncUI();
+    toast('s', 'Follower removed successfully');
+  }
+}
+
 function forceFollow(userId) {
   if(!CU || CU.id === userId) return;
   if(CU.following?.includes(userId)) return;
@@ -4000,7 +4096,7 @@ function mkPost(post) {
   let grad = randomGrad();
   let d = document.createElement('div'); d.className='post'; d.dataset.postId=post.id;
   let isFollowingAuthor = post.author !== CU?.id && (CU?.following?.includes(post.author) || CU?.autoFriends?.includes(post.author) || (CU?.forceFollowed||[]).includes(post.author));
-  let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" onclick="unfriendUser('${post.author}')">❌ Unfriend</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
+  let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" disabled>✔ Following</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
   let h = `<div class="post-hd"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});" onclick="viewUser('${post.author}')">${author.avatar?`<img src="${author.avatar}">`:(author.name||'?').charAt(0).toUpperCase()}</div><div style="flex:1;"><div class="post-nm">${esc(author.name||'User')} ${author.verified?'<span class="badge b-ver">✔</span>':''} ${author.isAdmin?'<span class="badge b-admin">👑</span>':''} ${author.kycVerified?'<span class="badge b-kyc">✅ KYC</span>':''} ${post.isNFT?'<span class="badge b-nft">🎨 NFT</span>':''}</div><div class="post-meta">${ago(post.createdAt)} ${vis2ico(post.visibility)} ${post.location?`📍${esc(post.location)}`:''}</div></div>${followBtn}<button class="post-more" onclick="showPostMenu('${post.id}',this)">⋯</button></div>`;
   if(post.text) h += `<div class="post-txt">${linkify(esc(post.text))}</div>`;
   
@@ -4359,7 +4455,6 @@ function showPostMenu(pid, anchor) {
     if (!isFollowing && !isForceFollowed) {
       items.push({ ico: '➕', label: 'Follow (Permanent)', fn: `permanentFollow('${post.author}','${pid}')` });
     } else {
-      items.push({ ico: '❌', label: 'Unfriend', fn: `unfriendUser('${post.author}')`, danger: true });
       items.push({ ico: '🔗', label: 'Following', fn: `toast('i','You are following this user')`, disabled: true });
     }
     items.push({ ico: '💬', label: 'Message User', fn: `openChat('${post.author}')` });
@@ -4406,48 +4501,10 @@ function permanentFollow(uid, pid) {
 
 // Unfriend / Remove friend functionality
 function unfriendUser(uid) {
-  if (!CU || uid === CU.id) return;
-  let target = D.users[uid];
-  if (!target) { toast('e', 'User not found'); return; }
-  
-  // Remove from all friend lists
-  let wasFollowing = CU.following?.includes(uid);
-  let wasAutoFriend = CU.autoFriends?.includes(uid);
-  let wasForceFollowed = CU.forceFollowed?.includes(uid);
-  
-  if (!wasFollowing && !wasAutoFriend && !wasForceFollowed) {
-    toast('w', 'You are not following this user');
-    return;
-  }
-  
-  // Remove from current user's lists
-  CU.following = (CU.following||[]).filter(id => id !== uid);
-  CU.autoFriends = (CU.autoFriends||[]).filter(id => id !== uid);
-  CU.forceFollowed = (CU.forceFollowed||[]).filter(id => id !== uid);
-  
-  // Remove from target's followers
-  target.followers = (target.followers||[]).filter(id => id !== CU.id);
-  target.autoFriends = (target.autoFriends||[]).filter(id => id !== CU.id);
-  
-  // Update user's following count in data
-  if(D.users[CU.id]) {
-    D.users[CU.id].following = CU.following;
-    D.users[CU.id].autoFriends = CU.autoFriends;
-    D.users[CU.id].forceFollowed = CU.forceFollowed;
-  }
-  if(D.users[uid]) {
-    D.users[uid].followers = target.followers;
-    D.users[uid].autoFriends = target.autoFriends;
-  }
-  
-  saveData();
-  syncCU();
-  toast('s', `❌ Unfriended ${target.name || 'user'}`);
-  addNotif(uid, 'friend', '👋', `${CU.name} unfriended you`);
-  
-  // Refresh UI
-  refreshAllPosts();
-  updateFriendsBadge();
+  // Permanent follow rule: followers cannot unfollow.
+  // Only the followed user can remove the follower via removeFollower().
+  toast('w', '⛔ You cannot unfollow this user. Only they can remove you.');
+  return;
 }
 
 function refreshAllPosts() {
@@ -5169,7 +5226,7 @@ function submitPost() {
   closeModal('postModal');
   rFeed();
   if(!hasCopyright) { confetti(); toast('s','Post published! +20 pts'); }
-  pfData=null; pfMime=null; pfName=null;
+  pfData=null; pfMime=null; pfName=null; pfFile=null;
   if(editor) editor.innerHTML='';
   G('postTags').value='';
   // Schedule copyright auto-delete
@@ -7259,7 +7316,7 @@ async function uploadToSupabase(dataOrFile, mime, bucket='media') {
     const path = `${CU?.id||'anon'}/${Date.now()}.${ext}`;
     _supabaseUploading = true;
     const r = await fetch(`${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Content-Type': mime,
@@ -7281,17 +7338,45 @@ async function uploadToSupabase(dataOrFile, mime, bucket='media') {
     return null;
   }
 }
+window.uploadToSupabaseNative = uploadToSupabase;
 // Upload media to Supabase and replace base64 with permanent URL
+async function dataUrlToFile(dataUrl, filename) {
+  let arr = dataUrl.split(',');
+  let mime = arr[0].match(/:(.*?);/)[1];
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while(n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
+
 async function persistMediaToSupabase() {
   if (!pfData || !pfMime) return; // no media
   // Skip if already a URL (not base64)
   if (typeof pfData === 'string' && !pfData.startsWith('data:')) return;
-  const url = await uploadToSupabase(pfData, pfMime);
-  if (url) {
-    pfData = url; // replace base64 with permanent Supabase URL
-    pfMime = pfMime; // keep mime type
+
+  let file = pfFile;
+  if (!file && typeof pfData === 'string' && pfData.startsWith('data:')) {
+    file = await dataUrlToFile(pfData, pfName || `upload.${pfMime?.split('/')[1] || 'bin'}`);
   }
-  // If upload fails, pfData stays as base64 (will be trimmed by saveData but preview still works)
+  if (!file) return;
+
+  try {
+    const uploadResult = await smartUpload(file, {
+      onProgress: pct => {
+        let fill = G('plbFill'); if(fill) fill.style.width = Math.min(90, pct) + '%';
+      }
+    });
+    if (uploadResult?.url) {
+      pfData = uploadResult.url;
+      pfMime = uploadResult.type || pfMime;
+      pfName = uploadResult.name || pfName;
+    }
+  } catch (err) {
+    console.warn('[HybridStorage] Media upload failed:', err);
+  }
 }
 
 
@@ -7316,7 +7401,7 @@ function openPostModal(type='text') {
   document.getElementById('postEditor').innerHTML='';
   G('postTags').value=''; G('mediaPreview').innerHTML=''; G('aiOutput').innerHTML='';
   G('hashtagSuggestArea').innerHTML=''; G('copyrightNotice').style.display='none';
-  pfData=null; pfMime=null; pfName=null;
+  pfData=null; pfMime=null; pfName=null; pfFile=null;
   openModal('postModal');
   setTimeout(()=>scrollRTLInit('postModal'), 80);
 }
@@ -7343,25 +7428,44 @@ function compressImage(file, maxW, maxH, quality) {
 }
 
 function previewPostFile(inp) {
-  let f = inp.files[0]; if(!f) return;
-  let r = new FileReader();
-  r.onload = e => {
-    pfData = e.target.result; pfMime = f.type; pfName = f.name;
-    let prev = G('mediaPreview');
-    if (f.type.startsWith('image/')) prev.innerHTML = `<img src="${e.target.result}" style="max-width:100%;border-radius:12px;max-height:180px;">`;
-    else if (f.type.startsWith('video/')) prev.innerHTML = `<video controls style="max-width:100%;"><source src="${e.target.result}"></video>`;
-    else prev.innerHTML = `<audio controls><source src="${e.target.result}"></audio>`;
-    checkCopyright(f.name+' '+ (document.getElementById('postEditor')?.innerText||''));
-    // Auto-run AI helpers: images -> object detection/caption, audio/video -> try auto-caption
-    if (f.type.startsWith('image/')) {
-      // run object detection which also suggests hashtags and caption
-      setTimeout(()=>{ try{ aiDetectObjects(); }catch(e){} }, 120);
-    } else if (f.type.startsWith('audio/') || f.type.startsWith('video/')) {
-      // trigger auto-caption placeholder / transcription attempt
+  const file = inp.files[0];
+  if(!file) return;
+  
+  // 100MB Limit check (100 * 1024 * 1024 bytes)
+  if(file.size > 104857600) {
+    toast('e', 'File size exceeds 100MB limit!');
+    inp.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    pfData = event.target.result;
+    pfMime = file.type;
+    pfName = file.name;
+    pfFile = file;
+    
+    let prevWrap = G('postPreviewWrap');
+    if(!prevWrap) return;
+    
+    prevWrap.style.display = 'block';
+    prevWrap.innerHTML = '';
+    prevWrap.classList.add('post-preview-floating');
+    
+    if(file.type.startsWith('image/')) {
+      prevWrap.innerHTML = `<img src="${pfData}" style="width:100%; border-radius:12px; margin-top:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);">`;
+    } else if(file.type.startsWith('video/')) {
+      prevWrap.innerHTML = `<video src="${pfData}" controls style="width:100%; border-radius:12px; margin-top:10px;"></video>`;
+    } else if(file.type.startsWith('audio/')) {
+      prevWrap.innerHTML = `<div class="audio-prev">🎵 ${file.name} (Ready to post)</div>`;
       setTimeout(()=>{ try{ aiGenerateCaption(true); }catch(e){} }, 300);
     }
+    let startX = null;
+    prevWrap.onpointerdown = e => { startX = e.clientX; };
+    prevWrap.onpointermove = e => { if(startX !== null && e.clientX - startX > 60) prevWrap.classList.add('floating'); };
+    prevWrap.onpointerup = prevWrap.onpointercancel = () => { startX = null; setTimeout(()=>prevWrap.classList.remove('floating'), 220); };
   };
-  r.readAsDataURL(f);
+  reader.readAsDataURL(file);
 }
 function checkCopyright(text) { let has=COPYRIGHT_KEYWORDS.some(k=>text.toLowerCase().includes(k)); G('copyrightNotice').style.display=has?'block':'none'; }
 
@@ -8329,17 +8433,13 @@ function startAudioCallBtn(){ if(currentChatId){ startCall(currentChatId,'audio'
 // ── Startup & Lifecycle ───────────────────────────────
 window.addEventListener('load', async () => {
   try {
-    initData();      // 1. Initialize empty structures
-    await loadData(); // 2. Load from LocalStorage/IndexedDB
-    initData();      // 3. Ensure integrity after load
-    loadSession();   // 4. Restore current user session
-    syncCU();        // 5. Sync current user object
+    if(typeof initData === 'function') initData();
+    if(typeof loadData === 'function') await loadData();
+    if(typeof loadSession === 'function') loadSession();
+    if(typeof syncCU === 'function') syncCU();
     
-    // Apply theme correctly
     let savedTheme = localStorage.getItem(STORAGE_KEY+'theme') || 'dark';
     if(typeof applyTheme === 'function') applyTheme(savedTheme);
-    
-    if(typeof initSocket === 'function') initSocket();
     
     if(CU && D.users[CU.id]) { 
       if(G('authWrap')) G('authWrap').style.display = 'none';
@@ -8347,17 +8447,12 @@ window.addEventListener('load', async () => {
       if(G('fab')) G('fab').style.display = 'flex';
       syncUI(); 
       nav('feed'); 
-      if(typeof startBanner === 'function') startBanner(); 
-      if(typeof scheduleInts === 'function') scheduleInts(); 
-      if(typeof scheduleReward === 'function') scheduleReward(); 
-      if(typeof scheduleAutoAd === 'function') scheduleAutoAd(); 
-      if(typeof checkAutoDeleteOnLoad === 'function') checkAutoDeleteOnLoad(); 
     } else { 
       if(G('authWrap')) G('authWrap').style.display = 'flex';
       if(typeof authTab === 'function') authTab('login');
     }
   } catch (err) {
-    console.error('Critical Startup Error:', err);
+    console.error('Startup Error:', err);
   }
 });
 
