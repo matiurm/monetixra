@@ -2,7 +2,7 @@
 //  Monetixra — Enhanced Service Worker (PWA)
 //  Offline support + Push Notifications + Background Sync
 // ============================================================
-const CACHE_NAME = 'monetixra-v3';
+const CACHE_NAME = 'monetixra-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -51,7 +51,7 @@ self.addEventListener('fetch', e => {
   // Navigation: network-first, fallback to cached index.html
   if (e.request.mode === 'navigate') {
     return e.respondWith(
-      fetch(e.request).catch(() => caches.match('/index.html'))
+      fetch(e.request, { cache: 'no-store' }).catch(() => caches.match('/index.html'))
     );
   }
 

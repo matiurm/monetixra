@@ -91,18 +91,9 @@ CREATE TABLE IF NOT EXISTS public.notifications (
   PRIMARY KEY (id)
 );
 
--- Storage bucket for media
-INSERT INTO storage.buckets (id, name, public) 
-VALUES ('media', 'media', true)
-ON CONFLICT (id) DO NOTHING;
-
--- Storage policy (public read)
-CREATE POLICY "Public Access" ON storage.objects
-  FOR SELECT USING (bucket_id = 'media');
-
--- Storage policy (authenticated upload)
-CREATE POLICY "Authenticated Upload" ON storage.objects
-  FOR INSERT TO authenticated USING (bucket_id = 'media');
+-- Storage bucket and policies for permanent media
+-- Use the complete, current setup from supabase_storage_setup.sql.
+-- It creates the public `media` bucket and allows the app's anon-key upload flow.
 
 -- Enable RLS
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;

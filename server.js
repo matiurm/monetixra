@@ -100,6 +100,24 @@ app.use('/api/ai/', aiLimiter);
 app.use('/api/payment/', payLimiter);
 
 app.use(express.static(path.join(__dirname,'public'),{maxAge:'1d'}));
+app.use('/js', express.static(path.join(__dirname,'js'),{maxAge:'1d'}));
+
+function sendRootFile(res, fileName, contentType) {
+  const fs = require('fs');
+  const rootFile = path.join(__dirname, fileName);
+  const publicFile = path.join(__dirname, 'public', fileName);
+  const file = fs.existsSync(rootFile) ? rootFile : publicFile;
+  if (contentType) res.type(contentType);
+  res.sendFile(file, err => {
+    if (err) res.status(404).send(`${fileName} not found`);
+  });
+}
+
+app.get(['/','/index.html'], (_, res) => sendRootFile(res, 'index.html', 'html'));
+app.get('/manifest.json', (_, res) => sendRootFile(res, 'manifest.json', 'application/manifest+json'));
+app.get('/sw.js', (_, res) => sendRootFile(res, 'sw.js', 'application/javascript'));
+app.get('/ads.txt', (_, res) => sendRootFile(res, 'ads.txt', 'text/plain'));
+app.get('/app-ads.txt', (_, res) => sendRootFile(res, 'app-ads.txt', 'text/plain'));
 
 // ── State ──────────────────────────────────────────────────────
 const onlineUsers  = new Map();
@@ -917,8 +935,7 @@ app.post('/api/otp/send', async(req,res)=>{
 
 // SPA fallback
 app.get('*',(_,res)=>{
-  const p=path.join(__dirname,'public','index.html');
-  res.sendFile(p, err=>{if(err) res.status(404).send('index.html not found in /public');});
+  sendRootFile(res, 'index.html', 'html');
 });
 
 // ─────────────────────────────────────────────────────────────

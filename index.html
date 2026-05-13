@@ -3289,6 +3289,7 @@ const ADMIN_CUT = 0.10;
 const PTS_PER_USD = 1000;
 const MIN_WITHDRAW = 50000;
 const STORAGE_KEY = 'mxt_';
+const STORAGE_VERSION = '2026-05-13-persistent-media-v1';
 const MLM_LEVELS = [{ level: 1, commission: 0.10, name: 'Level 1' },{ level: 2, commission: 0.05, name: 'Level 2' },{ level: 3, commission: 0.03, name: 'Level 3' },{ level: 4, commission: 0.02, name: 'Level 4' },{ level: 5, commission: 0.01, name: 'Level 5' },{ level: 6, commission: 0.01, name: 'Level 6' },{ level: 7, commission: 0.01, name: 'Level 7' },{ level: 8, commission: 0.01, name: 'Level 8' },{ level: 9, commission: 0.01, name: 'Level 9' },{ level: 10, commission: 0.01, name: 'Level 10' }];
 const LANGUAGES = { en: { name: 'English', flag: '🇬🇧' }, bn: { name: 'Bengali', flag: '🇧🇩' }, hi: { name: 'Hindi', flag: '🇮🇳' }, es: { name: 'Spanish', flag: '🇪🇸' }, fr: { name: 'French', flag: '🇫🇷' }, de: { name: 'German', flag: '🇩🇪' }, zh: { name: 'Chinese', flag: '🇨🇳' }, ja: { name: 'Japanese', flag: '🇯🇵' }, ar: { name: 'Arabic', flag: '🇸🇦' }, ru: { name: 'Russian', flag: '🇷🇺' }, pt: { name: 'Portuguese', flag: '🇵🇹' } };
 let D = { users: {}, posts: [], txs: [], notifs: [], chats: {}, stories: [], groups: [], marketplace: [], nfts: [], apps: [] };
@@ -3480,9 +3481,8 @@ const MediaDB = {
 MediaDB.init().catch(e => console.warn('MediaDB init failed:', e));
 
 function shrinkStoragePayload(lite) {
-  if(lite.posts && lite.posts.length > 50) {
-    lite.posts = lite.posts.slice(-50);
-  }
+  // Keep every post and point transaction metadata. Media is moved to IndexedDB
+  // before this fallback runs, so app refreshes/updates should not erase content.
   if(lite.chats && typeof lite.chats === 'object') {
     Object.keys(lite.chats).forEach(room => {
       if(Array.isArray(lite.chats[room]) && lite.chats[room].length > 100) {
@@ -3545,7 +3545,19 @@ async function saveData() {
     } catch (qe) {
       console.warn('LocalStorage Quota Exceeded. Trimming storage payload...');
       lite = shrinkStoragePayload(lite);
-      localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
+      try {
+        localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
+      } catch (qe2) {
+        console.warn('LocalStorage still full. Saving compact metadata without inline media...');
+        for (let pp of (lite.posts||[])) {
+          if (pp.file && pp.file.startsWith && pp.file.startsWith('data:')) {
+            const key = 'post_' + pp.id;
+            try { await MediaDB.save(key, pp.file); pp.file = 'db://' + key; pp.fileInDB = true; }
+            catch(err) { console.warn('Compact media save failed for', key, err); }
+          }
+        }
+        localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
+      }
     }
   } catch (e) { console.warn('saveData error:', e); }
 }
@@ -3580,7 +3592,7 @@ async function loadData() {
             p.fileInDB = false; // Reset flag since file is now restored
           } else {
             console.warn('Failed to restore media for post:', p.id);
-            p.file = null; // Fallback if media not found
+            p.fileMissing = true;
           }
         }
       }
@@ -3590,14 +3602,14 @@ async function loadData() {
         if(u.avatar && u.avatar.startsWith('db://')) {
           const dbKey = u.avatar.replace('db://', '');
           const realData = await MediaDB.get(dbKey);
-          if(realData) {
-            u.avatar = realData;
-            u.avatarInDB = false;
-          } else {
-            console.warn('Failed to restore avatar for user:', u.id);
-            u.avatar = null;
-          }
+        if(realData) {
+          u.avatar = realData;
+          u.avatarInDB = false;
+        } else {
+          console.warn('Failed to restore avatar for user:', u.id);
+          u.avatarMissing = true;
         }
+      }
       }
       
       // Save the restored data to ensure consistency
@@ -7751,8 +7763,7 @@ async function uploadToCloudinary(file, onProgress) {
       formData.append('api_key', auth.apiKey);
       formData.append('timestamp', auth.timestamp);
       formData.append('signature', auth.signature);
-      if (auth.folder) formData.append('folder', auth.folder);
-      if (CLOUDINARY_UPLOAD_PRESET) formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+      if (auth.folder) formData.set('folder', auth.folder);
     } else if (CLOUDINARY_UPLOAD_PRESET) {
       formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
     }
@@ -7846,6 +7857,7 @@ async function uploadToSupabase(dataOrFile, mime, bucket='media') {
     const r = await fetch(`${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`, {
       method: 'PUT',
       headers: {
+        'apikey': SUPABASE_KEY,
         'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Content-Type': mime,
         'x-upsert': 'true'
@@ -7898,6 +7910,11 @@ async function persistMediaToSupabase() {
       }
     });
     if (uploadResult?.url) {
+      if (String(uploadResult.url).startsWith('indexeddb://')) {
+        // Keep the original dataURL for the post; saveData() will persist it in
+        // MonetixraMedia IndexedDB and store a restorable db:// reference.
+        return;
+      }
       pfData = uploadResult.url;
       pfMime = uploadResult.type || pfMime;
       pfName = uploadResult.name || pfName;

@@ -25,6 +25,13 @@
   status = 200
   force = false
 
+# API proxy configuration (if using backend)
+[[redirects]]
+  from = "/api/*"
+  to = "https://monetixra-backend.onrender.com/api/:splat"
+  status = 200
+  force = true
+
 # Redirect rules for SPA (Single Page Application)
 [[redirects]]
   from = "/*"
@@ -63,13 +70,6 @@
   for = "*.{png,jpg,jpeg,gif,svg,webp,ico}"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
-
-# API proxy configuration (if using backend)
-[[redirects]]
-  from = "/api/*"
-  to = "https://your-backend.onrender.com/api/:splat"
-  status = 200
-  force = true
 
 # Compression
 [build.processing]
