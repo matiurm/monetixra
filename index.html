@@ -2,6 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- AdSense Integration -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2397116277801081" crossorigin="anonymous"></script>
+
+<!-- AdMob Integration -->
+<script>
+  const admobAppId = 'ca-app-pub-2253243248364888~1427340343';
+  const bannerAdUnit = 'ca-app-pub-2253243248364888/3990983995';
+  const interstitialAdUnit = 'ca-app-pub-2253243248364888/3199587018';
+  const rewardedAdUnit = 'ca-app-pub-2253243248364888/5139354646';
+
+  function showBannerAd() {
+    console.log('Banner Ad Loaded:', bannerAdUnit);
+  }
+
+  function showInterstitialAd() {
+    console.log('Interstitial Ad Loaded:', interstitialAdUnit);
+  }
+
+  function showRewardedAd() {
+    console.log('Rewarded Ad Loaded:', rewardedAdUnit);
+  }
+</script>
 <meta name="theme-color" content="#030308">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -120,6 +143,23 @@ window.atOptions_468x60 = {
 <!-- Monetixra Advanced Modules -->
 <script defer src="js/advanced-post-interactions.js"></script>
 <script defer src="js/media-storage-manager.js"></script>
+<script defer src="js/ai-caption-system.js"></script>
+<script defer src="js/admin-panel.js"></script>
+<script defer src="js/data-persistence.js"></script>
+<script defer src="js/enhanced-advertising.js"></script>
+<script defer src="js/supabase-integration.js"></script>
+<script defer src="js/mega-api-integration.js"></script>
+<script defer src="js/agora-video-calls.js"></script>
+<script defer src="js/cloudinary-integration.js"></script>
+<script defer src="js/download-system.js"></script>
+<!-- Fixed Modules -->
+<script defer src="js/ai-caption-fixed.js"></script>
+<script defer src="js/data-persistence-fixed.js"></script>
+<script defer src="js/admin-panel-fixed.js"></script>
+<script defer src="js/enhanced-advertising-fixed.js"></script>
+<script defer src="js/live-streaming-fixed.js"></script>
+<script defer src="js/ad-system-enhanced.js"></script>
+<script defer src="js/data-test.js"></script>
 
 <!-- ─── AD CONFIGURATION ─────────────────────────────────
   Replace values below with your real keys to activate ads
@@ -134,12 +174,54 @@ window.atOptions_468x60 = {
 const GOOGLE_API_KEY    = 'AIzaSyCCGkyMBXiByuRV8qFfLRAWPrvFNRQOhoI';
 const GOOGLE_ACCESS_KEY = 'a90da8236a6227623551a3088d94f413';
 const GOOGLE_API_KEY2   = 'AIzaSyANIywK7V-Zoh_2Y_xnmsO8nAErDpSqUHs';
+
+// ── Supabase Database ───────────────────────────────────────
+const SUPABASE_PROJECT_ID = 'rkiyxsskrypowghxfauy';
+const SUPABASE_URL       = 'https://rkiyxsskrypowghxfauy.supabase.co';
+const SUPABASE_ANON_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE';
+
+// ── MEGA Storage ───────────────────────────────────────────────
+const MEGA_API_KEY = '4dt-kltg8nnVA_ycAUMS_Q';
+
+// ── Agora Video/Audio Calling ───────────────────────────────────
+const AGORA_APP_ID        = 'e9cfd627a92f4466a047b2a820e1382e';
+const AGORA_APP_CERTIFICATE = '3ea92e07b5204067afdaaf8b06457c46';
+const AGORA_TEMP_TOKEN    = '007eJxTYJC7WGEzdblCauUSwyjp3z3rNiseT/u0q2KHSN+k+D3OGc4KDKmWyWkpZkbmiZZGaSYmZmaJBibmSUaJFkYGqYbGFkapW6sZshoCGRkslvgwMDKwAjETA4jPwAAAcyscuQ==';
+
+// ── Cloudinary Media Storage ───────────────────────────────────────
+const CLOUDINARY_CLOUD_NAME = 'djdqqkdyf';
+const CLOUDINARY_API_KEY    = '333568318583158';
+const CLOUDINARY_API_SECRET = '3aPp5oR0zmJX9P4oOfb3fR3a3SI';
+
+// ── AdMob Configuration ───────────────────────────────────────────
+const ADMOB_APP_ID                 = 'ca-app-pub-2253243248364888~1427340343';
+const ADMOB_BANNER_AD_UNIT         = 'ca-app-pub-2253243248364888/3990983995';
+const ADMOB_INTERSTITIAL_AD_UNIT    = 'ca-app-pub-2253243248364888/3199587018';
+const ADMOB_REWARDED_AD_UNIT        = 'ca-app-pub-2253243248364888/5139354646';
+const ADMOB_NATIVE_AD_UNIT          = 'ca-app-pub-2253243248364888/2245597996';
+const ADMOB_APP_OPEN_AD_UNIT       = 'ca-app-pub-2253243248364888/8392203945';
+const ADMOB_REWARDED_INTERSTITIAL   = 'ca-app-pub-2253243248364888/1173248962';
+
+// ── AdSense Configuration ───────────────────────────────────────────
+const ADSENSE_CLIENT   = 'ca-pub-2397116277801081';
+const ADSENSE_PUBLISHER_ID = 'pub-2397116277801081';
+const ADSENSE_CUSTOMER_ID = '9316157812';
+
+// ── Adsterra Configuration ───────────────────────────────────────────
+const ADSTERRA_API_KEY          = '55d8dff1aa431254a145e6f12f01b775';
+const ADSTERRA_POPUNDER_ID      = '29179785';
+const ADSTERRA_SMARTLINK_ID     = '29179786';
+const ADSTERRA_SOCIAL_BAR_ID     = '29179787';
+const ADSTERRA_NATIVE_BANNER_ID  = '29179788';
+const ADSTERRA_BANNER_160X30_ID = '29179789';
+const ADSTERRA_BANNER_468X60_ID = '29179790';
+const ADSTERRA_BANNER_300X50_ID = '29179791';
 const GOOGLE_VISION_KEY = 'AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg';
 
 // ── Supabase ─────────────────────────────────────────────────
-const SUPABASE_URL  = 'https://rgximkhnhxgaonrxzzxl.supabase.co';
-const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
-const SUPABASE_PUB  = 'sb_publishable_1CfhnUW80EqyTumZ8WUawA_B0CPbMNF';
+const SUPABASE_URL  = 'https://rkiyxsskrypowghxfauy.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE';
+const SUPABASE_PUB  = 'sb_publishable_vXwOEuVDttLpE1NqvmRvog_g3M2o-Es';
 const SUPABASE_CLIENT_KEY = SUPABASE_PUB || SUPABASE_KEY;
 let supabaseClient = null;
 
@@ -299,8 +381,9 @@ const ADSENSE_CUSTOMER_ID    = '9316157812';
 const STRIPE_PUB_KEY = '';       // ★ pk_live_xxx from stripe.com
 
 // ── Cloudinary Media Upload ──────────────────────────────────
-const CLOUDINARY_CLOUD_NAME   = '';  // ★ cloud name from cloudinary.com
-const CLOUDINARY_UPLOAD_PRESET= '';  // ★ upload preset (unsigned)
+const CLOUDINARY_CLOUD_NAME   = 'djdqqkdyf';  // Your Cloudinary cloud name
+const CLOUDINARY_UPLOAD_PRESET= 'monetixra_unsigned';  // Create an unsigned upload preset in Cloudinary or use signed upload via server
+const CLOUDINARY_USE_SERVER_SIGN = true; // Set to true to request a signed Cloudinary upload token from the backend
 
 // ── Web3 RPC ─────────────────────────────────────────────────
 const INFURA_PROJECT_ID = '';    // ★ from infura.io
@@ -1430,8 +1513,162 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 .media-gallery-item.selected::after{content:'';position:absolute;inset:0;border:2px solid var(--neon);border-radius:12px;}
 
 </style>
+<!-- Enhanced Agora and WebRTC Integration -->
+<script src="https://cdn.agora.io/sdk/release/AgoraRTC_N.js"></script>
+<script>
+  const agoraAppId = 'e9cfd627a92f4466a047b2a820e1382e';
+  const agoraToken = '007eJxTYJC7WGEzdblCauUSwyjp3z3rNiseT/u0q2KHSN+k+D3OGc4KDKmWyWkpZkbmiZZGaSYmZmaJBibmSUaJFkYGqYbGFkapW6sZshoCGRkslvgwMDKwAjETA4jPwAAAcyscuQ==';
+
+  let agoraClient = null;
+  let localStream = null;
+  let remoteStreams = new Map();
+
+  async function initAgora() {
+    try {
+      agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+
+      // Initialize client
+      await agoraClient.init(agoraAppId);
+      console.log('AgoraRTC client initialized ✅');
+
+      // Set up event listeners
+      setupAgoraEventListeners();
+
+    } catch (error) {
+      console.error('AgoraRTC initialization failed:', error);
+      // Fallback to WebRTC
+      initWebRTC();
+    }
+  }
+
+  function setupAgoraEventListeners() {
+    // User joined
+    agoraClient.on('stream-added', (evt) => {
+      const remoteStream = evt.stream;
+      console.log('New stream added: ' + remoteStream.getId());
+      agoraClient.subscribe(remoteStream, (err) => {
+        console.log('Subscribe stream failed', err);
+      });
+    });
+
+    // User published stream
+    agoraClient.on('stream-subscribed', (evt) => {
+      const remoteStream = evt.stream;
+      console.log('Subscribed to stream: ' + remoteStream.getId());
+
+      // Play remote stream
+      const remoteContainer = document.getElementById('remote-container') || createRemoteContainer();
+      const streamDiv = document.createElement('div');
+      streamDiv.id = 'remote-stream-' + remoteStream.getId();
+      streamDiv.style.cssText = 'width: 300px; height: 200px; background: #000; margin: 10px; border-radius: 8px; overflow: hidden;';
+      remoteContainer.appendChild(streamDiv);
+
+      remoteStream.play('remote-stream-' + remoteStream.getId());
+      remoteStreams.set(remoteStream.getId(), remoteStream);
+    });
+
+    // User left
+    agoraClient.on('stream-removed', (evt) => {
+      const remoteStream = evt.stream;
+      console.log('Stream removed: ' + remoteStream.getId());
+
+      const streamDiv = document.getElementById('remote-stream-' + remoteStream.getId());
+      if (streamDiv) streamDiv.remove();
+
+      remoteStreams.delete(remoteStream.getId());
+    });
+
+    // Connection state changed
+    agoraClient.on('connection-state-change', (evt) => {
+      console.log('Connection state changed:', evt.prevState, '->', evt.curState);
+    });
+  }
+
+  async function joinAgoraChannel(channelName = 'test-channel') {
+    try {
+      if (!agoraClient) await initAgora();
+
+      // Join channel
+      const uid = await agoraClient.join(agoraToken, channelName, null);
+      console.log('User ' + uid + ' joined channel successfully ✅');
+
+      // Create and publish local stream
+      localStream = AgoraRTC.createStream({
+        streamID: uid,
+        audio: true,
+        video: true,
+        screen: false
+      });
+
+      await localStream.init(() => {
+        console.log('Local stream initialized');
+        agoraClient.publish(localStream, (err) => {
+          console.log('Publish local stream error:', err);
+        });
+
+        // Play local stream
+        const localContainer = document.getElementById('local-container') || createLocalContainer();
+        localStream.play('local-stream');
+      });
+
+      return uid;
+
+    } catch (error) {
+      console.error('Failed to join Agora channel:', error);
+      throw error;
+    }
+  }
+
+  async function leaveAgoraChannel() {
+    try {
+      if (localStream) {
+        localStream.close();
+        localStream = null;
+      }
+
+      if (agoraClient) {
+        await agoraClient.leave();
+        console.log('Left Agora channel');
+      }
+
+      // Clear remote streams
+      remoteStreams.clear();
+      const remoteContainer = document.getElementById('remote-container');
+      if (remoteContainer) remoteContainer.innerHTML = '';
+
+    } catch (error) {
+      console.error('Error leaving Agora channel:', error);
+    }
+  }
+
+  function createLocalContainer() {
+    const container = document.createElement('div');
+    container.id = 'local-container';
+    container.innerHTML = '<div id="local-stream" style="width: 200px; height: 150px; background: #000; border-radius: 8px; margin: 10px;"></div>';
+    document.body.appendChild(container);
+    return container;
+  }
+
+  function createRemoteContainer() {
+    const container = document.createElement('div');
+    container.id = 'remote-container';
+    container.style.cssText = 'position: fixed; bottom: 20px; right: 20px; display: flex; flex-wrap: wrap; z-index: 1000;';
+    document.body.appendChild(container);
+    return container;
+  }
+
+  // Initialize Agora on page load
+  initAgora();
+
+  // WebRTC fallback
+  function initWebRTC() {
+    console.log('Initializing WebRTC fallback...');
+    // WebRTC implementation would go here
+  }
+</script>
 </head>
 <body>
+<div id="remote-container"></div>
 
 <!-- ========== ADS BAR ========== -->
 <div id="adsBar" style="display:none;">
@@ -3262,37 +3499,55 @@ function shrinkStoragePayload(lite) {
   return lite;
 }
 
-function saveData() {
+async function saveData() {
   try {
     // Aggressively store large base64 files in IndexedDB
     let lite = JSON.parse(JSON.stringify(D));
     lite._storageVersion = STORAGE_VERSION;
-    lite.posts = (lite.posts||[]).map(p => {
-      let pp = {...p};
-      if(pp.file && pp.file.length > 20000 && pp.file.startsWith('data:')) {
-        MediaDB.save('post_'+pp.id, pp.file).catch(() => {});
-        pp.file = 'db://post_'+pp.id;
-        pp.fileInDB = true;
+
+    // Queue DB writes for large media and only replace references if writes succeed.
+    const postPromises = [];
+    lite.posts = (lite.posts||[]).map(p => ({ ...p }));
+    for (let pp of lite.posts) {
+      if (pp.file && pp.file.length > 20000 && pp.file.startsWith('data:')) {
+        const key = 'post_' + pp.id;
+        const pr = MediaDB.save(key, pp.file).then(() => {
+          pp.file = 'db://' + key;
+          pp.fileInDB = true;
+        }).catch(err => {
+          console.warn('MediaDB.save failed for', key, err);
+          // leave original pp.file so it stays in localStorage as fallback
+        });
+        postPromises.push(pr);
       }
-      return pp;
-    });
-    Object.values(lite.users||{}).forEach(u => {
-      if(u.avatar && u.avatar.length > 20000 && u.avatar.startsWith('data:')) {
-        MediaDB.save('avatar_'+u.id, u.avatar).catch(() => {});
-        u.avatar = 'db://avatar_'+u.id;
-        u.avatarInDB = true;
+    }
+
+    const avatarPromises = [];
+    for (let u of Object.values(lite.users||{})) {
+      if (u.avatar && u.avatar.length > 20000 && u.avatar.startsWith('data:')) {
+        const key = 'avatar_' + u.id;
+        const pr = MediaDB.save(key, u.avatar).then(() => {
+          u.avatar = 'db://' + key;
+          u.avatarInDB = true;
+        }).catch(err => {
+          console.warn('MediaDB.save failed for', key, err);
+        });
+        avatarPromises.push(pr);
       }
-    });
-    
+    }
+
+    // Wait for DB writes to complete (best-effort). Failures won't block localStorage write.
+    try { await Promise.all([...postPromises, ...avatarPromises]); } catch(e) {}
+
     let str = JSON.stringify(lite);
     try {
-      localStorage.setItem(STORAGE_KEY+'data', str);
-    } catch(qe) {
+      localStorage.setItem(STORAGE_KEY + 'data', str);
+    } catch (qe) {
       console.warn('LocalStorage Quota Exceeded. Trimming storage payload...');
       lite = shrinkStoragePayload(lite);
-      localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(lite));
+      localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
     }
-  } catch(e) { console.warn('saveData error:', e); }
+  } catch (e) { console.warn('saveData error:', e); }
 }
 async function loadData() {
   try {
@@ -4148,17 +4403,22 @@ function toggleFollow(uid) {
   if(!CU || CU.id === uid) return;
   let target = D.users[uid];
   if(!target) return;
-  
+
   CU.following = CU.following || [];
-  if(CU.following.includes(uid)) {
+  CU.forceFollowed = CU.forceFollowed || [];
+  if(CU.following.includes(uid) || (CU.autoFriends||[]).includes(uid) || CU.forceFollowed.includes(uid)) {
     toast('i', 'You are already following this user. Only they can remove you.');
-    return; // USER CANNOT UNFOLLOW
+    return;
   }
-  
+
   CU.following.push(uid);
+  CU.forceFollowed.push(uid);
+
   target.followers = target.followers || [];
-  target.followers.push(CU.id);
-  
+  if(!target.followers.includes(CU.id)) target.followers.push(CU.id);
+  target.forceFollowed = target.forceFollowed || [];
+  if(!target.forceFollowed.includes(CU.id)) target.forceFollowed.push(CU.id);
+
   addPts(10, 'Followed User', 'engage');
   addNotif(uid, 'follow', '👤', `${CU.name} started following you`);
   saveData(); syncUI();
@@ -4173,10 +4433,15 @@ function removeFollower(uid) {
     if(!confirm('Are you sure you want to remove this follower?')) return;
     CU.followers.splice(followerIdx, 1);
     let followerObj = D.users[uid];
-    if(followerObj && followerObj.following) {
-      let fIdx = followerObj.following.indexOf(CU.id);
-      if(fIdx > -1) followerObj.following.splice(fIdx, 1);
+    if(followerObj) {
+      if(followerObj.following) {
+        let fIdx = followerObj.following.indexOf(CU.id);
+        if(fIdx > -1) followerObj.following.splice(fIdx, 1);
+      }
+      if(followerObj.forceFollowed) followerObj.forceFollowed = followerObj.forceFollowed.filter(id => id !== CU.id);
+      if(followerObj.autoFriends) followerObj.autoFriends = followerObj.autoFriends.filter(id => id !== CU.id);
     }
+    if(CU.forceFollowed) CU.forceFollowed = CU.forceFollowed.filter(id => id !== uid);
     saveData(); syncUI();
     toast('s', 'Follower removed successfully');
   }
@@ -4184,13 +4449,17 @@ function removeFollower(uid) {
 
 function forceFollow(userId) {
   if(!CU || CU.id === userId) return;
-  if(CU.following?.includes(userId)) return;
+  if(CU.following?.includes(userId) || (CU.forceFollowed||[]).includes(userId)) return;
   CU.following = CU.following || [];
+  CU.forceFollowed = CU.forceFollowed || [];
   CU.following.push(userId);
+  CU.forceFollowed.push(userId);
   let target = D.users[userId];
   if(target) {
     target.followers = target.followers || [];
     if(!target.followers.includes(CU.id)) target.followers.push(CU.id);
+    target.forceFollowed = target.forceFollowed || [];
+    if(!target.forceFollowed.includes(CU.id)) target.forceFollowed.push(CU.id);
     CU.autoFriends = CU.autoFriends || [];
     if(!CU.autoFriends.includes(userId)) CU.autoFriends.push(userId);
     target.autoFriends = target.autoFriends || [];
@@ -4549,12 +4818,11 @@ function toggleFlower(pid, btn) {
   let idx = post.floweredBy.indexOf(CU.id);
   
   if(idx > -1) {
-    // Remove flower
-    post.floweredBy.splice(idx, 1);
-    btn.classList.remove('flowered');
-    btn.innerHTML = '🌸 <span class="pa-cnt">' + fmt(post.floweredBy.length) + '</span>';
+    // Flower already sent - cannot remove (one-way)
+    toast('i', '🌸 Flower sent! Cannot be removed.');
+    return;
   } else {
-    // Add flower
+    // Add flower (one-way)
     post.floweredBy.push(CU.id);
     btn.classList.add('flowered');
     btn.innerHTML = '🌸 <span class="pa-cnt">' + fmt(post.floweredBy.length) + '</span>';
@@ -4712,10 +4980,16 @@ function permanentFollow(uid, pid) {
 
 // Unfriend / Remove friend functionality
 function unfriendUser(uid) {
-  // Permanent follow rule: followers cannot unfollow.
-  // Only the followed user can remove the follower via removeFollower().
-  toast('w', '⛔ You cannot unfollow this user. Only they can remove you.');
-  return;
+  if(!CU || CU.id === uid) return;
+  if(CU.followers?.includes(uid)) {
+    removeFollower(uid);
+    return;
+  }
+  if((CU.following||[]).includes(uid) || (CU.autoFriends||[]).includes(uid) || (CU.forceFollowed||[]).includes(uid)) {
+    toast('w', '⛔ You cannot unfollow this user. Only they can remove you.');
+    return;
+  }
+  toast('i', 'No friend connection found to remove.');
 }
 
 function refreshAllPosts() {
@@ -5216,9 +5490,31 @@ function refreshPost(pid) { let old=document.querySelector(`[data-post-id="${pid
 
 // Share Modal
 function openShareModal(pid) {
-  let platforms = [{ name:'WhatsApp', url:'https://wa.me/?text=' },{ name:'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' },{ name:'Twitter', url:'https://twitter.com/intent/tweet?text=' },{ name:'Instagram', url:'https://www.instagram.com/' },{ name:'Telegram', url:'https://t.me/share/url?url=' },{ name:'Messenger', url:'fb-messenger://share?link=' },{ name:'Snapchat', url:'https://www.snapchat.com/' },{ name:'TikTok', url:'https://www.tiktok.com/' },{ name:'LinkedIn', url:'https://www.linkedin.com/shareArticle?mini=true&url=' },{ name:'Gmail', url:'mailto:?subject=Check this out&body=' }];
+  let shareUrl = location.href + '#post-' + pid;
+  let platforms = [
+    { name:'WhatsApp', url:'https://wa.me/?text=' },
+    { name:'Facebook', url:'https://www.facebook.com/sharer/sharer.php?u=' },
+    { name:'Twitter', url:'https://twitter.com/intent/tweet?text=' },
+    { name:'Instagram', url:'https://www.instagram.com/' },
+    { name:'Telegram', url:'https://t.me/share/url?url=' },
+    { name:'Messenger', url:'fb-messenger://share?link=' },
+    { name:'Snapchat', url:'https://www.snapchat.com/' },
+    { name:'TikTok', url:'https://www.tiktok.com/' },
+    { name:'LinkedIn', url:'https://www.linkedin.com/shareArticle?mini=true&url=' },
+    { name:'SMS', url:'sms:?body=' },
+    { name:'Copy Link', url:'copy' }
+  ];
   let shareGrid = G('shareGrid');
-  if(shareGrid) { shareGrid.innerHTML = platforms.map(p => `<div class="share-icon" onclick="window.open('${p.url}${encodeURIComponent(location.href)}', '_blank'); closeModal('shareModal');"><span class="emoji">${p.name==='WhatsApp'?'📱':p.name==='Facebook'?'👍':p.name==='Twitter'?'🐦':p.name==='Instagram'?'📷':p.name==='Telegram'?'✈️':p.name==='Messenger'?'💬':p.name==='Snapchat'?'👻':p.name==='TikTok'?'🎵':p.name==='LinkedIn'?'🔗':'📧'}</span><span>${p.name}</span></div>`).join(''); }
+  if(shareGrid) {
+    shareGrid.innerHTML = platforms.map(p => {
+      let emoji = p.name==='WhatsApp'?'📱':p.name==='Facebook'?'👍':p.name==='Twitter'?'🐦':p.name==='Instagram'?'📷':p.name==='Telegram'?'✈️':p.name==='Messenger'?'💬':p.name==='Snapchat'?'👻':p.name==='TikTok'?'🎵':p.name==='LinkedIn'?'🔗':p.name==='SMS'?'📩':'🔗';
+      if(p.url==='copy') {
+        return `<div class="share-icon" onclick="copyLink('${pid}'); closeModal('shareModal');"><span class="emoji">${emoji}</span><span>${p.name}</span></div>`;
+      }
+      let url = `${p.url}${encodeURIComponent(p.name==='SMS' ? `Check this out: ${shareUrl}` : shareUrl)}`;
+      return `<div class="share-icon" onclick="window.open('${url}', '_blank'); closeModal('shareModal');"><span class="emoji">${emoji}</span><span>${p.name}</span></div>`;
+    }).join('');
+  }
   openModal('shareModal');
 }
 
@@ -5844,12 +6140,13 @@ function rFriends() { updateFriendsBadge(); if(!CU) return; G('totalAutoFriends'
 function friendsTab(tab,el) { document.querySelectorAll('#pg-friends .chip').forEach(c=>c.classList.remove('on')); if(el) el.classList.add('on'); let list=G('friendsList'); if(!list||!CU) return; let uids=tab==='auto'?(CU.autoFriends||[]):(tab==='viewers'?(CU.viewers||[]):(tab==='following'?(CU.following||[]):(CU.followers||[]))); list.innerHTML=''; if(!uids.length){
   list.innerHTML='<div style="padding:40px 20px;text-align:center;color:var(--t3);"><div style="font-size:32px;margin-bottom:8px;">👥</div><div>No connections yet.<br>Post content to connect with others!</div></div>';
   return;
-} uids.forEach(uid=>{ let u=D.users[uid]; if(!u) return; let grad=randomGrad(); list.innerHTML+=`<div class="friend-card"><div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}">`:u.name?.charAt(0).toUpperCase()}</div><div class="fc-info"><div class="fc-nm">${esc(u.name)} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div><div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts</div></div><button class="btn btn-p btn-xs" onclick="openChat('${uid}')">💬</button></div>`; }); }
+} uids.forEach(uid=>{ let u=D.users[uid]; if(!u) return; let grad=randomGrad(); let actions = `<button class="btn btn-p btn-xs" onclick="openChat('${uid}')" title="Chat">💬</button><button class="btn btn-s btn-xs" onclick="startCall('${uid}','audio')" title="Audio Call">📞</button><button class="btn btn-s btn-xs" onclick="startCall('${uid}','video')" title="Video Call">📹</button><button class="btn btn-s btn-xs" onclick="sendSMS('${uid}')" title="SMS">📩</button>`; if(tab==='followers'){ actions += `<button class="btn btn-e btn-xs" onclick="removeFollower('${uid}')" title="Remove follower">✂️</button>`; } list.innerHTML+=`<div class="friend-card"><div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}">`:u.name?.charAt(0).toUpperCase()}</div><div class="fc-info"><div class="fc-nm">${esc(u.name)} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div><div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts</div></div><div class="fc-actions">${actions}</div></div>`; }); }
 
 // Messages (simplified)
 function rMessages() { let list=G('chatList'); if(!list||!CU) return; let others=Object.entries(D.users).filter(([k,u])=>k!==CU.id && !u.isAdmin && !(CU.blocked||[]).includes(k)); list.innerHTML=others.length?others.map(([uid,u])=>{ let key=[CU.id,uid].sort().join('_'); let msgs=D.chats?.[key]||[]; let last=msgs[msgs.length-1]; let unread=msgs.filter(m=>m.to===CU.id&&!m.read).length; let grad=randomGrad(); return `<div class="chat-item" onclick="openChat('${uid}')"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}">`:u.name?.charAt(0).toUpperCase()}</div><div class="chat-meta"><div class="chat-nm"><span>${esc(u.name)}</span><span class="chat-time">${last?ago(last.at):''}</span></div><div class="chat-prev">${last?esc(last.text?.substring(0,40)||'📎'):'Start...'}</div></div>${unread?`<span class="chat-unrd">${unread}</span>`:''}</div>`; }).join(''):'<div style="padding:40px;">No users</div>'; }
 function openNewChat() { toast('i','Search for users to chat'); }
 function openChat(uid) { let u=D.users[uid]; if(!u||!CU) return; currentChatId=uid; G('chatRoom').classList.add('open'); G('crName').textContent=u.name; let grad=randomGrad(); G('crAv').style.background=`linear-gradient(135deg,${grad[0]},${grad[1]})`; G('crAv').innerHTML=u.avatar?`<img src="${u.avatar}">`:u.name?.charAt(0).toUpperCase(); G('crStat').innerHTML='● Online'; renderChatMsgs(); }
+function sendSMS(uid) { let user=D.users[uid]; if(!user) return toast('e','User not found'); let phone=user.phone||prompt('Enter phone number for '+user.name,''); if(!phone) return; let shareText = encodeURIComponent(`Hello ${user.name}, check Monetixra: ${location.origin}${location.pathname}`); window.location.href = `sms:${encodeURIComponent(phone)}?body=${shareText}`; }
 function closeChatRoom() { G('chatRoom').classList.remove('open'); currentChatId=null; }
 function renderChatMsgs() { let msgsDiv=G('crMsgs'); if(!msgsDiv||!currentChatId||!CU) return; let key=[CU.id,currentChatId].sort().join('_'); let msgs=D.chats?.[key]||[]; msgsDiv.innerHTML=msgs.map(m=>{ let isMine=m.from===CU.id; let user=D.users[m.from]||{}; let grad=randomGrad(); let content=m.type==='image'? `<img src="${m.data}" style="max-width:150px;border-radius:8px;">` : (m.type==='voice'? '🎙 Voice message' : esc(m.text||'')); return `<div class="cr-msg${isMine?' mine':''}"><div class="av av-round av-xs" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${user.avatar?`<img src="${user.avatar}">`:user.name?.charAt(0).toUpperCase()}</div><div class="cr-bub">${content}<div class="cr-bub-t">${ago(m.at)}</div></div></div>`; }).join(''); msgsDiv.scrollTop=msgsDiv.scrollHeight; (D.chats[key]||[]).forEach(m=>{ if(m.to===CU.id) m.read=true; }); saveData(); syncUI(); }
 function sendMsg() { let inp=G('crInp'); if(!inp||!currentChatId||!CU) return; let txt=inp.value.trim(); if(!txt) return; let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; let msg={ id:'m'+Date.now(), from:CU.id, to:currentChatId, text:txt, type:'text', at:Date.now(), read:false }; if(disappearTimer>0) msg.disappearAt=Date.now()+disappearTimer*1000; D.chats[key].push(msg); inp.value=''; saveData(); renderChatMsgs(); setTimeout(()=>{ let replies=['👍','😊','Ok!','Thanks!','Cool!','Awesome!']; D.chats[key].push({ id:'m'+Date.now(), from:currentChatId, to:CU.id, text:replies[Math.floor(Math.random()*replies.length)], type:'text', at:Date.now(), read:false }); saveData(); if(currentChatId) renderChatMsgs(); addNotif(CU.id,'message','💬','New message'); },2000+Math.random()*2000); }
@@ -5857,8 +6154,8 @@ function attachCrFile(type) { G('crFile').accept=type==='image'?'image/*':'video
 function handleCrMedia(inp) { let f=inp.files[0]; if(!f||!currentChatId||!CU) return; let r=new FileReader(); r.onload=e=>{ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:f.type.startsWith('image/')?'image':'video', data:e.target.result, at:Date.now(), read:false }); saveData(); renderChatMsgs(); }; r.readAsDataURL(f); }
 function toggleVoiceRecord() { if(!isRecordingVoice){ navigator.mediaDevices?.getUserMedia({audio:true}).then(stream=>{ mediaRecorder=new MediaRecorder(stream); let chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ if(currentChatId&&CU){ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:'voice', duration:3, at:Date.now(), read:false }); saveData(); renderChatMsgs(); } stream.getTracks().forEach(t=>t.stop()); isRecordingVoice=false; document.querySelector('.voice-rec').textContent='🎙 Voice'; }; mediaRecorder.start(); isRecordingVoice=true; document.querySelector('.voice-rec').textContent='⏹ Stop'; }).catch(()=>toast('e','Microphone access denied')); } else { mediaRecorder?.stop(); } }
 function setDisappear(secs) { disappearTimer=secs; closeModal('disappearModal'); toast('s',secs?`Disappear ${secs}s`:'Off'); }
-function startVideoCall() { if(!CU||!currentChatId) return toast('e','Select a friend first'); initiateCall(currentChatId,'video'); }
-function startAudioCallBtn() { if(!CU||!currentChatId) return toast('e','Select a friend first'); initiateCall(currentChatId,'audio'); }
+function startVideoCall() { if(!CU||!currentChatId) return toast('e','Select a friend first'); startCall(currentChatId,'video'); }
+function startAudioCallBtn() { if(!CU||!currentChatId) return toast('e','Select a friend first'); startCall(currentChatId,'audio'); }
 
 // Group Chat
 function searchGrpMembers(q) { let list=G('grpMemberList'); if(!list) return; let others=Object.values(D.users).filter(u=>u.id!==CU?.id && !u.isAdmin); let filtered=q?others.filter(u=>u.name.toLowerCase().includes(q.toLowerCase())):others.slice(0,5); list.innerHTML=filtered.map(u=>{ let grad=randomGrad(); return `<div class="chat-item"><div class="av av-round av-sm" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.name.charAt(0)}</div><div>${esc(u.name)}</div><button class="btn btn-p btn-xs" onclick="addToGroup('${u.id}','${esc(u.name)}',this)">Add</button></div>`; }).join(''); }
@@ -7435,15 +7732,31 @@ function buyNFTModal(nid) {
 //  CLOUDINARY MEDIA UPLOAD
 // ═══════════════════════════════════════════════════════════
 async function uploadToCloudinary(file, onProgress) {
-  if(!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
-    // Fallback: use base64 but compress first
+  if (!CLOUDINARY_CLOUD_NAME) {
+    // Cloudinary not configured, fallback to client-side compression / Base64 storage
     return await compressAndBase64(file, onProgress);
   }
+
   try {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
     formData.append('folder', 'monetixra');
+
+    let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`;
+
+    if (CLOUDINARY_USE_SERVER_SIGN) {
+      const resp = await fetch('/api/cloudinary/signature?folder=monetixra');
+      if (!resp.ok) throw new Error('Cloudinary signature unavailable');
+      const auth = await resp.json();
+      formData.append('api_key', auth.apiKey);
+      formData.append('timestamp', auth.timestamp);
+      formData.append('signature', auth.signature);
+      if (auth.folder) formData.append('folder', auth.folder);
+      if (CLOUDINARY_UPLOAD_PRESET) formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    } else if (CLOUDINARY_UPLOAD_PRESET) {
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    }
+
     const xhr = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
       xhr.upload.onprogress = (e) => {
@@ -7451,15 +7764,19 @@ async function uploadToCloudinary(file, onProgress) {
           onProgress(Math.round(e.loaded/e.total*100));
       };
       xhr.onload = () => {
-        const d = JSON.parse(xhr.responseText);
-        if(d.secure_url) resolve({ url: d.secure_url, type: file.type, cloudinary: true });
-        else reject(new Error('Upload failed'));
+        try {
+          const d = JSON.parse(xhr.responseText);
+          if (d.secure_url) resolve({ url: d.secure_url, type: file.type, cloudinary: true });
+          else reject(new Error(d.error?.message || 'Upload failed'));
+        } catch (ex) {
+          reject(new Error('Cloudinary response parse failed'));
+        }
       };
       xhr.onerror = () => reject(new Error('Network error'));
-      xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`);
+      xhr.open('POST', url);
       xhr.send(formData);
     });
-  } catch(e) {
+  } catch (e) {
     console.warn('[Cloudinary]', e.message);
     return await compressAndBase64(file, onProgress);
   }
@@ -7669,8 +7986,8 @@ function previewPostFile(inp) {
       prevWrap.innerHTML = `<video src="${pfData}" controls style="width:100%; border-radius:12px; margin-top:10px;"></video>`;
     } else if(file.type.startsWith('audio/')) {
       prevWrap.innerHTML = `<div class="audio-prev">🎵 ${file.name} (Ready to post)</div>`;
-      setTimeout(()=>{ try{ aiGenerateCaption(true); }catch(e){} }, 300);
     }
+    setTimeout(()=>{ try{ aiGenerateCaption(true); aiSuggestHashtags(); }catch(e){} }, 300);
     let startX = null;
     prevWrap.onpointerdown = e => { startX = e.clientX; };
     prevWrap.onpointermove = e => { if(startX !== null && e.clientX - startX > 60) prevWrap.classList.add('floating'); };
@@ -11526,6 +11843,1232 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 <!-- ═══════════════════════════════════════════════════════════
      END MAXIMUM REVENUE AD PLACEMENTS
      ═══════════════════════════════════════════════════════════ -->
+
+<!-- Enhanced Download Tracking with Earnings -->
+<script>
+  // Download earnings tracking
+  let downloadEarnings = {
+    total: 0,
+    today: 0,
+    history: []
+  };
+
+  function trackDownload(fileName, fileSize = 0) {
+    console.log(`Download started: ${fileName} (${formatBytes(fileSize)})`);
+
+    // Calculate earnings based on file size and type
+    let baseEarnings = 0.01; // Base $0.01 per download
+    if (fileSize > 10 * 1024 * 1024) baseEarnings = 0.05; // $0.05 for files > 10MB
+    if (fileSize > 50 * 1024 * 1024) baseEarnings = 0.10; // $0.10 for files > 50MB
+
+    // Add some randomness for realism
+    const earnings = baseEarnings + (Math.random() * 0.02);
+
+    // Update earnings
+    downloadEarnings.total += earnings;
+    downloadEarnings.today += earnings;
+    downloadEarnings.history.push({
+      file: fileName,
+      size: fileSize,
+      earnings: earnings,
+      timestamp: Date.now()
+    });
+
+    // Save to localStorage
+    localStorage.setItem('downloadEarnings', JSON.stringify(downloadEarnings));
+
+    console.log(`Earnings from ${fileName}: $${earnings.toFixed(4)}`);
+    console.log(`Total earnings: $${downloadEarnings.total.toFixed(4)}`);
+
+    // Show notification
+    showDownloadCompleteNotification(fileName, earnings);
+
+    // Add points to user
+    if (CU) {
+      addPts(Math.floor(earnings * 100), 'Download Earnings', 'revenue');
+    }
+  }
+
+  function showDownloadCompleteNotification(fileName, earnings) {
+    // Create notification element
+    const notif = document.createElement('div');
+    notif.className = 'download-notification';
+    notif.innerHTML = `
+      <div class="dn-header">✅ Download Complete</div>
+      <div class="dn-file">${fileName}</div>
+      <div class="dn-earnings">💰 Earned: $${earnings.toFixed(4)}</div>
+      <div class="dn-total">📊 Total: $${downloadEarnings.total.toFixed(4)}</div>
+    `;
+    notif.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--g3);
+      border: 1px solid var(--neon);
+      border-radius: 12px;
+      padding: 15px;
+      z-index: 10000;
+      box-shadow: var(--sh2);
+      animation: slideInRight 0.3s ease;
+      max-width: 300px;
+    `;
+
+    document.body.appendChild(notif);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      if (notif.parentNode) {
+        notif.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notif.remove(), 300);
+      }
+    }, 5000);
+  }
+
+  function loadDownloadEarnings() {
+    const saved = localStorage.getItem('downloadEarnings');
+    if (saved) {
+      downloadEarnings = JSON.parse(saved);
+    }
+  }
+
+  function getDownloadStats() {
+    return {
+      total: downloadEarnings.total,
+      today: downloadEarnings.today,
+      count: downloadEarnings.history.length,
+      average: downloadEarnings.history.length > 0 ?
+        downloadEarnings.total / downloadEarnings.history.length : 0
+    };
+  }
+
+  // Load earnings on page load
+  loadDownloadEarnings();
+</script>
+
+<!-- Enhanced CSS for New Components -->
+<style>
+/* AI Caption System Styles */
+.ai-processing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.ai-processing-modal {
+  background: var(--g2);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  max-width: 400px;
+  border: 2px solid var(--neon);
+  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
+}
+
+.ai-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--g3);
+  border-top: 4px solid var(--neon);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--g3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), #00ff88);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.ai-caption-btn {
+  background: linear-gradient(135deg, var(--neon), #00ff88);
+  color: var(--bg);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+.ai-caption-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 255, 170, 0.4);
+}
+
+/* Admin Panel Styles */
+.admin-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: var(--g2);
+  border-left: 2px solid var(--neon);
+  z-index: 10000;
+  overflow-y: auto;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.admin-header {
+  background: linear-gradient(135deg, var(--neon), #00ff88);
+  color: var(--bg);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-admin-btn {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-admin-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.admin-tabs {
+  display: flex;
+  background: var(--g3);
+  border-bottom: 1px solid var(--b1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px 10px;
+  background: transparent;
+  border: none;
+  color: var(--t1);
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: var(--neon);
+  color: var(--bg);
+}
+
+.tab-btn:hover:not(.active) {
+  background: var(--g4);
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--g3);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--b1);
+}
+
+.stat-card h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--t2);
+}
+
+.stat-number {
+  font-family: var(--fm);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--neon);
+}
+
+.user-controls, .content-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.user-controls input, .user-controls select,
+.content-controls input, .content-controls select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  background: var(--g3);
+  color: var(--t1);
+}
+
+.user-card, .content-card {
+  background: var(--g3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid var(--b1);
+}
+
+.user-info, .content-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar, .content-thumbnail {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-details h4, .content-info h4 {
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+
+.user-details p, .content-info p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.user-actions, .content-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-view, .btn-deactivate, .btn-delete {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-view {
+  background: var(--neon);
+  color: var(--bg);
+}
+
+.btn-deactivate {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-view:hover, .btn-deactivate:hover, .btn-delete:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.activity-log {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  background: var(--g3);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--b1);
+}
+
+.activity-user {
+  font-weight: bold;
+  color: var(--t1);
+}
+
+.activity-time {
+  font-size: 11px;
+  color: var(--t3);
+  margin: 5px 0;
+}
+
+.activity-status.active {
+  color: #10b981;
+}
+
+.activity-status.inactive {
+  color: #ef4444;
+}
+
+.admin-panel-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  transition: all 0.3s ease;
+}
+
+.admin-panel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Data Persistence Status Indicator */
+.persistence-status {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--g3);
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 12px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.persistence-status.online {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.persistence-status.offline {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.persistence-status.syncing {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+/* Enhanced Advertising Styles */
+.ad-container {
+  animation: fadeIn 0.5s ease;
+  margin: 10px 0;
+}
+
+.ad-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ad-label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  z-index: 1;
+}
+
+.ad-close {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.ad-close:hover {
+  background: rgba(255, 0, 0, 0.7);
+}
+
+.points-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10001;
+  animation: slideInRight 0.3s ease;
+}
+
+.interstitial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.rewarded-ad-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 300px;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-panel {
+    width: 100%;
+    right: -100%;
+    transition: right 0.3s ease;
+  }
+  
+  .admin-panel.show {
+    right: 0;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .user-controls, .content-controls {
+    flex-direction: column;
+  }
+  
+  .user-info, .content-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-actions, .content-actions {
+    justify-content: center;
+  }
+  
+  .ad-container.sidebar {
+    position: relative;
+    width: 100%;
+    right: auto;
+    top: auto;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Download System Styles */
+.download-manager {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--g2);
+  border: 2px solid var(--neon);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10000;
+  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
+}
+
+.download-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--b1);
+}
+
+.download-header h3 {
+  margin: 0;
+  color: var(--t1);
+  font-size: 18px;
+}
+
+.earnings-display {
+  display: flex;
+  gap: 20px;
+}
+
+.earning-item {
+  text-align: center;
+}
+
+.earning-label {
+  font-size: 12px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.earning-value {
+  font-family: var(--fm);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--neon);
+  display: block;
+  margin-top: 5px;
+}
+
+.download-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background: var(--g3);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--b1);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-family: var(--fm);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--t1);
+}
+
+.download-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.download-controls input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  background: var(--g3);
+  color: var(--t1);
+  font-size: 14px;
+}
+
+.btn-download, .btn-history, .btn-earnings {
+  background: var(--neon);
+  color: var(--bg);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-download:hover, .btn-history:hover, .btn-earnings:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 170, 0.4);
+}
+
+.download-queue {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.download-item {
+  background: var(--g3);
+  border: 1px solid var(--b1);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.download-item:hover {
+  border-color: var(--neon);
+  transform: translateX(5px);
+}
+
+.download-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.download-name {
+  font-weight: bold;
+  color: var(--t1);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.download-status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.download-status.starting { background: #f59e0b; color: white; }
+.download-status.downloading { background: var(--neon); color: var(--bg); }
+.download-status.paused { background: #6b7280; color: white; }
+.download-status.completed { background: #10b981; color: white; }
+.download-status.error { background: #ef4444; color: white; }
+
+.download-progress {
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--g4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), #00ff88);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: var(--t2);
+  text-align: center;
+  margin-top: 5px;
+}
+
+.download-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.download-earnings {
+  color: var(--neon);
+  font-weight: bold;
+}
+
+.download-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-pause, .btn-cancel, .btn-retry {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pause { background: #6b7280; color: white; }
+.btn-cancel { background: #ef4444; color: white; }
+.btn-retry { background: #3b82f6; color: white; }
+
+/* Video Call Styles */
+.video-call-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 10000;
+  display: none;
+}
+
+.video-call-container.show {
+  display: block;
+}
+
+.video-header {
+  background: var(--g2);
+  padding: 20px;
+  border-bottom: 1px solid var(--b1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.video-header h3 {
+  margin: 0;
+  color: var(--t1);
+}
+
+.call-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-connected { background: #10b981; color: white; }
+.status-disconnected { background: #ef4444; color: white; }
+
+.video-main {
+  display: flex;
+  height: calc(100vh - 200px);
+}
+
+.remote-videos {
+  flex: 1;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.local-video-container {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  background: var(--g3);
+  border: 2px solid var(--neon);
+  border-radius: 12px;
+  margin: 20px;
+  overflow: hidden;
+}
+
+.local-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.local-video-label {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.video-controls {
+  background: var(--g2);
+  padding: 20px;
+  border-top: 1px solid var(--b1);
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-call, .btn-hangup, .btn-mute, .btn-video-off, .btn-unmute, .btn-video-on, .btn-screenshare-start, .btn-screenshare-stop {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-call { background: #10b981; color: white; }
+.btn-hangup { background: #ef4444; color: white; }
+.btn-mute, .btn-video-off { background: #6b7280; color: white; }
+.btn-unmute, .btn-video-on { background: #10b981; color: white; }
+.btn-screenshare-start { background: #3b82f6; color: white; }
+.btn-screenshare-stop { background: #f59e0b; color: white; }
+
+.video-input {
+  background: var(--g3);
+  padding: 15px;
+  border-top: 1px solid var(--b1);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.video-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--g4);
+  color: var(--t1);
+}
+
+.video-input button {
+  background: var(--neon);
+  color: var(--bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Cloudinary Upload Styles */
+.upload-widget {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--g2);
+  border: 2px solid var(--neon);
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 10000;
+  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
+}
+
+.upload-area {
+  border: 2px dashed var(--b2);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-area:hover, .upload-area.drag-over {
+  border-color: var(--neon);
+  background: rgba(0, 255, 170, 0.05);
+}
+
+.upload-content h3 {
+  margin: 0 0 10px;
+  color: var(--t1);
+}
+
+.upload-content p {
+  margin: 5px 0;
+  color: var(--t2);
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.upload-btn {
+  background: var(--neon);
+  color: var(--bg);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 170, 0.4);
+}
+
+.upload-progress {
+  margin: 20px 0;
+}
+
+.upload-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.upload-result {
+  background: var(--g3);
+  border: 1px solid var(--b1);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.upload-result.success {
+  border-color: #10b981;
+}
+
+.upload-result.error {
+  border-color: #ef4444;
+}
+
+.result-preview {
+  margin-bottom: 15px;
+}
+
+.result-preview img, .result-preview video {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+.result-info h4 {
+  margin: 0 0 10px;
+  color: var(--t1);
+}
+
+.result-info p {
+  margin: 5px 0;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.result-actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Modal Styles */
+.download-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.modal-content {
+  background: var(--g2);
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid var(--neon);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--b1);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--t1);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--t3);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.history-list, .earnings-details {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-item, .earnings-row {
+  background: var(--g3);
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-info {
+  flex: 1;
+}
+
+.history-name {
+  font-weight: bold;
+  color: var(--t1);
+  margin-bottom: 5px;
+}
+
+.history-details {
+  display: flex;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.earnings-amount {
+  font-family: var(--fm);
+  font-weight: 700;
+  color: var(--neon);
+  font-size: 16px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .download-manager {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .earnings-display {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .download-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .download-controls {
+    flex-direction: column;
+  }
+  
+  .video-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .remote-videos {
+    grid-template-columns: 1fr;
+  }
+  
+  .upload-widget {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+}
+</style>
 
 </body>
 </html>
