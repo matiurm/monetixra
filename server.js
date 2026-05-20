@@ -24,19 +24,23 @@ const PORT          = process.env.PORT         || 3000;
 const OPENAI_KEY    = process.env.OPENAI_API_KEY   || '';
 const DEEPSEEK_KEY  = process.env.DEEPSEEK_API_KEY || '';
 // Updated with provided credentials
-const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || 'djdqqkdyf';
-const CLOUDINARY_API_KEY    = process.env.CLOUDINARY_API_KEY    || '333568318583158';
-const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || '3aPp5oR0zmJX9P4oOfb3fR3a3SI';
+const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || '';
+const CLOUDINARY_API_KEY    = process.env.CLOUDINARY_API_KEY    || '';
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || '';
 const SUPABASE_URL  = process.env.SUPABASE_URL     || 'https://rkiyxsskrypowghxfauy.supabase.co';
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY|| 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE';
+const SUPABASE_SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const SUPABASE_SERVER_KEY = SUPABASE_SERVICE_ROLE || SUPABASE_ANON;
+const SOCKET_AUTH_REQUIRED = String(process.env.SOCKET_AUTH_REQUIRED || '').toLowerCase() === 'true';
+const PTS_PER_USD = Number(process.env.PTS_PER_USD || 1000);
 
 // MEGA API Configuration
-const MEGA_API_KEY = process.env.MEGA_API_KEY || '4dt-kltg8nnVA_ycAUMS_Q';
+const MEGA_API_KEY = process.env.MEGA_API_KEY || '';
 
 // Agora Configuration
 const AGORA_APP_ID = process.env.AGORA_APP_ID || 'e9cfd627a92f4466a047b2a820e1382e';
-const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '3ea92e07b5204067afdaaf8b06457c46';
-const AGORA_API_KEY = process.env.AGORA_API_KEY || '41200023785#200031339';
+const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '';
+const AGORA_API_KEY = process.env.AGORA_API_KEY || '';
 
 // AdMob Configuration
 const ADMOB_APP_ID = process.env.ADMOB_APP_ID || 'ca-app-pub-2253243248364888~1427340343';
@@ -48,10 +52,10 @@ const ADMOB_REWARDED_AD_UNIT = process.env.ADMOB_REWARDED_AD_UNIT || 'ca-app-pub
 const ADSENSE_CLIENT = process.env.ADSENSE_CLIENT || 'ca-pub-2397116277801081';
 
 // Adsterra Configuration
-const ADSTERRA_API_KEY = process.env.ADSTERRA_API_KEY || '55d8dff1aa431254a145e6f12f01b775';
-const METERED_KEY   = process.env.METERED_API_KEY  || 'ffb21c8dfcff4bf229f8973e77541a11edc0';
-const GOOGLE_KEY    = process.env.GOOGLE_API_KEY   || 'AIzaSyCCGkyMBXiByuRV8qFfLRAWPrvFNRQOhoI';
-const GOOGLE_VISION = process.env.GOOGLE_VISION_KEY|| 'AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg';
+const ADSTERRA_API_KEY = process.env.ADSTERRA_API_KEY || '';
+const METERED_KEY   = process.env.METERED_API_KEY  || '';
+const GOOGLE_KEY    = process.env.GOOGLE_API_KEY   || '';
+const GOOGLE_VISION = process.env.GOOGLE_VISION_KEY|| '';
 const BKASH_APP_KEY    = process.env.BKASH_APP_KEY    || '';
 const BKASH_APP_SECRET = process.env.BKASH_APP_SECRET || '';
 const BKASH_USERNAME   = process.env.BKASH_USERNAME   || '';
@@ -88,7 +92,12 @@ const io     = new Server(server, {
 
 app.use(helmet({ contentSecurityPolicy:false, crossOriginEmbedderPolicy:false }));
 app.use(cors({origin:'*'}));
-app.use(express.json({limit:'10mb'}));
+app.use(express.json({
+  limit:'10mb',
+  verify:(req, _res, buf) => {
+    if(req.originalUrl === '/api/payment/stripe/webhook') req.rawBody = buf;
+  }
+}));
 app.use(express.urlencoded({extended:true, limit:'10mb'}));
 
 // Rate limiting
@@ -121,10 +130,54 @@ app.get('/app-ads.txt', (_, res) => sendRootFile(res, 'app-ads.txt', 'text/plain
 
 // ── State ──────────────────────────────────────────────────────
 const onlineUsers  = new Map();
+const onlineSessions = new Map();
 const callSessions = new Map();
 const rooms        = new Map();
 let cachedICE=null, iceExpiry=0;
 let bkashToken=null, bkashTokenExp=0;
+
+const syncStore = {
+  users: new Map(),
+  posts: new Map(),
+  points: new Map(),
+  media: new Map(),
+  backups: []
+};
+const searchIndex = {
+  users: new Map(),
+  posts: new Map()
+};
+
+function indexText(value) {
+  return String(value || '').toLowerCase().replace(/[^\p{L}\p{N}@#]+/gu, ' ').trim();
+}
+
+function updateIndexes() {
+  searchIndex.users.clear();
+  searchIndex.posts.clear();
+  for (const [id, u] of syncStore.users) {
+    searchIndex.users.set(id, indexText([u.name, u.username, u.email, u.phone].join(' ')));
+  }
+  for (const [id, p] of syncStore.posts) {
+    searchIndex.posts.set(id, indexText([p.text, p.type, p.category, ...(p.hashtags || [])].join(' ')));
+  }
+}
+
+function publicSyncSnapshot() {
+  return {
+    users: Array.from(syncStore.users.values()),
+    posts: Array.from(syncStore.posts.values()).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)),
+    points: Object.fromEntries(syncStore.points),
+    media: Array.from(syncStore.media.values()),
+    stats: {
+      onlineUsers: new Set(Array.from(onlineSessions.values()).map(s => s.userId)).size,
+      onlineSessions: onlineSessions.size,
+      totalUsers: syncStore.users.size,
+      totalPosts: syncStore.posts.size
+    },
+    generatedAt: Date.now()
+  };
+}
 
 // ─────────────────────────────────────────────────────────────
 //  HELPERS
@@ -145,13 +198,193 @@ async function supabaseReq(table,method,body,filter='') {
   const r=await fetch(url,{
     method, headers:{
       'Content-Type':'application/json',
-      'apikey':SUPABASE_ANON,
-      'Authorization':`Bearer ${SUPABASE_ANON}`,
+      'apikey':SUPABASE_SERVER_KEY,
+      'Authorization':`Bearer ${SUPABASE_SERVER_KEY}`,
       'Prefer': method==='POST'?'return=representation':''
     },
     body: body?JSON.stringify(body):undefined
   });
   return r.json();
+}
+
+async function supabaseRest(table, method='GET', body=null, query='', prefer='') {
+  if(!SUPABASE_URL || !SUPABASE_SERVER_KEY) throw new Error('Supabase not configured');
+  const url = `${SUPABASE_URL}/rest/v1/${table}${query ? '?' + query : ''}`;
+  const headers = {
+    'Content-Type':'application/json',
+    'apikey':SUPABASE_SERVER_KEY,
+    'Authorization':`Bearer ${SUPABASE_SERVER_KEY}`
+  };
+  if(prefer) headers.Prefer = prefer;
+  const r = await fetch(url, {method, headers, body: body ? JSON.stringify(body) : undefined});
+  const txt = await r.text();
+  const data = txt ? JSON.parse(txt) : null;
+  if(!r.ok) throw new Error(data?.message || data?.error || `Supabase ${method} ${table} failed`);
+  return data;
+}
+
+function toIso(msOrDate) {
+  if(!msOrDate) return new Date().toISOString();
+  const d = typeof msOrDate === 'number' ? new Date(msOrDate) : new Date(msOrDate);
+  return Number.isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+}
+
+function userRow(u={}) {
+  return {
+    id: String(u.id || u.userId || ''),
+    name: String(u.name || u.username || 'User'),
+    username: u.username || null,
+    email: u.email || null,
+    phone: u.phone || null,
+    password: u.password || null,
+    bio: u.bio || null,
+    avatar: u.avatar || null,
+    cover: u.cover || null,
+    points: Math.max(0, Number(u.points || 0)),
+    is_admin: !!(u.isAdmin || u.is_admin),
+    kyc_verified: !!(u.kycVerified || u.kyc_verified),
+    verified: !!u.verified,
+    two_fa: !!(u.twoFA || u.two_fa),
+    disabled: !!u.disabled,
+    deactivated: !!u.deactivated,
+    tin: u.tin || null,
+    pay_methods: u.payMethods || u.pay_methods || null,
+    crypto_wallets: u.cryptoWallets || u.crypto_wallets || null,
+    privacy_settings: u.privacySettings || u.privacy_settings || null,
+    notif_settings: u.notifSettings || u.notif_settings || null,
+    eth_address: u.ethAddress || u.eth_address || null,
+    sol_address: u.solAddress || u.sol_address || null,
+    referred_by: u.referredBy || u.referred_by || null,
+    created_at: toIso(u.createdAt || u.created_at || Date.now()),
+    updated_at: new Date().toISOString()
+  };
+}
+
+function postRow(p={}) {
+  return {
+    id: String(p.id || ''),
+    author: String(p.author || ''),
+    text: p.text || '',
+    file: p.file || null,
+    file_type: p.mimetype || p.fileType || p.type || null,
+    tags: Array.isArray(p.hashtags) ? p.hashtags : (Array.isArray(p.tags) ? p.tags : []),
+    visibility: p.visibility || 'public',
+    likes: Array.isArray(p.likedBy) ? p.likedBy : (Array.isArray(p.likes) ? p.likes : []),
+    views: Number(p.views || 0),
+    reports: Number(p.reports || 0),
+    hidden: !!p.hidden,
+    copyright: !!p.copyright,
+    chain: p.chain || null,
+    created_at: toIso(p.createdAt || p.created_at || Date.now())
+  };
+}
+
+function txRow(t={}) {
+  return {
+    id: String(t.id || 'tx_' + Date.now()),
+    user_id: String(t.user || t.userId || t.user_id || ''),
+    type: t.type || 'ledger',
+    label: t.label || '',
+    pts: Math.trunc(Number(t.pts || 0)),
+    admin_cut: Math.trunc(Number(t.adminCut || t.admin_cut || 0)),
+    created_at: toIso(t.at || t.createdAt || t.created_at || Date.now())
+  };
+}
+
+async function persistUser(u) {
+  const row = userRow(u);
+  if(!row.id) throw new Error('user id required');
+  await supabaseRest('users', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  return row;
+}
+
+async function persistPost(p) {
+  const row = postRow(p);
+  if(!row.id || !row.author) throw new Error('post id and author required');
+  await supabaseRest('posts', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  return row;
+}
+
+async function persistTransaction(t) {
+  const row = txRow(t);
+  if(!row.id || !row.user_id) throw new Error('transaction id and user required');
+  await supabaseRest('transactions', 'POST', row, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
+  return row;
+}
+
+async function getPersistentUser(userId) {
+  const rows = await supabaseRest('users', 'GET', null, `id=eq.${encodeURIComponent(userId)}&select=*`);
+  return Array.isArray(rows) ? rows[0] : null;
+}
+
+async function setPersistentPoints(userId, points) {
+  await supabaseRest('users', 'PATCH', {points: Math.max(0, Math.trunc(Number(points || 0))), updated_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(userId)}`, 'return=representation');
+}
+
+async function creditUserPoints(userId, pts, label, type='topup', txId='tx_' + Date.now()) {
+  const delta = Math.trunc(Number(pts || 0));
+  if(!userId || !delta) throw new Error('userId and pts required');
+  const current = await getPersistentUser(userId);
+  const nextPoints = Math.max(0, Number(current?.points || syncStore.points.get(userId)?.points || 0) + delta);
+  await setPersistentPoints(userId, nextPoints);
+  const tx = await persistTransaction({id:txId, user:userId, type, label, pts:delta, at:Date.now()});
+  syncStore.points.set(userId, {points:nextPoints, updatedAt:Date.now(), history:[...(syncStore.points.get(userId)?.history || []).slice(-49), {points:delta,label,at:Date.now()}]});
+  if(syncStore.users.has(userId)) syncStore.users.get(userId).points = nextPoints;
+  return {points:nextPoints, tx};
+}
+
+async function hydratePersistentSyncStore() {
+  try {
+    const [users, posts, txs] = await Promise.all([
+      supabaseRest('users', 'GET', null, 'select=*&limit=500'),
+      supabaseRest('posts', 'GET', null, 'select=*&order=created_at.desc&limit=500'),
+      supabaseRest('transactions', 'GET', null, 'select=*&order=created_at.desc&limit=500')
+    ]);
+    (users || []).forEach(u => {
+      syncStore.users.set(u.id, {...u, isAdmin:u.is_admin, kycVerified:u.kyc_verified, twoFA:u.two_fa, privacySettings:u.privacy_settings, notifSettings:u.notif_settings, points:Number(u.points || 0)});
+      syncStore.points.set(u.id, {points:Number(u.points || 0), history:[]});
+    });
+    (posts || []).forEach(p => syncStore.posts.set(p.id, {
+      id:p.id, author:p.author, text:p.text, file:p.file, mimetype:p.file_type,
+      hashtags:p.tags || [], visibility:p.visibility, likedBy:p.likes || [],
+      views:p.views || 0, reports:p.reports || 0, hidden:p.hidden,
+      copyright:p.copyright, chain:p.chain, createdAt:new Date(p.created_at).getTime()
+    }));
+    (txs || []).forEach(t => syncStore.points.set(t.user_id, {
+      ...(syncStore.points.get(t.user_id) || {points:0}),
+      history:[...(syncStore.points.get(t.user_id)?.history || []).slice(-49), {points:t.pts,label:t.label,at:new Date(t.created_at).getTime()}]
+    }));
+    updateIndexes();
+    console.log(`[Supabase] Hydrated ${syncStore.users.size} users, ${syncStore.posts.size} posts`);
+  } catch(e) {
+    console.warn('[Supabase hydrate]', e.message || e);
+  }
+}
+
+async function verifySupabaseToken(token) {
+  if(!token) return null;
+  const r = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+    headers:{apikey:SUPABASE_ANON, Authorization:`Bearer ${token}`}
+  });
+  if(!r.ok) return null;
+  const user = await r.json();
+  if(!user?.id && !user?.email) return null;
+  const matches = Array.from(syncStore.users.values()).find(u => u.authUid === user.id || (u.email && user.email && String(u.email).toLowerCase() === String(user.email).toLowerCase()));
+  return {authUid:user.id, email:user.email, appUserId:matches?.id || user.user_metadata?.appUserId || null};
+}
+
+function verifyStripeSignature(rawBody, signatureHeader, secret) {
+  if(!secret) return true;
+  if(!signatureHeader) return false;
+  const parts = Object.fromEntries(String(signatureHeader).split(',').map(part => {
+    const [k,v] = part.split('=');
+    return [k, v];
+  }));
+  if(!parts.t || !parts.v1) return false;
+  const expected = crypto.createHmac('sha256', secret).update(`${parts.t}.${rawBody.toString('utf8')}`).digest('hex');
+  const a = Buffer.from(expected, 'hex');
+  const b = Buffer.from(parts.v1, 'hex');
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
 // Send push notification to a user
@@ -172,7 +405,7 @@ async function sendPushToUser(userId, payload) {
 // Health
 app.get('/health',(_, res)=>res.json({
   status:'ok', uptime:Math.floor(process.uptime()),
-  online:onlineUsers.size, calls:callSessions.size,
+  online:onlineSessions.size, onlineUsers:onlineUsers.size, calls:callSessions.size,
   webpush:!!(VAPID_PUBLIC&&VAPID_PRIVATE),
   bkash:!!BKASH_APP_KEY, nagad:!!NAGAD_MERCHANT
 }));
@@ -181,7 +414,7 @@ app.get('/health',(_, res)=>res.json({
 app.get('/api/health',(_, res)=>res.json({
   status:'ok', timestamp: new Date().toISOString(),
   uptime:Math.floor(process.uptime()),
-  online:onlineUsers.size, calls:callSessions.size,
+  online:onlineSessions.size, onlineUsers:onlineUsers.size, calls:callSessions.size,
   socketio: io.engine.clientsCount,
   webpush:!!(VAPID_PUBLIC&&VAPID_PRIVATE),
   bkash:!!BKASH_APP_KEY, nagad:!!NAGAD_MERCHANT
@@ -602,8 +835,9 @@ app.get('/api/admin/dashboard-stats', async(req,res)=>{
   try {
     // In production: get real stats from database
     const stats = {
-      totalUsers: Array.from(onlineUsers.keys()).length + 1250, // demo data
-      activeUsers: Array.from(onlineUsers.keys()).length,
+      totalUsers: syncStore.users.size,
+      activeUsers: new Set(Array.from(onlineSessions.values()).map(s => s.userId)).size,
+      activeSessions: onlineSessions.size,
       totalPosts: 8475, // demo data
       reports: 23 // demo data
     };
@@ -708,11 +942,14 @@ app.delete('/api/admin/content/:id', async(req,res)=>{
 app.post('/api/posts/sync', async(req,res)=>{
   try {
     const postData = req.body;
-    // In production: save to Supabase or database
+    if(!postData || !postData.id) return res.status(400).json({error:'Post id required'});
+    syncStore.posts.set(postData.id, {...(syncStore.posts.get(postData.id)||{}), ...postData, syncedAt:Date.now()});
+    await persistPost(postData);
+    updateIndexes();
     console.log(`[Sync] Post: ${postData.id}`);
-    res.json({success: true, synced: true, id: postData.id});
+    res.json({success: true, synced: true, persisted: true, id: postData.id, totalPosts: syncStore.posts.size});
   } catch(e) {
-    res.status(500).json({error: 'Post sync failed'});
+    res.status(500).json({error: 'Post sync failed', detail:e.message});
   }
 });
 
@@ -720,11 +957,24 @@ app.post('/api/posts/sync', async(req,res)=>{
 app.post('/api/points/sync', async(req,res)=>{
   try {
     const pointsData = req.body;
-    // In production: save to Supabase or database
+    if(!pointsData || !pointsData.userId) return res.status(400).json({error:'userId required'});
+    const persistent = await getPersistentUser(pointsData.userId).catch(()=>null);
+    const prev = syncStore.points.get(pointsData.userId) || {points:0, history:[]};
+    const merged = Math.max(Number(prev.points || 0), Number(pointsData.points || 0), Number(persistent?.points || 0));
+    const next = {
+      ...prev,
+      ...pointsData,
+      points: merged,
+      updatedAt: Date.now(),
+      history: [...(prev.history || []).slice(-49), {points: pointsData.points, label: pointsData.label || 'sync', at: Date.now()}]
+    };
+    syncStore.points.set(pointsData.userId, next);
+    await setPersistentPoints(pointsData.userId, merged);
+    await persistTransaction({id:'sync_' + pointsData.userId + '_' + Date.now(), user:pointsData.userId, type:'sync', label:pointsData.label || 'points sync', pts:0, at:Date.now()}).catch(()=>{});
     console.log(`[Sync] Points: ${pointsData.userId} - ${pointsData.points}`);
-    res.json({success: true, synced: true, points: pointsData.points});
+    res.json({success: true, synced: true, persisted: true, points: next.points});
   } catch(e) {
-    res.status(500).json({error: 'Points sync failed'});
+    res.status(500).json({error: 'Points sync failed', detail:e.message});
   }
 });
 
@@ -732,11 +982,54 @@ app.post('/api/points/sync', async(req,res)=>{
 app.post('/api/user-data/sync', async(req,res)=>{
   try {
     const userData = req.body;
-    // In production: save to Supabase or database
+    const uid = userData.id || userData.userId || userData.key;
+    if(!uid) return res.status(400).json({error:'user id required'});
+    const prev = syncStore.users.get(uid) || {};
+    const pointState = syncStore.points.get(uid);
+    const persistent = await getPersistentUser(uid).catch(()=>null);
+    const mergedPoints = Math.max(
+      Number(prev.points || 0),
+      Number(userData.points || 0),
+      Number(pointState?.points || 0),
+      Number(persistent?.points || 0)
+    );
+    syncStore.users.set(uid, {...prev, ...userData, id:uid, points:mergedPoints, syncedAt:Date.now()});
+    await persistUser({...prev, ...userData, id:uid, points:mergedPoints});
+    updateIndexes();
     console.log(`[Sync] User Data: ${userData.key}`);
-    res.json({success: true, synced: true, key: userData.key});
+    res.json({success: true, synced: true, persisted: true, key: uid, points: mergedPoints, totalUsers: syncStore.users.size});
   } catch(e) {
-    res.status(500).json({error: 'User data sync failed'});
+    res.status(500).json({error: 'User data sync failed', detail:e.message});
+  }
+});
+
+app.post('/api/ledger/credit', async(req,res)=>{
+  try {
+    const {userId, pts, label='Server credit', type='earn', id} = req.body || {};
+    if(!userId || !Number.isFinite(Number(pts))) return res.status(400).json({error:'userId and pts required'});
+    const result = await creditUserPoints(userId, pts, label, type, id || `${type}_${userId}_${Date.now()}`);
+    res.json({success:true, ...result});
+  } catch(e) {
+    res.status(500).json({error:'Credit failed', detail:e.message});
+  }
+});
+
+app.post('/api/withdrawals/request', async(req,res)=>{
+  try {
+    const {userId, amount, method='bkash', account=''} = req.body || {};
+    const amt = Math.trunc(Number(amount || 0));
+    if(!userId || amt <= 0 || !account) return res.status(400).json({error:'userId, amount and account required'});
+    const user = await getPersistentUser(userId);
+    if(!user) return res.status(404).json({error:'User not found'});
+    if(!user.kyc_verified) return res.status(403).json({error:'KYC verification required'});
+    if(Number(user.points || 0) < amt) return res.status(400).json({error:'Insufficient points'});
+    const wd = {id:'wd_' + Date.now() + '_' + crypto.randomBytes(4).toString('hex'), user_id:userId, amount:amt, method, account, status:'pending', created_at:new Date().toISOString()};
+    await supabaseRest('withdrawals', 'POST', wd, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
+    await creditUserPoints(userId, -amt, `Withdrawal request via ${method}`, 'withdraw', 'withdraw_' + wd.id);
+    syncStore.backups.unshift({id:wd.id, at:Date.now(), type:'withdrawal', data:wd});
+    res.json({success:true, withdrawal:wd});
+  } catch(e) {
+    res.status(500).json({error:'Withdrawal request failed', detail:e.message});
   }
 });
 
@@ -744,9 +1037,10 @@ app.post('/api/user-data/sync', async(req,res)=>{
 app.post('/api/media/sync', async(req,res)=>{
   try {
     const mediaData = req.body;
-    // In production: save to cloud storage
+    if(!mediaData || !mediaData.id) return res.status(400).json({error:'media id required'});
+    syncStore.media.set(mediaData.id, {...(syncStore.media.get(mediaData.id)||{}), ...mediaData, syncedAt:Date.now()});
     console.log(`[Sync] Media: ${mediaData.id} - ${mediaData.type}`);
-    res.json({success: true, synced: true, id: mediaData.id});
+    res.json({success: true, synced: true, id: mediaData.id, storage: 'indexed-memory'});
   } catch(e) {
     res.status(500).json({error: 'Media sync failed'});
   }
@@ -755,15 +1049,56 @@ app.post('/api/media/sync', async(req,res)=>{
 // Get sync status
 app.get('/api/sync/status', async(req,res)=>{
   try {
-    // In production: check database sync status
     res.json({
       lastSyncTime: Date.now(),
       pendingItems: 0,
-      syncEnabled: true
+      syncEnabled: true,
+      indexed: {
+        users: syncStore.users.size,
+        posts: syncStore.posts.size,
+        points: syncStore.points.size,
+        media: syncStore.media.size
+      },
+      storage: {
+        active: process.env.S3_BUCKET ? 's3-compatible' : 'local-demo',
+        s3CompatibleReady: !!(process.env.S3_BUCKET && process.env.S3_ACCESS_KEY && process.env.S3_SECRET_KEY),
+        wasabiReady: !!(process.env.WASABI_BUCKET && process.env.WASABI_ACCESS_KEY && process.env.WASABI_SECRET_KEY)
+      }
     });
   } catch(e) {
     res.status(500).json({error: 'Sync status check failed'});
   }
+});
+
+app.get('/api/search', (req,res)=>{
+  const q = indexText(req.query.q || '');
+  const type = String(req.query.type || 'all').toLowerCase();
+  if(!q) return res.json({users:[], posts:[]});
+  const users = [];
+  const posts = [];
+  for (const [id, text] of searchIndex.users) {
+    if(text.includes(q)) users.push(syncStore.users.get(id));
+    if(users.length >= 20) break;
+  }
+  for (const [id, text] of searchIndex.posts) {
+    const post = syncStore.posts.get(id);
+    if(text.includes(q) && (type === 'all' || post?.type === type || post?.category === type)) posts.push(post);
+    if(posts.length >= 50) break;
+  }
+  res.json({users, posts, tookMs: 0, indexed: true});
+});
+
+app.get('/api/sync/export', (_,res)=>res.json(publicSyncSnapshot()));
+
+app.post('/api/backup/create', (req,res)=>{
+  const backup = {id:'backup_'+Date.now(), at:Date.now(), data: publicSyncSnapshot()};
+  syncStore.backups.unshift(backup);
+  syncStore.backups = syncStore.backups.slice(0,10);
+  res.json({success:true, id:backup.id, backups:syncStore.backups.length});
+});
+
+app.get('/api/backup/latest', (_,res)=>{
+  res.json(syncStore.backups[0] || {success:false, message:'No server backup yet'});
 });
 
 // ── Agora Token Generation ───────────────────────────────────────────
@@ -933,6 +1268,39 @@ app.post('/api/otp/send', async(req,res)=>{
   res.json({success:true, otp, note:'Check server console for OTP (demo mode)'});
 });
 
+app.get('/api/docs', (_,res)=>res.type('text/plain').send(`Monetixra API
+
+Health:
+GET /health
+GET /api/health
+
+Realtime Socket.io:
+user:online, chat:message, room:message, live:start, live:end, notif:send, call:invite, webrtc:offer, webrtc:answer, webrtc:ice-candidate
+
+Sync:
+POST /api/user-data/sync  {id|userId, name, username, points}
+POST /api/posts/sync      {id, author, type, text, createdAt}
+POST /api/points/sync     {userId, points, label}
+POST /api/media/sync      {id, type, url|data, postId}
+GET  /api/sync/status
+GET  /api/sync/export
+GET  /api/search?q=name&type=all
+
+Push:
+GET  /api/push/vapid-key
+POST /api/push/subscribe
+POST /api/push/unsubscribe
+POST /api/push/send
+POST /api/push/broadcast
+
+Backup:
+POST /api/backup/create
+GET  /api/backup/latest
+
+Storage:
+Cloudinary routes are available now. S3/Wasabi readiness is exposed at /api/sync/status and can be enabled with S3_BUCKET/S3_ACCESS_KEY/S3_SECRET_KEY or WASABI_* environment variables.
+`));
+
 // SPA fallback
 app.get('*',(_,res)=>{
   sendRootFile(res, 'index.html', 'html');
@@ -941,18 +1309,42 @@ app.get('*',(_,res)=>{
 // ─────────────────────────────────────────────────────────────
 //  SOCKET.IO
 // ─────────────────────────────────────────────────────────────
+io.use(async(socket,next)=>{
+  try {
+    const token = socket.handshake.auth?.token || socket.handshake.headers?.authorization?.replace(/^Bearer\s+/i,'');
+    const claimedUserId = socket.handshake.auth?.userId || socket.handshake.query?.userId;
+    const verified = token ? await verifySupabaseToken(token) : null;
+    if(verified) {
+      socket.auth = verified;
+      socket.userId = String(verified.appUserId || claimedUserId || verified.authUid);
+      return next();
+    }
+    if(SOCKET_AUTH_REQUIRED) return next(new Error('auth_required'));
+    if(claimedUserId) socket.userId = String(claimedUserId);
+    return next();
+  } catch(e) {
+    if(SOCKET_AUTH_REQUIRED) return next(new Error('auth_failed'));
+    return next();
+  }
+});
+
 io.on('connection', socket=>{
 
   socket.on('user:online', ({userId,name})=>{
-    if(!userId) return;
-    socket.userId=userId; socket.userName=name||'User';
-    onlineUsers.set(userId,socket.id);
-    socket.join('user:'+userId);
-    socket.broadcast.emit('user:status',{userId,status:'online'});
+    const effectiveUserId = socket.userId || userId;
+    if(!effectiveUserId) return;
+    if(socket.userId && userId && String(userId) !== String(socket.userId)) return socket.emit('auth:error',{error:'user_mismatch'});
+    socket.userId=String(effectiveUserId); socket.userName=name||'User';
+    onlineUsers.set(socket.userId,socket.id);
+    onlineSessions.set(socket.id, {userId: socket.userId, name: socket.userName, connectedAt: Date.now(), lastSeen: Date.now()});
+    socket.join('user:'+socket.userId);
+    socket.broadcast.emit('user:status',{userId:socket.userId,status:'online'});
   });
 
   // Chat
   socket.on('chat:message', ({to,from,text,media,msgId,timestamp})=>{
+    if(socket.userId && from && String(from) !== String(socket.userId)) return socket.emit('auth:error',{error:'sender_mismatch'});
+    from = socket.userId || from;
     const toSid=onlineUsers.get(to);
     const payload={from,text,media,msgId,timestamp:timestamp||Date.now()};
     if(toSid) io.to(toSid).emit('chat:message',payload);
@@ -960,31 +1352,41 @@ io.on('connection', socket=>{
     // Push notification if offline
     if(!toSid) sendPushToUser(to,{title:'New Message',body:(text||'📎 Media').slice(0,80),icon:'/icon-192.png',url:'/'});
   });
-  socket.on('chat:typing',  ({to,from,isTyping})=>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:typing',{from,isTyping}); });
-  socket.on('chat:read',    ({to,from,msgId})   =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:read',{from,msgId}); });
+  socket.on('chat:typing',  ({to,from,isTyping})=>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:typing',{from,isTyping}); });
+  socket.on('chat:read',    ({to,from,msgId})   =>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:read',{from,msgId}); });
   socket.on('chat:delete',  ({to,msgId})         =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:delete',{msgId}); });
 
   // Rooms
   socket.on('room:join',    ({roomId,userId})=>{ socket.join(roomId); if(!rooms.has(roomId)) rooms.set(roomId,new Set()); rooms.get(roomId).add(socket.id); socket.to(roomId).emit('room:user:joined',{userId}); });
   socket.on('room:leave',   ({roomId,userId})=>{ socket.leave(roomId); rooms.get(roomId)?.delete(socket.id); socket.to(roomId).emit('room:user:left',{userId}); });
-  socket.on('room:message', ({roomId,from,text,media,timestamp})=>{ io.to(roomId).emit('room:message',{from,text,media,timestamp:timestamp||Date.now()}); });
+  socket.on('room:message', ({roomId,from,text,media,timestamp})=>{ from = socket.userId || from; io.to(roomId).emit('room:message',{from,text,media,timestamp:timestamp||Date.now()}); });
 
   // Live Stream
-  socket.on('live:start',   ({streamerId,title})=>{ socket.join('live:'+streamerId); io.emit('live:new',{streamerId,title,viewers:0}); });
-  socket.on('live:comment', ({streamerId,from,text})=>{ io.to('live:'+streamerId).emit('live:comment',{from,text,t:Date.now()}); });
+  socket.on('live:start',   ({streamerId,title})=>{ streamerId = socket.userId || streamerId; socket.join('live:'+streamerId); io.emit('live:new',{streamerId,title,viewers:0}); });
+  socket.on('live:comment', ({streamerId,from,text})=>{ from = socket.userId || from; io.to('live:'+streamerId).emit('live:comment',{from,text,t:Date.now()}); });
   socket.on('live:reaction',({streamerId,emoji})=>{ io.to('live:'+streamerId).emit('live:reaction',{emoji}); });
   socket.on('live:end',     ({streamerId})=>{ io.to('live:'+streamerId).emit('live:ended',{streamerId}); });
   socket.on('live:gift',    ({streamerId,from,gift})=>{ io.to('live:'+streamerId).emit('live:gift',{from,gift,t:Date.now()}); });
 
   // Posts
-  socket.on('post:react',   ({postId,userId,reaction})=>{ io.emit('post:reacted',{postId,userId,reaction}); });
+  socket.on('post:react',   ({postId,userId,reaction})=>{ userId = socket.userId || userId; io.emit('post:reacted',{postId,userId,reaction}); });
   socket.on('post:comment', ({postId,authorId,comment})=>{ const s=onlineUsers.get(authorId); if(s) io.to(s).emit('post:new:comment',{postId,comment}); io.emit('post:commented',{postId,comment}); });
 
   // Notifications
-  socket.on('notif:send', ({to,notif})=>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('notif:receive',notif); else sendPushToUser(to,{title:notif.msg||'Notification',body:'',icon:'/icon-192.png',url:'/'}); });
+  socket.on('notif:send', ({to,notif})=>{
+    if(to === 'all') {
+      io.emit('notif:receive', notif);
+      return;
+    }
+    const s=onlineUsers.get(to);
+    if(s) io.to(s).emit('notif:receive',notif);
+    else sendPushToUser(to,{title:notif.msg||'Notification',body:'',icon:'/icon-192.png',url:'/'});
+  });
 
   // WebRTC Signaling
   socket.on('call:invite', async({callId,callerId,calleeId,type,callerName,callerAvatar})=>{
+    if(socket.userId && callerId && String(callerId) !== String(socket.userId)) return socket.emit('auth:error',{error:'caller_mismatch'});
+    callerId = socket.userId || callerId;
     const calleeSid=onlineUsers.get(calleeId);
     const iceServers=await getICE();
     callSessions.set(callId,{callId,callerId,calleeId,type,callerSocket:socket.id,calleeSocket:calleeSid,state:'ringing'});
@@ -1004,8 +1406,12 @@ io.on('connection', socket=>{
 
   socket.on('disconnect', ()=>{
     if(socket.userId){
-      onlineUsers.delete(socket.userId);
-      socket.broadcast.emit('user:status',{userId:socket.userId,status:'offline'});
+      onlineSessions.delete(socket.id);
+      const stillOnline = Array.from(onlineSessions.values()).some(s => s.userId === socket.userId);
+      if(!stillOnline) {
+        onlineUsers.delete(socket.userId);
+        socket.broadcast.emit('user:status',{userId:socket.userId,status:'offline'});
+      }
       for(const [callId,sess] of callSessions){
         if(sess.callerSocket===socket.id||sess.calleeSocket===socket.id){
           const other=sess.callerSocket===socket.id?sess.calleeSocket:sess.callerSocket;
@@ -1031,6 +1437,7 @@ server.listen(PORT, ()=>{
   console.log(`   ${NAGAD_MERCHANT?'✅':'⚠️ '} Nagad Payment`);
   console.log(`   ✅ Rate Limiting + Security\n`);
   getICE().catch(()=>{});
+  hydratePersistentSyncStore().catch(()=>{});
 });
 
 module.exports={app,server,io};
@@ -1040,16 +1447,29 @@ app.post('/api/payment/stripe/create-session', async(req,res)=>{
   const STRIPE_SECRET = process.env.STRIPE_SECRET_KEY||'';
   if(!STRIPE_SECRET) return res.json({demo:true, message:'Stripe not configured'});
   try {
-    const stripe = require('stripe')(STRIPE_SECRET);
     const {amount, currency='usd', description, userId} = req.body;
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types:['card'],
-      line_items:[{price_data:{currency,product_data:{name:description||'Monetixra Top-up'},unit_amount:amount},quantity:1}],
-      mode:'payment',
-      success_url: (process.env.BASE_URL||'http://localhost:3000') + '/?stripe=success&uid='+userId,
-      cancel_url:  (process.env.BASE_URL||'http://localhost:3000') + '/?stripe=cancel',
-      metadata:{ userId, description }
+    if(!userId) return res.status(400).json({error:'userId required'});
+    const cents = Math.max(50, Math.trunc(Number(amount || 0)));
+    const points = Math.round((cents / 100) * PTS_PER_USD);
+    const params = new URLSearchParams();
+    params.set('payment_method_types[]', 'card');
+    params.set('line_items[0][price_data][currency]', currency);
+    params.set('line_items[0][price_data][product_data][name]', description || 'Monetixra Top-up');
+    params.set('line_items[0][price_data][unit_amount]', String(cents));
+    params.set('line_items[0][quantity]', '1');
+    params.set('mode', 'payment');
+    params.set('success_url', (process.env.BASE_URL||'http://localhost:3000') + '/?stripe=success&uid='+userId);
+    params.set('cancel_url',  (process.env.BASE_URL||'http://localhost:3000') + '/?stripe=cancel');
+    params.set('metadata[userId]', userId);
+    params.set('metadata[description]', description || '');
+    params.set('metadata[points]', String(points));
+    const r = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method:'POST',
+      headers:{Authorization:`Bearer ${STRIPE_SECRET}`, 'Content-Type':'application/x-www-form-urlencoded'},
+      body:params
     });
+    const session = await r.json();
+    if(!r.ok) return res.status(400).json({error:session.error?.message || 'Stripe session failed'});
     res.json({ sessionId: session.id, url: session.url });
   } catch(e){ res.status(500).json({error:e.message}); }
 });
@@ -1060,15 +1480,19 @@ app.post('/api/payment/stripe/webhook', express.raw({type:'application/json'}), 
   const STRIPE_WH_SEC  = process.env.STRIPE_WEBHOOK_SECRET||'';
   if(!STRIPE_SECRET) return res.json({received:true});
   try {
-    const stripe = require('stripe')(STRIPE_SECRET);
     const sig    = req.headers['stripe-signature'];
-    const event  = STRIPE_WH_SEC ? stripe.webhooks.constructEvent(req.body, sig, STRIPE_WH_SEC) : JSON.parse(req.body);
+    const rawBody = req.rawBody || (Buffer.isBuffer(req.body) ? req.body : Buffer.from(JSON.stringify(req.body || {})));
+    if(STRIPE_WH_SEC && !verifyStripeSignature(rawBody, sig, STRIPE_WH_SEC)) return res.status(400).send('Webhook Error: invalid signature');
+    const event  = JSON.parse(rawBody.toString('utf8'));
     if(event.type === 'checkout.session.completed') {
       const session = event.data.object;
       const userId  = session.metadata?.userId;
       const amt     = session.amount_total; // cents
+      const points  = Math.round(Number(session.metadata?.points || ((amt / 100) * PTS_PER_USD)));
       console.log(`[Stripe] Payment completed: $${amt/100} by ${userId}`);
-      // TODO: credit points to user in Supabase
+      if(userId && points > 0) {
+        await creditUserPoints(userId, points, `Stripe top-up $${(amt/100).toFixed(2)}`, 'topup', 'stripe_' + session.id);
+      }
     }
     res.json({received:true});
   } catch(e){ res.status(400).send(`Webhook Error: ${e.message}`); }

@@ -2,7 +2,7 @@
 //  Monetixra — Enhanced Service Worker (PWA)
 //  Offline support + Push Notifications + Background Sync
 // ============================================================
-const CACHE_NAME = 'monetixra-v4';
+const CACHE_NAME = 'monetixra-v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -52,6 +52,21 @@ self.addEventListener('fetch', e => {
   if (e.request.mode === 'navigate') {
     return e.respondWith(
       fetch(e.request, { cache: 'no-store' }).catch(() => caches.match('/index.html'))
+    );
+  }
+
+  // Images and media thumbnails: stale-while-revalidate for faster mobile repeat views
+  if (e.request.destination === 'image' || /\.(png|jpg|jpeg|webp|gif|svg)$/i.test(url.pathname)) {
+    return e.respondWith(
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(e.request).then(cached => {
+          const fresh = fetch(e.request).then(response => {
+            if(response && response.status === 200) cache.put(e.request, response.clone());
+            return response;
+          }).catch(() => cached);
+          return cached || fresh;
+        })
+      )
     );
   }
 
