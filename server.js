@@ -14,6 +14,7 @@ const { Server }= require('socket.io');
 const cors      = require('cors');
 const helmet    = require('helmet');
 const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 const webpush   = require('web-push');
 const path      = require('path');
 const crypto    = require('crypto');
@@ -84,12 +85,14 @@ const pushSubscriptions = new Map(); // userId → subscription
 
 // ── App ───────────────────────────────────────────────────────
 const app    = express();
+app.disable('x-powered-by');
 const server = http.createServer(app);
 const io     = new Server(server, {
   cors:{origin:'*',methods:['GET','POST']},
   pingInterval:25000, pingTimeout:60000
 });
 
+app.use(compression());
 app.use(helmet({ contentSecurityPolicy:false, crossOriginEmbedderPolicy:false }));
 app.use(cors({origin:'*'}));
 app.use(express.json({
@@ -117,6 +120,7 @@ function sendRootFile(res, fileName, contentType) {
   const publicFile = path.join(__dirname, 'public', fileName);
   const file = fs.existsSync(rootFile) ? rootFile : publicFile;
   if (contentType) res.type(contentType);
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=86400, stale-while-revalidate=60');
   res.sendFile(file, err => {
     if (err) res.status(404).send(`${fileName} not found`);
   });
@@ -177,6 +181,68 @@ function publicSyncSnapshot() {
     },
     generatedAt: Date.now()
   };
+}
+
+function normalizeLoginId(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function sameAccountRecord(user, loginId) {
+  const q = normalizeLoginId(loginId);
+  if(!user || !q) return false;
+  return normalizeLoginId(user.id) === q ||
+    normalizeLoginId(user.email) === q ||
+    normalizeLoginId(user.username) === q ||
+    String(user.phone || '').trim() === String(loginId || '').trim();
+}
+
+function isAdminRequest(req) {
+  const adminId = req.headers['x-user-id'] || req.query.userId || req.body?.userId;
+  const suppliedSecret = req.headers['x-admin-secret'] || req.query.adminSecret || req.body?.adminSecret || '';
+  const trustedRoleHeader = !!(process.env.ADMIN_API_SECRET && suppliedSecret && suppliedSecret === process.env.ADMIN_API_SECRET);
+  const adminRole = trustedRoleHeader && String(req.headers['x-admin-role'] || req.query.admin || '').toLowerCase() === 'true';
+  const user = adminId ? syncStore.users.get(String(adminId)) : null;
+  return adminRole || !!(user && (user.isAdmin || user.is_admin));
+}
+
+function requireAdmin(req, res, next) {
+  if(isAdminRequest(req)) return next();
+  return res.status(403).json({error:'Admin only'});
+}
+
+function mergeAccountIntoCanonical(userData) {
+  if(!userData) return null;
+  const uid = String(userData.id || userData.userId || userData.key || '').trim();
+  if(!uid) return null;
+  const candidates = Array.from(syncStore.users.values()).filter(u =>
+    u && (u.id === uid ||
+      sameAccountRecord(u, userData.email) ||
+      sameAccountRecord(u, userData.username) ||
+      sameAccountRecord(u, userData.phone))
+  );
+  const canonical = candidates.find(u => u.id === uid) || candidates[0] || {};
+  const canonicalId = canonical.id || uid;
+  const pointCandidates = candidates.map(u => Number(u.points || 0));
+  pointCandidates.push(Number(userData.points || 0), Number(syncStore.points.get(uid)?.points || 0), Number(syncStore.points.get(canonicalId)?.points || 0));
+  const mergedPoints = Math.max(0, ...pointCandidates.filter(Number.isFinite));
+  const merged = {...canonical, ...userData, id: canonicalId, points: mergedPoints, syncedAt: Date.now()};
+
+  candidates.forEach(u => {
+    if(u.id && u.id !== canonicalId) {
+      syncStore.users.delete(u.id);
+      const oldPoint = syncStore.points.get(u.id);
+      if(oldPoint) syncStore.points.delete(u.id);
+      for(const post of syncStore.posts.values()) if(post.author === u.id) post.author = canonicalId;
+      pointCandidates.push(Number(oldPoint?.points || 0));
+    }
+  });
+  syncStore.users.set(canonicalId, merged);
+  syncStore.points.set(canonicalId, {
+    ...(syncStore.points.get(canonicalId) || {}),
+    points: mergedPoints,
+    updatedAt: Date.now()
+  });
+  return merged;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -620,19 +686,33 @@ app.post('/api/ai/vision', async(req,res)=>{
 });
 
 // ── Enhanced Translation API ────────────────────────────────────────────────
+async function googleTranslate(q, targetLanguage='en', sourceLanguage='auto') {
+  if(!GOOGLE_KEY) return {translated:q, translatedText:q, sourceLanguage, targetLanguage, configured:false};
+  const payload = {q, target:targetLanguage, format:'text'};
+  if(sourceLanguage && sourceLanguage !== 'auto') payload.source = sourceLanguage;
+  const r = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_KEY}`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  });
+  const d = await r.json();
+  if(!r.ok) throw new Error(d.error?.message || 'Google Translate failed');
+  const first = d.data?.translations?.[0] || {};
+  return {
+    translated:first.translatedText || q,
+    translatedText:first.translatedText || q,
+    sourceLanguage:first.detectedSourceLanguage || sourceLanguage,
+    targetLanguage,
+    configured:true
+  };
+}
+
 app.post('/api/ai/translate', async(req,res)=>{
   const {text='', targetLanguage='en', sourceLanguage='auto'}=req.body;
   if(!text) return res.status(400).json({error:'text required'});
   
   try {
-    const r=await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({q:text,target:targetLanguage,source:sourceLanguage,format:'text'})
-    });
-    const d=await r.json();
-    const translatedText = d.data?.translations?.[0]?.translatedText||text;
-    const detectedSourceLanguage = d.data?.translations?.[0]?.detectedSourceLanguage||sourceLanguage;
-    res.json({translatedText, sourceLanguage:detectedSourceLanguage, targetLanguage});
+    res.json(await googleTranslate(text, targetLanguage, sourceLanguage));
   }catch(e){ 
     console.error('Translation error:', e);
     res.json({translatedText:text, sourceLanguage:sourceLanguage, targetLanguage}); 
@@ -641,16 +721,34 @@ app.post('/api/ai/translate', async(req,res)=>{
 
 // ── Google Translate ──────────────────────────────────────────
 app.post('/api/translate', async(req,res)=>{
-  const {text,target='en'}=req.body;
+  const {text,target='en',targetLanguage,sourceLanguage='auto'}=req.body;
   if(!text) return res.status(400).json({error:'text required'});
   try {
-    const r=await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({q:text,target,format:'text'})
+    res.json(await googleTranslate(text, targetLanguage || target, sourceLanguage));
+  }catch(e){ res.json({error:'Translation failed', detail:e.message, translated:text, translatedText:text}); }
+});
+
+app.post('/api/translate/batch', async(req,res)=>{
+  const {texts=[], target='en', targetLanguage, sourceLanguage='auto'} = req.body || {};
+  const list = Array.isArray(texts) ? texts.slice(0, 100) : [];
+  if(!list.length) return res.status(400).json({error:'texts required'});
+  const lang = targetLanguage || target;
+  try {
+    if(!GOOGLE_KEY) return res.json({translations:list, translated:list, configured:false});
+    const payload = {q:list, target:lang, format:'text'};
+    if(sourceLanguage && sourceLanguage !== 'auto') payload.source = sourceLanguage;
+    const r = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_KEY}`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
     });
-    const d=await r.json();
-    res.json({translated:d.data?.translations?.[0]?.translatedText||text});
-  }catch(e){ res.status(500).json({error:'Translation failed'}); }
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.error?.message || 'Google Translate batch failed');
+    const translations = (d.data?.translations || []).map((x,i) => x.translatedText || list[i]);
+    res.json({translations, translated:translations, targetLanguage:lang, configured:true});
+  } catch(e) {
+    res.json({error:'Batch translation failed', detail:e.message, translations:list, translated:list});
+  }
 });
 
 // ── Google Vision ─────────────────────────────────────────────
@@ -822,24 +920,28 @@ app.get('/api/payment/nagad/callback', (req,res)=>{
 // Check admin status
 app.get('/api/auth/check-admin', async(req,res)=>{
   try {
-    // For demo: check if user has admin role (in production, verify against database)
-    const isAdmin = req.headers['x-admin-role'] === 'true' || req.query.admin === 'true';
-    res.json({isAdmin, user: {id: 'admin', username: 'Administrator'}});
+    const userId = req.headers['x-user-id'] || req.query.userId;
+    const user = userId ? syncStore.users.get(String(userId)) : null;
+    const isAdmin = isAdminRequest(req);
+    res.json({isAdmin, user: isAdmin ? (user || {id:userId || 'admin', username:'Administrator'}) : null});
   } catch(e) {
     res.json({isAdmin: false, user: null});
   }
 });
 
 // Get dashboard statistics
-app.get('/api/admin/dashboard-stats', async(req,res)=>{
+app.get('/api/admin/dashboard-stats', requireAdmin, async(req,res)=>{
   try {
     // In production: get real stats from database
+    const pendingWithdrawals = syncStore.backups.filter(x => x.type === 'withdrawal' && x.data?.status === 'pending').length;
     const stats = {
       totalUsers: syncStore.users.size,
       activeUsers: new Set(Array.from(onlineSessions.values()).map(s => s.userId)).size,
       activeSessions: onlineSessions.size,
-      totalPosts: 8475, // demo data
-      reports: 23 // demo data
+      totalPosts: syncStore.posts.size,
+      reports: syncStore.backups.filter(x => x.type === 'report').length + Array.from(syncStore.posts.values()).filter(p => Number(p.reports || 0) > 0).length,
+      pendingWithdrawals,
+      totalWithdrawals: syncStore.backups.filter(x => x.type === 'withdrawal').length
     };
     res.json(stats);
   } catch(e) {
@@ -848,14 +950,12 @@ app.get('/api/admin/dashboard-stats', async(req,res)=>{
 });
 
 // Get all users
-app.get('/api/admin/users', async(req,res)=>{
+app.get('/api/admin/users', requireAdmin, async(req,res)=>{
   try {
-    // In production: get real users from database
-    const users = [
-      {id: '1', username: 'user1', email: 'user1@example.com', createdAt: '2024-01-15', status: 'active', avatar: '/default-avatar.png'},
-      {id: '2', username: 'user2', email: 'user2@example.com', createdAt: '2024-02-20', status: 'active', avatar: '/default-avatar.png'},
-      {id: '3', username: 'user3', email: 'user3@example.com', createdAt: '2024-03-10', status: 'inactive', avatar: '/default-avatar.png'}
-    ];
+    const users = Array.from(syncStore.users.values()).map(u => ({
+      ...u,
+      status: u.deleted ? 'deleted' : u.deactivated ? 'deactivated' : u.disabled ? 'disabled' : 'active'
+    }));
     res.json(users);
   } catch(e) {
     res.status(500).json({error: 'Failed to load users'});
@@ -863,11 +963,11 @@ app.get('/api/admin/users', async(req,res)=>{
 });
 
 // Get specific user
-app.get('/api/admin/users/:id', async(req,res)=>{
+app.get('/api/admin/users/:id', requireAdmin, async(req,res)=>{
   try {
     const userId = req.params.id;
-    // In production: get real user from database
-    const user = {id: userId, username: `user${userId}`, email: `user${userId}@example.com`, createdAt: '2024-01-15', status: 'active', postCount: 25};
+    const user = syncStore.users.get(userId);
+    if(!user) return res.status(404).json({error:'User not found'});
     res.json(user);
   } catch(e) {
     res.status(500).json({error: 'Failed to load user'});
@@ -875,23 +975,31 @@ app.get('/api/admin/users/:id', async(req,res)=>{
 });
 
 // Deactivate user
-app.post('/api/admin/users/:id/deactivate', async(req,res)=>{
+app.post('/api/admin/users/:id/deactivate', requireAdmin, async(req,res)=>{
   try {
     const userId = req.params.id;
-    // In production: update user status in database
-    console.log(`Deactivating user ${userId}`);
-    res.json({success: true});
+    const user = syncStore.users.get(userId);
+    if(!user) return res.status(404).json({error:'User not found'});
+    user.deactivated = true;
+    user.updatedAt = Date.now();
+    await persistUser(user).catch(()=>{});
+    res.json({success: true, user});
   } catch(e) {
     res.status(500).json({error: 'Failed to deactivate user'});
   }
 });
 
 // Delete user
-app.delete('/api/admin/users/:id', async(req,res)=>{
+app.delete('/api/admin/users/:id', requireAdmin, async(req,res)=>{
   try {
     const userId = req.params.id;
-    // In production: delete user from database
-    console.log(`Deleting user ${userId}`);
+    const user = syncStore.users.get(userId);
+    if(user) {
+      user.deleted = true;
+      user.deactivated = true;
+      user.updatedAt = Date.now();
+      await persistUser(user).catch(()=>{});
+    }
     res.json({success: true});
   } catch(e) {
     res.status(500).json({error: 'Failed to delete user'});
@@ -899,14 +1007,14 @@ app.delete('/api/admin/users/:id', async(req,res)=>{
 });
 
 // Get all content
-app.get('/api/admin/content', async(req,res)=>{
+app.get('/api/admin/content', requireAdmin, async(req,res)=>{
   try {
-    // In production: get real content from database
-    const content = [
-      {id: '1', title: 'Amazing sunset', author: 'user1', createdAt: '2024-05-10', status: 'active', mediaUrl: '/sample1.jpg'},
-      {id: '2', title: 'Cool video', author: 'user2', createdAt: '2024-05-11', status: 'reported', mediaUrl: '/sample2.jpg'},
-      {id: '3', title: 'Nice photo', author: 'user3', createdAt: '2024-05-12', status: 'active', mediaUrl: '/sample3.jpg'}
-    ];
+    const content = Array.from(syncStore.posts.values()).map(p => ({
+      ...p,
+      title: p.text || p.type || 'Post',
+      status: p.hidden ? 'hidden' : Number(p.reports || 0) > 0 ? 'reported' : 'active',
+      mediaUrl: p.file || p.mediaUrl || ''
+    }));
     res.json(content);
   } catch(e) {
     res.status(500).json({error: 'Failed to load content'});
@@ -914,11 +1022,11 @@ app.get('/api/admin/content', async(req,res)=>{
 });
 
 // Get specific content
-app.get('/api/admin/content/:id', async(req,res)=>{
+app.get('/api/admin/content/:id', requireAdmin, async(req,res)=>{
   try {
     const contentId = req.params.id;
-    // In production: get real content from database
-    const content = {id: contentId, title: `Content ${contentId}`, author: 'user1', createdAt: '2024-05-10', status: 'active'};
+    const content = syncStore.posts.get(contentId);
+    if(!content) return res.status(404).json({error:'Content not found'});
     res.json(content);
   } catch(e) {
     res.status(500).json({error: 'Failed to load content'});
@@ -926,11 +1034,10 @@ app.get('/api/admin/content/:id', async(req,res)=>{
 });
 
 // Delete content
-app.delete('/api/admin/content/:id', async(req,res)=>{
+app.delete('/api/admin/content/:id', requireAdmin, async(req,res)=>{
   try {
     const contentId = req.params.id;
-    // In production: delete content from database
-    console.log(`Deleting content ${contentId}`);
+    syncStore.posts.delete(contentId);
     res.json({success: true});
   } catch(e) {
     res.status(500).json({error: 'Failed to delete content'});
@@ -943,9 +1050,17 @@ app.post('/api/posts/sync', async(req,res)=>{
   try {
     const postData = req.body;
     if(!postData || !postData.id) return res.status(400).json({error:'Post id required'});
-    syncStore.posts.set(postData.id, {...(syncStore.posts.get(postData.id)||{}), ...postData, syncedAt:Date.now()});
-    await persistPost(postData);
+    const savedPost = {...(syncStore.posts.get(postData.id)||{}), ...postData, syncedAt:Date.now()};
+    syncStore.posts.set(postData.id, savedPost);
+    await persistPost(savedPost);
     updateIndexes();
+    io.emit('post:new', {post:savedPost});
+    const author = syncStore.users.get(String(savedPost.author || '')) || {};
+    const audience = new Set([...(author.followers || []), ...(author.following || []), ...(author.autoFriends || []), ...(author.forceFollowed || [])]);
+    for(const userId of audience) {
+      const sid = onlineUsers.get(String(userId));
+      if(sid) io.to(sid).emit('notif:receive', {type:'post', postId:savedPost.id, msg:`${author.name || 'Someone'} created a new post`});
+    }
     console.log(`[Sync] Post: ${postData.id}`);
     res.json({success: true, synced: true, persisted: true, id: postData.id, totalPosts: syncStore.posts.size});
   } catch(e) {
@@ -984,8 +1099,10 @@ app.post('/api/user-data/sync', async(req,res)=>{
     const userData = req.body;
     const uid = userData.id || userData.userId || userData.key;
     if(!uid) return res.status(400).json({error:'user id required'});
-    const prev = syncStore.users.get(uid) || {};
-    const pointState = syncStore.points.get(uid);
+    const mergedUser = mergeAccountIntoCanonical(userData);
+    const canonicalId = mergedUser.id;
+    const prev = syncStore.users.get(canonicalId) || {};
+    const pointState = syncStore.points.get(canonicalId);
     const persistent = await getPersistentUser(uid).catch(()=>null);
     const mergedPoints = Math.max(
       Number(prev.points || 0),
@@ -993,13 +1110,67 @@ app.post('/api/user-data/sync', async(req,res)=>{
       Number(pointState?.points || 0),
       Number(persistent?.points || 0)
     );
-    syncStore.users.set(uid, {...prev, ...userData, id:uid, points:mergedPoints, syncedAt:Date.now()});
-    await persistUser({...prev, ...userData, id:uid, points:mergedPoints});
+    const finalUser = {...prev, ...mergedUser, id:canonicalId, points:mergedPoints, syncedAt:Date.now()};
+    syncStore.users.set(canonicalId, finalUser);
+    syncStore.points.set(canonicalId, {...(syncStore.points.get(canonicalId) || {}), points:mergedPoints, updatedAt:Date.now()});
+    await persistUser(finalUser);
     updateIndexes();
     console.log(`[Sync] User Data: ${userData.key}`);
-    res.json({success: true, synced: true, persisted: true, key: uid, points: mergedPoints, totalUsers: syncStore.users.size});
+    res.json({success: true, synced: true, persisted: true, key: canonicalId, canonicalId, points: mergedPoints, totalUsers: syncStore.users.size});
   } catch(e) {
     res.status(500).json({error: 'User data sync failed', detail:e.message});
+  }
+});
+
+app.post('/api/account/deactivate', async(req,res)=>{
+  try {
+    const {userId} = req.body || {};
+    if(!userId) return res.status(400).json({error:'userId required'});
+    const user = syncStore.users.get(userId) || await getPersistentUser(userId).catch(()=>null);
+    if(!user) return res.status(404).json({error:'User not found'});
+    user.deactivated = true;
+    user.updatedAt = Date.now();
+    syncStore.users.set(userId, user);
+    await persistUser(user).catch(()=>{});
+    res.json({success:true, userId});
+  } catch(e) {
+    res.status(500).json({error:'Deactivate failed', detail:e.message});
+  }
+});
+
+app.delete('/api/account/:id', async(req,res)=>{
+  try {
+    const userId = req.params.id;
+    const user = syncStore.users.get(userId) || {};
+    user.id = userId;
+    user.deleted = true;
+    user.deactivated = true;
+    user.updatedAt = Date.now();
+    syncStore.users.set(userId, user);
+    syncStore.points.delete(userId);
+    for(const [postId, post] of syncStore.posts) if(post.author === userId) syncStore.posts.delete(postId);
+    await persistUser(user).catch(()=>{});
+    res.json({success:true, userId});
+  } catch(e) {
+    res.status(500).json({error:'Delete account failed', detail:e.message});
+  }
+});
+
+app.post('/api/reports', async(req,res)=>{
+  try {
+    const {from, postId='', message='', type='feedback'} = req.body || {};
+    if(!from || !message) return res.status(400).json({error:'from and message required'});
+    const report = {id:'rep_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'), from, postId, message, type, status:'open', at:Date.now()};
+    syncStore.backups.unshift({id:report.id, at:Date.now(), type:'report', data:report});
+    if(postId && syncStore.posts.has(postId)) {
+      const post = syncStore.posts.get(postId);
+      post.reports = Number(post.reports || 0) + 1;
+      post.updatedAt = Date.now();
+      await persistPost(post).catch(()=>{});
+    }
+    res.json({success:true, report});
+  } catch(e) {
+    res.status(500).json({error:'Report failed', detail:e.message});
   }
 });
 
@@ -1019,17 +1190,84 @@ app.post('/api/withdrawals/request', async(req,res)=>{
     const {userId, amount, method='bkash', account=''} = req.body || {};
     const amt = Math.trunc(Number(amount || 0));
     if(!userId || amt <= 0 || !account) return res.status(400).json({error:'userId, amount and account required'});
-    const user = await getPersistentUser(userId);
+    let user = null;
+    let persistentReady = true;
+    try {
+      user = await getPersistentUser(userId);
+    } catch(e) {
+      persistentReady = false;
+      user = syncStore.users.get(userId) || null;
+    }
     if(!user) return res.status(404).json({error:'User not found'});
-    if(!user.kyc_verified) return res.status(403).json({error:'KYC verification required'});
+    if(!(user.kyc_verified || user.kycVerified)) return res.status(403).json({error:'KYC verification required'});
     if(Number(user.points || 0) < amt) return res.status(400).json({error:'Insufficient points'});
     const wd = {id:'wd_' + Date.now() + '_' + crypto.randomBytes(4).toString('hex'), user_id:userId, amount:amt, method, account, status:'pending', created_at:new Date().toISOString()};
-    await supabaseRest('withdrawals', 'POST', wd, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
-    await creditUserPoints(userId, -amt, `Withdrawal request via ${method}`, 'withdraw', 'withdraw_' + wd.id);
+    if(persistentReady) {
+      await supabaseRest('withdrawals', 'POST', wd, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
+      await creditUserPoints(userId, -amt, `Withdrawal request via ${method}`, 'withdraw', 'withdraw_' + wd.id);
+    } else {
+      const nextPoints = Math.max(0, Number(user.points || 0) - amt);
+      user.points = nextPoints;
+      syncStore.users.set(userId, user);
+      syncStore.points.set(userId, {
+        ...(syncStore.points.get(userId) || {}),
+        points: nextPoints,
+        updatedAt: Date.now(),
+        history: [...(syncStore.points.get(userId)?.history || []).slice(-49), {points:-amt,label:`Withdrawal request via ${method}`,at:Date.now()}]
+      });
+    }
     syncStore.backups.unshift({id:wd.id, at:Date.now(), type:'withdrawal', data:wd});
-    res.json({success:true, withdrawal:wd});
+    res.json({success:true, withdrawal:wd, persisted:persistentReady});
   } catch(e) {
     res.status(500).json({error:'Withdrawal request failed', detail:e.message});
+  }
+});
+
+app.get('/api/admin/withdrawals', requireAdmin, async(req,res)=>{
+  try {
+    let rows = [];
+    try {
+      rows = await supabaseRest('withdrawals', 'GET', null, 'select=*&order=created_at.desc&limit=200');
+    } catch(e) {
+      rows = syncStore.backups.filter(x => x.type === 'withdrawal').map(x => x.data).sort((a,b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+    }
+    res.json({success:true, withdrawals:rows});
+  } catch(e) {
+    res.status(500).json({error:'Failed to load withdrawals', detail:e.message});
+  }
+});
+
+app.post('/api/admin/withdrawals/:id/:action', requireAdmin, async(req,res)=>{
+  try {
+    const {id, action} = req.params;
+    if(!['approve','reject'].includes(action)) return res.status(400).json({error:'action must be approve or reject'});
+    const status = action === 'approve' ? 'approved' : 'rejected';
+    const stamp = action === 'approve' ? 'approved_at' : 'rejected_at';
+    let wd = null;
+    try {
+      const rows = await supabaseRest('withdrawals', 'GET', null, `id=eq.${encodeURIComponent(id)}&select=*`);
+      wd = Array.isArray(rows) ? rows[0] : null;
+      if(!wd) return res.status(404).json({error:'Withdrawal not found'});
+      await supabaseRest('withdrawals', 'PATCH', {status, [stamp]:new Date().toISOString()}, `id=eq.${encodeURIComponent(id)}`, 'return=representation');
+      if(action === 'reject') await creditUserPoints(wd.user_id, Number(wd.amount || 0), 'Withdrawal rejected refund', 'withdraw_refund', 'refund_' + id);
+    } catch(e) {
+      const entry = syncStore.backups.find(x => x.type === 'withdrawal' && x.id === id);
+      wd = entry?.data;
+      if(!wd) return res.status(404).json({error:'Withdrawal not found'});
+      wd.status = status;
+      wd[stamp] = new Date().toISOString();
+      if(action === 'reject') {
+        const user = syncStore.users.get(wd.user_id);
+        if(user) {
+          user.points = Number(user.points || 0) + Number(wd.amount || 0);
+          syncStore.users.set(wd.user_id, user);
+          syncStore.points.set(wd.user_id, {...(syncStore.points.get(wd.user_id) || {}), points:user.points, updatedAt:Date.now()});
+        }
+      }
+    }
+    res.json({success:true, withdrawal:{...wd, status}});
+  } catch(e) {
+    res.status(500).json({error:'Withdrawal update failed', detail:e.message});
   }
 });
 
@@ -1039,6 +1277,16 @@ app.post('/api/media/sync', async(req,res)=>{
     const mediaData = req.body;
     if(!mediaData || !mediaData.id) return res.status(400).json({error:'media id required'});
     syncStore.media.set(mediaData.id, {...(syncStore.media.get(mediaData.id)||{}), ...mediaData, syncedAt:Date.now()});
+    supabaseRest('media_objects', 'POST', {
+      id:mediaData.id,
+      user_id:mediaData.userId || mediaData.user_id || null,
+      post_id:mediaData.postId || mediaData.post_id || null,
+      provider:mediaData.provider || 'local',
+      url:mediaData.url || mediaData.data || '',
+      mime:mediaData.type || mediaData.mime || '',
+      size:Math.trunc(Number(mediaData.size || 0)),
+      created_at:new Date(mediaData.at || Date.now()).toISOString()
+    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(()=>{});
     console.log(`[Sync] Media: ${mediaData.id} - ${mediaData.type}`);
     res.json({success: true, synced: true, id: mediaData.id, storage: 'indexed-memory'});
   } catch(e) {
@@ -1347,6 +1595,15 @@ io.on('connection', socket=>{
     from = socket.userId || from;
     const toSid=onlineUsers.get(to);
     const payload={from,text,media,msgId,timestamp:timestamp||Date.now()};
+    supabaseRest('messages', 'POST', {
+      id:msgId || 'm_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
+      from_user:from,
+      to_user:to,
+      text:text || '',
+      media:media || null,
+      read:false,
+      created_at:new Date(payload.timestamp).toISOString()
+    }, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation').catch(()=>{});
     if(toSid) io.to(toSid).emit('chat:message',payload);
     socket.emit('chat:message:sent',{msgId,to,timestamp:payload.timestamp});
     // Push notification if offline
@@ -1354,7 +1611,10 @@ io.on('connection', socket=>{
   });
   socket.on('chat:typing',  ({to,from,isTyping})=>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:typing',{from,isTyping}); });
   socket.on('chat:read',    ({to,from,msgId})   =>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:read',{from,msgId}); });
-  socket.on('chat:delete',  ({to,msgId})         =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:delete',{msgId}); });
+  socket.on('chat:delete',  ({to,msgId,scope='everyone'})=>{
+    const s=onlineUsers.get(to);
+    if(s) io.to(s).emit('chat:delete',{msgId,scope,from:socket.userId});
+  });
 
   // Rooms
   socket.on('room:join',    ({roomId,userId})=>{ socket.join(roomId); if(!rooms.has(roomId)) rooms.set(roomId,new Set()); rooms.get(roomId).add(socket.id); socket.to(roomId).emit('room:user:joined',{userId}); });
@@ -1362,13 +1622,37 @@ io.on('connection', socket=>{
   socket.on('room:message', ({roomId,from,text,media,timestamp})=>{ from = socket.userId || from; io.to(roomId).emit('room:message',{from,text,media,timestamp:timestamp||Date.now()}); });
 
   // Live Stream
-  socket.on('live:start',   ({streamerId,title})=>{ streamerId = socket.userId || streamerId; socket.join('live:'+streamerId); io.emit('live:new',{streamerId,title,viewers:0}); });
+  socket.on('live:start',   ({streamerId,title,postId})=>{
+    streamerId = socket.userId || streamerId;
+    socket.join('live:'+streamerId);
+    supabaseRest('live_events', 'POST', {
+      id:postId || 'live_' + Date.now(),
+      post_id:postId || null,
+      streamer_id:streamerId,
+      status:'live',
+      started_at:new Date().toISOString()
+    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(()=>{});
+    io.emit('live:new',{streamerId,title,postId,viewers:0});
+  });
   socket.on('live:comment', ({streamerId,from,text})=>{ from = socket.userId || from; io.to('live:'+streamerId).emit('live:comment',{from,text,t:Date.now()}); });
   socket.on('live:reaction',({streamerId,emoji})=>{ io.to('live:'+streamerId).emit('live:reaction',{emoji}); });
-  socket.on('live:end',     ({streamerId})=>{ io.to('live:'+streamerId).emit('live:ended',{streamerId}); });
+  socket.on('live:end',     ({streamerId,postId})=>{
+    streamerId = socket.userId || streamerId;
+    if(postId) supabaseRest('live_events', 'PATCH', {status:'ended', ended_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(postId)}`, 'return=representation').catch(()=>{});
+    io.to('live:'+streamerId).emit('live:ended',{streamerId,postId});
+  });
   socket.on('live:gift',    ({streamerId,from,gift})=>{ io.to('live:'+streamerId).emit('live:gift',{from,gift,t:Date.now()}); });
 
   // Posts
+  socket.on('post:create', ({post})=>{
+    if(!post || !post.id) return;
+    if(socket.userId && post.author && String(post.author) !== String(socket.userId)) return socket.emit('auth:error',{error:'post_author_mismatch'});
+    const savedPost = {...(syncStore.posts.get(post.id)||{}), ...post, author:socket.userId || post.author, syncedAt:Date.now()};
+    syncStore.posts.set(savedPost.id, savedPost);
+    persistPost(savedPost).catch(()=>{});
+    updateIndexes();
+    io.emit('post:new', {post:savedPost});
+  });
   socket.on('post:react',   ({postId,userId,reaction})=>{ userId = socket.userId || userId; io.emit('post:reacted',{postId,userId,reaction}); });
   socket.on('post:comment', ({postId,authorId,comment})=>{ const s=onlineUsers.get(authorId); if(s) io.to(s).emit('post:new:comment',{postId,comment}); io.emit('post:commented',{postId,comment}); });
 
