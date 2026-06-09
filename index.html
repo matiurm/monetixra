@@ -3430,6 +3430,52 @@ const hide = id => { let e = G(id); if(e) e.style.display = 'none'; };
 const show = id => { let e = G(id); if(e) e.style.display = 'block'; };
 const flex = id => { let e = G(id); if(e) e.style.display = 'flex'; };
 
+function collectLoginCandidates(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return [];
+  const parts = raw
+    .split(/[\/|,;:]+/)
+    .map(p => String(p || '').trim())
+    .filter(Boolean);
+  const candidates = new Set();
+  const add = (v) => {
+    const s = String(v || '').trim();
+    if (!s) return;
+    candidates.add(s);
+    candidates.add(s.toLowerCase());
+    const compact = s.replace(/\s+/g, '');
+    if (compact) {
+      candidates.add(compact);
+      candidates.add(compact.toLowerCase());
+    }
+    const digits = compact.replace(/\D/g, '');
+    if (digits) {
+      candidates.add(digits);
+      candidates.add(digits.replace(/^0+/, ''));
+    }
+  };
+  parts.forEach(add);
+  add(raw);
+  return Array.from(candidates);
+}
+
+function accountMatchesLogin(user, loginCandidates) {
+  const values = [user?.id, user?.email, user?.username, user?.phone].filter(v => v !== undefined && v !== null);
+  return loginCandidates.some(candidate => {
+    const input = String(candidate || '').trim();
+    if (!input) return false;
+    const inputDigits = input.replace(/\D/g, '');
+    return values.some(value => {
+      const normalizedValue = String(value || '').trim();
+      if (!normalizedValue) return false;
+      const normalizedValueDigits = normalizedValue.replace(/\D/g, '');
+      return normalizedValue.toLowerCase() === input.toLowerCase() ||
+        normalizedValue.replace(/\s+/g, '').toLowerCase() === input.replace(/\s+/g, '').toLowerCase() ||
+        (inputDigits && normalizedValueDigits && normalizedValueDigits === inputDigits);
+    });
+  });
+}
+
 // ── Password hashing (SHA-256) with Fallback ───────────────────────────────
 async function hashPass(pw) {
   try {
@@ -3993,7 +4039,8 @@ function otpNext(inp,i) { if(inp.value && i<5) G('ob'+(i+1))?.focus(); }
 async function doLogin() {
   try {
     let rawId = V('liId');
-    let id = String(rawId || '').trim();
+    const loginCandidates = collectLoginCandidates(rawId);
+    let id = String(loginCandidates[0] || rawId || '').trim();
     let pw = V('liPw');
     if(!id) return toast('e','Enter your email, phone or username');
     if(!pw) return toast('e','Enter your password');
@@ -4001,7 +4048,11 @@ async function doLogin() {
     let idLower = id.toLowerCase();
     let normalizedPhone = id.replace(/\D/g, '');
     let normalizedAdminPhone = String(ADMIN_PHONE || '').replace(/\D/g, '');
-    let isAdminId = idLower === ADMIN_EMAIL.toLowerCase() || normalizedPhone === normalizedAdminPhone || idLower === 'admin';
+    let isAdminId = loginCandidates.some(candidate => {
+      const candidateText = String(candidate || '').trim().toLowerCase();
+      const candidatePhone = candidateText.replace(/\D/g, '');
+      return candidateText === ADMIN_EMAIL.toLowerCase() || candidatePhone === normalizedAdminPhone || candidateText === 'admin';
+    });
     let isAdminPassword = pw === ADMIN_PASS || pw === ADMIN_PASS_DEFAULT || pw === ADMIN_PASS_FALLBACK;
     let foundUid = null;
 
@@ -4027,11 +4078,12 @@ async function doLogin() {
     }
 
     // Supabase auth for email logins when not using local admin fallback
-    if (!foundUid && id.includes('@') && isSupabaseReady()) {
-      const { data: authData, error: authError } = await supabaseSignIn(id, pw);
+    const loginEmail = (loginCandidates.find(c => String(c || '').includes('@')) || id).trim();
+    if (!foundUid && loginEmail.includes('@') && isSupabaseReady()) {
+      const { data: authData, error: authError } = await supabaseSignIn(loginEmail, pw);
       if (!authError && authData?.user) {
         let authUid = authData.user.id;
-        let emailLower = id.toLowerCase();
+        let emailLower = loginEmail.toLowerCase();
         for (let k in D.users) {
           let u = D.users[k];
           if (!u) continue;
@@ -4044,9 +4096,9 @@ async function doLogin() {
           D.users[newId] = {
             id: newId,
             authUid,
-            name: id.split('@')[0],
-            username: id.split('@')[0],
-            email: id,
+            name: loginEmail.split('@')[0],
+            username: loginEmail.split('@')[0],
+            email: loginEmail,
             password: await hashPass(pw),
             points: 50,
             verified: true,
@@ -4085,9 +4137,7 @@ async function doLogin() {
       for(let k in D.users) {
         let u = D.users[k];
         if(!u) continue;
-        if((u.email||'').toLowerCase()===idLower ||
-           (u.phone||'')=== id ||
-           (u.username||'').toLowerCase()===idLower) {
+        if(accountMatchesLogin(u, loginCandidates)) {
           foundUid = k; break;
         }
       }
