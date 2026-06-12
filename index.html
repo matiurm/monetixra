@@ -173,14 +173,14 @@ window.atOptions_468x60 = {
 // ═══════════════════════════════════════════════════════════
 
 // ── Google APIs ─────────────────────────────────────────────
-const GOOGLE_API_KEY    = '';
-const GOOGLE_ACCESS_KEY = '';
-const GOOGLE_API_KEY2   = '';
+const GOOGLE_API_KEY    = 'AIzaSyCk05RbvCwZmX42jd-z1STsjSwn3uvkqzU';
+const GOOGLE_ACCESS_KEY = 'a90da8236a6227623551a3088d94f413';
+const GOOGLE_API_KEY2   = 'AIzaSyANIywK7V-Zoh_2Y_xnmsO8nAErDpSqUHs';
 
 // ── Supabase Database ───────────────────────────────────────
 const SUPABASE_PROJECT_ID = 'rkiyxsskrypowghxfauy';
-const SUPABASE_URL       = 'https://rkiyxsskrypowghxfauy.supabase.co';
-const SUPABASE_ANON_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE';
+const SUPABASE_URL       = 'https://rgximkhnhxgaonrxzzxl.supabase.co';
+const SUPABASE_ANON_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
 
 // ── MEGA Storage ───────────────────────────────────────────────
 const MEGA_API_KEY = '';
@@ -218,7 +218,7 @@ const ADSTERRA_NATIVE_BANNER_ID  = '29179788';
 const ADSTERRA_BANNER_160X30_ID = '29179789';
 const ADSTERRA_BANNER_468X60_ID = '29179790';
 const ADSTERRA_BANNER_300X50_ID = '29179791';
-const GOOGLE_VISION_KEY = '';
+const GOOGLE_VISION_KEY = 'AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg';
 
 // ── Supabase ─────────────────────────────────────────────────
 const SUPABASE_KEY  = SUPABASE_ANON_KEY;
@@ -330,7 +330,7 @@ async function syncCloudBackup() {
 }
 
 // ── Metered TURN (WebRTC) ────────────────────────────────────
-const METERED_API_KEY = '';
+const METERED_API_KEY = 'ffb21c8dfcff4bf229f8973e77541a11edc0';
 
 // ── OpenAI ───────────────────────────────────────────────────
 const OPENAI_API_KEY = '';  // Server-only. Set OPENAI_API_KEY in backend environment.
@@ -1754,6 +1754,9 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   });
 })();
 </script>
+
+<!-- Income Ads Hub CSS -->
+<link rel="stylesheet" href="css/income-ads-hub.css">
 </head>
 <body>
 <div id="remote-container"></div>
@@ -2733,17 +2736,6 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 </div>
 
 <!-- ========== BOTTOM NAV ========== -->
-<div id="mxtBottomLiveAd" class="mxt-bottom-live-ad" data-ad-type="bottom_banner">
-  <div class="mxt-bottom-track" id="mxtBottomAdTrack">
-    <span>Sponsored</span>
-    <b>Google AdSense</b>
-    <span>Adsterra native</span>
-    <b>AdMob banner</b>
-    <span>Rewarded video</span>
-    <b>Creator offer</b>
-  </div>
-  <button class="mxt-bottom-claim" onclick="mxtClaimBottomAd?.(this)">+4 pts</button>
-</div>
 <div id="btmNav">
   <button class="bn on" data-p="feed" onclick="nav('feed')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🏠</span><span class="lbl">Feed</span></button>
   <button class="bn" data-p="explore" onclick="nav('explore')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🔭</span><span class="lbl">Explore</span></button>
@@ -4461,6 +4453,13 @@ function logout(skipConfirm = false) {
 }
 function deleteAccount() {
   if(!CU) return;
+  
+  // Use new modular system
+  if(typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.deleteAccount === 'function') {
+    return MonetixraAccountManagement.deleteAccount();
+  }
+  
+  // Fallback
   let confirmText = prompt('Type DELETE to permanently delete your account:');
   if(confirmText !== 'DELETE') { toast('e','Cancelled — type DELETE to confirm'); return; }
   let uid = CU.id;
@@ -5234,17 +5233,19 @@ function addComment(pid) {
   let post=D.posts.find(p=>p.id===pid); if(!post) return;
   post.comments=post.comments||[];
   post.comments.push({id:'c'+Date.now(), by:CU.id, text:txt, likes:0, reacts:{}, at:Date.now()});
-  // Notify post author
   if(post.author !== CU.id) addNotif(post.author,'comment','💬',CU.name+' commented: '+txt.substring(0,50));
   addPts(5,'Commented','engage');
   inp.value=''; saveData(); refreshPost(pid);
+  if (typeof addToSyncQueue === 'function' && !navigator.onLine) {
+    addToSyncQueue({ type: 'comment', data: { postId: pid, post, text: txt, userId: CU.id } }).catch(()=>{});
+  }
 }
 function addReply(pid,cid) { let inp=G(`rInp-${cid}`); if(!inp||!CU) return; let txt=inp.value.trim(); if(!txt) return; let post=D.posts.find(p=>p.id===pid); if(!post) return; let findCmt=(cmts)=>{ for(let c of cmts||[]){ if(c.id===cid) return c; if(c.replies){ let f=findCmt(c.replies); if(f) return f; } } return null; }; let cmt=findCmt(post.comments); if(!cmt) return; cmt.replies=cmt.replies||[]; cmt.replies.push({id:'r'+Date.now(), by:CU.id, text:txt, likes:0, at:Date.now() }); addPts(3,'Replied','engage'); inp.value=''; saveData(); refreshPost(pid); }
 function reactComment(pid,cid,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post) return; let findCmt=(cmts)=>{ for(let c of cmts||[]){ if(c.id===cid) return c; if(c.replies){ let f=findCmt(c.replies); if(f) return f; } } return null; }; let c=findCmt(post.comments); if(c){ c.reacts=c.reacts||{}; c.reacts[emoji]=(c.reacts[emoji]||0)+1; addPts(1,'Comment React','engage'); saveData(); refreshPost(pid); } }
 function react(pid,key,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.reactions=post.reactions||{like:[],love:[],haha:[],wow:[],sad:[],angry:[],fire:[],diamond:[]}; let arr=post.reactions[key]||[]; let idx=arr.indexOf(CU.id); if(idx>-1) arr.splice(idx,1); else { arr.push(CU.id); addPts(2,'Reaction','engage'); spawnReaction(pid,emoji); } post.reactions[key]=arr; saveData(); refreshReacts(pid,post); }
 function spawnReaction(pid,emoji) { let el=document.querySelector(`[data-post-id="${pid}"]`); if(!el) return; let f=document.createElement('div'); f.className='react-float'; f.textContent=emoji; f.style.cssText=`left:${20+Math.random()*60}%;top:50%;`; el.style.position='relative'; el.appendChild(f); setTimeout(()=>f.remove(),800); }
 function refreshReacts(pid,post) { let bar=G(`react-${pid}`); if(!bar) return; bar.innerHTML=''; ['👍','❤️','😂','😮','😢','😡','🔥','💎'].forEach(emoji=>{ let key={'👍':'like','❤️':'love','😂':'haha','😮':'wow','😢':'sad','😡':'angry','🔥':'fire','💎':'diamond'}[emoji]; let cnt=post.reactions?.[key]?.length||0; let active=post.reactions?.[key]?.includes(CU?.id)?'active':''; let btn=document.createElement('div'); btn.className=`react-btn ${active}`; btn.onclick=()=>react(pid,key,emoji); btn.innerHTML=`${emoji}${cnt?`<span class="rcnt">${cnt}</span>`:''}`; bar.appendChild(btn); }); }
-function likePost(pid,btn) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.likedBy=post.likedBy||[]; let idx=post.likedBy.indexOf(CU.id); if(idx>-1){ post.likedBy.splice(idx,1); btn.classList.remove('liked'); btn.innerHTML='🤍 <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; } else { post.likedBy.push(CU.id); btn.classList.add('liked'); btn.innerHTML='❤️ <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; addPts(3,'Liked','engage'); addNotif(post.author,'like','❤️',`${CU.name} liked your post`,pid); } saveData(); }
+function likePost(pid,btn) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.likedBy=post.likedBy||[]; let idx=post.likedBy.indexOf(CU.id); if(idx>-1){ post.likedBy.splice(idx,1); btn.classList.remove('liked'); btn.innerHTML='🤍 <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; } else { post.likedBy.push(CU.id); btn.classList.add('liked'); btn.innerHTML='❤️ <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; addPts(3,'Liked','engage'); addNotif(post.author,'like','❤️',`${CU.name} liked your post`,pid); } saveData(); if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'like', data: { postId: pid, likedBy: post.likedBy || [], userId: CU.id } }).catch(()=>{}); } }
 function toggleFlower(pid, btn) {
   if(!CU) return;
   let post = D.posts.find(p => p.id === pid);
@@ -6196,6 +6197,19 @@ function submitPost() {
   saveData();
   if(socketReady && socket) socket.emit('post:create', {post});
   OfflineCache.save(post);
+  if (typeof addToSyncQueue === 'function') {
+    const syncPayload = { ...post, timestamp: post.createdAt || Date.now() };
+    if (!navigator.onLine) {
+      addToSyncQueue({ type: 'post', data: syncPayload }).catch(()=>{});
+      toast('i', '📶 Offline: post queued for sync');
+    } else {
+      fetch('/api/posts/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...syncPayload, syncedAt: Date.now() })
+      }).catch(() => addToSyncQueue({ type: 'post', data: syncPayload }).catch(()=>{}));
+    }
+  }
   closeModal('postModal');
   rFeed();
   window.scrollTo({top:0, behavior:'smooth'});
@@ -6212,21 +6226,41 @@ function toggleAiPanel(){
   let p=G('aiPanelSection');
   if(p) p.style.display=p.style.display==='none'?'block':'none';
 }
+function setComposerText(text, label='AI suggestion') {
+  const editor = document.getElementById('postEditor');
+  if (editor) {
+    editor.textContent = text;
+    editor.focus?.();
+  }
+  const out = G('aiOutput');
+  if (out) {
+    out.innerHTML = `<div class="ai-caption-result" style="cursor:pointer;">✨ ${esc(text)}<br><small style="color:var(--t3);">${esc(label)} — ready to post</small></div>`;
+  }
+}
 async function aiGenerateCaption(fromMedia=false) {
+  // Use new AI features system
+  if(typeof MonetixraAI !== 'undefined' && typeof MonetixraAI.generateCaption === 'function') {
+    // If called from media selection, show media type picker
+    if(fromMedia) {
+      const mediaType = await MonetixraAI.showMediaTypeSelector();
+      if(!mediaType) return;
+      return MonetixraAI.generateCaption(mediaType);
+    }
+    return MonetixraAI.generateCaption('photo');
+  }
+  
+  // Fallback
   let out = G('aiOutput');
   let editor = document.getElementById('postEditor');
   let text = editor ? editor.innerText.trim() : 'social media post';
-  out.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>AI generating...</span></div>';
+  if (out) out.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>AI generating...</span></div>';
   try {
-    // If triggered from media upload, attempt media-specific flow
     if (fromMedia && pfData) {
       if (pfMime && pfMime.startsWith('image/')) {
-        // Image -> leverage object detection which also suggests caption/hashtags
         await aiDetectObjects();
         return;
       }
       if (pfMime && (pfMime.startsWith('audio/') || pfMime.startsWith('video/'))) {
-        // Try server-side transcription if available
         try {
           const r = await fetch('/api/ai/transcribe',{
             method:'POST',headers:{'Content-Type':'application/json'},
@@ -6234,44 +6268,58 @@ async function aiGenerateCaption(fromMedia=false) {
           });
           const d = await r.json();
           let cap = d.text || d.transcript || (`Auto-caption for ${pfName||'media'}`);
-          out.innerHTML = `<div class="ai-caption-result" onclick="if(editor)editor.innerHTML=this.innerText" style="cursor:pointer;">✨ ${esc(cap)}<br><small style="color:var(--t3);">Tap to use</small></div>`;
+          setComposerText(cap, 'Media caption');
           return;
         } catch (e) {
-          // fallback to filename-based caption
-          out.innerHTML = `<div class="ai-caption-result" onclick="if(editor)editor.innerHTML=this.innerText" style="cursor:pointer;">✨ Auto-caption: ${esc(pfName||'media')}.<br><small style="color:var(--t3);">Fallback caption — integrate server ASR for full transcription</small></div>`;
+          let fallback = `Auto-caption: ${pfName||'media'} — ready to publish`;
+          setComposerText(fallback, 'Fallback media caption');
           return;
         }
       }
     }
 
-    // Default text-based caption generation
     const r = await fetch('/api/ai/caption',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageDescription:text||'amazing post',tone:'engaging',hashtags:true})});
     const d = await r.json();
-    out.innerHTML = `<div class="ai-caption-result" onclick="if(editor)editor.innerHTML=this.innerText" style="cursor:pointer;">✨ ${esc(d.caption||'Great post!')}<br><small style="color:var(--t3);">Tap to use</small></div>`;
+    const caption = d.caption || 'Great post!';
+    setComposerText(caption, 'AI caption');
   } catch(e) {
-    out.innerHTML = '<div class="ai-caption-result">✨ Amazing content! 🔥 #Monetixra #Trending #Viral #Crypto #NFT</div>';
+    const fallback = 'Amazing content! 🔥 #Monetixra #Trending #Viral #Crypto #NFT';
+    setComposerText(fallback, 'Fallback caption');
   }
 }
 async function aiSuggestHashtags() {
+  // Use new AI features system
+  if(typeof MonetixraAI !== 'undefined' && typeof MonetixraAI.suggestHashtags === 'function') {
+    return MonetixraAI.suggestHashtags();
+  }
+  
+  // Fallback
   let area=G('hashtagSuggestArea');
-  area.innerHTML='<small style="color:var(--t3);">Loading AI hashtags...</small>';
+  if (area) area.innerHTML='<small style="color:var(--t3);">Loading AI hashtags...</small>';
   let editor=document.getElementById('postEditor');
   let text=editor?editor.innerText.trim():'social media content';
   try {
     const r=await fetch('/api/ai/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:`Generate 12 trending hashtags for: "${text}". Return ONLY hashtags separated by spaces, no explanation.`}],model:'openai'})});
     const d=await r.json();
     let tags=(d.reply||'').match(/#\w+/g)||['#Bangladesh','#Trending','#Viral','#Monetixra','#Crypto','#NFT','#AI','#Creator','#Digital','#Content'];
-    area.innerHTML='';
-    tags.forEach(tag=>{let t=document.createElement('span');t.className='ai-tag suggested';t.textContent=tag;t.onclick=()=>{let inp=G('postTags');if(inp)inp.value+=(inp.value?' ':'')+tag;};area.appendChild(t);});
+    if (area) { area.innerHTML=''; tags.forEach(tag=>{let t=document.createElement('span');t.className='ai-tag suggested';t.textContent=tag;t.onclick=()=>{let inp=G('postTags');if(inp)inp.value+=(inp.value?' ':'')+tag;};area.appendChild(t);}); }
+    let inp=G('postTags'); if(inp) inp.value=(inp.value+' '+tags.join(' ')).trim();
   } catch(e){
-    area.innerHTML='';
-    ['#Bangladesh','#Trending','#Viral','#Monetixra','#Crypto','#NFT','#AI','#Metaverse'].forEach(tag=>{let t=document.createElement('span');t.className='ai-tag suggested';t.textContent=tag;t.onclick=()=>{let inp=G('postTags');if(inp)inp.value+=(inp.value?' ':'')+tag;};area.appendChild(t);});
+    const fallback=['#Bangladesh','#Trending','#Viral','#Monetixra','#Crypto','#NFT','#AI','#Metaverse'];
+    if (area) { area.innerHTML=''; fallback.forEach(tag=>{let t=document.createElement('span');t.className='ai-tag suggested';t.textContent=tag;t.onclick=()=>{let inp=G('postTags');if(inp)inp.value+=(inp.value?' ':'')+tag;};area.appendChild(t);}); }
+    let inp=G('postTags'); if(inp) inp.value=(inp.value+' '+fallback.join(' ')).trim();
   }
 }
 async function aiDetectObjects() {
+  // Use new AI features system
+  if(typeof MonetixraAI !== 'undefined' && typeof MonetixraAI.detectObjects === 'function') {
+    return MonetixraAI.detectObjects();
+  }
+  
+  // Fallback
   if(!pfData){ toast('w','Upload an image first'); return; }
   let out=G('aiOutput');
-  out.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Analyzing with Vision AI...</span></div>';
+  if (out) out.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Analyzing with Vision AI...</span></div>';
   try {
     const VISION_KEY = GOOGLE_VISION_KEY;
     if(!VISION_KEY) throw new Error('Vision API key is not configured');
@@ -6281,17 +6329,26 @@ async function aiDetectObjects() {
     let labels=(d.responses?.[0]?.labelAnnotations||[]).map(l=>l.description).join(', ');
     let safety=d.responses?.[0]?.safeSearchAnnotation||{};
     let safe=(safety.adult==='UNLIKELY'||safety.adult==='VERY_UNLIKELY');
-    if(!safe){ toast('e','⚠️ Image may contain inappropriate content'); out.innerHTML='<div class="ai-caption-result" style="color:var(--c5);">⚠️ Unsafe content detected. This image cannot be posted.</div>'; pfData=null; return; }
-    out.innerHTML=`<div class="ai-caption-result">👁️ Detected: ${labels||'Beautiful image'}.<br><small style="color:var(--t3);">✅ Safe to post</small></div>`;
-    // Auto-suggest hashtags
+    if(!safe){ toast('e','⚠️ Image may contain inappropriate content'); if(out) out.innerHTML='<div class="ai-caption-result" style="color:var(--c5);">⚠️ Unsafe content detected. This image cannot be posted.</div>'; pfData=null; return; }
+    const caption = `Detected: ${labels||'Beautiful image'}.`;
+    setComposerText(caption, 'Object detection');
     let tags=labels.split(', ').slice(0,5).map(l=>'#'+l.replace(/\s+/g,''));
     let inp=G('postTags');
     if(inp && tags.length) inp.value=(inp.value+' '+tags.join(' ')).trim();
   } catch(e){
-    out.innerHTML='<div class="ai-caption-result">👁️ Analysis complete. Image looks great!</div>';
+    if(out) out.innerHTML='<div class="ai-caption-result">👁️ Analysis complete. Image looks great!</div>';
+    setComposerText('Image looks great and is ready to post.', 'Object detection');
   }
 }
 async function aiTranslate() {
+  // Use new AI features system
+  if(typeof MonetixraAI !== 'undefined' && typeof MonetixraAI.translateCaption === 'function') {
+    let targetLang=prompt('Target language code (en, bn, hi, es, fr, de, zh, ja, ar, ru, etc.)', 'en');
+    if(!targetLang) return;
+    return MonetixraAI.translateCaption(targetLang);
+  }
+  
+  // Fallback
   let editor=document.getElementById('postEditor');
   let text=editor?.innerText;
   if(!text){ toast('w','Enter text to translate'); return; }
@@ -6304,7 +6361,7 @@ async function aiTranslate() {
     const r=await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:text,target:targetLang,format:'text'})});
     const d=await r.json();
     let translated=d.data?.translations?.[0]?.translatedText||text;
-    if(editor) editor.innerHTML=translated;
+    if(editor) editor.textContent=translated;
     toast('s',`Translated to ${targetLang.toUpperCase()}!`);
   } catch(e){
     toast('e','Translation failed. Check your API key.');
@@ -6632,7 +6689,7 @@ function openChat(uid) { let u=D.users[uid]; if(!u||!CU) return; currentChatId=u
 function sendSMS(uid) { let user=D.users[uid]; if(!user) return toast('e','User not found'); let phone=user.phone||prompt('Enter phone number for '+user.name,''); if(!phone) return; let shareText = encodeURIComponent(`Hello ${user.name}, check Monetixra: ${location.origin}${location.pathname}`); window.location.href = `sms:${encodeURIComponent(phone)}?body=${shareText}`; }
 function closeChatRoom() { G('chatRoom').classList.remove('open'); currentChatId=null; }
 function renderChatMsgs() { let msgsDiv=G('crMsgs'); if(!msgsDiv||!currentChatId||!CU) return; let key=[CU.id,currentChatId].sort().join('_'); let msgs=D.chats?.[key]||[]; msgsDiv.innerHTML=msgs.map(m=>{ let isMine=m.from===CU.id; let user=D.users[m.from]||{}; let grad=randomGrad(); let content=m.type==='image'? `<img src="${m.data}" style="max-width:150px;border-radius:8px;">` : (m.type==='voice'? '🎙 Voice message' : esc(m.text||'')); return `<div class="cr-msg${isMine?' mine':''}"><div class="av av-round av-xs" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${user.avatar?`<img src="${user.avatar}">`:user.name?.charAt(0).toUpperCase()}</div><div class="cr-bub">${content}<div class="cr-bub-t">${ago(m.at)}</div></div></div>`; }).join(''); msgsDiv.scrollTop=msgsDiv.scrollHeight; (D.chats[key]||[]).forEach(m=>{ if(m.to===CU.id) m.read=true; }); saveData(); syncUI(); }
-function sendMsg() { let inp=G('crInp'); if(!inp||!currentChatId||!CU) return; let txt=inp.value.trim(); if(!txt) return; let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; let msg={ id:'m'+Date.now(), from:CU.id, to:currentChatId, text:txt, type:'text', at:Date.now(), read:false }; if(disappearTimer>0) msg.disappearAt=Date.now()+disappearTimer*1000; D.chats[key].push(msg); inp.value=''; saveData(); renderChatMsgs(); setTimeout(()=>{ let replies=['👍','😊','Ok!','Thanks!','Cool!','Awesome!']; D.chats[key].push({ id:'m'+Date.now(), from:currentChatId, to:CU.id, text:replies[Math.floor(Math.random()*replies.length)], type:'text', at:Date.now(), read:false }); saveData(); if(currentChatId) renderChatMsgs(); addNotif(CU.id,'message','💬','New message'); },2000+Math.random()*2000); }
+function sendMsg() { let inp=G('crInp'); if(!inp||!currentChatId||!CU) return; let txt=inp.value.trim(); if(!txt) return; let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; let msg={ id:'m'+Date.now(), from:CU.id, to:currentChatId, text:txt, type:'text', at:Date.now(), read:false }; if(disappearTimer>0) msg.disappearAt=Date.now()+disappearTimer*1000; D.chats[key].push(msg); inp.value=''; saveData(); renderChatMsgs(); if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'chat', data: { room: key, message: msg } }).catch(()=>{}); } setTimeout(()=>{ let replies=['👍','😊','Ok!','Thanks!','Cool!','Awesome!']; D.chats[key].push({ id:'m'+Date.now(), from:currentChatId, to:CU.id, text:replies[Math.floor(Math.random()*replies.length)], type:'text', at:Date.now(), read:false }); saveData(); if(currentChatId) renderChatMsgs(); addNotif(CU.id,'message','💬','New message'); },2000+Math.random()*2000); }
 function attachCrFile(type) { G('crFile').accept=type==='image'?'image/*':'video/*'; G('crFile').click(); }
 function handleCrMedia(inp) { let f=inp.files[0]; if(!f||!currentChatId||!CU) return; let r=new FileReader(); r.onload=e=>{ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:f.type.startsWith('image/')?'image':'video', data:e.target.result, at:Date.now(), read:false }); saveData(); renderChatMsgs(); }; r.readAsDataURL(f); }
 function toggleVoiceRecord() { if(!isRecordingVoice){ navigator.mediaDevices?.getUserMedia({audio:true}).then(stream=>{ mediaRecorder=new MediaRecorder(stream); let chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ if(currentChatId&&CU){ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:'voice', duration:3, at:Date.now(), read:false }); saveData(); renderChatMsgs(); } stream.getTracks().forEach(t=>t.stop()); isRecordingVoice=false; document.querySelector('.voice-rec').textContent='🎙 Voice'; }; mediaRecorder.start(); isRecordingVoice=true; document.querySelector('.voice-rec').textContent='⏹ Stop'; }).catch(()=>toast('e','Microphone access denied')); } else { mediaRecorder?.stop(); } }
@@ -9108,6 +9165,13 @@ function clearCache() {
 function clearSearchHistory() { if (CU) { CU.searchHistory=[]; saveData(); toast('s','🔍 Search history cleared'); } }
 function clearAllNotifs() {
   if(!CU) return toast('e','Please sign in first');
+  
+  // Use new modular system
+  if(typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.clearAllNotifications === 'function') {
+    return MonetixraAccountManagement.clearAllNotifications();
+  }
+  
+  // Fallback
   let before = (D.notifs||[]).length;
   D.notifs = (D.notifs||[]).filter(n=>n.to!==CU.id);
   persistAuthState();
@@ -9118,6 +9182,13 @@ function clearAllNotifs() {
 }
 function deactivateAccount() {
   if(!CU) return;
+  
+  // Use new modular system
+  if(typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.deactivateAccount === 'function') {
+    return MonetixraAccountManagement.deactivateAccount();
+  }
+  
+  // Fallback
   if(!confirm('Deactivate your account? You can reactivate by logging in again.')) return;
   let u = D.users[CU.id]||CU;
   u.deactivated = true;
@@ -10888,6 +10959,22 @@ window.checkPaywall = checkPaywall;
 
 <!-- Real-time Subscriptions (Supabase) -->
 <script src="js/supabase-realtime.js"></script>
+
+<!-- ═════════════════════════════════════════════════════════════ -->
+<!-- MONETIXRA - MODULAR SYSTEMS (NEW) -->
+<!-- ═════════════════════════════════════════════════════════════ -->
+
+<!-- Hardened Authentication System -->
+<script src="js/auth-system.js"></script>
+
+<!-- Account Management (Notifications, Deactivate, Delete, SignOut) -->
+<script src="js/account-management.js"></script>
+
+<!-- AI Features (Caption, Hashtags, Objects, Translation) -->
+<script src="js/ai-features.js"></script>
+
+<!-- Complete Offline Sync System -->
+<script src="js/offline-sync.js"></script>
 
 <!-- Initialize Hybrid Storage -->
 <script>
@@ -15259,26 +15346,30 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       return out;
     };
 
-    const oldClear = window.clearAllNotifs;
     window.clearAllNotifs = function(){
       const u = me();
       if(!u) return typeof toast === 'function' && toast('e','Please sign in first');
+      const before = (D.notifs || []).filter(n => n.to === u.id).length;
       D.notifs = (D.notifs || []).filter(n => n.to !== u.id);
-      save();
+      saveData();
+      persistAuthState();
       if(typeof rNotif === 'function') rNotif();
-      if(typeof toast === 'function') toast('s','All notifications cleared');
-      return oldClear && oldClear !== window.clearAllNotifs ? undefined : true;
+      if(typeof syncUI === 'function') syncUI();
+      if(typeof toast === 'function') toast('s', before ? '🔕 All notifications cleared' : 'No notifications to clear');
+      return true;
     };
 
     window.deactivateAccount = function(){
       const u = me();
       if(!u) return typeof toast === 'function' && toast('e','Please sign in first');
       if(!confirm('Deactivate your account? You can reactivate by logging in again.')) return;
-      u.deactivated = true;
+      const user = D.users[u.id] || u;
+      user.deactivated = true;
       fetch('/api/account/deactivate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id})}).catch(()=>{});
       D.cur = null;
       CU = null;
-      save();
+      saveData();
+      persistAuthState();
       if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
       if(typeof toast === 'function') toast('i','Account deactivated');
       setTimeout(() => location.reload(), 700);
@@ -15304,7 +15395,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       });
       D.cur = null;
       CU = null;
-      save();
+      saveData();
+      persistAuthState();
       if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
       if(typeof toast === 'function') toast('s','Account deleted');
       setTimeout(() => location.reload(), 700);
@@ -16404,8 +16496,97 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     };
   }
 
+  function applyMobilePerformanceBoost(){
+    document.body.classList.add('mxt-mobile-boost');
+    const tuneMedia = root => {
+      (root || document).querySelectorAll?.('img,video,iframe').forEach(el => {
+        if(el.tagName === 'IMG') {
+          el.loading = el.loading || 'lazy';
+          el.decoding = el.decoding || 'async';
+        }
+        if(el.tagName === 'IFRAME') el.loading = el.loading || 'lazy';
+        if(el.tagName === 'VIDEO') {
+          el.preload = el.preload || 'metadata';
+          el.playsInline = true;
+        }
+      });
+    };
+    tuneMedia(document);
+    new MutationObserver(records => {
+      records.forEach(record => record.addedNodes?.forEach(node => {
+        if(node.nodeType === 1) tuneMedia(node);
+      }));
+    }).observe(document.body, {childList:true, subtree:true});
+  }
+
+  function installMovableScreenControls(){
+    const key = 'mxt_movable_controls';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch(e) {}
+    const controlSelector = '.mxt-floating-pts,.mxt-safe-fab';
+    const controlId = el => el.id || el.className?.toString?.().split(/\s+/).find(Boolean) || 'control';
+    const save = () => {
+      try { localStorage.setItem(key, JSON.stringify(saved)); } catch(e) {}
+    };
+    const restore = el => {
+      const pos = saved[controlId(el)];
+      if(!pos) return;
+      Object.assign(el.style, {
+        left: pos.left + 'px',
+        top: pos.top + 'px',
+        right: 'auto',
+        bottom: 'auto'
+      });
+    };
+    const restoreAll = root => (root || document).querySelectorAll?.(controlSelector).forEach(el => {
+      el.classList.add('mxt-draggable-control');
+      restore(el);
+    });
+    restoreAll(document);
+    new MutationObserver(records => {
+      records.forEach(record => record.addedNodes?.forEach(node => {
+        if(node.nodeType === 1) restoreAll(node);
+      }));
+    }).observe(document.body, {childList:true, subtree:true});
+
+    let drag = null;
+    document.addEventListener('pointerdown', e => {
+      const el = e.target.closest(controlSelector);
+      if(!el || e.target.closest('.mxt-floating-pts-x')) return;
+      const rect = el.getBoundingClientRect();
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const timer = setTimeout(() => {
+        drag = {el, id:controlId(el), dx:startX - rect.left, dy:startY - rect.top};
+        el.classList.add('mxt-dragging-control');
+        el.setPointerCapture?.(e.pointerId);
+      }, 360);
+      const cancel = () => clearTimeout(timer);
+      el.addEventListener('pointerup', cancel, {once:true});
+      el.addEventListener('pointercancel', cancel, {once:true});
+    }, {passive:true});
+    document.addEventListener('pointermove', e => {
+      if(!drag) return;
+      e.preventDefault();
+      const w = drag.el.offsetWidth || 64;
+      const h = drag.el.offsetHeight || 44;
+      const left = Math.max(6, Math.min(window.innerWidth - w - 6, e.clientX - drag.dx));
+      const top = Math.max(6, Math.min(window.innerHeight - h - 6, e.clientY - drag.dy));
+      Object.assign(drag.el.style, {left:left + 'px', top:top + 'px', right:'auto', bottom:'auto'});
+      saved[drag.id] = {left, top};
+      save();
+    }, {passive:false});
+    document.addEventListener('pointerup', () => {
+      if(!drag) return;
+      drag.el.classList.remove('mxt-dragging-control');
+      drag = null;
+    }, {passive:true});
+  }
+
   ready(() => {
     document.body.classList.add('mxt-safe-upgrades');
+    applyMobilePerformanceBoost();
+    installMovableScreenControls();
     closeBlockingAds();
     setTimeout(showFloatingClickReward, 12000);
     setInterval(showFloatingClickReward, 60000);
@@ -16418,6 +16599,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
   const AD_SHARE = 0.67;
+  const BOTTOM_AD_DAILY_LIMIT = 5;
   const feedTypes = ['adsense_display','adsterra_native','admob_banner','native_feed','rewarded_offer','video_offer','click_to_earn','quiz','poll','banner_300x250','admob_rewarded','premium_offer'];
   const adWeights = {
     rewarded_offer:12, video_offer:10, adsterra_native:8, adsense_display:8,
@@ -16456,6 +16638,39 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   function escText(v){
     if(typeof esc === 'function') return esc(v);
     return String(v || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  const dayKey = () => new Date().toDateString();
+  function rewardUserId(){
+    try { return CU?.id || 'guest'; } catch(e) { return 'guest'; }
+  }
+  function getBottomRewardState(){
+    const key = 'mxt_bottom_income_claims_' + rewardUserId();
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch(e) {}
+    if(state.date !== dayKey()) state = {date:dayKey(), count:0, claimed:{}};
+    state.key = key;
+    state.claimed = state.claimed || {};
+    state.count = Number(state.count || 0);
+    return state;
+  }
+  function saveBottomRewardState(state){
+    try {
+      localStorage.setItem(state.key, JSON.stringify({
+        date:state.date,
+        count:state.count || 0,
+        claimed:state.claimed || {}
+      }));
+    } catch(e) {}
+  }
+  function bottomClaimLeft(){
+    const state = getBottomRewardState();
+    return Math.max(0, BOTTOM_AD_DAILY_LIMIT - (state.count || 0));
+  }
+  function mediaKind(ad, idx){
+    const text = [ad?.category, ad?.title, ad?.description, ad?.thumbnail].join(' ').toLowerCase();
+    if(/video|watch|live|stream/.test(text)) return 'video';
+    if(/photo|image|stock|creator/.test(text)) return 'photo';
+    return idx % 3 === 0 ? 'video' : (idx % 3 === 1 ? 'photo' : 'offer');
   }
   function pick(list){
     const pool = [];
@@ -16516,7 +16731,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     } catch(e) {}
   }
   function claimKey(btn, type, label){
-    const ad = btn?.closest?.('.mxt-rotating-ad,.feed-ad,.ad-container,.ad-native,.mxt-live-ad');
+    const ad = btn?.closest?.('.mxt-rotating-ad,.feed-ad,.ad-container,.ad-native,.mxt-live-ad,.mxt-bottom-shelf-card');
     if(ad && !ad.dataset.claimId) ad.dataset.claimId = 'mxtad_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
     return btn?.dataset.rewardId || ad?.dataset.claimId || `${type || 'ad'}_${label || 'reward'}_${Date.now()}`;
   }
@@ -16590,13 +16805,13 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     d.dataset.adType = type;
     d.dataset.adIndex = String(adIdx);
     d.innerHTML = `
-      <div class="mxt-ra-head"><span>Sponsored</span><b>${escText(adLabel(type))}</b></div>
+      <div class="mxt-ra-head"><span>Income Ad</span><b>${escText(adLabel(type))}</b></div>
       ${slot ? `<div class="mxt-network-wrap">${slot}</div>` : ''}
       <div class="mxt-ra-body" style="--mxt-a:${a};--mxt-b:${b};">
         <div class="mxt-ra-mark">AD</div>
         <div class="mxt-ra-copy">
           <div class="mxt-ra-title">${escText(title)}</div>
-          <div class="mxt-ra-sub">Rotates by post, feature and user activity without blocking browsing.</div>
+          <div class="mxt-ra-sub">Video, photo, task and offer ads rotate by activity for stronger revenue.</div>
         </div>
         <button class="mxt-ra-btn" onclick="mxtClaimRevenueAd(this,${pts},'${escText(adLabel(type))} Revenue','${escText(type)}')">+${Math.round(pts * AD_SHARE)} pts</button>
       </div>`;
@@ -16820,17 +17035,19 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     });
     const bottom = document.getElementById('mxtBottomLiveAd');
     if(bottom) updateBottomLiveAd(ctx);
+    ensureBottomAdShelves(ctx);
+    updateBottomAdShelf(ctx);
   }
   function bottomMessages(ctx){
     const type = typeFor(ctx || currentPage());
-    const network = adLabel(type);
+    const network = incomeTypeLabel(bottomCategories(ctx || currentPage())[0] || 'dailyTasks');
     const sets = {
-      feed:['Every 3 posts: native + banner mix','Fresh sponsor after each feed section','High viewability in-feed placement'],
-      media:['Video/audio break sponsor','Rewarded media offer','Photo viewer native banner'],
-      earn:['Rewarded offer first','Click-to-earn sponsor','Quiz and poll ad rotation'],
-      wallet:['Withdrawal sponsor','Premium payout offer','Finance-ready display ad'],
-      messages:['Chat-safe native sponsor','Compact AdMob banner','Conversation break offer'],
-      default:['Page-specific live sponsor','Rotating scalable banner','Smart revenue placement']
+      feed:['Video watch income ads','Photo stock income offers','High RPM native + banner mix'],
+      media:['Video/audio reward ads','Photo viewer income offers','CPA media campaigns'],
+      earn:['Survey and task income ads','App install CPA offers','Click-to-earn rotations'],
+      wallet:['Crypto and finance offers','High-value payout campaigns','Wallet-ready display ads'],
+      messages:['Referral income offers','Compact chat-safe campaigns','Communication app install ads'],
+      default:['Page-based income ads','Rotating CPA and affiliate offers','Smart revenue placements']
     };
     const copy = sets[ctx] || sets.default;
     return {type, network, copy};
@@ -16847,6 +17064,175 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     track.offsetHeight;
     track.style.animation = '';
     trackAd(type, 'bottom_live_banner');
+  }
+  const bottomAdCategoryMap = {
+    feed:['watchVideos','photoShare','dailyTasks','appInstall','affiliate'],
+    explore:['photoShare','watchVideos','nftMarketplace','appInstall','freelance'],
+    earn:['dailyTasks','appInstall','watchVideos','referralMlm','affiliate'],
+    wallet:['cryptoEarning','affiliate','dailyTasks','nftMarketplace','appInstall'],
+    messages:['referralMlm','appInstall','dailyTasks','watchVideos','affiliate'],
+    profile:['freelance','affiliate','photoShare','watchVideos','appInstall'],
+    nft:['nftMarketplace','cryptoEarning','photoShare','affiliate','dailyTasks'],
+    metaverse:['liveStreaming','nftMarketplace','cryptoEarning','watchVideos','appInstall'],
+    apps:['appInstall','dailyTasks','watchVideos','affiliate','referralMlm'],
+    default:['watchVideos','appInstall','dailyTasks','photoShare','affiliate']
+  };
+  const fallbackBottomAds = [
+    {id:'mxt-fb-video', title:'Video Watch Income', description:'Short video views, rewarded video and high-viewability video offers.', earning:'High view RPM', thumbnail:'VID', url:'#earn', category:'watchVideos'},
+    {id:'mxt-fb-app', title:'App Install CPA', description:'Install, signup and trial campaigns with stronger payout potential.', earning:'CPA payout', thumbnail:'APP', url:'#apps', category:'appInstall'},
+    {id:'mxt-fb-task', title:'Survey & Task Income', description:'Daily survey, quiz, poll and micro-task offers rotate by page.', earning:'Task bonus', thumbnail:'TASK', url:'#earn', category:'dailyTasks'},
+    {id:'mxt-fb-photo', title:'Photo Stock Income', description:'Photo upload, stock image and creator marketplace income offers.', earning:'Photo sales', thumbnail:'PHOTO', url:'#explore', category:'photoShare'},
+    {id:'mxt-fb-aff', title:'Affiliate Offer Wall', description:'Referral, trial and affiliate campaigns for stronger website revenue.', earning:'Commission', thumbnail:'AFF', url:'#referral', category:'affiliate'}
+  ];
+  function incomeTypeLabel(category){
+    const labels = {
+      watchVideos:'Video Income',
+      photoShare:'Photo Income',
+      dailyTasks:'Survey/Task Income',
+      referralMlm:'Referral Income',
+      cryptoEarning:'Crypto/Finance Income',
+      nftMarketplace:'NFT Marketplace Income',
+      freelance:'Freelance Income',
+      liveStreaming:'Live Video Income',
+      appInstall:'App Install CPA',
+      affiliate:'Affiliate Income'
+    };
+    return labels[category] || 'Income Ad';
+  }
+  function bottomCategories(ctx=currentPage()){
+    return bottomAdCategoryMap[ctx] || bottomAdCategoryMap.default;
+  }
+  function pickBottomAds(ctx=currentPage(), count=5){
+    const hub = window.IncomeAdsHub;
+    const picked = [];
+    bottomCategories(ctx).forEach((category, i) => {
+      let ad = null;
+      try {
+        if(hub?.rotateAd) hub.rotateAd(category);
+        ad = hub?.getCurrentAd?.(category) || hub?.getRandomAd?.(category);
+      } catch(e) {}
+      if(!ad) ad = fallbackBottomAds[i % fallbackBottomAds.length];
+      picked.push({...ad, category: ad.category || category});
+    });
+    return picked.slice(0, count);
+  }
+  function buildBottomShelfCard(ad, idx, ctx){
+    const d = document.createElement('article');
+    const type = typeFor(ctx);
+    const [a,b] = adTheme(idx + Date.now());
+    const kind = mediaKind(ad, idx);
+    const pts = Math.round(5 * AD_SHARE);
+    const left = bottomClaimLeft();
+    d.className = 'mxt-bottom-shelf-card';
+    d.dataset.incomeAdId = ad.id || `bottom_${idx}`;
+    d.dataset.adType = type;
+    d.dataset.category = ad.category || 'bottom';
+    d.dataset.claimId = `mxt_shelf_${ctx}_${idx}_${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
+    d.dataset.href = ad.url || '#';
+    d.style.setProperty('--mxt-a', a);
+    d.style.setProperty('--mxt-b', b);
+    d.innerHTML = `
+      <div class="mxt-bs-badge">${escText(incomeTypeLabel(ad.category))}</div>
+      <div class="mxt-bs-media mxt-bs-${escText(kind)}">
+        <div class="mxt-bs-media-mark">${kind === 'video' ? 'PLAY' : (kind === 'photo' ? 'IMG' : 'AD')}</div>
+        <div class="mxt-bs-media-shine"></div>
+      </div>
+      <div class="mxt-bs-main">
+        <div class="mxt-bs-copy">
+          <h4>${escText(ad.title || incomeTypeLabel(ad.category))}</h4>
+          <p>${escText(ad.description || ad.subtitle || 'Fresh income ad placement that rotates by page and action.')}</p>
+          <span>${escText(ad.earning || ad.bonus || 'Partner offer')}</span>
+        </div>
+      </div>
+      <div class="mxt-bs-actions">
+        <button type="button" onclick="mxtOpenBottomShelfAd(this)">Open</button>
+        <button type="button" onclick="mxtClaimBottomShelfAd(this,${pts},'${escText(type)}')" ${left <= 0 ? 'disabled' : ''}>${left <= 0 ? 'Daily limit' : '+' + pts + ' pts'}</button>
+      </div>`;
+    trackAd(type, 'page_bottom_shelf');
+    return d;
+  }
+  function ensureBottomAdShelves(ctx=currentPage()){
+    document.querySelectorAll('.pg').forEach(pg => {
+      if(pg.querySelector(':scope > .mxt-bottom-shelf')) return;
+      const shelf = document.createElement('section');
+      shelf.className = 'mxt-bottom-shelf';
+      shelf.innerHTML = '<div class="mxt-bs-head"><span>Income ads</span><b>Auto rotating</b></div><div class="mxt-bs-grid"></div>';
+      pg.appendChild(shelf);
+    });
+    updateBottomAdShelf(ctx);
+  }
+  function updateBottomAdShelf(ctx=currentPage()){
+    const pg = document.querySelector('.pg.on') || document.getElementById('pg-' + ctx);
+    const head = pg?.querySelector(':scope > .mxt-bottom-shelf .mxt-bs-head b');
+    if(head) head.textContent = `Auto rotating - ${bottomClaimLeft()}/${BOTTOM_AD_DAILY_LIMIT} left`;
+    const grid = pg?.querySelector(':scope > .mxt-bottom-shelf .mxt-bs-grid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    pickBottomAds(ctx, 5).forEach((ad, idx) => grid.appendChild(buildBottomShelfCard(ad, idx, ctx)));
+  }
+  window.mxtOpenBottomShelfAd = function(btn){
+    const ad = btn?.closest?.('.mxt-bottom-shelf-card');
+    const href = ad?.dataset.href || '#';
+    if(window.IncomeAdsHub && ad?.dataset.incomeAdId) {
+      try { window.IncomeAdsHub.trackClick(ad.dataset.category || 'bottom', ad.dataset.incomeAdId); } catch(e) {}
+    }
+    updateBottomAdShelf(currentPage());
+    if(href && href.startsWith('#') && href.length > 1) {
+      const target = href.slice(1);
+      if(typeof nav === 'function' && document.getElementById('pg-' + target)) nav(target);
+      return;
+    }
+    if(href && href !== '#') window.open(href, '_blank', 'noopener,noreferrer');
+  };
+  window.mxtClaimBottomShelfAd = function(btn, pts, type){
+    const card = btn?.closest?.('.mxt-bottom-shelf-card');
+    const state = getBottomRewardState();
+    const claimId = card?.dataset.claimId || btn?.dataset.rewardId || `bottom_${Date.now()}`;
+    if(!CU) return typeof toast === 'function' && toast('e','Please login first');
+    if(state.claimed[claimId]) {
+      btn.disabled = true;
+      btn.textContent = 'Claimed';
+      return typeof toast === 'function' && toast('w','Already claimed');
+    }
+    if((state.count || 0) >= BOTTOM_AD_DAILY_LIMIT) {
+      btn.disabled = true;
+      btn.textContent = 'Daily limit';
+      return typeof toast === 'function' && toast('w','Daily income ads limit reached: 5/5');
+    }
+    btn.disabled = true;
+    btn.textContent = 'Opening...';
+    try { window.mxtOpenBottomShelfAd(btn); } catch(e) {}
+    setTimeout(() => {
+      state.count = (state.count || 0) + 1;
+      state.claimed[claimId] = Date.now();
+      saveBottomRewardState(state);
+      if(typeof addPts === 'function') addPts(Number(pts) || 3, 'Bottom Income Ad', 'earn');
+      if(typeof toast === 'function') toast('s', `+${pts} pts added (${state.count}/${BOTTOM_AD_DAILY_LIMIT} today)`);
+      trackAd(type || card?.dataset.adType || 'bottom_income', 'bottom_shelf_claim');
+      updateBottomAdShelf(currentPage());
+    }, 450);
+    return false;
+  };
+  function incomeAdText(text){
+    return String(text || '')
+      .replace(/Sponsored Content/g, 'Income Offers')
+      .replace(/Sponsored offers/g, 'Income ads')
+      .replace(/Sponsored Offer/g, 'Income Offer')
+      .replace(/Sponsored/g, 'Income Ad')
+      .replace(/sponsored/g, 'income');
+  }
+  function replaceSponsoredLabels(root=document.body){
+    if(!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        const parent = node.parentElement;
+        if(!parent || /^(SCRIPT|STYLE|TEXTAREA|INPUT)$/i.test(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return /Sponsored|sponsored/.test(node.nodeValue || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    const nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => { node.nodeValue = incomeAdText(node.nodeValue); });
   }
   window.mxtClaimBottomAd = function(btn){
     const bar = document.getElementById('mxtBottomLiveAd');
@@ -16868,6 +17254,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       const btn = e.target.closest('button,.bn,.chip,.media-chip,.eh-btn,.sett-row,.app-card,.task-card');
       if(!btn || btn.closest('.feed-ad,.mxt-rotating-ad,.mxt-bottom-live-ad,.mxt-reward-gate')) return;
       if(Math.random() < 0.28) setTimeout(() => updateBottomLiveAd(currentPage()), 80);
+      if(Math.random() < 0.42) setTimeout(() => updateBottomAdShelf(currentPage()), 120);
     }, true);
   }
 
@@ -16881,8 +17268,12 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     installOncePerAdRewards();
     installFeatureAdTargets();
     installNavAdRefresh();
+    ensureBottomAdShelves(currentPage());
     updateBottomLiveAd(currentPage());
+    updateBottomAdShelf(currentPage());
+    replaceSponsoredLabels();
     setInterval(() => updateBottomLiveAd(currentPage()), 45000);
+    setInterval(() => updateBottomAdShelf(currentPage()), 30000);
     document.addEventListener('play', triggerMediaAd, true);
     new MutationObserver(() => ensureFeedAds()).observe(document.body, {childList:true, subtree:true});
     document.addEventListener('click', e => {
@@ -16890,21 +17281,43 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       if(!btn || btn.closest('#postModal') || btn.dataset.mxtFeatureAd) return;
       btn.dataset.mxtFeatureAd = '1';
       if(Math.random() < 0.18 && window.MAX_AD_SYSTEM) window.MAX_AD_SYSTEM.triggerContextualAd('feature_' + currentPage());
+      setTimeout(replaceSponsoredLabels, 160);
     }, true);
+    new MutationObserver(records => {
+      records.forEach(record => record.addedNodes?.forEach(node => {
+        if(node.nodeType === 1) replaceSponsoredLabels(node);
+        else if(node.nodeType === 3 && /Sponsored|sponsored/.test(node.nodeValue || '')) node.nodeValue = incomeAdText(node.nodeValue);
+      }));
+    }).observe(document.body, {childList:true, subtree:true});
     setInterval(installComfortCaps, 5000);
   });
 })();
 </script>
 
 <style>
-#mxtBottomLiveAd, .mxt-bottom-live-ad { display:none !important; }
-.mxt-bottom-live-ad{position:fixed;left:0;right:0;bottom:calc(54px + env(safe-area-inset-bottom));z-index:99998;height:34px;background:rgba(3,3,8,.96);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:8px;overflow:hidden;backdrop-filter:blur(18px)}
-.mxt-bottom-track{display:flex;align-items:center;gap:18px;min-width:max-content;padding-left:100%;font-size:11px;color:var(--t2);white-space:nowrap;animation:mxtBottomAdScroll 24s linear infinite}
-.mxt-bottom-track span{color:var(--t3)}
-.mxt-bottom-track b{color:var(--neon);font-weight:900}
-.mxt-bottom-claim{position:absolute;right:8px;top:5px;border:1px solid rgba(255,255,255,.24);background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-radius:8px;padding:4px 8px;font-size:11px;font-weight:900;cursor:pointer}
-.mxt-bottom-claim:disabled{opacity:.68;cursor:default}
-@keyframes mxtBottomAdScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.mxt-bottom-shelf{margin:18px 0 88px;padding:12px;border:1px solid var(--b1);border-radius:12px;background:rgba(255,255,255,.025)}
+.mxt-bs-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:11px;color:var(--t3);text-transform:uppercase}
+.mxt-bs-head span{font-weight:900;color:var(--t2)}
+.mxt-bs-head b{color:var(--neon);font-size:10px}
+.mxt-bs-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.mxt-bottom-shelf-card{min-height:208px;border:1px solid var(--b1);border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));overflow:hidden;display:flex;flex-direction:column;contain:content}
+.mxt-bs-badge{padding:6px 8px;background:linear-gradient(135deg,var(--mxt-a),var(--mxt-b));color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mxt-bs-media{position:relative;height:72px;background:linear-gradient(135deg,var(--mxt-a),var(--mxt-b));overflow:hidden}
+.mxt-bs-media:before{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.22);border-radius:8px}
+.mxt-bs-media-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:46px;height:28px;border-radius:999px;background:rgba(3,3,8,.38);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px}
+.mxt-bs-video .mxt-bs-media-mark:before{content:"";width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #fff;margin-right:5px}
+.mxt-bs-photo .mxt-bs-media-mark:before{content:"";width:12px;height:9px;border-radius:2px;border:1px solid #fff;margin-right:5px}
+.mxt-bs-media-shine{position:absolute;inset:auto -20% -45% auto;width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.16)}
+.mxt-bs-main{display:flex;gap:8px;padding:9px;flex:1;min-width:0}
+.mxt-bs-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:var(--neon);font-size:10px;font-weight:900;flex:0 0 auto}
+.mxt-bs-copy{min-width:0;flex:1}
+.mxt-bs-copy h4{font-size:12px;line-height:1.25;color:var(--t1);margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mxt-bs-copy p{font-size:10px;line-height:1.35;color:var(--t3);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mxt-bs-copy span{display:inline-flex;max-width:100%;border:1px solid rgba(0,255,170,.22);border-radius:6px;padding:3px 5px;color:var(--neon);font-size:9px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mxt-bs-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 9px 9px}
+.mxt-bs-actions button{min-height:32px;border:1px solid var(--b1);border-radius:7px;background:var(--g2);color:var(--t2);font-size:11px;font-weight:900;cursor:pointer}
+.mxt-bs-actions button:last-child{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:#fff}
+.mxt-bs-actions button:disabled{opacity:.7;cursor:default}
 .mxt-rotating-ad{background:var(--g2);border:1px solid var(--b1);border-radius:12px;overflow:hidden;margin:10px 0}
 .mxt-ra-network{font-size:9px;color:var(--t3);padding:4px 10px;text-align:right;border-bottom:1px solid var(--b1)}
 .mxt-ra-head{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px}
@@ -16920,10 +17333,23 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 .mxt-live-slot{display:flex;align-items:center;justify-content:center;width:100%;min-height:72px;border:1px dashed var(--b1);border-radius:8px;color:var(--t3);font-size:11px;text-align:center;overflow:hidden}
 .mxt-admob-slot{background:linear-gradient(135deg,rgba(15,118,110,.12),rgba(37,99,235,.12));color:var(--t2);font-weight:700}
 .mxt-page-scalable-ad{margin:10px 0 12px}
+.mxt-mobile-boost *{-webkit-tap-highlight-color:transparent}
+.mxt-mobile-boost img,.mxt-mobile-boost video{content-visibility:auto;contain-intrinsic-size:320px;max-width:100%}
+.mxt-mobile-boost .pg,.mxt-mobile-boost .post,.mxt-mobile-boost .mxt-bottom-shelf-card{content-visibility:auto}
+.mxt-mobile-boost button,.mxt-mobile-boost .bn,.mxt-mobile-boost .chip,.mxt-mobile-boost .btn{touch-action:manipulation}
+.mxt-draggable-control{touch-action:none;user-select:none}
+.mxt-dragging-control{transition:none !important;filter:drop-shadow(0 16px 34px rgba(0,0,0,.42))}
 @media (max-width:520px){
   .mxt-ra-body{align-items:flex-start}
   .mxt-ra-title{white-space:normal}
   .mxt-live-slot{min-height:56px}
+  .mxt-bs-grid{grid-template-columns:1fr}
+  .mxt-bottom-shelf{margin-bottom:96px;padding:10px}
+  .mxt-bottom-shelf-card{min-height:196px}
+  .mxt-bs-media{height:82px}
+}
+@media (min-width:521px) and (max-width:920px){
+  .mxt-bs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 .mxt-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .mxt-feature-grid button{background:var(--g2);border:1px solid var(--b1);color:var(--t1);border-radius:8px;padding:10px 8px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}
@@ -16956,6 +17382,42 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   .mxt-floating-pts{right:10px;bottom:calc(124px + env(safe-area-inset-bottom))}
 }
 </style>
+
+<!-- Income Ads Hub - Dynamic Ad System with Auto-Rotation -->
+<script defer src="js/data-persistence-permanent.js"></script>
+<script defer src="js/ad-dismissal-system.js"></script>
+<script defer src="js/income-ads-hub.js"></script>
+<script defer src="js/income-ads-hub-integration.js"></script>
+<script defer src="js/income-ads-hub-admin.js"></script>
+
+<!-- 🎯 Dynamic Sponsored Ads - Replace Static Labels with Rotating Income Ads -->
+<script defer src="js/dynamic-sponsored-ads.js"></script>
+<script defer src="js/dynamic-ads-integration.js"></script>
+
+<!-- Initialize Dynamic Ads System -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    if (window.DynamicSponsoredAds) {
+      // Replace all static "Sponsored" labels with dynamic ads
+      DynamicSponsoredAds.replaceLabels();
+      
+      // Setup auto-rotation for main sponsored containers
+      const sponsoredContainers = document.querySelectorAll('[id*="Sponsored"], [class*="sponsored"]');
+      sponsoredContainers.forEach(container => {
+        if (container && container.style.display !== 'none') {
+          DynamicSponsoredAds.setupRotation(container, {
+            interval: 8000,
+            type: 'banner'
+          });
+        }
+      });
+      
+      console.log('✅ Dynamic Sponsored Ads System Initialized');
+    }
+  }, 500);
+});
+</script>
 </body>
 </html>
 

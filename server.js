@@ -28,8 +28,8 @@ const DEEPSEEK_KEY  = process.env.DEEPSEEK_API_KEY || '';
 const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || '';
 const CLOUDINARY_API_KEY    = process.env.CLOUDINARY_API_KEY    || '';
 const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || '';
-const SUPABASE_URL  = process.env.SUPABASE_URL     || 'https://rkiyxsskrypowghxfauy.supabase.co';
-const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY|| 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE';
+const SUPABASE_URL  = process.env.SUPABASE_URL     || 'https://rgximkhnhxgaonrxzzxl.supabase.co';
+const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY|| 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
 const SUPABASE_SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const SUPABASE_SERVER_KEY = SUPABASE_SERVICE_ROLE || SUPABASE_ANON;
 const SOCKET_AUTH_REQUIRED = String(process.env.SOCKET_AUTH_REQUIRED || '').toLowerCase() === 'true';
@@ -54,9 +54,9 @@ const ADSENSE_CLIENT = process.env.ADSENSE_CLIENT || 'ca-pub-2397116277801081';
 
 // Adsterra Configuration
 const ADSTERRA_API_KEY = process.env.ADSTERRA_API_KEY || '';
-const METERED_KEY   = process.env.METERED_API_KEY  || '';
-const GOOGLE_KEY    = process.env.GOOGLE_API_KEY   || '';
-const GOOGLE_VISION = process.env.GOOGLE_VISION_KEY|| '';
+const METERED_KEY   = process.env.METERED_API_KEY  || 'ffb21c8dfcff4bf229f8973e77541a11edc0';
+const GOOGLE_KEY    = process.env.GOOGLE_API_KEY   || 'AIzaSyCCGkyMBXiByuRV8qFfLRAWPrvFNRQOhoI';
+const GOOGLE_VISION = process.env.GOOGLE_VISION_KEY|| 'AIzaSyDIgQr0BfU4-AfWRA2_HFcDhwZZj7ymiUg';
 const BKASH_APP_KEY    = process.env.BKASH_APP_KEY    || '';
 const BKASH_APP_SECRET = process.env.BKASH_APP_SECRET || '';
 const BKASH_USERNAME   = process.env.BKASH_USERNAME   || '';
@@ -86,6 +86,7 @@ const pushSubscriptions = new Map(); // userId → subscription
 // ── App ───────────────────────────────────────────────────────
 const app    = express();
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 const io     = new Server(server, {
   cors:{origin:'*',methods:['GET','POST']},
@@ -131,6 +132,26 @@ app.get('/manifest.json', (_, res) => sendRootFile(res, 'manifest.json', 'applic
 app.get('/sw.js', (_, res) => sendRootFile(res, 'sw.js', 'application/javascript'));
 app.get('/ads.txt', (_, res) => sendRootFile(res, 'ads.txt', 'text/plain'));
 app.get('/app-ads.txt', (_, res) => sendRootFile(res, 'app-ads.txt', 'text/plain'));
+app.get('/api/health', (_req, res) => {
+  res.json({
+    ok: true,
+    service: 'monetixra',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime().toFixed(2),
+    node: process.version,
+    env: {
+      hasOpenAI: Boolean(OPENAI_KEY),
+      hasSupabase: Boolean(SUPABASE_URL),
+      hasVapid: Boolean(VAPID_PUBLIC && VAPID_PRIVATE)
+    }
+  });
+});
+
+app.use((req, res) => res.status(404).json({ error: 'Not found', path: req.path }));
+app.use((err, req, res, next) => {
+  console.error('[server error]', err);
+  res.status(err.status || 500).json({ error: 'Internal server error' });
+});
 
 // ── State ──────────────────────────────────────────────────────
 const onlineUsers  = new Map();
