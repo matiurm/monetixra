@@ -1174,6 +1174,65 @@ iframe[src*="adzilla"],
 .lv-inp{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:var(--r4);padding:8px 14px;color:#fff;font-size:13px;outline:none;}
 .lv-close{position:absolute;top:50px;right:12px;background:rgba(0,0,0,.5);border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
 
+/* Professional Camera Controls */
+.lv-camera-controls{position:absolute;top:100px;right:12px;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 200px);overflow-y:auto;transition:opacity .3s ease,transform .3s ease;}
+.lv-camera-controls.hidden{opacity:0;transform:translateX(100%);pointer-events:none;}
+.lv-control-group{display:flex;flex-direction:column;gap:6px;}
+.lv-control-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.5px;}
+.lv-select{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 10px;color:#fff;font-size:12px;outline:none;cursor:pointer;}
+.lv-select option{background:#1a1a2e;color:#fff;}
+.lv-btn{background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(0,255,170,.15));border:1px solid rgba(0,212,255,.3);border-radius:10px;padding:8px 12px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:6px;}
+.lv-btn:hover{background:linear-gradient(135deg,rgba(0,212,255,.3),rgba(0,255,170,.25));transform:scale(1.05);}
+.lv-btn-icon{width:40px;height:40px;border-radius:50%;font-size:18px;padding:0;}
+.lv-btn-icon.active{background:linear-gradient(135deg,var(--c5),#ff6b6b);border-color:#ff4444;}
+.lv-zoom-level{color:#fff;font-size:12px;font-weight:700;text-align:center;}
+.lv-filter-row{display:flex;flex-wrap:wrap;gap:6px;}
+.lv-filter-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;color:#fff;font-size:10px;font-weight:600;cursor:pointer;transition:all .2s ease;}
+.lv-filter-btn:hover{background:rgba(255,255,255,.2);}
+.lv-filter-btn.active{background:linear-gradient(135deg,var(--neon),var(--c2));border-color:var(--neon);color:#000;}
+.lv-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:rgba(255,255,255,.2);outline:none;}
+.lv-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
+.lv-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
+
+/* ========== MOBILE PERFORMANCE OPTIMIZATIONS ========== */
+/* Smooth scrolling and touch optimization */
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
+body{touch-action:manipulation;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:contain;}
+
+/* GPU acceleration for smooth animations */
+.card,.modal,.btn,.post-media video,.post-media img{transform:translateZ(0);will-change:transform;backface-visibility:hidden;}
+
+/* Optimize images for mobile */
+img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;}
+
+/* Optimize video playback */
+video{max-width:100%;height:auto;object-fit:contain;will-change:transform;}
+
+/* Smooth touch interactions */
+button,.media-chip,.pa,.react-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;}
+
+/* Prevent layout shifts */
+.post-media{min-height:200px;position:relative;}
+.post-media video,.post-media img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+
+/* Optimize scrolling performance */
+#feed{will-change:transform;contain:layout style paint;}
+
+/* Reduce paint on scroll */
+.card{contain:layout style paint;}
+
+/* Smooth modal transitions */
+.modal{transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s cubic-bezier(.4,0,.2,1);will-change:transform,opacity;}
+
+/* Optimize text rendering */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+
+/* Prevent bounce on mobile */
+html,body{overscroll-behavior:none;}
+
+/* Smooth bottom nav transitions */
+.bn{transition:transform .2s ease,opacity .2s ease;will-change:transform,opacity;}
+
 /* ========== VIDEO EDITOR ========== */
 #videoEditor{position:fixed;inset:0;z-index:750;background:var(--bg);display:none;flex-direction:column;}
 #videoEditor.open{display:flex;animation:slideUp .3s var(--ease);}
@@ -1947,6 +2006,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     </div>
     <!-- Horizontal LTR scroller for quick media actions -->
     <div class="h-scroll-ltr" aria-label="media actions">
+      <div class="media-chip" onclick="startLiveStreamFromPost()" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);color:#fff;font-weight:800;">🔴 LIVE</div>
       <div class="media-chip" onclick="openPostModal('image')">📷 Photo</div>
       <div class="media-chip" onclick="openPostModal('video')">📹 Video</div>
       <div class="media-chip" onclick="openPostModal('audio')">🎵 Audio</div>
@@ -2872,6 +2932,84 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     <div class="lv-comments" id="lvComments"></div>
     <div class="lv-bottom"><div class="lv-inp-row"><input class="lv-inp" id="lvInp" placeholder="Comment..."><button class="cr-send" onclick="sendLiveComment()">➤</button></div></div>
     <button class="lv-close" onclick="closeLiveView()">✕</button>
+    
+    <!-- Professional Camera Controls -->
+    <div class="lv-camera-controls" id="lvCameraControls">
+      <!-- Resolution Selector -->
+      <div class="lv-control-group">
+        <div class="lv-control-label">📺 Quality</div>
+        <select class="lv-select" id="lvResolution" onchange="changeResolution()">
+          <option value="720">720p HD</option>
+          <option value="1080" selected>1080p FHD</option>
+          <option value="1440">1440p QHD</option>
+          <option value="2160">4K UHD</option>
+        </select>
+      </div>
+      
+      <!-- Camera Toggle -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" onclick="toggleCamera()" title="Switch Camera">🔄</button>
+      </div>
+      
+      <!-- Flash Control -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" id="lvFlashBtn" onclick="toggleFlash()" title="Flash">⚡</button>
+      </div>
+      
+      <!-- Zoom Controls -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" onclick="zoomOut()" title="Zoom Out">➖</button>
+        <span class="lv-zoom-level" id="lvZoomLevel">1x</span>
+        <button class="lv-btn lv-btn-icon" onclick="zoomIn()" title="Zoom In">➕</button>
+      </div>
+      
+      <!-- Color Filters -->
+      <div class="lv-control-group">
+        <div class="lv-control-label">🎨 Filters</div>
+        <div class="lv-filter-row" id="lvFilters">
+          <button class="lv-filter-btn active" data-filter="none" onclick="applyFilter('none')">Normal</button>
+          <button class="lv-filter-btn" data-filter="grayscale(100%)" onclick="applyFilter('grayscale(100%)')">B&W</button>
+          <button class="lv-filter-btn" data-filter="sepia(100%)" onclick="applyFilter('sepia(100%)')">Sepia</button>
+          <button class="lv-filter-btn" data-filter="contrast(150%)" onclick="applyFilter('contrast(150%)')">Vivid</button>
+          <button class="lv-filter-btn" data-filter="saturate(200%)" onclick="applyFilter('saturate(200%)')">Vibrant</button>
+          <button class="lv-filter-btn" data-filter="hue-rotate(90deg)" onclick="applyFilter('hue-rotate(90deg)')">Cool</button>
+          <button class="lv-filter-btn" data-filter="hue-rotate(180deg)" onclick="applyFilter('hue-rotate(180deg)')">Warm</button>
+          <button class="lv-filter-btn" data-filter="invert(100%)" onclick="applyFilter('invert(100%)')">Negative</button>
+        </div>
+      </div>
+      
+      <!-- Beauty Mode -->
+      <div class="lv-control-group">
+        <div class="lv-control-label">✨ Beauty</div>
+        <input type="range" class="lv-slider" id="lvBeautySlider" min="0" max="100" value="0" onchange="applyBeauty()">
+      </div>
+      
+      <!-- Brightness/Contrast -->
+      <div class="lv-control-group">
+        <div class="lv-control-label">☀️ Brightness</div>
+        <input type="range" class="lv-slider" id="lvBrightnessSlider" min="50" max="150" value="100" onchange="applyAdjustments()">
+      </div>
+      
+      <div class="lv-control-group">
+        <div class="lv-control-label">🌓 Contrast</div>
+        <input type="range" class="lv-slider" id="lvContrastSlider" min="50" max="150" value="100" onchange="applyAdjustments()">
+      </div>
+      
+      <!-- Mute/Unmute -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" id="lvMuteBtn" onclick="toggleMute()" title="Mute/Unmute">🎤</button>
+      </div>
+      
+      <!-- Screenshot -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" onclick="takeScreenshot()" title="Screenshot">📸</button>
+      </div>
+      
+      <!-- Hide Controls Toggle -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" onclick="toggleCameraControls()" title="Hide/Show Controls">👁</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -3917,7 +4055,16 @@ function seedData() {
     achievements: [],
     adViews: 0, adPts: 0, engPts: 0,
     refPts: 0, mlmPts: 0, nftPts: 0, stakePts: 0,
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    // Tracking fields for accurate statistics
+    lastActive: 0,
+    lastLogin: 0,
+    lastAction: 0,
+    sessionStart: 0,
+    loginCount: 0,
+    isLoggedIn: false,
+    isOnline: false,
+    dailyUsage: {}
   };
   D.posts = [];
   D.stories = [];
@@ -4176,6 +4323,7 @@ async function doLogin() {
     CU    = D.users[foundUid];
     saveSession();
     saveData();
+    trackUserActivity('login');
     mount();
     toast('s','✅ Welcome back, '+CU.name+'!');
   } catch(err) {
@@ -4300,7 +4448,16 @@ async function doRegister() {
       kycVerified:false, tin:null, cryptoWallets:{}, achievements:[],
       adViews:0, adPts:0, engPts:0, refPts:0, mlmPts:0, nftPts:0, stakePts:0,
       notifSettings:{}, privacySettings:{},
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      // Tracking fields for accurate statistics
+      lastActive: 0,
+      lastLogin: 0,
+      lastAction: 0,
+      sessionStart: 0,
+      loginCount: 0,
+      isLoggedIn: false,
+      isOnline: false,
+      dailyUsage: {}
     };
 
     if (isEmail && isSupabaseReady()) {
@@ -4494,6 +4651,12 @@ function mount() {
   initBottomNav();
   
   if(!D.users[ADMIN_ID]) seedData();
+  
+  // Initialize user tracking fields for accurate statistics
+  if(typeof initializeUserTracking === 'function') {
+    initializeUserTracking();
+  }
+  
   syncCU();
   if(CU?.email===ADMIN_EMAIL || CU?.phone===ADMIN_PHONE) {
     CU.isAdmin=true;
@@ -4511,6 +4674,11 @@ function mount() {
       u.lastActive = Date.now();
     }
     saveData();
+    
+    // Track user activity
+    if(typeof trackUserActivity === 'function') {
+      trackUserActivity('login');
+    }
     
     // Update last active periodically
     setInterval(() => {
@@ -4586,12 +4754,11 @@ function updatePageAds(page) {
   };
   if(baText) baText.textContent = pageMessages[page] || '💎 Monetixra ads and rewards on every page.';
   if(banner) banner.style.display = 'flex';
-  const fab = G('fabAd'); if(fab) fab.style.display = '';
-  const fireFab = G('socialBarAd'); if(fireFab) fireFab.style.display = '';
+  // FABs removed - no longer displaying fabAd and socialBarAd
   if(typeof rotateContextAds === 'function') rotateContextAds(page);
 }
 function installFloatingAdDrag() {
-  const selectors = ['#fabAd', '#socialBarAd', '#bannerAd .ba-earn'];
+  const selectors = ['#bannerAd .ba-earn'];
   selectors.forEach(sel => {
     const el = document.querySelector(sel);
     if(!el || el.dataset.mxtDragBound === '1') return;
@@ -4603,9 +4770,6 @@ function installFloatingAdDrag() {
     if(sel === '#bannerAd .ba-earn') {
       if(!el.style.top) el.style.top = '48px';
       el.style.bottom = '';
-    } else {
-      if(!el.style.bottom) el.style.bottom = sel === '#socialBarAd' ? '166px' : '92px';
-      el.style.top = '';
     }
     let dragging = false;
     let startX = 0;
@@ -5037,7 +5201,7 @@ function mkPost(post) {
   if(post.file) {
     if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
     else if(post.mimetype?.startsWith('image/')) h += `<div class="post-media"><img src="${post.file}" loading="lazy" onclick="window.open('${post.file}')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" onload="registerPostView('${post.id}','${post.author}','image')" title="Hold/right-click to download"><div class="media-overlay"></div></div>`;
-    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video controls muted playsinline preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
+    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video controls playsinline preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
     else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio controls onplay="registerPostView('${post.id}','${post.author}','audio')"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
   }
   if(post.hashtags?.length) h += `<div class="post-tags">${post.hashtags.map(t=>`<span class="post-tag" onclick="searchTag('${t}')">#${t}</span>`).join('')}</div>`;
@@ -6195,6 +6359,9 @@ function submitPost() {
     toast('s','Post minted as NFT! +500 pts deducted');
   }
   saveData();
+  if(typeof trackUserActivity === 'function') {
+    trackUserActivity('post');
+  }
   if(socketReady && socket) socket.emit('post:create', {post});
   OfflineCache.save(post);
   if (typeof addToSyncQueue === 'function') {
@@ -6845,31 +7012,253 @@ function buyItem(id) {
 // =====================================================
 let adminUserFlt = 'all', adminPostFlt = 'all', adminSearchQ = '';
 
+// Track user activity for accurate statistics
+function trackUserActivity(actionType = 'general') {
+  if(!CU || !D.users[CU.id]) return;
+  
+  let now = Date.now();
+  let today = new Date().toDateString();
+  let user = D.users[CU.id];
+  
+  // Update last active timestamp
+  user.lastActive = now;
+  user.lastAction = now;
+  user.isOnline = true;
+  
+  // Track session
+  if(!user.sessionStart) {
+    user.sessionStart = now;
+  }
+  
+  // Track daily usage
+  if(!user.dailyUsage) user.dailyUsage = {};
+  if(!user.dailyUsage[today]) {
+    user.dailyUsage[today] = { actions: 0, loginCount: 0, lastSeen: now };
+  }
+  user.dailyUsage[today].actions++;
+  user.dailyUsage[today].lastSeen = now;
+  
+  // Track specific actions
+  if(actionType === 'login') {
+    user.lastLogin = now;
+    user.loginCount = (user.loginCount || 0) + 1;
+    user.dailyUsage[today].loginCount++;
+    user.isLoggedIn = true;
+  }
+  
+  saveData();
+}
+
+// Update user online status periodically
+setInterval(() => {
+  if(CU && D.users[CU.id]) {
+    D.users[CU.id].lastActive = Date.now();
+    D.users[CU.id].isOnline = true;
+  }
+}, 30000); // Every 30 seconds
+
+// Mark user as offline when leaving
+window.addEventListener('beforeunload', () => {
+  if(CU && D.users[CU.id]) {
+    D.users[CU.id].isOnline = false;
+    D.users[CU.id].lastActive = Date.now();
+    saveData();
+  }
+});
+
+// Function to initialize user tracking fields for accurate statistics
+function initializeUserTracking() {
+  if(!D.users) return;
+  
+  Object.keys(D.users).forEach(userId => {
+    let user = D.users[userId];
+    
+    // Initialize tracking fields if they don't exist
+    if(!user.lastActive) user.lastActive = 0;
+    if(!user.lastLogin) user.lastLogin = 0;
+    if(!user.lastAction) user.lastAction = 0;
+    if(!user.sessionStart) user.sessionStart = 0;
+    if(!user.loginCount) user.loginCount = 0;
+    if(!user.isLoggedIn) user.isLoggedIn = false;
+    if(!user.isOnline) user.isOnline = false;
+    if(!user.dailyUsage) user.dailyUsage = {};
+  });
+  
+  saveData();
+}
+
+// Function to refresh admin statistics in real-time
+function refreshAdminStats() {
+  if(!D.users) return;
+  
+  let users = Object.values(D.users);
+  let allPosts = D.posts||[];
+  let today = new Date().toDateString();
+  let fiveMinutesAgo = Date.now() - 300000;
+  
+  // Calculate statistics
+  let totalUsers = users.length;
+  let onlineNow = users.filter(u => {
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return lastActive > fiveMinutesAgo;
+  }).length;
+  let activeToday = users.filter(u => {
+    let lastLogin = u.lastLogin || 0;
+    let lastActive = u.lastActive || 0;
+    let loginDate = new Date(lastLogin).toDateString();
+    let activeDate = new Date(lastActive).toDateString();
+    return loginDate === today || activeDate === today || u.todayPts?.date === today;
+  }).length;
+  let kycVerified = users.filter(u => u.kycVerified).length;
+  let totalPosts = allPosts.length;
+  let totalWithdrawals = (D.withdrawals || []).length;
+  let disabledUsers = users.filter(u => u.disabled).length;
+  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
+  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length;
+  let activeSessions = users.filter(u => {
+    let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
+    return sessionDate === today;
+  }).length;
+  let usedAppToday = users.filter(u => {
+    let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
+    let actionDate = new Date(lastAction).toDateString();
+    return actionDate === today;
+  }).length;
+  let todayLogin = users.filter(u => {
+    let loginDate = new Date(u.lastLogin || 0).toDateString();
+    return loginDate === today;
+  }).length;
+  
+  // Update the stats display
+  let statsEl = document.getElementById('adminStats');
+  if(statsEl) {
+    statsEl.innerHTML = `
+      <div class="admin-stat"><div class="as-i">👥</div><div class="as-n">${totalUsers}</div><div class="as-l">Total Users</div></div>
+      <div class="admin-stat"><div class="as-i">🟢</div><div class="as-n">${onlineNow}</div><div class="as-l">Online Now</div></div>
+      <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${activeToday}</div><div class="as-l">Active Today</div></div>
+      <div class="admin-stat"><div class="as-i">✅</div><div class="as-n">${kycVerified}</div><div class="as-l">KYC Verified</div></div>
+      <div class="admin-stat"><div class="as-i">📋</div><div class="as-n">${totalPosts}</div><div class="as-l">Total Posts</div></div>
+      <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${totalWithdrawals}</div><div class="as-l">Withdrawals</div></div>
+      <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${disabledUsers}</div><div class="as-l">Disabled</div></div>
+      <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(revenuePts)}</div><div class="as-l">Revenue pts</div></div>
+      <div class="admin-stat"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
+      <div class="admin-stat"><div class="as-i">📱</div><div class="as-n">${activeSessions}</div><div class="as-l">Sessions</div></div>
+      <div class="admin-stat"><div class="as-i">🎯</div><div class="as-n">${usedAppToday}</div><div class="as-l">Used App</div></div>
+      <div class="admin-stat"><div class="as-i">🔑</div><div class="as-n">${todayLogin}</div><div class="as-l">Today Login</div></div>
+    `;
+  }
+  
+  // Update stored data
+  window.adminStatsData = {
+    totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals,
+    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin
+  };
+}
+
 function rAdmin() {
   if(!CU?.isAdmin){ nav('feed'); toast('e','Access denied'); return; }
   syncCU();
+  
+  // Initialize user tracking fields for accurate statistics
+  initializeUserTracking();
+  
   // Stats
   let users = Object.values(D.users);
   let allPosts = D.posts||[];
   let revenue = (D.users[ADMIN_ID]?.adminRevenue||0);
-  let today = new Date().toDateString();
   
-  // Calculate active users (logged in today)
-  let activeToday = users.filter(u => u.lastLogin === today || u.todayPts?.date === today).length;
-  let onlineNow = users.filter(u => u.isOnline || (u.lastActive && (Date.now() - u.lastActive) < 300000)).length; // 5 min threshold
+  // Calculate accurate statistics
+  let today = new Date().toDateString();
+  let fiveMinutesAgo = Date.now() - 300000; // 5 minutes ago threshold
+  
+  // Total Users
+  let totalUsers = users.length;
+  
+  // Online Now (users active within last 5 minutes)
+  let onlineNow = users.filter(u => {
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return lastActive > fiveMinutesAgo;
+  }).length;
+  
+  // Active Today (users who logged in or used app today)
+  let activeToday = users.filter(u => {
+    let lastLogin = u.lastLogin || 0;
+    let lastActive = u.lastActive || 0;
+    let loginDate = new Date(lastLogin).toDateString();
+    let activeDate = new Date(lastActive).toDateString();
+    return loginDate === today || activeDate === today || u.todayPts?.date === today;
+  }).length;
+  
+  // KYC Verified
+  let kycVerified = users.filter(u => u.kycVerified).length;
+  
+  // Total Posts
+  let totalPosts = allPosts.length;
+  
+  // Withdrawals (total and pending)
+  let totalWithdrawals = (D.withdrawals || []).length;
+  let pendingWithdrawals = (D.withdrawals || []).filter(w => w.status === 'pending').length;
+  let completedWithdrawals = (D.withdrawals || []).filter(w => w.status === 'completed').length;
+  
+  // Disabled Users
+  let disabledUsers = users.filter(u => u.disabled).length;
+  
+  // Revenue Points (total points earned by all users)
+  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
+  
+  // Logged In Users (users with active session)
+  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length; // 30 min
+  
+  // Active Sessions (track unique sessions today)
+  let activeSessions = users.filter(u => {
+    let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
+    return sessionDate === today;
+  }).length;
+  
+  // Used App Today (users who performed any action today)
+  let usedAppToday = users.filter(u => {
+    let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
+    let actionDate = new Date(lastAction).toDateString();
+    return actionDate === today;
+  }).length;
+  
+  // Today Login (users who logged in today)
+  let todayLogin = users.filter(u => {
+    let loginDate = new Date(u.lastLogin || 0).toDateString();
+    return loginDate === today;
+  }).length;
   
   // Build analytics
   renderAdminAnalytics(users);
   if(G('adminStats')) G('adminStats').innerHTML = `
-    <div class="admin-stat"><div class="as-i">👥</div><div class="as-n">${users.length}</div><div class="as-l">Total Users</div></div>
+    <div class="admin-stat"><div class="as-i">👥</div><div class="as-n">${totalUsers}</div><div class="as-l">Total Users</div></div>
     <div class="admin-stat"><div class="as-i">🟢</div><div class="as-n">${onlineNow}</div><div class="as-l">Online Now</div></div>
     <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${activeToday}</div><div class="as-l">Active Today</div></div>
-    <div class="admin-stat"><div class="as-i">✅</div><div class="as-n">${users.filter(u=>u.kycVerified).length}</div><div class="as-l">KYC Verified</div></div>
-    <div class="admin-stat"><div class="as-i">📋</div><div class="as-n">${allPosts.length}</div><div class="as-l">Total Posts</div></div>
-    <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${(D.withdrawals||[]).filter(w=>w.status==='pending').length}</div><div class="as-l">Withdrawals</div></div>
-    <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${users.filter(u=>u.disabled).length}</div><div class="as-l">Disabled</div></div>
-    <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(revenue)}</div><div class="as-l">Revenue pts</div></div>
+    <div class="admin-stat"><div class="as-i">✅</div><div class="as-n">${kycVerified}</div><div class="as-l">KYC Verified</div></div>
+    <div class="admin-stat"><div class="as-i">📋</div><div class="as-n">${totalPosts}</div><div class="as-l">Total Posts</div></div>
+    <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${totalWithdrawals}</div><div class="as-l">Withdrawals</div></div>
+    <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${disabledUsers}</div><div class="as-l">Disabled</div></div>
+    <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(revenuePts)}</div><div class="as-l">Revenue pts</div></div>
+    <div class="admin-stat"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
+    <div class="admin-stat"><div class="as-i">📱</div><div class="as-n">${activeSessions}</div><div class="as-l">Sessions</div></div>
+    <div class="admin-stat"><div class="as-i">🎯</div><div class="as-n">${usedAppToday}</div><div class="as-l">Used App</div></div>
+    <div class="admin-stat"><div class="as-i">🔑</div><div class="as-n">${todayLogin}</div><div class="as-l">Today Login</div></div>
   `;
+  
+  // Store statistics for real-time refresh
+  window.adminStatsData = {
+    totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals,
+    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin
+  };
+  
+  // Start auto-refresh for statistics when admin panel is open
+  if(window.adminStatsRefreshInterval) clearInterval(window.adminStatsRefreshInterval);
+  window.adminStatsRefreshInterval = setInterval(() => {
+    if(CU?.isAdmin && document.getElementById('adminStats')) {
+      refreshAdminStats();
+    }
+  }, 10000); // Refresh every 10 seconds
+  
   if(G('adminRevEl')) G('adminRevEl').textContent = '$'+(revenue/PTS_PER_USD).toFixed(2);
   // Analytics: daily signups (last 7 days)
   let analyticsDiv = G('adminAnalytics');
@@ -8966,6 +9355,251 @@ function renderLiveComments() {
   }).join('');
   
   lc.scrollTop = lc.scrollHeight;
+}
+
+// ========== PROFESSIONAL CAMERA CONTROLS ==========
+
+// Camera state
+let cameraState = {
+  currentFacingMode: 'user',
+  currentResolution: 1080,
+  zoomLevel: 1,
+  flashEnabled: false,
+  currentFilter: 'none',
+  beautyLevel: 0,
+  brightness: 100,
+  contrast: 100,
+  isMuted: false
+};
+
+// Change camera resolution
+async function changeResolution() {
+  let resolution = parseInt(G('lvResolution').value);
+  cameraState.currentResolution = resolution;
+  
+  if (liveStreamState.stream) {
+    // Stop current stream
+    liveStreamState.stream.getTracks().forEach(t => t.stop());
+    
+    // Restart with new resolution
+    let constraints = {
+      video: { 
+        width: { ideal: resolution }, 
+        height: { ideal: resolution * 9 / 16 },
+        facingMode: cameraState.currentFacingMode 
+      },
+      audio: true
+    };
+    
+    try {
+      let stream = await navigator.mediaDevices.getUserMedia(constraints);
+      liveStreamState.stream = stream;
+      
+      let vid = G('liveVideo');
+      if (vid) {
+        vid.srcObject = stream;
+        vid.play().catch(() => {});
+      }
+      
+      toast('s', `Resolution changed to ${resolution}p`);
+    } catch (err) {
+      console.error('[Camera] Resolution change error:', err);
+      toast('e', 'Failed to change resolution');
+    }
+  }
+}
+
+// Toggle front/back camera
+async function toggleCamera() {
+  cameraState.currentFacingMode = cameraState.currentFacingMode === 'user' ? 'environment' : 'user';
+  
+  if (liveStreamState.stream) {
+    liveStreamState.stream.getTracks().forEach(t => t.stop());
+    
+    let constraints = {
+      video: { 
+        width: { ideal: cameraState.currentResolution }, 
+        height: { ideal: cameraState.currentResolution * 9 / 16 },
+        facingMode: cameraState.currentFacingMode 
+      },
+      audio: true
+    };
+    
+    try {
+      let stream = await navigator.mediaDevices.getUserMedia(constraints);
+      liveStreamState.stream = stream;
+      
+      let vid = G('liveVideo');
+      if (vid) {
+        vid.srcObject = stream;
+        vid.play().catch(() => {});
+      }
+      
+      toast('s', `Camera switched to ${cameraState.currentFacingMode === 'user' ? 'Front' : 'Back'}`);
+    } catch (err) {
+      console.error('[Camera] Toggle error:', err);
+      toast('e', 'Failed to switch camera');
+    }
+  }
+}
+
+// Toggle flash/torch
+async function toggleFlash() {
+  if (!liveStreamState.stream) return;
+  
+  let videoTrack = liveStreamState.stream.getVideoTracks()[0];
+  if (!videoTrack) return;
+  
+  let capabilities = videoTrack.getCapabilities();
+  if (!capabilities.torch) {
+    toast('w', 'Flash not supported on this device');
+    return;
+  }
+  
+  cameraState.flashEnabled = !cameraState.flashEnabled;
+  
+  try {
+    await videoTrack.applyConstraints({
+      advanced: [{ torch: cameraState.flashEnabled }]
+    });
+    
+    let btn = G('lvFlashBtn');
+    if (btn) {
+      btn.classList.toggle('active', cameraState.flashEnabled);
+    }
+    
+    toast('s', cameraState.flashEnabled ? 'Flash ON' : 'Flash OFF');
+  } catch (err) {
+    console.error('[Camera] Flash error:', err);
+    toast('e', 'Failed to toggle flash');
+  }
+}
+
+// Zoom controls
+function zoomIn() {
+  if (cameraState.zoomLevel < 3) {
+    cameraState.zoomLevel = Math.round((cameraState.zoomLevel + 0.2) * 10) / 10;
+    applyZoom();
+  }
+}
+
+function zoomOut() {
+  if (cameraState.zoomLevel > 1) {
+    cameraState.zoomLevel = Math.round((cameraState.zoomLevel - 0.2) * 10) / 10;
+    applyZoom();
+  }
+}
+
+function applyZoom() {
+  let vid = G('liveVideo');
+  if (vid) {
+    vid.style.transform = `scale(${cameraState.zoomLevel})`;
+    G('lvZoomLevel').textContent = cameraState.zoomLevel + 'x';
+  }
+}
+
+// Apply color filters
+function applyFilter(filter) {
+  cameraState.currentFilter = filter;
+  
+  let vid = G('liveVideo');
+  if (vid) {
+    vid.style.filter = filter === 'none' ? '' : filter;
+  }
+  
+  // Update active state
+  document.querySelectorAll('.lv-filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+  
+  toast('s', 'Filter applied');
+}
+
+// Apply beauty effect
+function applyBeauty() {
+  let beauty = parseInt(G('lvBeautySlider').value);
+  cameraState.beautyLevel = beauty;
+  
+  let vid = G('liveVideo');
+  if (vid) {
+    let blurAmount = beauty > 0 ? beauty / 20 : 0;
+    let brightnessAmount = 100 + (beauty / 2);
+    vid.style.filter = `blur(${blurAmount}px) brightness(${brightnessAmount}%)`;
+  }
+}
+
+// Apply brightness and contrast adjustments
+function applyAdjustments() {
+  let brightness = parseInt(G('lvBrightnessSlider').value);
+  let contrast = parseInt(G('lvContrastSlider').value);
+  
+  cameraState.brightness = brightness;
+  cameraState.contrast = contrast;
+  
+  let vid = G('liveVideo');
+  if (vid) {
+    let currentFilter = vid.style.filter || '';
+    let filterParts = currentFilter.split(' ').filter(f => !f.includes('brightness') && !f.includes('contrast'));
+    
+    vid.style.filter = `${filterParts.join(' ')} brightness(${brightness}%) contrast(${contrast}%)`;
+  }
+}
+
+// Toggle mute/unmute
+function toggleMute() {
+  if (!liveStreamState.stream) return;
+  
+  let audioTrack = liveStreamState.stream.getAudioTracks()[0];
+  if (!audioTrack) return;
+  
+  cameraState.isMuted = !cameraState.isMuted;
+  audioTrack.enabled = !cameraState.isMuted;
+  
+  let btn = G('lvMuteBtn');
+  if (btn) {
+    btn.classList.toggle('active', cameraState.isMuted);
+    btn.textContent = cameraState.isMuted ? '🔇' : '🎤';
+  }
+  
+  toast('s', cameraState.isMuted ? 'Microphone OFF' : 'Microphone ON');
+}
+
+// Take screenshot
+function takeScreenshot() {
+  let vid = G('liveVideo');
+  if (!vid) return;
+  
+  let canvas = document.createElement('canvas');
+  canvas.width = vid.videoWidth;
+  canvas.height = vid.videoHeight;
+  
+  let ctx = canvas.getContext('2d');
+  ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+  
+  // Apply current filters to screenshot
+  if (vid.style.filter) {
+    ctx.filter = vid.style.filter;
+    ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+  }
+  
+  let dataUrl = canvas.toDataURL('image/png');
+  
+  // Create download link
+  let link = document.createElement('a');
+  link.download = `live_screenshot_${Date.now()}.png`;
+  link.href = dataUrl;
+  link.click();
+  
+  toast('s', 'Screenshot saved!');
+  confetti();
+}
+
+// Toggle camera controls visibility
+function toggleCameraControls() {
+  let controls = G('lvCameraControls');
+  if (controls) {
+    controls.classList.toggle('hidden');
+  }
 }
 
 // Watch live stream (for viewers)
@@ -11124,13 +11758,10 @@ function watchVideoAd() {
 setTimeout(() => { const el = document.getElementById('videoAdContainer'); if(el) el.style.display='block'; }, 60000);
 </script>
 
-<!-- Floating Action Button Ad — Persistent Earning -->
-<div id="fabAd" class="mxt-safe-fab mxt-create-fab" role="button" aria-label="Create post">
-  <span style="font-size:24px;">💰</span>
-</div>
+<!-- Floating Action Button Ad — Persistent Earning (REMOVED) -->
 <style>
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
-.mxt-safe-fab{position:fixed !important;right:18px !important;width:64px !important;height:64px !important;border-radius:50% !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;z-index:100020 !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;touch-action:manipulation !important;-webkit-tap-highlight-color:transparent !important;box-shadow:0 12px 34px rgba(0,0,0,.38),0 0 28px rgba(0,212,255,.22) !important;animation:pulse 2s infinite;}
+.mxt-safe-fab{position:fixed !important;right:18px !important;width:64px !important;height:64px !important;border-radius:50% !important;display:none !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;z-index:100020 !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;touch-action:manipulation !important;-webkit-tap-highlight-color:transparent !important;box-shadow:0 12px 34px rgba(0,0,0,.38),0 0 28px rgba(0,212,255,.22) !important;animation:pulse 2s infinite;}
 .mxt-create-fab{bottom:calc(92px + env(safe-area-inset-bottom)) !important;background:linear-gradient(135deg,#6d28d9,#00ffaa) !important;}
 .mxt-fire-fab{bottom:calc(166px + env(safe-area-inset-bottom)) !important;background:linear-gradient(135deg,#ff6b6b,#ee5a6f) !important;}
 .mxt-safe-fab span{font-size:0 !important;line-height:1 !important;user-select:none !important;}
@@ -11142,97 +11773,7 @@ setTimeout(() => { const el = document.getElementById('videoAdContainer'); if(el
 .mxt-safe-fab.inside{right:18px !important;opacity:1 !important;}
 </style>
 <script>
-function handleQuickCreateFab(ev){
-  ev && ev.preventDefault && ev.preventDefault();
-  ev && ev.stopPropagation && ev.stopPropagation();
-  if(!CU) { toast('e','Login required'); return; }
-  if(typeof openPostModal === 'function') openPostModal();
-  else if(G('fab')) G('fab').click();
-}
-function handleFireFab(ev){
-  ev && ev.preventDefault && ev.preventDefault();
-  ev && ev.stopPropagation && ev.stopPropagation();
-  if(typeof showAutoAd === 'function') showAutoAd();
-  else if(typeof nav === 'function') nav('earn');
-  if(typeof toast === 'function') toast('i','Earn options opened');
-}
-
-function makeFabDraggable(id, handler){
-  const el = document.getElementById(id);
-  if(!el || el.dataset.mxtDragBound === '1') return;
-  el.dataset.mxtDragBound = '1';
-  let dragging = false;
-  let startX = 0;
-  let startRight = 0;
-  let moved = false;
-  const minRight = -42;
-  const maxRight = 18;
-  const getRight = () => parseFloat(getComputedStyle(el).right) || 0;
-  const setSnap = () => {
-    const cur = getRight();
-    if(cur < -10) {
-      el.classList.add('outside');
-      el.classList.remove('inside');
-      el.style.right = minRight + 'px';
-    } else {
-      el.classList.add('inside');
-      el.classList.remove('outside');
-      el.style.right = maxRight + 'px';
-    }
-  };
-  el.style.right = minRight + 'px';
-  el.classList.add('outside');
-  el.addEventListener('pointerdown', e => {
-    e.preventDefault();
-    e.stopPropagation();
-    dragging = true;
-    moved = false;
-    startX = e.clientX;
-    startRight = getRight();
-    el.setPointerCapture(e.pointerId);
-  }, {passive:false});
-  el.addEventListener('pointermove', e => {
-    if(!dragging) return;
-    const delta = startX - e.clientX;
-    const next = Math.min(maxRight, Math.max(minRight, startRight + delta));
-    el.style.right = next + 'px';
-    moved = moved || Math.abs(delta) > 6;
-  }, {passive:false});
-  el.addEventListener('pointerup', e => {
-    if(!dragging) return;
-    dragging = false;
-    el.releasePointerCapture(e.pointerId);
-    if(moved) {
-      setSnap();
-      el.dataset.mxtFabDragged = '1';
-      setTimeout(() => { if(el.dataset.mxtFabDragged === '1') el.dataset.mxtFabDragged = '0'; }, 20);
-    }
-  });
-  el.addEventListener('click', e => {
-    if(el.dataset.mxtFabDragged === '1'){
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    handler(e);
-  }, {passive:false});
-}
-
-(function installFloatingActionReliability(){
-  function bindFab(id, handler){
-    const el = document.getElementById(id);
-    if(!el || el.dataset.mxtFabReady === '1') return;
-    el.dataset.mxtFabReady = '1';
-    makeFabDraggable(id, handler);
-  }
-  function refresh(){
-    bindFab('fabAd', handleQuickCreateFab);
-    bindFab('socialBarAd', handleFireFab);
-  }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh, {once:true});
-  else refresh();
-  new MutationObserver(refresh).observe(document.body, {childList:true, subtree:true});
-})();
+// FAB handlers removed - floating action buttons disabled
 </script>
 
 <!-- Exit Intent Popup — High Conversion -->
@@ -12265,23 +12806,11 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
     },
     
     // ═══════════════════════════════════════════════════════
-    // SOCIAL BAR — Floating Social Ad
+    // SOCIAL BAR — Floating Social Ad (REMOVED)
     // ═══════════════════════════════════════════════════════
     initSocialBar() {
-      const socialBar = document.createElement('div');
-      socialBar.id = 'socialBarAd';
-      socialBar.className = 'mxt-safe-fab mxt-fire-fab';
-      socialBar.style.cssText = '';
-      socialBar.innerHTML = '<span style="font-size:24px;">🔥</span>';
-      
-      document.body.appendChild(socialBar);
-      
-      // Add pulse animation
-      const style = document.createElement('style');
-      style.textContent = `@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}`;
-      document.head.appendChild(style);
-      
-      console.log('[SocialBar] Initialized');
+      // FAB removed - no longer creating social bar
+      console.log('[SocialBar] Disabled');
     },
     
     // ═══════════════════════════════════════════════════════
@@ -15461,17 +15990,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   }
 
   function handleFabTap(e){
-    const fab = e.target && e.target.closest && e.target.closest('#fabAd,#socialBarAd');
-    if(!fab) return;
-    e.preventDefault();
-    e.stopPropagation();
-    if(fab.id === 'fabAd') {
-      if(typeof handleQuickCreateFab === 'function') handleQuickCreateFab(e);
-      else if(typeof openPostModal === 'function') openPostModal();
-    } else {
-      if(typeof handleFireFab === 'function') handleFireFab(e);
-      else if(typeof nav === 'function') nav('earn');
-    }
+    // FABs removed - no longer handling FAB taps
+    return;
   }
 
   ['pointerup','touchend','click'].forEach(evt => {
@@ -17311,8 +17831,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 .mxt-bs-main{display:flex;gap:8px;padding:9px;flex:1;min-width:0}
 .mxt-bs-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:var(--neon);font-size:10px;font-weight:900;flex:0 0 auto}
 .mxt-bs-copy{min-width:0;flex:1}
-.mxt-bs-copy h4{font-size:12px;line-height:1.25;color:var(--t1);margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mxt-bs-copy p{font-size:10px;line-height:1.35;color:var(--t3);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mxt-bs-copy h4{font-size:12px;line-height:1.25;color:var(--t1);margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mxt-bs-copy p{font-size:10px;line-height:1.35;color:var(--t3);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .mxt-bs-copy span{display:inline-flex;max-width:100%;border:1px solid rgba(0,255,170,.22);border-radius:6px;padding:3px 5px;color:var(--neon);font-size:9px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mxt-bs-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 9px 9px}
 .mxt-bs-actions button{min-height:32px;border:1px solid var(--b1);border-radius:7px;background:var(--g2);color:var(--t2);font-size:11px;font-weight:900;cursor:pointer}
