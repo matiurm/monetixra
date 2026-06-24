@@ -3,6 +3,7 @@
   "short_name": "Monetixra",
   "description": "Monetixra — Complete Social Earn Platform with AI, Crypto, NFT, MLM & Live",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#030308",

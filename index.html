@@ -2457,10 +2457,10 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <!-- DANGER ZONE -->
   <div class="sett-sec danger">
     <div class="sett-ttl">⚠️ Danger Zone</div>
-    <div class="sett-row" onclick="clearAllNotifs()"><div class="sett-ico">🔕</div><div><div class="sett-nm">Clear All Notifications</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="deactivateAccount()"><div class="sett-ico">😴</div><div><div class="sett-nm">Deactivate Account</div><div class="sett-sub">Temporarily hide your account</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="logout()"><div class="sett-ico">🚪</div><div><div class="sett-nm">Sign Out</div></div></div>
-    <div class="sett-row danger" onclick="deleteAccount()"><div class="sett-ico">🗑️</div><div><div class="sett-nm">Delete Account</div><div class="sett-sub">Permanently remove all data</div></div></div>
+    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.clearAllNotifications ? window.MonetixraAccountManagement.clearAllNotifications() : (window.clearAllNotifs && window.clearAllNotifs()))"><div class="sett-ico">🔕</div><div><div class="sett-nm">Clear All Notifications</div></div><span class="sett-end">›</span></div>
+    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.deactivateAccount ? window.MonetixraAccountManagement.deactivateAccount() : (window.deactivateAccount && window.deactivateAccount()))"><div class="sett-ico">😴</div><div><div class="sett-nm">Deactivate Account</div><div class="sett-sub">Temporarily hide your account</div></div><span class="sett-end">›</span></div>
+    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.signOut ? window.MonetixraAccountManagement.signOut() : (window.logout && window.logout()))"><div class="sett-ico">🚪</div><div><div class="sett-nm">Sign Out</div></div></div>
+    <div class="sett-row danger" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.deleteAccount ? window.MonetixraAccountManagement.deleteAccount() : (window.deleteAccount && window.deleteAccount()))"><div class="sett-ico">🗑️</div><div><div class="sett-nm">Delete Account</div><div class="sett-sub">Permanently remove all data</div></div></div>
   </div>
 </div>
 
@@ -3122,8 +3122,11 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="media-chip" onclick="pickFile('video')">📹 Video</div>
       <div class="media-chip" onclick="pickFile('audio')">🎵 Audio</div>
       <div class="media-chip" onclick="pickFile('360')">🔄 360° Image</div>
+      <div class="media-chip" id="voiceNoteChip" onclick="toggleVoiceRecording()">🎤 Voice Note</div>
       <div class="media-chip" onclick="toggleAiPanel()">🤖 AI Features</div>
     </div>
+    <div id="voiceRecordStatus" style="display:none;margin:6px 0 0;padding:8px 10px;border:1px solid rgba(239,68,68,.25);background:rgba(239,68,68,.08);border-radius:10px;color:var(--c5);font-size:12px;font-weight:700;"></div>
+    <div id="draftStatus" style="font-size:11px;color:var(--t3);margin-top:4px;">🗂 Drafts auto-save locally</div>
     <input type="file" id="postFileIn" style="display:none" onchange="previewPostFile(this)">
     <div class="ai-panel" id="aiPanelSection" style="display:none;">
       <div class="h-scroll-ltr">
@@ -3789,10 +3792,81 @@ function shrinkStoragePayload(lite) {
   return lite;
 }
 
+function savePersistenceBackup(snapshot) {
+  try {
+    const payload = snapshot ? JSON.stringify(snapshot) : JSON.stringify(D || {});
+    const sessionId = D?.cur || '';
+    localStorage.setItem(STORAGE_KEY + 'backup_data', payload);
+    localStorage.setItem(STORAGE_KEY + 'backup_session', sessionId);
+    localStorage.setItem(STORAGE_KEY + 'backup_time', String(Date.now()));
+    localStorage.setItem(STORAGE_KEY + 'persisted_at', String(Date.now()));
+    localStorage.setItem(STORAGE_KEY + 'persist_version', '2');
+    try {
+      sessionStorage.setItem(STORAGE_KEY + 'backup_data', payload);
+      sessionStorage.setItem(STORAGE_KEY + 'backup_session', sessionId);
+      sessionStorage.setItem(STORAGE_KEY + 'backup_time', String(Date.now()));
+      sessionStorage.setItem(STORAGE_KEY + 'persisted_at', String(Date.now()));
+    } catch (e) {}
+  } catch (e) {
+    console.warn('[Persistence] Backup write failed:', e);
+  }
+}
+
+function restorePersistenceBackup() {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY + 'backup_data') || localStorage.getItem(STORAGE_KEY + 'backup_data');
+    if (!raw) return false;
+    const backup = JSON.parse(raw);
+    if (!backup || typeof backup !== 'object') return false;
+    const hasContent = !!(backup.users || backup.posts || backup.txs || backup.notifs || backup.chats || backup.stories || backup.marketplace || backup.nfts || backup.apps);
+    if (!hasContent) return false;
+    D = { ...D, ...backup };
+    if (!D.users) D.users = {};
+    if (!D.posts) D.posts = [];
+    if (!D.txs) D.txs = [];
+    if (!D.notifs) D.notifs = [];
+    if (!D.chats) D.chats = {};
+    if (!D.stories) D.stories = [];
+    if (!D.groups) D.groups = {};
+    if (!D.marketplace) D.marketplace = [];
+    if (!D.nfts) D.nfts = [];
+    if (!D.apps) D.apps = [];
+    if (!D.withdrawals) D.withdrawals = [];
+    if (D.cur && D.users && D.users[D.cur]) {
+      CU = D.users[D.cur];
+    } else if (D.users) {
+      const firstActive = Object.values(D.users).find(u => u && u.id);
+      if (firstActive) {
+        D.cur = firstActive.id;
+        CU = firstActive;
+      }
+    }
+    saveData();
+    return true;
+  } catch (e) {
+    console.warn('[Persistence] Backup restore failed:', e);
+    return false;
+  }
+}
+
 async function saveData() {
   try {
+    const safeRoot = D && typeof D === 'object' ? D : { users: {}, posts: [], txs: [], notifs: [], chats: {}, stories: [], groups: {}, marketplace: [], nfts: [], apps: [] };
+    let lite = JSON.parse(JSON.stringify(safeRoot));
+    lite._storageVersion = STORAGE_VERSION;
+    if (!lite.users) lite.users = {};
+    if (!lite.posts) lite.posts = [];
+    if (!lite.txs) lite.txs = [];
+    if (!lite.notifs) lite.notifs = [];
+    if (!lite.chats) lite.chats = {};
+    if (!lite.stories) lite.stories = [];
+    if (!lite.groups) lite.groups = {};
+    if (!lite.marketplace) lite.marketplace = [];
+    if (!lite.nfts) lite.nfts = [];
+    if (!lite.apps) lite.apps = [];
+    if (!lite.withdrawals) lite.withdrawals = [];
+
     // Aggressively store large base64 files in IndexedDB
-    let lite = JSON.parse(JSON.stringify(D));
     lite._storageVersion = STORAGE_VERSION;
 
     // Queue DB writes for large media and only replace references if writes succeed.
@@ -3832,11 +3906,13 @@ async function saveData() {
     let str = JSON.stringify(lite);
     try {
       localStorage.setItem(STORAGE_KEY + 'data', str);
+      savePersistenceBackup(lite);
     } catch (qe) {
       console.warn('LocalStorage Quota Exceeded. Trimming storage payload...');
       lite = shrinkStoragePayload(lite);
       try {
         localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
+        savePersistenceBackup(lite);
       } catch (qe2) {
         console.warn('LocalStorage still full. Saving compact metadata without inline media...');
         for (let pp of (lite.posts||[])) {
@@ -3847,6 +3923,7 @@ async function saveData() {
           }
         }
         localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(lite));
+        savePersistenceBackup(lite);
       }
     }
   } catch (e) { console.warn('saveData error:', e); }
@@ -3854,6 +3931,9 @@ async function saveData() {
 async function loadData() {
   try {
     let raw = localStorage.getItem(STORAGE_KEY+'data');
+    if(!raw) {
+      raw = sessionStorage.getItem(STORAGE_KEY+'backup_data') || localStorage.getItem(STORAGE_KEY+'backup_data');
+    }
     if(raw) {
       let saved = JSON.parse(raw);
       if(saved._storageVersion && saved._storageVersion !== STORAGE_VERSION) {
@@ -3868,6 +3948,12 @@ async function loadData() {
       if(saved.stories)     saved.stories     = saved.stories.filter(s => s.id !== 's1');
       if(saved.marketplace) saved.marketplace = saved.marketplace.filter(m => m.id !== 'm1');
       Object.assign(D, saved);
+      if (!D.users || Object.keys(D.users).length === 0) {
+        const backup = localStorage.getItem(STORAGE_KEY+'backup_data');
+        if (backup) {
+          try { Object.assign(D, JSON.parse(backup)); } catch (e) {}
+        }
+      }
       
       // Restore media files from IndexedDB
       await MediaDB.init();
@@ -3904,8 +3990,66 @@ async function loadData() {
       
       // Save the restored data to ensure consistency
       saveData();
+    } else {
+      restorePersistenceBackup();
     }
   } catch(e) { console.warn('loadData error:', e); }
+}
+
+function ensurePersistentRecovery() {
+  try {
+    if (!D || typeof D !== 'object') {
+      D = { users: {}, posts: [], txs: [], notifs: [], chats: {}, stories: [], groups: {}, marketplace: [], nfts: [], apps: [] };
+    }
+
+    if (!D.users) D.users = {};
+    if (!D.posts) D.posts = [];
+    if (!D.txs) D.txs = [];
+    if (!D.notifs) D.notifs = [];
+    if (!D.chats) D.chats = {};
+    if (!D.stories) D.stories = [];
+    if (!D.groups) D.groups = {};
+    if (!D.marketplace) D.marketplace = [];
+    if (!D.nfts) D.nfts = [];
+    if (!D.apps) D.apps = [];
+    if (!D.withdrawals) D.withdrawals = [];
+
+    if (!D.users) D.users = {};
+    if (!D.posts) D.posts = [];
+    if (!D.txs) D.txs = [];
+    if (!D.notifs) D.notifs = [];
+    if (!D.chats) D.chats = {};
+    if (!D.stories) D.stories = [];
+    if (!D.groups) D.groups = {};
+    if (!D.marketplace) D.marketplace = [];
+    if (!D.nfts) D.nfts = [];
+    if (!D.apps) D.apps = [];
+
+    const hasLocalContent = Object.keys(D.users).length > 0 || D.posts.length > 0 || D.txs.length > 0 || D.notifs.length > 0 || Object.keys(D.chats).length > 0 || D.stories.length > 0 || D.marketplace.length > 0 || D.nfts.length > 0 || D.apps.length > 0;
+    if (!hasLocalContent) {
+      restorePersistenceBackup();
+    }
+
+    if (!D.cur) {
+      D.cur = sessionStorage.getItem(STORAGE_KEY + 'backup_session') || localStorage.getItem(STORAGE_KEY + 'backup_session') || '';
+    }
+
+    if (D.cur && D.users && D.users[D.cur]) {
+      CU = D.users[D.cur];
+    } else if (D.users) {
+      const firstUser = Object.values(D.users).find(u => u && u.id);
+      if (firstUser) {
+        D.cur = firstUser.id;
+        CU = firstUser;
+      }
+    }
+
+    if (CU && typeof saveSession === 'function') {
+      saveSession();
+    }
+  } catch (e) {
+    console.warn('[Persistence] Recovery guard failed:', e);
+  }
 }
 
 // Time-based multiplier for dynamic point system
@@ -3965,7 +4109,17 @@ function initData() {
 // FIXED: save only user ID, not full object
 function saveSession() {
   try {
-    localStorage.setItem(STORAGE_KEY+'session', D.cur || '');
+    const sessionId = D.cur || '';
+    localStorage.setItem(STORAGE_KEY+'session', sessionId);
+    localStorage.setItem(STORAGE_KEY+'backup_session', sessionId);
+    localStorage.setItem(STORAGE_KEY+'last_login_user', sessionId);
+    
+    // PERSISTENCE: Also save to persistence manager for extra reliability
+    if(typeof PersistenceManager !== 'undefined' && PersistenceManager && CU) {
+      PersistenceManager.saveSession(CU.id, { cur: D.cur }).catch(err => {
+        console.warn('[PersistenceManager] Session save failed:', err);
+      });
+    }
   } catch(e) {}
 }
 // Helper to force-clear session (used by logout/delete)
@@ -3978,15 +4132,41 @@ function clearSession() {
   } catch(e) {}
 }
 // FIXED: restore CU as a direct reference to D.users[uid]
-function loadSession() {
+async function loadSession() {
   try {
     let uid = localStorage.getItem(STORAGE_KEY+'session');
+    if(!uid) {
+      uid = localStorage.getItem(STORAGE_KEY+'backup_session');
+    }
+    if(!uid) {
+      uid = localStorage.getItem(STORAGE_KEY+'last_login_user');
+    }
+    
+    // PERSISTENCE: Try to restore from persistence manager if localStorage is empty
+    if(!uid && typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+      const session = await PersistenceManager.loadSession();
+      if(session && session.userId) {
+        uid = session.userId;
+        localStorage.setItem(STORAGE_KEY+'session', uid);
+        console.log('[PersistenceManager] Session restored from persistence storage');
+      }
+    }
+    
     if(uid && uid.length > 0 && D.users[uid]) {
       let u = D.users[uid];
       // Don't auto-login disabled accounts
       if(u.disabled && uid !== ADMIN_ID) return;
       CU = u;      // direct reference
       D.cur = uid;
+      
+      // PERSISTENCE: Restore points from persistence manager
+      if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+        const savedPoints = await PersistenceManager.loadPoints(uid);
+        if(savedPoints > 0 && (u.points || 0) < savedPoints) {
+          u.points = savedPoints;
+          console.log('[PersistenceManager] Points restored:', savedPoints);
+        }
+      }
     }
   } catch(e) {}
 }
@@ -4323,6 +4503,18 @@ async function doLogin() {
     CU    = D.users[foundUid];
     saveSession();
     saveData();
+    
+    // PERSISTENCE: Restore points from persistence manager on login
+    if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+      const savedPoints = await PersistenceManager.loadPoints(foundUid);
+      if(savedPoints > 0 && (CU.points || 0) < savedPoints) {
+        CU.points = savedPoints;
+        D.users[foundUid].points = savedPoints;
+        console.log('[PersistenceManager] Points restored on login:', savedPoints);
+        saveData(); // Save the restored points
+      }
+    }
+    
     trackUserActivity('login');
     mount();
     toast('s','✅ Welcome back, '+CU.name+'!');
@@ -4595,18 +4787,58 @@ function persistAuthState() {
   }
 }
 function logout(skipConfirm = false) {
-  if(!skipConfirm && !confirm('Sign out of Monetixra?')) return;
-  // CRITICAL: must save D.cur=null BEFORE reload
-  D.cur = null;
-  CU    = null;
-  if (isSupabaseReady()) {
-    supabaseSignOut().catch(err => {
-      console.warn('[Supabase signout]', err.message || err);
+  if (typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.signOut === 'function') {
+    return MonetixraAccountManagement.signOut(skipConfirm);
+  }
+
+  if (!skipConfirm && !confirm('Sign out of Monetixra?')) return false;
+  if (typeof D !== 'undefined') {
+    D.cur = null;
+  }
+  CU = null;
+
+  if (typeof isSupabaseReady === 'function' && isSupabaseReady()) {
+    if (typeof supabaseSignOut === 'function') {
+      supabaseSignOut().catch(err => {
+        console.warn('[Supabase signout]', err.message || err);
+      });
+    }
+  }
+
+  if (typeof PersistenceManager !== 'undefined' && PersistenceManager && typeof PersistenceManager.clearSession === 'function') {
+    PersistenceManager.clearSession().catch(err => {
+      console.warn('[PersistenceManager] Session clear failed:', err);
     });
   }
-  persistAuthState();
-  toast('s','Signed out successfully');
-  setTimeout(()=> location.reload(), 600);
+
+  if (typeof saveData === 'function') {
+    saveData();
+  }
+  if (typeof persistAuthState === 'function') {
+    persistAuthState();
+  }
+  try {
+    localStorage.setItem(STORAGE_KEY+'last_login_user', '');
+    localStorage.setItem(STORAGE_KEY+'backup_session', '');
+  } catch (e) {}
+
+  if (typeof document !== 'undefined') {
+    const authWrap = document.getElementById('authWrap');
+    const appWrap = document.getElementById('appWrap');
+    const fab = document.getElementById('fab');
+    if (authWrap) authWrap.style.display = 'flex';
+    if (appWrap) appWrap.style.display = 'none';
+    if (fab) fab.style.display = 'none';
+    if (typeof authTab === 'function') {
+      authTab('login');
+    }
+  }
+
+  if (typeof toast === 'function') {
+    toast('s', 'Signed out successfully');
+  }
+  setTimeout(() => location.reload(), 600);
+  return true;
 }
 function deleteAccount() {
   if(!CU) return;
@@ -4643,6 +4875,14 @@ function deleteAccount() {
 
 // Mount
 function mount() {
+  if (!CU || !D?.users?.[CU.id]) {
+    if (G('authWrap')) G('authWrap').style.display = 'flex';
+    if (G('appWrap')) G('appWrap').style.display = 'none';
+    if (G('fab')) G('fab').style.display = 'none';
+    if (typeof authTab === 'function') authTab('login');
+    return;
+  }
+
   G('authWrap').style.display='none';
   G('appWrap').style.display='block';
   G('fab').style.display='flex';
@@ -6313,6 +6553,10 @@ async function submitPostWithLoader() {
 function submitPost() {
   if(!CU){ toast('e','Login required'); closeModal('postModal'); return; }
   
+  if (voiceRecordingActive && voiceRecorder && voiceRecorder.state !== 'inactive') {
+    voiceRecorder.stop();
+  }
+  
   // MAX AD SYSTEM: Show rewarded ad before post creation (high engagement moment)
   if (typeof MAX_AD_SYSTEM !== 'undefined' && Math.random() > 0.5) {
     MAX_AD_SYSTEM.triggerContextualAd('before_post');
@@ -6359,6 +6603,25 @@ function submitPost() {
     toast('s','Post minted as NFT! +500 pts deducted');
   }
   saveData();
+  
+  // PERSISTENCE: Save post to persistence manager
+  if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+    PersistenceManager.savePost(post).catch(err => {
+      console.warn('[PersistenceManager] Post save failed:', err);
+    });
+    
+    // Save media file if present
+    if(post.file && post.file.length > 0) {
+      PersistenceManager.saveMedia(post.id, post.file, {
+        type: post.type,
+        mimetype: post.mimetype,
+        postId: post.id
+      }).catch(err => {
+        console.warn('[PersistenceManager] Media save failed:', err);
+      });
+    }
+  }
+  
   if(typeof trackUserActivity === 'function') {
     trackUserActivity('post');
   }
@@ -6377,6 +6640,7 @@ function submitPost() {
       }).catch(() => addToSyncQueue({ type: 'post', data: syncPayload }).catch(()=>{}));
     }
   }
+  clearPostDraft();
   closeModal('postModal');
   rFeed();
   window.scrollTo({top:0, behavior:'smooth'});
@@ -6697,6 +6961,13 @@ function addPts(pts, label, type='earn') {
   addMLMCommission(CU.id, userPts, label);
   checkAchievements();
   saveData(); syncUI();
+  
+  // PERSISTENCE: Save points to persistence manager (survives refresh/update/logout)
+  if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+    PersistenceManager.savePoints(CU.id, u.points || 0).catch(err => {
+      console.warn('[PersistenceManager] Points save failed:', err);
+    });
+  }
 }
 function addNotif(toId, type, icon, msg, refId='', priority=2) { D.notifs=D.notifs||[]; D.notifs.unshift({ id:'n'+Date.now(), to:toId, type, icon, msg, refId, at:Date.now(), read:false, priority }); if(D.notifs.length>200) D.notifs=D.notifs.slice(0,200); saveData(); syncUI(); }
 
@@ -6733,12 +7004,22 @@ function watchAd() {
   // Ads are now UNLIMITED - removed 50/day limit
   let today = new Date().toDateString();
   if(!u.todayAds||u.todayAds.date!==today) u.todayAds={date:today,count:0};
-  // Show interstitial ad with real ad content
-  showInts();
+  
+  // AD ROTATION: Use ad rotation system if available
+  if(typeof AdRotationSystem !== 'undefined' && AdRotationSystem) {
+    const network = AdRotationSystem.getNextAdNetwork();
+    window.open(network.url, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+    addPts(network.points, `Watched ${network.name} Ad`);
+    toast('s', `📺 +${network.points} pts from ${network.name}!`);
+  } else {
+    // Fallback to original interstitial
+    showInts();
+    addPts(3,'Watched Ad Bonus');
+  }
+  
   u.lastAdTime = Date.now();
   u.todayAds.count++;
   CU.adViews=(CU.adViews||0)+1;
-  addPts(3,'Watched Ad Bonus');
   saveData();
 }
 
@@ -9008,15 +9289,189 @@ function scrollRTLInit(rootSelectorOrNode) {
   } catch(e) { console.warn('scrollRTLInit', e); }
 }
 
+let postDraftTimer = null;
+let voiceRecorder = null;
+let voiceRecorderStream = null;
+let voiceRecorderChunks = [];
+let voiceRecordingActive = false;
+
+function collectPostDraft() {
+  const editor = document.getElementById('postEditor');
+  const tagsInput = G('postTags');
+  const privacy = document.querySelector('input[name="privacy"]:checked')?.value || 'public';
+  return {
+    text: editor ? editor.innerHTML : '',
+    plainText: editor ? editor.innerText.trim() : '',
+    tags: tagsInput ? tagsInput.value : '',
+    privacy,
+    mediaData: (pfData && pfData.length < 700000) ? pfData : null,
+    mediaMime: pfMime || null,
+    mediaName: pfName || null
+  };
+}
+
+function savePostDraft() {
+  try {
+    const draft = collectPostDraft();
+    localStorage.setItem('mxt_post_draft', JSON.stringify(draft));
+    const st = G('draftStatus');
+    if (st) st.textContent = draft.plainText || draft.tags ? '🗂 Draft saved locally' : '🗂 Drafts auto-save locally';
+  } catch (e) {}
+}
+
+function clearPostDraft() {
+  try { localStorage.removeItem('mxt_post_draft'); } catch (e) {}
+  const st = G('draftStatus');
+  if(st) st.textContent = '🗂 Drafts auto-save locally';
+}
+
+function restorePostDraft() {
+  try {
+    const raw = localStorage.getItem('mxt_post_draft');
+    if (!raw) return false;
+    const draft = JSON.parse(raw);
+    const editor = document.getElementById('postEditor');
+    if (editor) editor.innerHTML = draft.text || draft.plainText || '';
+    const tagsInput = G('postTags');
+    if (tagsInput) tagsInput.value = draft.tags || '';
+    if (draft.privacy) {
+      const radio = document.querySelector(`input[name="privacy"][value="${draft.privacy}"]`);
+      if (radio) radio.checked = true;
+    }
+    if (draft.mediaData && draft.mediaMime) {
+      pfData = draft.mediaData;
+      pfMime = draft.mediaMime;
+      pfName = draft.mediaName || 'draft-media';
+      const prevWrap = G('postPreviewWrap') || G('mediaPreview');
+      if (prevWrap) {
+        prevWrap.style.display = 'block';
+        prevWrap.innerHTML = '';
+        if (draft.mediaMime.startsWith('image/')) {
+          prevWrap.innerHTML = `<img src="${pfData}" style="width:100%; border-radius:12px; margin-top:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);">`;
+        } else if (draft.mediaMime.startsWith('video/')) {
+          prevWrap.innerHTML = `<video src="${pfData}" controls style="width:100%; border-radius:12px; margin-top:10px;"></video>`;
+        } else if (draft.mediaMime.startsWith('audio/')) {
+          prevWrap.innerHTML = `<div class="audio-prev">🎵 ${escape(pfName || 'Voice note')} (Restored draft)</div>`;
+        }
+      }
+    }
+    const st = G('draftStatus');
+    if (st) st.textContent = '🗂 Draft restored';
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function schedulePostDraftAutosave() {
+  clearTimeout(postDraftTimer);
+  postDraftTimer = setTimeout(savePostDraft, 350);
+}
+
+function bindPostDraftEvents() {
+  const editor = document.getElementById('postEditor');
+  const tagsInput = G('postTags');
+  if (editor && !editor.dataset.draftBound) {
+    editor.addEventListener('input', schedulePostDraftAutosave);
+    editor.dataset.draftBound = '1';
+  }
+  if (tagsInput && !tagsInput.dataset.draftBound) {
+    tagsInput.addEventListener('input', schedulePostDraftAutosave);
+    tagsInput.dataset.draftBound = '1';
+  }
+  document.querySelectorAll('input[name="privacy"]').forEach(radio => {
+    if (!radio.dataset.draftBound) {
+      radio.addEventListener('change', schedulePostDraftAutosave);
+      radio.dataset.draftBound = '1';
+    }
+  });
+}
+
+async function toggleVoiceRecording() {
+  const chip = G('voiceNoteChip');
+  const status = G('voiceRecordStatus');
+
+  if (voiceRecordingActive) {
+    if (voiceRecorder && voiceRecorder.state !== 'inactive') {
+      voiceRecorder.stop();
+    }
+    return;
+  }
+
+  if (!navigator.mediaDevices?.getUserMedia) {
+    toast('e', 'Voice recording is not supported on this browser');
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    voiceRecordingActive = true;
+    voiceRecorderStream = stream;
+    voiceRecorderChunks = [];
+    if (chip) {
+      chip.textContent = '⏹ Stop Recording';
+      chip.style.background = 'linear-gradient(90deg,#ef4444,#f59e0b)';
+      chip.style.color = '#fff';
+    }
+    if (status) {
+      status.style.display = 'block';
+      status.innerHTML = '🎙️ Recording voice note...';
+    }
+
+    const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4';
+    voiceRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+    voiceRecorder.ondataavailable = (e) => {
+      if (e.data.size) voiceRecorderChunks.push(e.data);
+    };
+    voiceRecorder.onstop = () => {
+      const blob = new Blob(voiceRecorderChunks, { type: voiceRecorder?.mimeType || mimeType || 'audio/webm' });
+      const reader = new FileReader();
+      reader.onload = () => {
+        pfData = reader.result;
+        pfMime = blob.type || 'audio/webm';
+        pfName = 'voice-note.' + (blob.type.includes('mp4') ? 'mp4' : 'webm');
+        const prevWrap = G('postPreviewWrap') || G('mediaPreview');
+        if (prevWrap) {
+          prevWrap.style.display = 'block';
+          prevWrap.innerHTML = `<div class="audio-prev">🎤 Voice note ready to post</div>`;
+        }
+        savePostDraft();
+        toast('s', '🎤 Voice note attached');
+      };
+      reader.readAsDataURL(blob);
+      if (voiceRecorderStream) {
+        voiceRecorderStream.getTracks().forEach(t => t.stop());
+        voiceRecorderStream = null;
+      }
+      voiceRecordingActive = false;
+      if (chip) {
+        chip.textContent = '🎤 Voice Note';
+        chip.style.background = '';
+        chip.style.color = '';
+      }
+      if (status) status.style.display = 'none';
+    };
+    voiceRecorder.start();
+    toast('i', '🎙️ Recording started. Tap stop when done.');
+  } catch (err) {
+    console.warn('[VoiceNote]', err);
+    toast('e', 'Microphone access was denied or unavailable');
+  }
+}
+
 function openPostModal(type='text') {
-  document.getElementById('postEditor').innerHTML='';
+  const editor = document.getElementById('postEditor');
+  if (editor) editor.innerHTML='';
   G('postTags').value=''; G('mediaPreview').innerHTML=''; G('aiOutput').innerHTML='';
   G('hashtagSuggestArea').innerHTML=''; G('copyrightNotice').style.display='none';
   pfData=null; pfMime=null; pfName=null; pfFile=null;
+  bindPostDraftEvents();
+  if (restorePostDraft()) {
+    toast('i', '🗂 Draft restored');
+  }
   openModal('postModal');
   setTimeout(()=>{
     scrollRTLInit('postModal');
-    let editor = document.getElementById('postEditor');
     if(editor) editor.focus();
   }, 80);
 }
@@ -9075,6 +9530,7 @@ function previewPostFile(inp) {
       prevWrap.innerHTML = `<div class="audio-prev">🎵 ${file.name} (Ready to post)</div>`;
     }
     setTimeout(()=>{ try{ aiGenerateCaption(true); aiSuggestHashtags(); }catch(e){} }, 300);
+    schedulePostDraftAutosave();
     let startX = null;
     prevWrap.onpointerdown = e => { startX = e.clientX; };
     prevWrap.onpointermove = e => { if(startX !== null && e.clientX - startX > 60) prevWrap.classList.add('floating'); };
@@ -9099,37 +9555,14 @@ let liveStreamState = {
 // Start Live from Create Post Modal
 function startLiveStreamFromPost() {
   if (!CU) return toast('e', 'Please login first');
-  
-  // Close post modal and request permissions
+
   closeModal('postModal');
-  
-  // Show permission request dialog
-  let permModal = document.createElement('div');
-  permModal.id = 'livePermModal';
-  permModal.className = 'overlay center';
-  permModal.style.zIndex = '10000';
-  permModal.innerHTML = `
-    <div class="modal" style="max-width:350px;text-align:center;">
-      <div style="font-size:48px;margin-bottom:10px;">📹</div>
-      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Start Live Stream?</div>
-      <div style="font-size:13px;color:var(--t3);margin-bottom:20px;">
-        Camera and microphone access required.<br>
-        All users will be able to watch your live stream.
-      </div>
-      <div style="display:flex;gap:10px;justify-content:center;">
-        <button class="btn btn-ghost" onclick="document.getElementById('livePermModal').remove()">Cancel</button>
-        <button class="btn btn-p" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);" onclick="requestLivePermissions()">🔴 Go Live</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(permModal);
+  toast('i', 'Opening camera for live stream...');
+  requestLivePermissions();
 }
 
 // Request camera/mic permissions
 function requestLivePermissions() {
-  let permModal = document.getElementById('livePermModal');
-  if (permModal) permModal.remove();
-
   const isSecure = window.isSecureContext || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (!isSecure) {
     toast('e', 'Camera access requires HTTPS or localhost. Please open this app in a secure context.');
@@ -9210,6 +9643,7 @@ function startBroadcast(stream) {
     vid.srcObject = stream;
     vid.muted = true; // Mute self to prevent echo
     vid.play?.().catch(() => {});
+    vid.style.filter = 'none';
   }
   G('lvName').textContent = (CU.name || 'User') + "'s Live Stream";
   G('lvAv').textContent = CU.name?.charAt(0).toUpperCase() || 'L';
@@ -9616,30 +10050,36 @@ function watchLiveStream(postId) {
   G('lvAv').textContent = post.streamerName?.charAt(0).toUpperCase() || 'L';
   G('lvViewers').textContent = post.viewers || 0;
   
-  // Hide video element for viewers (they watch via simulated connection)
+  // Show the live camera feed when the broadcaster is already streaming in this session
   let vid = G('liveVideo');
-  if (vid) {
-    vid.style.display = 'none';
-    vid.srcObject = null;
-  }
-  
-  // Show viewer mode UI
   let overlay = document.querySelector('.lv-overlay');
-  if (overlay) {
-    overlay.innerHTML = `
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:40px;">
-          ${post.streamerName?.charAt(0).toUpperCase() || 'L'}
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:18px;font-weight:700;">${esc(post.streamerName)}</div>
-          <div style="font-size:14px;color:var(--t3);">🔴 LIVE NOW</div>
-        </div>
-        <div style="background:rgba(255,0,0,0.2);border:1px solid #ff4444;padding:10px 20px;border-radius:20px;font-size:12px;">
-          📹 Watching Live Stream
-        </div>
-      </div>
-    `;
+  if (vid) {
+    if (liveStreamState.active && liveStreamState.stream) {
+      vid.style.display = 'block';
+      vid.srcObject = liveStreamState.stream;
+      vid.muted = true;
+      vid.play?.().catch(() => {});
+      if (overlay) overlay.innerHTML = '';
+    } else {
+      vid.style.display = 'none';
+      vid.srcObject = null;
+      if (overlay) {
+        overlay.innerHTML = `
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:40px;">
+              ${post.streamerName?.charAt(0).toUpperCase() || 'L'}
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:18px;font-weight:700;">${esc(post.streamerName)}</div>
+              <div style="font-size:14px;color:var(--t3);">🔴 LIVE NOW</div>
+            </div>
+            <div style="background:rgba(255,0,0,0.2);border:1px solid #ff4444;padding:10px 20px;border-radius:20px;font-size:12px;">
+              📹 Watching Live Stream
+            </div>
+          </div>
+        `;
+      }
+    }
   }
   
   // Load comments
@@ -10453,9 +10893,18 @@ function startAudioCallBtn(){ if(currentChatId){ startCall(currentChatId,'audio'
 // ── Startup & Lifecycle ───────────────────────────────
 window.addEventListener('load', async () => {
   try {
+    // PERSISTENCE: Initialize persistence manager first
+    if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
+      await PersistenceManager.init().catch(err => {
+        console.warn('[PersistenceManager] Init failed:', err);
+      });
+    }
+    
     if(typeof initData === 'function') initData();
     if(typeof loadData === 'function') await loadData();
-    if(typeof loadSession === 'function') loadSession();
+    if(typeof ensurePersistentRecovery === 'function') ensurePersistentRecovery();
+    if(typeof loadSession === 'function') await loadSession();
+    if(typeof ensurePersistentRecovery === 'function') ensurePersistentRecovery();
     if(typeof syncCU === 'function') syncCU();
     
     let savedTheme = localStorage.getItem(STORAGE_KEY+'theme') || 'dark';
@@ -10490,8 +10939,32 @@ setInterval(() => { if(CU){ syncCU(); saveData(); saveSession(); } }, 30000);
 setInterval(() => { if(CU) checkScheduledPosts(); }, 60000);
 setTimeout(loadCryptoPrices, 2000);
 
+window.addEventListener('pageshow', () => {
+  try {
+    if (typeof ensurePersistentRecovery === 'function') ensurePersistentRecovery();
+    if (CU) {
+      syncCU();
+      saveData();
+      saveSession();
+    }
+  } catch (e) {}
+});
+
 // Sync before page unload
 window.addEventListener('beforeunload', () => { if(CU){ syncCU(); saveData(); saveSession(); } });
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    try {
+      if (typeof ensurePersistentRecovery === 'function') ensurePersistentRecovery();
+      if (CU) {
+        syncCU();
+        saveData();
+        saveSession();
+      }
+    } catch (e) {}
+  }
+});
 
 // EmailJS init if configured
 if(typeof EMAILJS_PUBLIC !== 'undefined' && typeof emailjs !== 'undefined') {
@@ -11411,6 +11884,30 @@ function closeStickyAd() {
 }
 
 function clickStickyAd() {
+  if (typeof CU === 'undefined' || !CU) {
+    if (typeof toast === 'function') toast('e', 'Please sign in first');
+    return;
+  }
+
+  if (typeof watchAdWithRotation === 'function') {
+    watchAdWithRotation();
+    closeStickyAd();
+    return;
+  }
+
+  if (typeof window.AdRotationSystem !== 'undefined' && window.AdRotationSystem) {
+    const network = window.AdRotationSystem.getNextAdNetwork();
+    window.AdRotationSystem.openAd(network);
+    if (typeof addPts === 'function') {
+      addPts(network.points, `Clicked ${network.name} Ad`);
+    }
+    if (typeof toast === 'function') {
+      toast('s', `+${network.points} pts from ${network.name}!`);
+    }
+    closeStickyAd();
+    return;
+  }
+
   addPts(5, 'Clicked Sticky Ad');
   toast('s', '+5 pts!');
   closeStickyAd();
@@ -11424,21 +11921,23 @@ function scheduleStickyAd() {
 if('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').then(reg => {
     console.log('SW registered:', reg);
-    
-    // Check for updates
+    if (reg.waiting) {
+      showUpdateBanner();
+    }
     reg.addEventListener('updatefound', () => {
-      let newWorker = reg.installing;
+      const newWorker = reg.installing;
       newWorker.addEventListener('statechange', () => {
-        if(newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
           showUpdateBanner();
         }
       });
     });
-  }).catch(err => console.log('SW registration failed:', err));
-}
-
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
 function showUpdateBanner() {
+  if (document.getElementById('sw-update-banner')) return;
   let banner = document.createElement('div');
+  banner.id = 'sw-update-banner';
   banner.className = 'sw-update-banner';
   banner.innerHTML = `
     <span>🚀 New version available!</span>
@@ -11593,6 +12092,12 @@ window.checkPaywall = checkPaywall;
 
 <!-- Real-time Subscriptions (Supabase) -->
 <script src="js/supabase-realtime.js"></script>
+
+<!-- Ultimate Persistence Manager - Points, Session, Media, Posts, Chats -->
+<script src="js/persistence-manager.js"></script>
+
+<!-- Ad Rotation System - Different ad networks on each click -->
+<script src="js/ad-rotation-system.js"></script>
 
 <!-- ═════════════════════════════════════════════════════════════ -->
 <!-- MONETIXRA - MODULAR SYSTEMS (NEW) -->
@@ -15876,12 +16381,20 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     };
 
     window.clearAllNotifs = function(){
+      if (typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.clearAllNotifications === 'function') {
+        return MonetixraAccountManagement.clearAllNotifications();
+      }
+
       const u = me();
-      if(!u) return typeof toast === 'function' && toast('e','Please sign in first');
+      if(!u) {
+        if(typeof toast === 'function') toast('e','Please sign in first');
+        return false;
+      }
+
       const before = (D.notifs || []).filter(n => n.to === u.id).length;
       D.notifs = (D.notifs || []).filter(n => n.to !== u.id);
-      saveData();
-      persistAuthState();
+      if(typeof saveData === 'function') saveData();
+      if(typeof persistAuthState === 'function') persistAuthState();
       if(typeof rNotif === 'function') rNotif();
       if(typeof syncUI === 'function') syncUI();
       if(typeof toast === 'function') toast('s', before ? '🔕 All notifications cleared' : 'No notifications to clear');
@@ -15889,46 +16402,68 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     };
 
     window.deactivateAccount = function(){
+      if (typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.deactivateAccount === 'function') {
+        return MonetixraAccountManagement.deactivateAccount();
+      }
+
       const u = me();
-      if(!u) return typeof toast === 'function' && toast('e','Please sign in first');
-      if(!confirm('Deactivate your account? You can reactivate by logging in again.')) return;
+      if(!u) {
+        if(typeof toast === 'function') toast('e','Please sign in first');
+        return false;
+      }
+      if(!confirm('Deactivate your account? You can reactivate by logging in again.')) return false;
       const user = D.users[u.id] || u;
       user.deactivated = true;
-      fetch('/api/account/deactivate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id})}).catch(()=>{});
-      D.cur = null;
+      if(typeof fetch === 'function') {
+        fetch('/api/account/deactivate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id})}).catch(()=>{});
+      }
+      if(typeof D !== 'undefined') D.cur = null;
       CU = null;
-      saveData();
-      persistAuthState();
+      if(typeof saveData === 'function') saveData();
+      if(typeof persistAuthState === 'function') persistAuthState();
       if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
       if(typeof toast === 'function') toast('i','Account deactivated');
       setTimeout(() => location.reload(), 700);
+      return true;
     };
 
     window.deleteAccount = function(){
+      if (typeof MonetixraAccountManagement !== 'undefined' && typeof MonetixraAccountManagement.deleteAccount === 'function') {
+        return MonetixraAccountManagement.deleteAccount();
+      }
+
       const u = me();
-      if(!u) return typeof toast === 'function' && toast('e','Please sign in first');
+      if(!u) {
+        if(typeof toast === 'function') toast('e','Please sign in first');
+        return false;
+      }
       const uid = u.id;
       if(prompt('Type DELETE to permanently delete your account:') !== 'DELETE') {
         if(typeof toast === 'function') toast('e','Cancelled - type DELETE to confirm');
-        return;
+        return false;
       }
-      fetch('/api/account/' + encodeURIComponent(uid), {method:'DELETE'}).catch(()=>{});
-      delete D.users[uid];
-      D.posts = (D.posts || []).filter(p => p.author !== uid);
-      D.notifs = (D.notifs || []).filter(n => n.to !== uid);
-      D.txs = (D.txs || []).filter(t => t.user !== uid);
+      if(typeof fetch === 'function') {
+        fetch('/api/account/' + encodeURIComponent(uid), {method:'DELETE'}).catch(()=>{});
+      }
+      if(typeof D !== 'undefined') {
+        delete D.users[uid];
+        D.posts = (D.posts || []).filter(p => p.author !== uid);
+        D.notifs = (D.notifs || []).filter(n => n.to !== uid);
+        D.txs = (D.txs || []).filter(t => t.user !== uid);
+      }
       Object.values(D.users || {}).forEach(x => {
         x.followers = (x.followers || []).filter(id => id !== uid);
         x.following = (x.following || []).filter(id => id !== uid);
         x.autoFriends = (x.autoFriends || []).filter(id => id !== uid);
       });
-      D.cur = null;
+      if(typeof D !== 'undefined') D.cur = null;
       CU = null;
-      saveData();
-      persistAuthState();
+      if(typeof saveData === 'function') saveData();
+      if(typeof persistAuthState === 'function') persistAuthState();
       if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
       if(typeof toast === 'function') toast('s','Account deleted');
       setTimeout(() => location.reload(), 700);
+      return true;
     };
 
     const oldFeedback = window.openFeedback;

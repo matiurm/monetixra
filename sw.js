@@ -1,13 +1,19 @@
 // ============================================================
-//  Monetixra — Enhanced Service Worker (PWA)
-//  Offline support + Push Notifications + Background Sync
+//  Monetixra — Offline-safe Service Worker (PWA)
+//  Keeps the app usable across refresh, update, reset, and offline use.
 // ============================================================
-const CACHE_NAME = 'monetixra-v5';
+const CACHE_NAME = 'monetixra-v8';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/icon-72.png',
+  '/icon-96.png',
+  '/icon-128.png',
+  '/icon-144.png',
+  '/icon-152.png',
   '/icon-192.png',
+  '/icon-384.png',
   '/icon-512.png',
 ];
 
@@ -19,65 +25,54 @@ const CDN_ASSETS = [
 
 const ASSETS = [...STATIC_ASSETS, ...CDN_ASSETS];
 
-// Install: cache essential assets
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(c => {
-      return Promise.allSettled(ASSETS.map(url => c.add(url).catch(() => {})));
-    }).then(() => self.skipWaiting())
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => Promise.allSettled(ASSETS.map(url => cache.add(url).catch(() => {})))).then(() => self.skipWaiting())
   );
 });
 
-// Activate: delete old caches
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())
   );
 });
 
-// Fetch: network-first for API, cache-first for assets
-self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
 
-  // API calls: always network
   if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/socket.io/')) {
-    return e.respondWith(fetch(e.request).catch(() => new Response(
-      JSON.stringify({ error: 'Offline' }), { headers: { 'Content-Type': 'application/json' } }
-    )));
+    event.respondWith(fetch(event.request).catch(() => new Response(JSON.stringify({ error: 'Offline' }), { headers: { 'Content-Type': 'application/json' } })));
+    return;
   }
 
-  // Navigation: network-first, fallback to cached index.html
-  if (e.request.mode === 'navigate') {
-    return e.respondWith(
-      fetch(e.request, { cache: 'no-store' }).catch(() => caches.match('/index.html'))
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' }).catch(() => caches.match('/index.html'))
     );
+    return;
   }
 
-  // Images and media thumbnails: stale-while-revalidate for faster mobile repeat views
-  if (e.request.destination === 'image' || /\.(png|jpg|jpeg|webp|gif|svg)$/i.test(url.pathname)) {
-    return e.respondWith(
-      caches.open(CACHE_NAME).then(cache =>
-        cache.match(e.request).then(cached => {
-          const fresh = fetch(e.request).then(response => {
-            if(response && response.status === 200) cache.put(e.request, response.clone());
-            return response;
-          }).catch(() => cached);
-          return cached || fresh;
-        })
-      )
+  if (event.request.destination === 'image' || /\.(png|jpg|jpeg|webp|gif|svg)$/i.test(url.pathname)) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        const networkFetch = fetch(event.request).then(response => {
+          if (response && response.status === 200) {
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
+          }
+          return response;
+        }).catch(() => cached);
+        return cached || networkFetch;
+      })
     );
+    return;
   }
 
-  // Assets: cache-first
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      return cached || fetch(e.request).then(response => {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request).then(response => {
         if (response && response.status === 200) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
-        }
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       }).catch(() => cached);
     })
