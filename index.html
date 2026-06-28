@@ -1194,6 +1194,62 @@ iframe[src*="adzilla"],
 .lv-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
 .lv-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
 
+/* Premium Live Camera Studio */
+#liveView{background:radial-gradient(circle at 50% 0%,#12202a 0%,#030308 55%,#000 100%);}
+.lv-vid{overflow:hidden;isolation:isolate;}
+.lv-vid:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 18% 16%,rgba(0,255,170,.16),transparent 28%),radial-gradient(circle at 82% 12%,rgba(14,165,233,.14),transparent 25%),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.34));mix-blend-mode:screen;}
+.lv-vid video{transform-origin:center;transition:filter .22s ease,transform .22s ease;}
+.lv-overlay{z-index:2;background:linear-gradient(to bottom,rgba(0,0,0,.58) 0%,rgba(0,0,0,.1) 24%,rgba(0,0,0,.08) 54%,rgba(0,0,0,.82) 100%);}
+.lv-camera-frame{position:absolute;inset:76px 22px 112px;z-index:3;pointer-events:none;border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,255,170,.14),0 0 42px rgba(0,255,170,.08);}
+.lv-camera-frame span{position:absolute;width:34px;height:34px;border-color:rgba(0,255,170,.72);border-style:solid;}
+.lv-camera-frame span:nth-child(1){top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:22px 0 0 0;}
+.lv-camera-frame span:nth-child(2){top:-1px;right:-1px;border-width:2px 2px 0 0;border-radius:0 22px 0 0;}
+.lv-camera-frame span:nth-child(3){bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 22px 0;}
+.lv-camera-frame span:nth-child(4){bottom:-1px;left:-1px;border-width:0 0 2px 2px;border-radius:0 0 0 22px;}
+.lv-focus-grid{position:absolute;inset:76px 22px 112px;z-index:3;pointer-events:none;opacity:.22;background:linear-gradient(90deg,transparent 33%,rgba(255,255,255,.55) 33.2%,transparent 33.6%,transparent 66%,rgba(255,255,255,.55) 66.2%,transparent 66.6%),linear-gradient(0deg,transparent 33%,rgba(255,255,255,.55) 33.2%,transparent 33.6%,transparent 66%,rgba(255,255,255,.55) 66.2%,transparent 66.6%);}
+.lv-rec-ring{position:absolute;left:50%;top:50%;z-index:3;width:82px;height:82px;margin:-41px 0 0 -41px;border:1px solid rgba(255,255,255,.2);border-radius:50%;pointer-events:none;box-shadow:0 0 0 999px rgba(0,0,0,.01);}
+.lv-rec-ring:before,.lv-rec-ring:after{content:"";position:absolute;inset:12px;border:1px dashed rgba(0,255,170,.48);border-radius:50%;animation:spinSlow 8s linear infinite;}
+.lv-rec-ring:after{inset:25px;border-color:rgba(14,165,233,.44);animation-direction:reverse;}
+.lv-rec-ring span{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;background:rgba(255,255,255,.9);border-radius:50%;}
+.lv-studio-hud{position:absolute;top:50px;left:12px;right:56px;z-index:4;display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;}
+.lv-studio-hud::-webkit-scrollbar{display:none;}
+.lv-hud-chip{flex:0 0 auto;min-height:30px;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(3,6,12,.58);backdrop-filter:blur(16px);color:#fff;font-size:11px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.22);}
+.lv-hud-live{background:linear-gradient(135deg,rgba(239,68,68,.86),rgba(225,29,72,.68));border-color:rgba(255,255,255,.22);}
+.lv-hud-live span{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.14);animation:pulse 1.2s infinite;}
+.lv-top{z-index:4;top:40px;padding-top:48px;}
+.lv-close{z-index:7;background:rgba(3,6,12,.62);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);}
+.lv-tools-toggle{position:absolute;right:12px;top:92px;z-index:7;min-width:44px;height:32px;border:1px solid rgba(0,255,170,.28);border-radius:999px;background:linear-gradient(135deg,rgba(0,255,170,.2),rgba(14,165,233,.16));backdrop-filter:blur(14px);color:#fff;font-size:11px;font-weight:900;letter-spacing:0;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.3);}
+.lv-tools-toggle.is-hidden{background:rgba(3,6,12,.72);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.72);}
+.lv-comments,.lv-bottom{z-index:5;}
+.lv-camera-controls{z-index:6;top:126px;right:14px;width:178px;padding:10px;background:linear-gradient(180deg,rgba(6,12,22,.78),rgba(5,8,14,.58));border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(150%);}
+.lv-control-group{padding:8px;border:1px solid rgba(255,255,255,.08);border-radius:13px;background:rgba(255,255,255,.045);}
+.lv-control-group:has(.lv-btn-icon){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;}
+.lv-control-label{letter-spacing:0;color:rgba(255,255,255,.72);}
+.lv-select{height:36px;border-radius:11px;background:rgba(255,255,255,.1);}
+.lv-btn{border-radius:12px;background:linear-gradient(135deg,rgba(0,255,170,.16),rgba(14,165,233,.14));border-color:rgba(0,255,170,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+.lv-btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,255,170,.12);}
+.lv-btn-icon{width:42px;height:42px;justify-self:center;}
+.lv-filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+.lv-filter-btn{min-height:30px;border-radius:10px;background:rgba(255,255,255,.07);}
+.lv-filter-btn.active{color:#04100c;background:linear-gradient(135deg,#4ade80,#22d3ee);}
+.lv-slider{height:8px;background:linear-gradient(90deg,rgba(0,255,170,.85) var(--lv-progress,50%),rgba(255,255,255,.18) var(--lv-progress,50%));}
+.lv-slider::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(0,255,170,.16),0 6px 16px rgba(0,0,0,.3);}
+.lv-slider::-moz-range-thumb{box-shadow:0 0 0 5px rgba(0,255,170,.16),0 6px 16px rgba(0,0,0,.3);}
+.lv-camera-controls.hidden{opacity:.08;transform:translateX(calc(100% - 16px));}
+@keyframes spinSlow{to{transform:rotate(360deg);}}
+@media(max-width:720px){
+  .lv-camera-frame,.lv-focus-grid{inset:92px 12px 160px;border-radius:18px;}
+  .lv-rec-ring{width:64px;height:64px;margin:-32px 0 0 -32px;}
+  .lv-studio-hud{top:44px;right:50px;}
+  .lv-top{top:34px;padding-top:42px;}
+  .lv-camera-controls{top:auto;left:10px;right:10px;bottom:68px;width:auto;max-height:34vh;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow:auto;border-radius:18px;}
+  .lv-control-group{min-width:0;padding:7px;}
+  .lv-control-group:has(.lv-filter-row),.lv-control-group:has(.lv-slider),.lv-control-group:first-child{grid-column:span 2;}
+  .lv-filter-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .lv-control-label{font-size:10px;}
+  .lv-comments{bottom:240px;width:min(260px,78vw);}
+}
+
 /* ========== MOBILE PERFORMANCE OPTIMIZATIONS ========== */
 /* Smooth scrolling and touch optimization */
 html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
@@ -2928,10 +2984,22 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 <div id="liveView">
   <div class="lv-vid"><video id="liveVideo" autoplay muted playsinline></video>
     <div class="lv-overlay"></div>
+    <div class="lv-camera-frame" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="lv-focus-grid" aria-hidden="true"></div>
+    <div class="lv-rec-ring" aria-hidden="true"><span></span></div>
+    <div class="lv-studio-hud" id="lvStudioHud">
+      <div class="lv-hud-chip lv-hud-live"><span></span>LIVE</div>
+      <div class="lv-hud-chip" id="lvHudMode">Front Camera</div>
+      <div class="lv-hud-chip" id="lvHudQuality">1080p</div>
+      <div class="lv-hud-chip" id="lvHudFx">FX Normal</div>
+    </div>
     <div class="lv-top"><div class="av av-round av-sm" id="lvAv">L</div><div style="flex:1;"><span id="lvName">Live</span></div><div class="lv-live-badge">🔴 LIVE</div><div class="lv-viewers">👁 <span id="lvViewers">0</span></div></div>
     <div class="lv-comments" id="lvComments"></div>
     <div class="lv-bottom"><div class="lv-inp-row"><input class="lv-inp" id="lvInp" placeholder="Comment..."><button class="cr-send" onclick="sendLiveComment()">➤</button></div></div>
     <button class="lv-close" onclick="closeLiveView()">✕</button>
+    <button class="lv-tools-toggle" id="lvToolsToggle" onclick="toggleCameraControls()" title="Camera Studio">CAM</button>
     
     <!-- Professional Camera Controls -->
     <div class="lv-camera-controls" id="lvCameraControls">
@@ -2949,6 +3017,11 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <!-- Camera Toggle -->
       <div class="lv-control-group">
         <button class="lv-btn lv-btn-icon" onclick="toggleCamera()" title="Switch Camera">🔄</button>
+      </div>
+
+      <!-- Screen Share -->
+      <div class="lv-control-group">
+        <button class="lv-btn lv-btn-icon" onclick="startLiveScreenShare()" title="Share Screen">🖥</button>
       </div>
       
       <!-- Flash Control -->
@@ -2981,18 +3054,18 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <!-- Beauty Mode -->
       <div class="lv-control-group">
         <div class="lv-control-label">✨ Beauty</div>
-        <input type="range" class="lv-slider" id="lvBeautySlider" min="0" max="100" value="0" onchange="applyBeauty()">
+        <input type="range" class="lv-slider" id="lvBeautySlider" min="0" max="100" value="0" oninput="applyBeauty()" onchange="applyBeauty()">
       </div>
       
       <!-- Brightness/Contrast -->
       <div class="lv-control-group">
         <div class="lv-control-label">☀️ Brightness</div>
-        <input type="range" class="lv-slider" id="lvBrightnessSlider" min="50" max="150" value="100" onchange="applyAdjustments()">
+        <input type="range" class="lv-slider" id="lvBrightnessSlider" min="50" max="150" value="100" oninput="applyAdjustments()" onchange="applyAdjustments()">
       </div>
       
       <div class="lv-control-group">
         <div class="lv-control-label">🌓 Contrast</div>
-        <input type="range" class="lv-slider" id="lvContrastSlider" min="50" max="150" value="100" onchange="applyAdjustments()">
+        <input type="range" class="lv-slider" id="lvContrastSlider" min="50" max="150" value="100" oninput="applyAdjustments()" onchange="applyAdjustments()">
       </div>
       
       <!-- Mute/Unmute -->
@@ -9552,6 +9625,107 @@ let liveStreamState = {
   postId: null
 };
 
+let livePeerState = {
+  broadcasterPeers: new Map(),
+  viewerPc: null,
+  viewerPostId: null,
+  viewerStreamerId: null
+};
+
+function livePeerKey(viewerSocketId, viewerId) {
+  return viewerSocketId || viewerId || ('viewer_' + Date.now());
+}
+
+function closeLivePeerConnections() {
+  livePeerState.broadcasterPeers.forEach(pc => {
+    try { pc.close(); } catch(e) {}
+  });
+  livePeerState.broadcasterPeers.clear();
+  if(livePeerState.viewerPc) {
+    try { livePeerState.viewerPc.close(); } catch(e) {}
+    livePeerState.viewerPc = null;
+  }
+  livePeerState.viewerPostId = null;
+  livePeerState.viewerStreamerId = null;
+}
+
+async function createLiveBroadcasterPeer({postId, viewerId, viewerSocketId}) {
+  if(!socketReady || !socket || !liveStreamState.active || !liveStreamState.stream) return;
+  if(postId !== liveStreamState.postId) return;
+  const key = livePeerKey(viewerSocketId, viewerId);
+  const oldPc = livePeerState.broadcasterPeers.get(key);
+  if(oldPc) try { oldPc.close(); } catch(e) {}
+
+  const pc = new RTCPeerConnection({ iceServers: await fetchICEServers() });
+  liveStreamState.stream.getTracks().forEach(track => pc.addTrack(track, liveStreamState.stream));
+  pc.onicecandidate = e => {
+    if(e.candidate && socketReady) socket.emit('live:ice', {
+      postId,
+      toSocketId: viewerSocketId,
+      toUserId: viewerId,
+      fromUserId: CU?.id,
+      candidate: e.candidate
+    });
+  };
+  pc.onconnectionstatechange = () => {
+    if(['failed','disconnected','closed'].includes(pc.connectionState)) livePeerState.broadcasterPeers.delete(key);
+  };
+  livePeerState.broadcasterPeers.set(key, pc);
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  socket.emit('live:offer', { postId, toSocketId: viewerSocketId, streamerId: CU?.id, offer });
+}
+
+async function acceptLiveOffer({postId, streamerId, offer}) {
+  if(!offer || !socketReady || !socket) return;
+  if(livePeerState.viewerPc) try { livePeerState.viewerPc.close(); } catch(e) {}
+
+  livePeerState.viewerPostId = postId;
+  livePeerState.viewerStreamerId = streamerId;
+  const pc = new RTCPeerConnection({ iceServers: await fetchICEServers() });
+  livePeerState.viewerPc = pc;
+  pc.ontrack = event => {
+    const vid = G('liveVideo');
+    const overlay = document.querySelector('.lv-overlay');
+    if(vid) {
+      vid.style.display = 'block';
+      vid.srcObject = event.streams[0];
+      vid.muted = false;
+      vid.play?.().catch(() => {});
+    }
+    if(overlay) overlay.innerHTML = '';
+  };
+  pc.onicecandidate = e => {
+    if(e.candidate && socketReady) socket.emit('live:ice', {
+      postId,
+      toUserId: streamerId,
+      fromUserId: CU?.id,
+      candidate: e.candidate
+    });
+  };
+  await pc.setRemoteDescription(new RTCSessionDescription(offer));
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  socket.emit('live:answer', { postId, streamerId, viewerId: CU?.id, answer });
+}
+
+async function handleLiveAnswer({postId, viewerId, viewerSocketId, answer}) {
+  if(postId !== liveStreamState.postId || !answer) return;
+  const pc = livePeerState.broadcasterPeers.get(livePeerKey(viewerSocketId, viewerId)) || livePeerState.broadcasterPeers.get(viewerId);
+  if(pc) try { await pc.setRemoteDescription(new RTCSessionDescription(answer)); } catch(e) { console.warn('[Live] answer failed', e); }
+}
+
+async function handleLiveIce({postId, fromUserId, fromSocketId, candidate}) {
+  if(!candidate) return;
+  const rtcCandidate = new RTCIceCandidate(candidate);
+  if(liveStreamState.active && postId === liveStreamState.postId) {
+    const pc = livePeerState.broadcasterPeers.get(livePeerKey(fromSocketId, fromUserId)) || livePeerState.broadcasterPeers.get(fromUserId);
+    if(pc) try { await pc.addIceCandidate(rtcCandidate); } catch(e) {}
+  } else if(livePeerState.viewerPc && postId === livePeerState.viewerPostId) {
+    try { await livePeerState.viewerPc.addIceCandidate(rtcCandidate); } catch(e) {}
+  }
+}
+
 // Start Live from Create Post Modal
 function startLiveStreamFromPost() {
   if (!CU) return toast('e', 'Please login first');
@@ -9561,46 +9735,196 @@ function startLiveStreamFromPost() {
   requestLivePermissions();
 }
 
+function getLiveCameraConstraints(options = {}) {
+  const resolution = Number(options.resolution || cameraState?.currentResolution || 1080);
+  return {
+    video: options.video === false ? false : {
+      width: { ideal: Math.min(resolution, 1920) },
+      height: { ideal: Math.round(Math.min(resolution, 1920) * 9 / 16) },
+      facingMode: options.facingMode || cameraState?.currentFacingMode || 'user'
+    },
+    audio: options.audio !== false
+  };
+}
+
+function liveErrorDetails(err) {
+  const name = err?.name || 'UnknownError';
+  const messages = {
+    NotAllowedError: 'Camera/Mic permission is blocked. Allow it from the browser site settings, then try again.',
+    PermissionDeniedError: 'Camera/Mic permission is blocked. Allow it from the browser site settings, then try again.',
+    NotFoundError: 'No camera or microphone was found on this device.',
+    NotReadableError: 'Camera or microphone is already being used by another app.',
+    OverconstrainedError: 'Requested camera quality is not available. Trying a lower quality can fix this.',
+    SecurityError: 'Browser security policy blocked camera/mic. Check HTTPS and Permissions-Policy headers.',
+    AbortError: 'The browser stopped camera startup. Please try again.'
+  };
+  return messages[name] || (err?.message || 'Unable to access camera/microphone.');
+}
+
+function showLivePermissionHelp(err) {
+  const details = liveErrorDetails(err);
+  toast('e', details);
+  openLiveFallbackView(details);
+  alert(
+    'Camera Access Required\n\n' +
+    details + '\n\n' +
+    'Fix checklist:\n' +
+    '1. Use HTTPS or localhost.\n' +
+    '2. Click the camera icon in the address bar and choose Allow.\n' +
+    '3. Close other apps using the camera.\n' +
+    '4. If this page is inside an iframe, the parent iframe must include allow="camera; microphone; display-capture".\n' +
+    '5. Try Screen Share from Live controls if camera is unavailable.'
+  );
+}
+
+function openLiveFallbackView(message) {
+  const liveView = G('liveView');
+  if (liveView) liveView.classList.add('open');
+  const controls = G('lvCameraControls');
+  if (controls) {
+    controls.style.display = '';
+    controls.classList.remove('hidden');
+  }
+  const toolsToggle = G('lvToolsToggle');
+  if (toolsToggle) {
+    toolsToggle.style.display = '';
+    toolsToggle.classList.remove('is-hidden');
+  }
+  const vid = G('liveVideo');
+  if (vid) {
+    vid.pause?.();
+    vid.srcObject = null;
+    vid.style.display = 'none';
+  }
+  const overlay = document.querySelector('.lv-overlay');
+  if (overlay) {
+    overlay.innerHTML = `
+      <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;color:#fff;background:linear-gradient(135deg,rgba(0,0,0,.55),rgba(0,255,170,.14));">
+        <div style="font-size:15px;font-weight:900;">Camera is not available</div>
+        <div style="max-width:320px;font-size:12px;line-height:1.45;color:rgba(255,255,255,.78);">${esc(message || 'Please allow camera/mic permission and try again.')}</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+          <button class="btn btn-neon btn-sm" onclick="requestLivePermissions()">Retry Camera</button>
+          <button class="btn btn-sm" onclick="startLiveScreenShare()">Share Screen</button>
+        </div>
+      </div>`;
+  }
+  if (G('lvName')) G('lvName').textContent = 'Live setup';
+  if (G('lvAv')) G('lvAv').textContent = CU?.name?.charAt(0).toUpperCase() || 'L';
+  if (G('lvViewers')) G('lvViewers').textContent = '0';
+}
+
+async function requestMediaWithFallback() {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    const legacyGetMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    if (!legacyGetMedia) throw new Error('Your browser does not support live streaming');
+    return await new Promise((resolve, reject) => {
+      legacyGetMedia.call(navigator, getLiveCameraConstraints({ resolution: 720 }), resolve, reject);
+    });
+  }
+
+  const attempts = [
+    getLiveCameraConstraints({ resolution: 1080, audio: true }),
+    getLiveCameraConstraints({ resolution: 720, audio: true }),
+    getLiveCameraConstraints({ resolution: 480, audio: true }),
+    getLiveCameraConstraints({ resolution: 720, audio: false }),
+    { video: false, audio: true }
+  ];
+
+  let lastErr = null;
+  for (const constraints of attempts) {
+    try {
+      return await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (err) {
+      lastErr = err;
+      if (err?.name === 'NotAllowedError' || err?.name === 'PermissionDeniedError' || err?.name === 'SecurityError') break;
+    }
+  }
+  throw lastErr || new Error('Camera permission failed');
+}
+
 // Request camera/mic permissions
-function requestLivePermissions() {
+async function requestLivePermissions() {
   const isSecure = window.isSecureContext || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (!isSecure) {
     toast('e', 'Camera access requires HTTPS or localhost. Please open this app in a secure context.');
     return;
   }
 
-  const constraints = {
-    video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user' },
-    audio: true
-  };
-
   toast('i', 'Requesting camera access...');
+  try {
+    const stream = await requestMediaWithFallback();
+    startBroadcast(stream);
+  } catch (err) {
+    console.error('[Live] Permission denied or unavailable:', err);
+    showLivePermissionHelp(err);
+  }
+}
 
-  if (navigator.mediaDevices?.getUserMedia) {
-    navigator.mediaDevices.getUserMedia(constraints)
-      .then(stream => startBroadcast(stream))
-      .catch(err => handleLivePermissionError(err));
-  } else {
-    const legacyGetMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    if (!legacyGetMedia) {
-      return toast('e', 'Your browser does not support live streaming');
-    }
-    legacyGetMedia.call(navigator, constraints, stream => startBroadcast(stream), err => handleLivePermissionError(err));
+async function replaceLiveBroadcastStream(stream) {
+  if (liveStreamState.stream && liveStreamState.stream !== stream) {
+    liveStreamState.stream.getTracks().forEach(track => track.stop());
+  }
+  liveStreamState.stream = stream;
+
+  const vid = G('liveVideo');
+  if (vid) {
+    vid.style.display = 'block';
+    vid.srcObject = stream;
+    vid.muted = true;
+    vid.play?.().catch(() => {});
+    applyLiveVideoEffects();
   }
 
-  function handleLivePermissionError(err) {
-    console.error('[Live] Permission denied or unavailable:', err);
-    const msg = err && err.name === 'NotAllowedError'
-      ? 'Camera/mic access denied. Please allow permissions.'
-      : 'Unable to access camera/microphone. Please check browser settings.';
-    toast('e', msg);
-    alert('📹 Camera Access Required\n\nPlease:\n1. Click the camera icon in your browser address bar\n2. Select "Allow" for Camera and Microphone\n3. Refresh the page and try again');
+  livePeerState.broadcasterPeers?.forEach(pc => {
+    const senders = pc.getSenders ? pc.getSenders() : [];
+    stream.getTracks().forEach(track => {
+      const sender = senders.find(s => s.track?.kind === track.kind);
+      if (sender?.replaceTrack) sender.replaceTrack(track).catch(err => console.warn('[Live] replaceTrack failed', err));
+      else {
+        try { pc.addTrack(track, stream); } catch(e) {}
+      }
+    });
+  });
+}
+
+async function startLiveScreenShare() {
+  if (!CU) return toast('e', 'Please login first');
+  if (!navigator.mediaDevices?.getDisplayMedia) return toast('e', 'Screen sharing is not supported in this browser');
+  try {
+    const screenStream = await navigator.mediaDevices.getDisplayMedia({
+      video: { cursor: 'always', frameRate: { ideal: 30, max: 60 } },
+      audio: true
+    });
+    const audioTracks = screenStream.getAudioTracks();
+    if (!audioTracks.length && navigator.mediaDevices?.getUserMedia) {
+      try {
+        const mic = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        mic.getAudioTracks().forEach(track => screenStream.addTrack(track));
+      } catch (err) {
+        console.warn('[Live] Mic unavailable for screen share', err);
+      }
+    }
+    screenStream.getVideoTracks()[0]?.addEventListener('ended', () => {
+      if (liveStreamState.active && liveStreamState.stream === screenStream) endBroadcast();
+    });
+    if (liveStreamState.active) {
+      await replaceLiveBroadcastStream(screenStream);
+      toast('s', 'Screen is now live');
+    } else {
+      startBroadcast(screenStream);
+      toast('s', 'Screen live started');
+    }
+  } catch (err) {
+    if (err?.name !== 'NotAllowedError') console.error('[Live] Screen share error:', err);
+    toast('e', err?.name === 'NotAllowedError' ? 'Screen share cancelled' : 'Unable to start screen share');
   }
 }
 
 // Start the actual broadcast
 function startBroadcast(stream) {
   if (!CU) return;
+  const hasVideo = stream.getVideoTracks().length > 0;
+  const isScreenLive = hasVideo && stream.getVideoTracks().some(track => /screen|display|window|tab/i.test(track.label || ''));
   
   liveStreamState.active = true;
   liveStreamState.stream = stream;
@@ -9614,13 +9938,14 @@ function startBroadcast(stream) {
     id: 'live_' + Date.now(),
     author: CU.id,
     type: 'live',
-    text: '🔴 ' + (CU.name || 'User') + ' is LIVE NOW!',
+    text: '🔴 ' + (CU.name || 'User') + (isScreenLive ? ' is sharing screen LIVE NOW!' : ' is LIVE NOW!'),
     createdAt: Date.now(),
     isLive: true,
     viewers: 0,
     comments: [],
     streamerName: CU.name,
     streamerAvatar: CU.avatar || null,
+    liveMode: isScreenLive ? 'screen' : (hasVideo ? 'camera' : 'audio'),
     category: 'live',
     visibility: 'public',
     autoFollows: [],
@@ -9637,14 +9962,27 @@ function startBroadcast(stream) {
   
   // Open live view for broadcaster
   G('liveView').classList.add('open');
+  let controls = G('lvCameraControls');
+  if (controls) {
+    controls.style.display = '';
+    controls.classList.remove('hidden');
+  }
+  let toolsToggle = G('lvToolsToggle');
+  if (toolsToggle) {
+    toolsToggle.style.display = '';
+    toolsToggle.classList.remove('is-hidden');
+  }
+  updateLiveStudioHud();
   let vid = G('liveVideo');
   if (vid) {
     vid.style.display = 'block';
     vid.srcObject = stream;
     vid.muted = true; // Mute self to prevent echo
     vid.play?.().catch(() => {});
-    vid.style.filter = 'none';
+    applyLiveVideoEffects();
   }
+  const overlay = document.querySelector('.lv-overlay');
+  if (overlay) overlay.innerHTML = hasVideo ? '' : '<div style="height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;font-weight:800;background:linear-gradient(135deg,rgba(0,255,170,.18),rgba(124,58,237,.18));">Audio live is running. Camera is unavailable on this device.</div>';
   G('lvName').textContent = (CU.name || 'User') + "'s Live Stream";
   G('lvAv').textContent = CU.name?.charAt(0).toUpperCase() || 'L';
   
@@ -9672,6 +10010,7 @@ function startBroadcast(stream) {
   
   // Notify all users via socket if available
   if (socketReady && socket) {
+    socket.emit('post:create', { post: livePost });
     socket.emit('live:start', {
       postId: livePost.id,
       streamerId: CU.id,
@@ -9710,7 +10049,9 @@ function startBroadcast(stream) {
 function closeLiveView() {
   let vid = G('liveVideo');
   if (vid?.srcObject) {
-    vid.srcObject.getTracks().forEach(t => t.stop());
+    if (liveStreamState.active && liveStreamState.streamerId === CU?.id) {
+      vid.srcObject.getTracks().forEach(t => t.stop());
+    }
     vid.srcObject = null;
   }
   if (vid) vid.style.display = 'none';
@@ -9718,6 +10059,8 @@ function closeLiveView() {
   if (liveStreamState.active && liveStreamState.streamerId === CU?.id) {
     // Broadcaster ending stream
     endBroadcast();
+  } else {
+    closeLivePeerConnections();
   }
   
   G('liveView').classList.remove('open');
@@ -9727,6 +10070,7 @@ function closeLiveView() {
 // End broadcast
 function endBroadcast() {
   liveStreamState.active = false;
+  closeLivePeerConnections();
   
   // Update post to show ended
   let post = D.posts.find(p => p.id === liveStreamState.postId);
@@ -9806,39 +10150,73 @@ let cameraState = {
   isMuted: false
 };
 
+function liveFilterName(filter = cameraState.currentFilter) {
+  const names = {
+    none: 'Normal',
+    'grayscale(100%)': 'B&W',
+    'sepia(100%)': 'Sepia',
+    'contrast(150%)': 'Vivid',
+    'saturate(200%)': 'Vibrant',
+    'hue-rotate(90deg)': 'Cool',
+    'hue-rotate(180deg)': 'Warm',
+    'invert(100%)': 'Negative'
+  };
+  return names[filter] || 'Custom';
+}
+
+function updateLiveSliderProgress(slider) {
+  if(!slider) return;
+  const min = Number(slider.min || 0);
+  const max = Number(slider.max || 100);
+  const val = Number(slider.value || min);
+  const pct = max === min ? 0 : ((val - min) / (max - min)) * 100;
+  slider.style.setProperty('--lv-progress', `${Math.max(0, Math.min(100, pct))}%`);
+}
+
+function updateLiveStudioHud() {
+  const mode = G('lvHudMode');
+  const quality = G('lvHudQuality');
+  const fx = G('lvHudFx');
+  if(mode) mode.textContent = cameraState.currentFacingMode === 'user' ? 'Front Camera' : 'Back Camera';
+  if(quality) quality.textContent = `${cameraState.currentResolution}p`;
+  if(fx) {
+    const tuned = cameraState.beautyLevel || cameraState.brightness !== 100 || cameraState.contrast !== 100;
+    fx.textContent = `FX ${liveFilterName()}${tuned ? ' + Tune' : ''}`;
+  }
+  updateLiveSliderProgress(G('lvBeautySlider'));
+  updateLiveSliderProgress(G('lvBrightnessSlider'));
+  updateLiveSliderProgress(G('lvContrastSlider'));
+}
+
+function applyLiveVideoEffects() {
+  const vid = G('liveVideo');
+  if(!vid) return;
+  const parts = [];
+  if(cameraState.currentFilter && cameraState.currentFilter !== 'none') parts.push(cameraState.currentFilter);
+  if(cameraState.beautyLevel > 0) {
+    parts.push(`blur(${(cameraState.beautyLevel / 28).toFixed(2)}px)`);
+    parts.push(`saturate(${100 + Math.round(cameraState.beautyLevel / 3)}%)`);
+  }
+  parts.push(`brightness(${cameraState.brightness + Math.round(cameraState.beautyLevel / 3)}%)`);
+  parts.push(`contrast(${cameraState.contrast}%)`);
+  vid.style.filter = parts.join(' ');
+  updateLiveStudioHud();
+}
+
 // Change camera resolution
 async function changeResolution() {
   let resolution = parseInt(G('lvResolution').value);
   cameraState.currentResolution = resolution;
+  updateLiveStudioHud();
   
   if (liveStreamState.stream) {
-    // Stop current stream
-    liveStreamState.stream.getTracks().forEach(t => t.stop());
-    
-    // Restart with new resolution
-    let constraints = {
-      video: { 
-        width: { ideal: resolution }, 
-        height: { ideal: resolution * 9 / 16 },
-        facingMode: cameraState.currentFacingMode 
-      },
-      audio: true
-    };
-    
     try {
-      let stream = await navigator.mediaDevices.getUserMedia(constraints);
-      liveStreamState.stream = stream;
-      
-      let vid = G('liveVideo');
-      if (vid) {
-        vid.srcObject = stream;
-        vid.play().catch(() => {});
-      }
-      
+      let stream = await navigator.mediaDevices.getUserMedia(getLiveCameraConstraints({ resolution }));
+      await replaceLiveBroadcastStream(stream);
       toast('s', `Resolution changed to ${resolution}p`);
     } catch (err) {
       console.error('[Camera] Resolution change error:', err);
-      toast('e', 'Failed to change resolution');
+      toast('e', liveErrorDetails(err));
     }
   }
 }
@@ -9846,33 +10224,16 @@ async function changeResolution() {
 // Toggle front/back camera
 async function toggleCamera() {
   cameraState.currentFacingMode = cameraState.currentFacingMode === 'user' ? 'environment' : 'user';
+  updateLiveStudioHud();
   
   if (liveStreamState.stream) {
-    liveStreamState.stream.getTracks().forEach(t => t.stop());
-    
-    let constraints = {
-      video: { 
-        width: { ideal: cameraState.currentResolution }, 
-        height: { ideal: cameraState.currentResolution * 9 / 16 },
-        facingMode: cameraState.currentFacingMode 
-      },
-      audio: true
-    };
-    
     try {
-      let stream = await navigator.mediaDevices.getUserMedia(constraints);
-      liveStreamState.stream = stream;
-      
-      let vid = G('liveVideo');
-      if (vid) {
-        vid.srcObject = stream;
-        vid.play().catch(() => {});
-      }
-      
+      let stream = await navigator.mediaDevices.getUserMedia(getLiveCameraConstraints());
+      await replaceLiveBroadcastStream(stream);
       toast('s', `Camera switched to ${cameraState.currentFacingMode === 'user' ? 'Front' : 'Back'}`);
     } catch (err) {
       console.error('[Camera] Toggle error:', err);
-      toast('e', 'Failed to switch camera');
+      toast('e', liveErrorDetails(err));
     }
   }
 }
@@ -9929,17 +10290,14 @@ function applyZoom() {
   if (vid) {
     vid.style.transform = `scale(${cameraState.zoomLevel})`;
     G('lvZoomLevel').textContent = cameraState.zoomLevel + 'x';
+    updateLiveStudioHud();
   }
 }
 
 // Apply color filters
 function applyFilter(filter) {
   cameraState.currentFilter = filter;
-  
-  let vid = G('liveVideo');
-  if (vid) {
-    vid.style.filter = filter === 'none' ? '' : filter;
-  }
+  applyLiveVideoEffects();
   
   // Update active state
   document.querySelectorAll('.lv-filter-btn').forEach(btn => {
@@ -9953,13 +10311,7 @@ function applyFilter(filter) {
 function applyBeauty() {
   let beauty = parseInt(G('lvBeautySlider').value);
   cameraState.beautyLevel = beauty;
-  
-  let vid = G('liveVideo');
-  if (vid) {
-    let blurAmount = beauty > 0 ? beauty / 20 : 0;
-    let brightnessAmount = 100 + (beauty / 2);
-    vid.style.filter = `blur(${blurAmount}px) brightness(${brightnessAmount}%)`;
-  }
+  applyLiveVideoEffects();
 }
 
 // Apply brightness and contrast adjustments
@@ -9969,14 +10321,7 @@ function applyAdjustments() {
   
   cameraState.brightness = brightness;
   cameraState.contrast = contrast;
-  
-  let vid = G('liveVideo');
-  if (vid) {
-    let currentFilter = vid.style.filter || '';
-    let filterParts = currentFilter.split(' ').filter(f => !f.includes('brightness') && !f.includes('contrast'));
-    
-    vid.style.filter = `${filterParts.join(' ')} brightness(${brightness}%) contrast(${contrast}%)`;
-  }
+  applyLiveVideoEffects();
 }
 
 // Toggle mute/unmute
@@ -10008,13 +10353,10 @@ function takeScreenshot() {
   canvas.height = vid.videoHeight;
   
   let ctx = canvas.getContext('2d');
-  ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
-  
-  // Apply current filters to screenshot
   if (vid.style.filter) {
     ctx.filter = vid.style.filter;
-    ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
   }
+  ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
   
   let dataUrl = canvas.toDataURL('image/png');
   
@@ -10033,6 +10375,8 @@ function toggleCameraControls() {
   let controls = G('lvCameraControls');
   if (controls) {
     controls.classList.toggle('hidden');
+    let toolsToggle = G('lvToolsToggle');
+    if (toolsToggle) toolsToggle.classList.toggle('is-hidden', controls.classList.contains('hidden'));
   }
 }
 
@@ -10046,6 +10390,10 @@ function watchLiveStream(postId) {
   
   // For viewers - show the live view without camera
   G('liveView').classList.add('open');
+  let controls = G('lvCameraControls');
+  if (controls) controls.style.display = 'none';
+  let toolsToggle = G('lvToolsToggle');
+  if (toolsToggle) toolsToggle.style.display = 'none';
   G('lvName').textContent = post.streamerName + "'s Live";
   G('lvAv').textContent = post.streamerName?.charAt(0).toUpperCase() || 'L';
   G('lvViewers').textContent = post.viewers || 0;
@@ -10061,8 +10409,8 @@ function watchLiveStream(postId) {
       vid.play?.().catch(() => {});
       if (overlay) overlay.innerHTML = '';
     } else {
-      vid.style.display = 'none';
       vid.srcObject = null;
+      vid.style.display = 'block';
       if (overlay) {
         overlay.innerHTML = `
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
@@ -10078,6 +10426,11 @@ function watchLiveStream(postId) {
             </div>
           </div>
         `;
+      }
+      if(socketReady && socket) {
+        socket.emit('live:join', { postId, streamerId: post.author, viewerId: CU?.id });
+      } else {
+        toast('e', 'Live video connection is offline. Please refresh and try again.');
       }
     }
   }
@@ -10675,6 +11028,52 @@ function initSocket() {
       if(typeof rFeed === 'function') rFeed();
       if(post.author !== CU.id) toast('i','New post is available');
     }
+  });
+  socket.on('live:new', ({postId, streamerId, title}) => {
+    if(!CU || streamerId === CU.id || !postId) return;
+    const existing = (D.posts || []).some(p => p.id === postId);
+    if(!existing) {
+      D.posts = D.posts || [];
+      D.posts.unshift({
+        id: postId,
+        author: streamerId,
+        type: 'live',
+        text: title || 'Live stream started',
+        createdAt: Date.now(),
+        isLive: true,
+        viewers: 0,
+        comments: [],
+        streamerName: D.users?.[streamerId]?.name || 'User',
+        streamerAvatar: D.users?.[streamerId]?.avatar || null,
+        category: 'live',
+        visibility: 'public',
+        autoFollows: [],
+        reactions: {},
+        likedBy: [],
+        shares: 0
+      });
+      saveData();
+      if(typeof rFeed === 'function') rFeed();
+    }
+    toast('i', 'Live stream started');
+  });
+  socket.on('live:viewer-ready', data => createLiveBroadcasterPeer(data).catch(e => console.warn('[Live] offer failed', e)));
+  socket.on('live:offer', data => acceptLiveOffer(data).catch(e => {
+    console.warn('[Live] viewer connection failed', e);
+    toast('e', 'Could not connect to live video');
+  }));
+  socket.on('live:answer', data => handleLiveAnswer(data));
+  socket.on('live:ice', data => handleLiveIce(data));
+  socket.on('live:ended', ({postId}) => {
+    const post = (D.posts || []).find(p => p.id === postId);
+    if(post) {
+      post.isLive = false;
+      post.endedAt = Date.now();
+      saveData();
+      if(typeof rFeed === 'function') rFeed();
+    }
+    if(livePeerState.viewerPostId === postId || liveStreamState.postId === postId) closeLivePeerConnections();
+    toast('i', 'Live stream ended');
   });
   socket.on('call:incoming', ({ callId, callerId, callerName, callerAvatar, type, iceServers }) => {
     callState.iceServers = iceServers;

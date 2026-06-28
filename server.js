@@ -1646,6 +1646,7 @@ io.on('connection', socket=>{
   socket.on('live:start',   ({streamerId,title,postId})=>{
     streamerId = socket.userId || streamerId;
     socket.join('live:'+streamerId);
+    if(postId) socket.join('livepost:'+postId);
     supabaseRest('live_events', 'POST', {
       id:postId || 'live_' + Date.now(),
       post_id:postId || null,
@@ -1661,8 +1662,28 @@ io.on('connection', socket=>{
     streamerId = socket.userId || streamerId;
     if(postId) supabaseRest('live_events', 'PATCH', {status:'ended', ended_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(postId)}`, 'return=representation').catch(()=>{});
     io.to('live:'+streamerId).emit('live:ended',{streamerId,postId});
+    if(postId) io.to('livepost:'+postId).emit('live:ended',{streamerId,postId});
   });
   socket.on('live:gift',    ({streamerId,from,gift})=>{ io.to('live:'+streamerId).emit('live:gift',{from,gift,t:Date.now()}); });
+  socket.on('live:join', ({postId,streamerId,viewerId})=>{
+    viewerId = socket.userId || viewerId || socket.id;
+    if(postId) socket.join('livepost:'+postId);
+    if(streamerId) io.to('live:'+streamerId).emit('live:viewer-ready',{postId,streamerId,viewerId,viewerSocketId:socket.id});
+  });
+  socket.on('live:offer', ({postId,toSocketId,streamerId,offer})=>{
+    if(toSocketId) io.to(toSocketId).emit('live:offer',{postId,streamerId:socket.userId || streamerId,offer});
+  });
+  socket.on('live:answer', ({postId,streamerId,viewerId,answer})=>{
+    const target = onlineUsers.get(streamerId);
+    if(target) io.to(target).emit('live:answer',{postId,viewerId:socket.userId || viewerId || socket.id,viewerSocketId:socket.id,answer});
+  });
+  socket.on('live:ice', ({postId,toSocketId,toUserId,fromUserId,candidate})=>{
+    if(toSocketId) io.to(toSocketId).emit('live:ice',{postId,fromUserId:socket.userId || fromUserId || socket.id,fromSocketId:socket.id,candidate});
+    else if(toUserId) {
+      const target = onlineUsers.get(toUserId);
+      if(target) io.to(target).emit('live:ice',{postId,fromUserId:socket.userId || fromUserId || socket.id,fromSocketId:socket.id,candidate});
+    }
+  });
 
   // Posts
   socket.on('post:create', ({post})=>{
