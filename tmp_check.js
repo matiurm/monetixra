@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
 
-<!-- AdSense Integration -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2397116277801081" crossorigin="anonymous"></script>
 
-<!-- AdMob Integration -->
-<script>
+
   const admobAppId = 'ca-app-pub-2253243248364888~1427340343';
   const bannerAdUnit = 'ca-app-pub-2253243248364888/3990983995';
   const interstitialAdUnit = 'ca-app-pub-2253243248364888/3199587018';
@@ -24,37 +17,9 @@
   function showRewardedAd() {
     console.log('Rewarded Ad Loaded:', rewardedAdUnit);
   }
-</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="format-detection" content="telephone=no">
-<meta name="msapplication-tap-highlight" content="no">
-<meta name="theme-color" content="#030308">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Monetixra">
-<meta name="screen-orientation" content="portrait">
-<meta name="x5-orientation" content="portrait">
-<meta name="x5-fullscreen" content="true">
-<meta name="x5-page-mode" content="app">
-<meta name="full-screen" content="yes">
-<meta name="browsermode" content="application">
-<meta name="description" content="Monetixra — Complete Social Earn Platform with AI, Crypto, NFT, MLM & Live">
-<title>Monetixra — Complete Social Earn Platform</title>
-<!-- Open Graph / Social Sharing (dynamic) -->
-<meta property="og:type"        content="website" id="og-type">
-<meta property="og:url"         content="https://monetixra.onrender.com/" id="og-url">
-<meta property="og:title"       content="Monetixra — Earn Money on Social Media" id="og-title">
-<meta property="og:description" content="Post, watch ads, invite friends & earn real money with Monetixra. AI-powered social platform with crypto, NFT & live streaming." id="og-desc">
-<meta property="og:image"       content="https://monetixra.onrender.com/icon-512.png" id="og-image">
-<meta name="twitter:card"       content="summary_large_image">
-<meta name="twitter:title"      content="Monetixra — Earn Money on Social Media" id="tw-title">
-<meta name="twitter:description"content="Post, watch ads & earn real money with AI-powered social platform." id="tw-desc">
-<meta name="twitter:image"      content="https://monetixra.onrender.com/icon-512.png" id="tw-image">
-<meta name="google-adsense-account" content="ca-pub-2397116277801081">
-<link rel="canonical"           href="https://monetixra.onrender.com/" id="canonical">
-<!-- JSON-LD Structured Data -->
-<script type="application/ld+json" id="jsonLd">{
+
+
+{
   "@context":"https://schema.org",
   "@type":"WebApplication",
   "name":"Monetixra",
@@ -62,35 +27,24 @@
   "url":"https://monetixra.onrender.com",
   "applicationCategory":"SocialNetworkingApplication",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}</script>
-<!-- ═══════════════════════════════════════════════════════
-     Monetixra — External Libraries
-     ═══════════════════════════════════════════════════════ -->
+}
 
-<!-- Google AdSense -->
 
-<!-- ProfitableCPMRate — Popunder -->
-<script defer src="https://pl29280284.profitablecpmratenetwork.com/25/1b/0c/251b0cf69cbb4dec0e2e5d4397f5e56f.js"></script>
 
-<!-- ProfitableCPMRate — Social Bar (HIDDEN - showing notification banners at top) -->
-<!-- <script src="https://pl29280286.profitablecpmratenetwork.com/1f/31/3a/1f313aa876d332b1f8c2519dd6ff70f9.js"></script> -->
-<!-- Social Bar disabled to hide top notification banners like memecoin ads -->
 
-<!-- ProfitableCPMRate — Native Banner -->
-<script async="async" data-cfasync="false" src="https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js"></script>
 
-<!-- ProfitableCPMRate — Smartlink (for interstitial/rewarded) -->
-<script type="text/javascript">
+
+
+
 (function() {
   var smartlink = document.createElement('script');
   smartlink.async = true;
   smartlink.src = 'https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a';
   if(document.head) document.head.appendChild(smartlink);
 })();
-</script>
 
-<!-- ProfitableCPMRate — 300x50 Banner -->
-<script>
+
+
 window.atOptions_300x50 = {
   'key' : 'ddb48e8829959135fea1323207677af1',
   'format' : 'iframe',
@@ -98,11 +52,11 @@ window.atOptions_300x50 = {
   'width' : 300,
   'params' : {}
 };
-</script>
-<script defer src="https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js"></script>
 
-<!-- ProfitableCPMRate — 160x30 Micro Banner -->
-<script>
+
+
+
+
 window.atOptions_160x30 = {
   'key' : '5c1a960ae2f4c6d4ac2b758a9e2fb18b',
   'format' : 'iframe',
@@ -110,11 +64,11 @@ window.atOptions_160x30 = {
   'width' : 160,
   'params' : {}
 };
-</script>
-<script defer src="https://www.highperformanceformat.com/5c1a960ae2f4c6d4ac2b758a9e2fb18b/invoke.js"></script>
 
-<!-- ProfitableCPMRate — 468x60 Full Banner -->
-<script>
+
+
+
+
 window.atOptions_468x60 = {
   'key' : '2c59b270de9e21b57ad543e7b88c2e3f',
   'format' : 'iframe',
@@ -122,60 +76,61 @@ window.atOptions_468x60 = {
   'width' : 468,
   'params' : {}
 };
-</script>
-<script defer src="https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js"></script>
 
-<!-- AdMob Mobile Ads SDK (for mobile app/web hybrid) -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2253243248364888" crossorigin="anonymous"></script>
 
-<!-- Socket.io Real-time -->
-<script defer src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
-<!-- Google Sign-In (One Tap) -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 
-<!-- PeerJS (WebRTC simplified) -->
-<script defer src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 
-<!-- Web3.js (Ethereum/MetaMask) -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.3.0/web3.min.js"></script>
 
-<!-- EmailJS (Email OTP & Notifications) -->
-<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<!-- Solana Web3.js -->
-<script defer src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-<!-- PWA Manifest -->
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon-192.png">
 
-<!-- Monetixra Advanced Modules -->
-<script defer src="js/advanced-post-interactions.js"></script>
-<script defer src="js/media-storage-manager.js"></script>
-<script defer src="js/ai-caption-system.js"></script>
-<script defer src="js/admin-panel.js"></script>
-<script defer src="js/data-persistence.js"></script>
-<script defer src="js/enhanced-advertising.js"></script>
-<script defer src="js/supabase-integration.js"></script>
-<script defer src="js/mega-api-integration.js"></script>
-<script defer src="js/agora-video-calls.js"></script>
-<script defer src="js/cloudinary-integration.js"></script>
-<script defer src="js/download-system.js"></script>
-<!-- Fixed Modules -->
-<script defer src="js/ai-caption-fixed.js"></script>
-<script defer src="js/data-persistence-fixed.js"></script>
-<script defer src="js/admin-panel-fixed.js"></script>
-<script defer src="js/enhanced-advertising-fixed.js"></script>
-<script defer src="js/live-streaming-fixed.js"></script>
-<script defer src="js/ad-system-enhanced.js"></script>
-<script defer src="js/data-test.js"></script>
 
-<!-- ─── AD CONFIGURATION ─────────────────────────────────
-  Replace values below with your real keys to activate ads
-  ──────────────────────────────────────────────────────── -->
-<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ═══════════════════════════════════════════════════════════
 //  MONETIXRA — ALL API KEYS & CONFIGURATION
 //  ★ Fill in your keys below to activate each service
@@ -410,10 +365,9 @@ if(ADSTERRA_KEY) {
   s.src = '//www.topcreativeformat.com/' + ADSTERRA_KEY + '/invoke.js';
   document.head.appendChild(s);
 }
-</script>
 
-<!-- Google AdSense auto-load -->
-<script>
+
+
   if(ADSENSE_CLIENT) {
     let s = document.createElement('script');
     s.async = true;
@@ -465,1215 +419,11 @@ if(ADSTERRA_KEY) {
     s.async = true;
     document.head.appendChild(s);
   }
-</script>
 
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* ========== COMPLETE ULTRA CSS ========== */
-:root {
-    --bg:#030308; --bg2:#06060f; --bg3:#0c0c1e; --bg4:#11112a; --bg5:#16163a;
-    --g1:rgba(255,255,255,.03); --g2:rgba(255,255,255,.055); --g3:rgba(255,255,255,.09);
-    --g4:rgba(255,255,255,.14); --g5:rgba(255,255,255,.2);
-    --b1:rgba(255,255,255,.07); --b2:rgba(255,255,255,.12); --b3:rgba(255,255,255,.18);
-    --c1:#6d28d9; --c2:#0ea5e9; --c3:#10b981; --c4:#f59e0b; --c5:#ef4444; --c6:#ec4899; --c7:#8b5cf6;
-    --neon:#00ffaa; --neon2:#00d4ff; --neon3:#b44dff;
-    --t1:#f1f5f9; --t2:#94a3b8; --t3:#475569; --t4:#1e293b;
-    --r1:8px; --r2:14px; --r3:20px; --r4:99px;
-    --ease:cubic-bezier(.16,1,.3,1); --fast:.12s var(--ease); --med:.24s var(--ease); --slow:.42s var(--ease);
-    --ff:'Outfit',sans-serif; --fd:'Syne',sans-serif; --fm:'JetBrains Mono',monospace;
-    --sh1:0 4px 24px rgba(0,0,0,.55); --sh2:0 16px 56px rgba(0,0,0,.75); --sh3:0 32px 96px rgba(0,0,0,.9);
-    --glow1:0 0 24px rgba(0,255,170,.18); --glow2:0 0 48px rgba(0,255,170,.32);
-    --mesh:radial-gradient(at 20% 50%,rgba(109,40,217,.12) 0,transparent 50%),
-          radial-gradient(at 80% 10%,rgba(0,255,170,.07) 0,transparent 45%),
-          radial-gradient(at 60% 90%,rgba(14,165,233,.08) 0,transparent 50%);
-}
-body.lm{
-    --bg:#f0f4ff; --bg2:#e6ecfa; --bg3:#dbe4f5; --bg4:#cfd9ee; --bg5:#c3cee8;
-    --g1:rgba(0,0,0,.025); --g2:rgba(0,0,0,.05); --g3:rgba(0,0,0,.08); --g4:rgba(0,0,0,.11); --g5:rgba(0,0,0,.16);
-    --b1:rgba(0,0,0,.07); --b2:rgba(0,0,0,.12); --b3:rgba(0,0,0,.18);
-    --t1:#0f172a; --t2:#334155; --t3:#64748b; --t4:#94a3b8;
-    --sh1:0 4px 20px rgba(0,0,0,.08); --sh2:0 10px 40px rgba(0,0,0,.12);
-}
-body.cb-mode{filter:grayscale(75%) contrast(1.15);}
-body.large-txt{font-size:115%;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:var(--ff);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s;-webkit-tap-highlight-color:transparent;line-height:1.5;overflow-y:auto;}
-::-webkit-scrollbar{width:2px;height:2px;}
-::-webkit-scrollbar-thumb{background:rgba(109,40,217,.6);border-radius:99px;}
-::selection{background:rgba(109,40,217,.3);color:var(--neon);}
 
-/* ========== KEYFRAMES ========== */
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:none}}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
-@keyframes slideLeft{from{transform:translateX(100%)}to{transform:none}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes gradX{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes confetti{0%{transform:translateY(-10px) rotate(0) scale(1);opacity:1}100%{transform:translateY(105vh) rotate(720deg) scale(0);opacity:0}}
-@keyframes notifSlide{from{transform:translateX(120%);opacity:0}to{transform:none;opacity:1}}
-@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-@keyframes glow{0%,100%{box-shadow:var(--glow1)}50%{box-shadow:var(--glow2)}}
-@keyframes neonPulse{0%,100%{text-shadow:0 0 8px var(--neon)}50%{text-shadow:0 0 24px var(--neon),0 0 48px var(--neon)}}
-@keyframes reactionPop{0%{transform:scale(0) translateY(0);opacity:0}50%{transform:scale(1.3) translateY(-20px);opacity:1}100%{transform:scale(1) translateY(-40px);opacity:0}}
-@keyframes friendPop{0%{transform:scale(0) translateY(20px);opacity:0}60%{transform:scale(1.12) translateY(-4px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
-@keyframes typingDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes ripple{to{transform:scale(3.5);opacity:0}}
-@keyframes loadingBar{0%{width:0%}50%{width:70%}100%{width:100%}}
 
-/* ========== Rich Editor & Additional Styles ========== */
-.rich-toolbar{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap;}
-.rich-btn{background:var(--g2);border:1px solid var(--b1);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;transition:all .15s;color:var(--t2);}
-.rich-btn:hover{background:var(--g3);color:var(--t1);}
-.rich-editor{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:8px;min-height:120px;max-height:40vh;overflow-y:auto;color:var(--t1);font-size:14px;outline:none;white-space:pre-wrap;word-break:break-word;}
-.rich-editor:focus{border-color:var(--neon);box-shadow:0 0 0 2px rgba(0,255,170,.1);}
-.overlay .modal{max-height:calc(100vh - 90px);overflow-y:auto;}
-.overlay .modal::-webkit-scrollbar{width:8px;}
-.overlay .modal::-webkit-scrollbar-thumb{background:rgba(109,40,217,.3);border-radius:99px;}
-.post-loader{position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(0,255,170,.2);z-index:10007;display:none;}
-.post-loader-bar{height:100%;background:linear-gradient(90deg,var(--neon),var(--neon2));width:0%;animation:loadingBar 1.2s ease-out forwards;}
-.post-loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:10008;display:none;flex-direction:column;align-items:center;justify-content:center;gap:15px;}
-.post-loading-spinner{width:40px;height:40px;border:3px solid var(--g3);border-top-color:var(--neon);border-radius:50%;animation:spin 1s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.force-follow-badge{background:linear-gradient(135deg,rgba(0,255,170,.2),rgba(0,212,255,.1));border:1px solid rgba(0,255,170,.3);color:var(--neon);font-size:9px;padding:2px 6px;border-radius:99px;margin-left:6px;}
-.post-follow-btn{background:linear-gradient(135deg,var(--c1),var(--c2));border:none;border-radius:99px;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;cursor:pointer;flex-shrink:0;transition:all .18s;letter-spacing:.2px;}
-.post-follow-btn:hover{opacity:.85;transform:scale(1.05);}
-.post-follow-btn.following{background:var(--g3);border:1px solid var(--b2);color:var(--neon);cursor:default;}
-.post-loader-bar-top{position:fixed;top:0;left:0;width:100%;height:3px;background:transparent;z-index:10010;display:none;}
-.post-loader-bar-top .plb-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--neon),var(--neon2),var(--neon3));border-radius:0 99px 99px 0;transition:width .1s linear;}
-.copyright-auto-delete-bar{background:linear-gradient(90deg,rgba(239,68,68,.15),rgba(245,158,11,.1));border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:7px 10px;margin-top:5px;font-size:11px;color:var(--c4);display:flex;align-items:center;gap:6px;font-family:var(--fm);}
-.app-rating{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--c4);margin-top:3px;}
-.app-installs{font-size:10px;color:var(--t3);margin-top:1px;}
-.app-store-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;margin-top:3px;display:inline-block;}
-.app-store-badge.playstore{background:rgba(16,185,129,.15);color:var(--c3);border:1px solid rgba(16,185,129,.25);}
-.app-store-badge.appstore{background:rgba(14,165,233,.15);color:var(--c2);border:1px solid rgba(14,165,233,.25);}
-.app-store-badge.blocked{background:rgba(239,68,68,.15);color:var(--c5);border:1px solid rgba(239,68,68,.25);}
 
-/* ========== DOWNLOAD QUALITY MODAL ========== */
-.dl-modal{position:fixed;inset:0;z-index:10020;background:rgba(0,0,0,.85);backdrop-filter:blur(14px);display:none;align-items:flex-end;justify-content:center;}
-.dl-modal.open{display:flex;animation:fadeIn .2s;}
-.dl-sheet{width:100%;max-width:500px;background:var(--bg2);border:1px solid var(--b2);border-radius:22px 22px 0 0;padding:20px 16px 32px;animation:slideUp .28s var(--ease);}
-.dl-ttl{font-family:var(--fd);font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
-.dl-sub{font-size:11px;color:var(--t3);margin-bottom:14px;}
-.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-.dl-opt{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .18s;}
-.dl-opt:hover,.dl-opt:active{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;transform:scale(1.04);}
-.dl-opt .dl-q{font-family:var(--fm);font-size:14px;font-weight:700;color:var(--neon);}
-.dl-opt .dl-l{font-size:10px;color:var(--t3);margin-top:3px;}
-.dl-opt:hover .dl-q,.dl-opt:hover .dl-l{color:#fff;}
-.dl-cancel{width:100%;margin-top:8px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:12px;font-size:13px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .18s;}
-.dl-cancel:hover{background:var(--g3);}
-.dl-progress{height:3px;background:var(--g3);border-radius:99px;margin-top:12px;overflow:hidden;display:none;}
-.dl-progress-bar{height:100%;background:linear-gradient(90deg,var(--neon),var(--neon2));border-radius:99px;width:0%;transition:width .3s;}
 
-/* ========== COMMENT EDIT / DELETE ========== */
-.cm-menu-btn{background:none;border:none;color:var(--t3);cursor:pointer;font-size:13px;padding:2px 5px;border-radius:6px;transition:all .15s;line-height:1;}
-.cm-menu-btn:hover{background:var(--g3);color:var(--t1);}
-.cm-edit-inp{width:100%;background:var(--g2);border:1px solid var(--neon);border-radius:8px;padding:6px 8px;color:var(--t1);font-size:13px;outline:none;margin-top:5px;font-family:var(--ff);}
-.cm-edited-tag{font-size:9px;color:var(--t3);margin-left:5px;font-style:italic;}
-
-/* ========== ENHANCED SETTINGS ========== */
-.sett-hero{background:linear-gradient(135deg,rgba(109,40,217,.12),rgba(0,255,170,.06));border:1px solid rgba(109,40,217,.2);border-radius:var(--r3);padding:16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
-.sett-hero-av{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;overflow:hidden;flex-shrink:0;}
-.sett-hero-av img{width:100%;height:100%;object-fit:cover;}
-.sett-hero-info .sh-name{font-family:var(--fd);font-size:15px;font-weight:800;}
-.sett-hero-info .sh-user{font-size:11px;color:var(--t3);}
-.sett-hero-info .sh-pts{font-family:var(--fm);font-size:12px;color:var(--neon);margin-top:2px;}
-.sett-badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-.sett-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
-.sett-stat{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px;text-align:center;}
-.sett-stat .ss-n{font-family:var(--fm);font-size:16px;font-weight:700;color:var(--neon);}
-.sett-stat .ss-l{font-size:10px;color:var(--t3);margin-top:2px;}
-.sett-slider{width:100%;accent-color:var(--neon);}
-.sett-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;background:rgba(0,255,170,.1);color:var(--neon);border:1px solid rgba(0,255,170,.2);}
-
-.cm-reacts{display:flex;gap:8px;margin-top:4px;}
-.cm-reaction{font-size:12px;cursor:pointer;opacity:.6;transition:opacity .15s;}
-.cm-reaction:hover{opacity:1;}
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;}
-.share-icon{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px;cursor:pointer;transition:all .18s;}
-.share-icon:hover{background:var(--g3);transform:scale(1.05);}
-.share-icon .emoji{font-size:28px;display:block;margin-bottom:4px;}
-.app-card{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
-.app-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
-.app-info{flex:1;}
-.app-name{font-weight:700;font-size:14px;}
-.app-store{font-size:10px;color:var(--t3);margin-top:2px;}
-.app-badge{background:rgba(239,68,68,.15);color:var(--c5);font-size:9px;padding:2px 6px;border-radius:99px;}
-
-/* ========== POST THREE-DOT MENU ========== */
-.post-more{cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:10 !important;background:transparent !important;border:none !important;padding:4px 8px !important;font-size:22px !important;color:var(--t3) !important;line-height:1 !important;}
-.post-more:hover{color:var(--t1) !important;background:rgba(255,255,255,.05) !important;border-radius:6px !important;}
-.post-menu-dropdown{position:fixed !important;z-index:99999 !important;background:var(--bg3) !important;border:1px solid var(--b2) !important;border-radius:14px !important;box-shadow:0 8px 32px rgba(0,0,0,.4) !important;overflow:auto !important;max-height:60vh !important;min-width:200px !important;pointer-events:auto !important;}
-.post-menu-dropdown .pmd-item{padding:11px 16px !important;font-size:13px !important;font-weight:600 !important;cursor:pointer !important;display:flex !important;align-items:center !important;gap:9px !important;transition:background .14s !important;color:var(--t1) !important;pointer-events:auto !important;}
-.post-menu-dropdown .pmd-item:hover{background:var(--g3) !important;}
-.post-menu-dropdown .pmd-item.danger{color:var(--c5) !important;}
-.post-menu-dropdown .pmd-item.disabled{opacity:.45 !important;cursor:not-allowed !important;pointer-events:none !important;}
-.post-menu-dropdown .pmd-item+.pmd-item{border-top:1px solid var(--b1) !important;}
-
-/* Flower button styles */
-.pa.flowered{background:linear-gradient(135deg,#ff69b4,#ff1493);color:#fff;}
-.flowered .pa-cnt{color:#fff;}
-
-/* adsBar hidden: shift everything up by 38px */
-#bannerAd{top:0 !important;}
-#ticker{top:30px !important;}
-#topBar{top:54px !important;}
-#catBar{top:106px !important;}
-#mainWrap{padding-top:162px !important;}
-.adbar-ttl{font-family:var(--fd);font-size:9px;font-weight:700;color:var(--c7);letter-spacing:1.5px;white-space:nowrap;padding-right:8px;border-right:1px solid var(--b2);margin-right:4px;text-transform:uppercase;}
-.adpill{flex-shrink:0;display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:var(--r4);background:var(--g2);border:1px solid var(--b1);font-size:9px;font-weight:700;color:var(--t3);cursor:pointer;transition:all .18s;white-space:nowrap;}
-.adpill.on,.adpill:hover{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-color:transparent;box-shadow:0 2px 10px rgba(109,40,217,.35);}
-.adpill .led{width:4px;height:4px;border-radius:50%;background:var(--neon);animation:pulse 1.4s infinite;}
-
-/* ========== HIDE EXTERNAL NOTIFICATION ADS ========== */
-/* Hide floating notification banners from external ad networks */
-iframe[src*="profitablecpmratenetwork"],
-iframe[src*="adstxtmanager"],
-iframe[src*="srv"],
-div[class*="notification"][class*="ad"],
-div[id*="notif"][id*="ad"],
-div[style*="position:fixed"][style*="z-index:9999"],
-div[style*="position:fixed"][style*="z-index:10000"],
-.psn-notification,
-.ad-notification,
-.push-notification,
-.alert-ad,
-.promo-banner,
-[class*="memecoin"],
-[id*="memecoin"],
-[class*="adzilla"],
-[id*="adzilla"],
-[class*="monster"],
-[id*="monster"],
-/* Block any floating banners at very high z-index */
-div[style*="position:fixed"][style*="top:0"][style*="z-index:9"],
-iframe[src*="memecoin"],
-iframe[src*="adzilla"],
-#ckCpgn,
-#ckBkgd,
-.floating-banner,
-.sticky-ad-top,
-.top-ad-banner,
-.notification-ad-bar {
-  display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-  height:0 !important;
-  width:0 !important;
-  pointer-events:none !important;
-}
-
-/* ========== BANNER AD ========== */
-#bannerAd{position:fixed;bottom:70px;top:auto;left:0;right:0;z-index:10001;height:30px;background:linear-gradient(90deg,var(--c1),var(--neon3),var(--c2),var(--neon),var(--c4),var(--c1));background-size:400% 100%;animation:gradX 5s ease infinite;display:flex;align-items:center;padding:0 8px;gap:7px;overflow:hidden;}
-.ba-label{background:rgba(0,0,0,.28);padding:1px 7px;border-radius:99px;font-size:9px;font-weight:800;color:#fff;letter-spacing:1.5px;flex-shrink:0;}
-#baT{flex:1;font-size:11px;font-weight:700;color:#000;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ba-earn{background:rgba(0,0,0,.22);padding:1px 8px;border-radius:99px;font-size:10px;font-weight:800;color:#000;font-family:var(--fm);flex-shrink:0;cursor:pointer;}
-.ba-x{cursor:pointer;color:rgba(0,0,0,.5);font-size:12px;padding:2px 5px;flex-shrink:0;}
-
-/* ========== TICKER ========== */
-#ticker{position:fixed;top:68px;left:0;right:0;z-index:10000;height:24px;background:rgba(3,3,8,.98);border-bottom:1px solid var(--b1);overflow:hidden;display:flex;align-items:center;}
-.tk-lbl{background:linear-gradient(90deg,var(--c1),var(--c2));padding:0 9px;height:100%;display:flex;align-items:center;font-family:var(--fd);font-size:8px;font-weight:700;letter-spacing:1.5px;color:#fff;flex-shrink:0;text-transform:uppercase;}
-.tk-track{flex:1;overflow:hidden;height:100%;position:relative;}
-.tk-inner{position:absolute;white-space:nowrap;display:flex;align-items:center;height:100%;animation:ticker 38s linear infinite;}
-.tk-inner span{font-size:10.5px;color:var(--t2);padding:0 18px;}
-.tk-inner b{color:var(--c4);}
-
-/* ========== TOP BAR ========== */
-#topBar{position:fixed;top:92px;left:0;right:0;z-index:500;height:52px;background:rgba(3,3,8,.92);backdrop-filter:blur(28px);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 10px;gap:8px;}
-.logo{font-family:var(--fd);font-size:17px;font-weight:800;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;white-space:nowrap;letter-spacing:-.4px;flex-shrink:0;}
-.logo sup{font-size:8px;-webkit-text-fill-color:var(--c4);vertical-align:super;}
-.tb-sw{flex:1;position:relative;max-width:240px;}
-.tb-si{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;color:var(--t3);}
-.tb-s{width:100%;background:var(--g2);border:1px solid var(--b1);border-radius:var(--r4);padding:7px 11px 7px 30px;color:var(--t1);font-size:12px;outline:none;transition:all var(--fast);}
-.tb-s:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,170,.08);}
-.tb-r{margin-left:auto;display:flex;gap:5px;align-items:center;}
-.tb-pts{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.28);border-radius:var(--r4);padding:4px 10px;font-size:11px;font-weight:700;color:var(--c4);font-family:var(--fm);cursor:pointer;white-space:nowrap;}
-.tb-pts:hover{box-shadow:0 0 12px rgba(245,158,11,.3);}
-.tb-ic{width:34px;height:34px;border-radius:var(--r2);background:var(--g2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--t2);transition:all var(--fast);position:relative;flex-shrink:0;}
-.tb-ic:hover{background:var(--g3);color:var(--neon);transform:scale(1.06);}
-.tb-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--c5);border-radius:50%;border:2px solid var(--bg);}
-.tb-av{width:34px;height:34px;border-radius:var(--r2);background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;cursor:pointer;overflow:hidden;flex-shrink:0;}
-.tb-av:hover{transform:scale(1.06);box-shadow:var(--glow1);}
-.tb-av img{width:100%;height:100%;object-fit:cover;}
-
-/* ========== CATEGORY BAR ========== */
-#catBar{position:fixed;top:144px;left:0;right:0;z-index:499;background:rgba(3,3,8,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);padding:5px 10px;overflow-x:auto;scrollbar-width:none;display:flex;gap:5px;align-items:center;min-height:36px;}
-#catBar::-webkit-scrollbar{display:none;}
-.cat-pill{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:var(--r4);background:var(--g2);border:1px solid var(--b1);font-size:11px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .18s;white-space:nowrap;}
-.cat-pill.on,.cat-pill:hover{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(109,40,217,.4);}
-.cat-pill .ci{font-size:12px;}
-
-/* ========== BOTTOM NAV ========== */
-#btmNav{position:fixed;bottom:0;left:0;right:0;z-index:500;background:rgba(3,3,8,.96);backdrop-filter:blur(24px);border-top:1px solid var(--b1);display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0 calc(2px + env(safe-area-inset-bottom));}
-#btmNav::-webkit-scrollbar{display:none;}
-.bn{flex:0 0 auto;min-width:60px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 4px;cursor:pointer;border-radius:0;color:var(--t3);transition:all var(--fast);position:relative;border:none;background:transparent;}
-.bn .ico{font-size:18px;line-height:1;transition:transform var(--fast);}
-.bn .lbl{font-size:8.5px;font-weight:600;letter-spacing:.2px;transition:color var(--fast);}
-.bn.on .ico{transform:scale(1.15);}
-.bn.on .lbl{color:var(--neon);}
-.bn.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:linear-gradient(90deg,var(--neon),var(--neon2));border-radius:0 0 99px 99px;box-shadow:0 0 8px var(--neon);}
-.bn-bdg{position:absolute;top:1px;right:calc(50% - 17px);background:var(--c5);color:#fff;font-size:7.5px;font-weight:800;padding:1px 4px;border-radius:99px;min-width:14px;text-align:center;font-family:var(--fm);}
-
-/* ========== LAYOUT ========== */
-#authWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14px;background:var(--mesh),var(--bg);position:relative;z-index:1000;}
-#appWrap{display:none;}
-#mainWrap{padding:190px 0 120px;max-width:640px;margin:0 auto;}
-.pg{display:none;padding:0 10px;animation:fadeUp .3s var(--ease);}
-.pg.on{display:block;}
-
-/* ========== AUTH ========== */
-.auth-card{width:100%;max-width:400px;background:var(--g2);border:1px solid var(--b2);border-radius:26px;padding:24px 18px;backdrop-filter:blur(40px);box-shadow:var(--sh3),inset 0 1px 0 var(--g4);position:relative;z-index:1;}
-.auth-top{text-align:center;margin-bottom:20px;}
-.auth-gem{width:62px;height:62px;border-radius:18px;margin:0 auto 10px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 32px rgba(109,40,217,.5),var(--glow1);animation:float 3s ease-in-out infinite;}
-.auth-h1{font-family:var(--fd);font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--neon) 30%,var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px;}
-.auth-sub{font-size:11.5px;color:var(--t2);margin-top:4px;}
-.auth-seg{display:grid;grid-template-columns:1fr 1fr;background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:3px;gap:3px;margin-bottom:14px;}
-.seg-b{padding:8px;border-radius:10px;border:none;background:transparent;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;transition:all var(--fast);}
-.seg-b.on{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;box-shadow:0 3px 14px rgba(109,40,217,.4);}
-.af{display:none;}.af.on{display:block;animation:fadeIn .22s;}
-
-/* ========== FORM ========== */
-.fg{margin-bottom:10px;}
-.fl{display:block;font-size:10px;font-weight:700;color:var(--t3);margin-bottom:4px;letter-spacing:.7px;text-transform:uppercase;}
-.fw{position:relative;}
-.fi{width:100%;background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:10px 12px;color:var(--t1);font-size:13.5px;outline:none;transition:all var(--fast);}
-.fi:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,170,.07);background:var(--g3);}
-.fi-p{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;}
-.fw .fi-p~.fi{padding-left:32px;}
-.fi-s{position:absolute;right:11px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:13px;color:var(--t3);}
-.otp-row{display:flex;gap:7px;justify-content:center;margin:12px 0;}
-.ob{width:44px;height:52px;background:var(--g2);border:1.5px solid var(--b2);border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:var(--t1);outline:none;font-family:var(--fm);transition:all var(--fast);}
-.ob:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,255,170,.1);}
-
-/* ========== BUTTONS ========== */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:var(--r2);border:none;font-size:13.5px;font-weight:600;cursor:pointer;transition:all var(--fast);width:100%;position:relative;overflow:hidden;}
-.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent);pointer-events:none;}
-.btn:active{transform:scale(.97);}
-.btn-p{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;box-shadow:0 4px 18px rgba(109,40,217,.35);}
-.btn-p:hover{box-shadow:0 6px 26px rgba(109,40,217,.55);transform:translateY(-1px);}
-.btn-neon{background:linear-gradient(135deg,rgba(0,255,170,.18),rgba(0,212,255,.12));border:1px solid rgba(0,255,170,.32);color:var(--neon);font-weight:700;}
-.btn-neon:hover{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#000;}
-.btn-g{background:linear-gradient(135deg,#064e3b,#00cc88);color:#000;font-weight:700;}
-.btn-o{background:linear-gradient(135deg,#7c2d12,#fb923c);color:#fff;}
-.btn-r{background:linear-gradient(135deg,#7f1d1d,var(--c5));color:#fff;}
-.btn-b{background:linear-gradient(135deg,#0c4a6e,var(--c2));color:#fff;}
-.btn-ghost{background:var(--g2);border:1px solid var(--b2);color:var(--t1);}
-.btn-ghost:hover{background:var(--g3);border-color:var(--b3);}
-/* AI feature pill buttons inside h-scroll-rtl */
-.h-scroll-rtl > .btn-ghost{display:inline-flex;align-items:center;justify-content:center;height:30px;background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.05));border:1px solid rgba(109,40,217,.2);border-radius:99px;font-weight:700;letter-spacing:.3px;transition:all .22s cubic-bezier(.4,0,.2,1);line-height:1;}
-.h-scroll-rtl > .btn-ghost:hover{background:linear-gradient(135deg,rgba(109,40,217,.22),rgba(0,255,170,.12));border-color:var(--neon);color:var(--neon);transform:translateY(-1px);box-shadow:0 3px 12px rgba(0,255,170,.15);}
-.h-scroll-rtl > .btn-ghost:active{transform:translateY(0);box-shadow:none;}
-.btn-sm{padding:7px 13px;font-size:12px;border-radius:var(--r1);}
-.btn-xs{padding:4px 9px;font-size:11px;border-radius:8px;}
-
-/* ========== BADGES ========== */
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:99px;font-size:9.5px;font-weight:700;letter-spacing:.2px;}
-.b-g{background:rgba(0,255,170,.1);color:var(--neon);border:1px solid rgba(0,255,170,.22);}
-.b-b{background:rgba(14,165,233,.1);color:var(--c2);border:1px solid rgba(14,165,233,.22);}
-.b-p{background:rgba(109,40,217,.1);color:#a78bfa;border:1px solid rgba(109,40,217,.22);}
-.b-o{background:rgba(245,158,11,.1);color:var(--c4);border:1px solid rgba(245,158,11,.22);}
-.b-r{background:rgba(239,68,68,.1);color:var(--c5);border:1px solid rgba(239,68,68,.22);}
-.b-admin{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(239,68,68,.12));color:var(--c4);border:1px solid rgba(245,158,11,.3);}
-.b-ver{background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(0,255,170,.08));color:var(--c2);border:1px solid rgba(14,165,233,.25);}
-.b-live{background:var(--c5);color:#fff;animation:pulse 1.4s infinite;}
-.b-kyc{background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(14,165,233,.1));color:var(--c3);border:1px solid rgba(16,185,129,.25);}
-.b-nft{background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(236,72,153,.1));color:var(--c7);border:1px solid rgba(139,92,246,.25);}
-
-/* ========== CARDS ========== */
-.card{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r3);padding:14px;}
-.section-label{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-size:12px;font-weight:700;color:var(--t2);margin:14px 0 10px;letter-spacing:.3px;text-transform:uppercase;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--b1);}
-.page-title{font-family:var(--fd);font-size:18px;font-weight:800;margin-bottom:14px;letter-spacing:-.3px;}
-.mono{font-family:var(--fm)!important;}
-.chip{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:99px;background:var(--g2);border:1px solid var(--b1);font-size:11.5px;font-weight:600;cursor:pointer;transition:all var(--fast);color:var(--t2);}
-.chip.on,.chip:hover{background:var(--g3);border-color:rgba(0,255,170,.22);color:var(--neon);}
-.div{height:1px;background:var(--b1);margin:12px 0;}
-
-/* ========== STORY ROW ========== */
-.story-row{display:flex;gap:9px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;}
-.story-item{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;}
-.story-ring{width:60px;height:60px;border-radius:17px;padding:2.5px;background:linear-gradient(135deg,var(--c1),var(--c2),var(--neon));position:relative;}
-.story-ring.seen{background:var(--g2);}
-.story-ring .av{width:100%;height:100%;border-radius:14px;border:2px solid var(--bg);font-size:20px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.story-ring .av img{width:100%;height:100%;object-fit:cover;}
-.story-add{position:absolute;bottom:-4px;right:-4px;width:18px;height:18px;background:var(--neon);border-radius:50%;border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#000;}
-.story-nm{font-size:9.5px;font-weight:500;color:var(--t2);max-width:62px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
-/* Horizontal right-to-left scroller for composer and AI controls */
-.h-scroll-rtl{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:8px 6px;direction:rtl;flex-wrap:nowrap;scrollbar-width:thin;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(to left,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-image:linear-gradient(to left,transparent 0%,black 8%,black 92%,transparent 100%);}
-.h-scroll-rtl::-webkit-scrollbar{height:4px;}
-.h-scroll-rtl::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--c1),var(--neon));border-radius:99px;}
-.h-scroll-rtl::-webkit-scrollbar-track{background:rgba(109,40,217,.08);border-radius:99px;}
-.h-scroll-rtl > *{flex:0 0 auto;direction:ltr;white-space:nowrap;} /* keep children LTR for correct icon/text order */
-
-/* LTR horizontal scroller for compact chip rows */
-.h-scroll-ltr{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:6px 4px;flex-wrap:nowrap;scrollbar-width:thin;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);}
-.h-scroll-ltr::-webkit-scrollbar{height:3px;}
-.h-scroll-ltr::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--neon),var(--c1));border-radius:99px;}
-.h-scroll-ltr::-webkit-scrollbar-track{background:rgba(109,40,217,.08);border-radius:99px;}
-.h-scroll-ltr > *{flex:0 0 auto;white-space:nowrap;}
-
-/* Compact small box chips for media & AI actions */
-.media-chip{display:inline-flex;align-items:center;justify-content:center;gap:3px;height:26px;padding:0 9px;background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.05));border:1px solid rgba(109,40,217,.2);border-radius:8px;font-size:10.5px;font-weight:700;letter-spacing:.2px;color:var(--t1);cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);line-height:1;white-space:nowrap;user-select:none;}
-.media-chip:hover{background:linear-gradient(135deg,rgba(109,40,217,.22),rgba(0,255,170,.12));border-color:var(--neon);color:var(--neon);transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,255,170,.15);}
-.media-chip:active{transform:translateY(0);box-shadow:none;}
-.media-chip.ai-chip{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.06));border-color:rgba(139,92,246,.25);}
-.media-chip.ai-chip:hover{background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(236,72,153,.12));border-color:#a78bfa;color:#c4b5fd;box-shadow:0 2px 8px rgba(139,92,246,.18);}
-
-/* Post menu vertical scrolling when many items */
-.post-menu-dropdown{max-height:60vh;overflow-y:auto;padding:6px 6px;}
-.post-menu-dropdown::-webkit-scrollbar{width:8px}
-.post-menu-dropdown::-webkit-scrollbar-thumb{background:rgba(109,40,217,.35);border-radius:8px}
-
-/* ========== COMPOSER ========== */
-.composer{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r3);padding:12px;margin-bottom:10px;}
-.compose-top{display:flex;gap:9px;align-items:center;margin-bottom:10px;}
-.compose-inp{flex:1;background:var(--g3);border:1px solid var(--b1);border-radius:var(--r4);padding:9px 14px;color:var(--t1);font-size:13px;cursor:pointer;}
-.compose-inp:hover{border-color:var(--b2);background:var(--g3);}
-.compose-btns{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:4px 2px;mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);}
-.compose-btns::-webkit-scrollbar{height:4px;}
-.compose-btns::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--c1),var(--neon));border-radius:99px;}
-.compose-btns::-webkit-scrollbar-track{background:rgba(109,40,217,.08);border-radius:99px;}
-.cm-btn{display:inline-flex;align-items:center;justify-content:center;height:32px;background:linear-gradient(135deg,rgba(109,40,217,.12),rgba(0,255,170,.06));border:1px solid rgba(109,40,217,.25);border-radius:99px;padding:0 14px;font-size:11px;font-weight:700;cursor:pointer;color:var(--t1);transition:all .22s cubic-bezier(.4,0,.2,1);white-space:nowrap;flex-shrink:0;letter-spacing:.3px;line-height:1;}
-.cm-btn:hover{background:linear-gradient(135deg,rgba(109,40,217,.25),rgba(0,255,170,.12));border-color:var(--neon);color:var(--neon);transform:translateY(-1px);box-shadow:0 3px 12px rgba(0,255,170,.15);}
-.cm-btn:active{transform:translateY(0);box-shadow:none;}
-
-/* ========== POSTS ========== */
-.post{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r3);margin-bottom:10px;overflow:hidden;transition:border-color .2s;}
-.post:hover{border-color:var(--b2);box-shadow:var(--sh1);}
-.post-hd{display:flex;align-items:center;gap:9px;padding:12px 13px 8px;}
-.post-nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
-.post-meta{font-size:11px;color:var(--t3);margin-top:1px;display:flex;align-items:center;gap:6px;}
-.post-more{margin-left:auto;cursor:pointer;color:var(--t3);font-size:22px;padding:0 4px;border:none;background:transparent;line-height:1;}
-.post-more:hover{color:var(--t1);}
-.post-txt{padding:3px 13px 9px;font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word;}
-.post-tags{display:flex;flex-wrap:wrap;gap:4px;padding:0 13px 8px;}
-.post-tag{font-size:12px;color:var(--c2);font-weight:600;cursor:pointer;}
-.post-tag:hover{color:var(--neon);}
-.post-media{overflow:hidden;position:relative;}
-.post-media img{width:100%;max-height:440px;object-fit:cover;display:block;cursor:zoom-in;transition:transform .3s;}
-.post-media img:hover{transform:scale(1.01);}
-.post-media video{width:100%;max-height:380px;background:#000;display:block;}
-.post-media audio{width:100%;padding:10px 13px;}
-.post-preview-floating{transition:transform .25s ease,box-shadow .25s ease;}
-.post-preview-floating.floating{transform:translateY(-14px) scale(1.02);box-shadow:0 18px 42px rgba(0,0,0,.25);}
-.reaction-bar{display:flex;flex-wrap:wrap;gap:4px;padding:7px 13px;border-bottom:1px solid var(--b1);}
-.react-btn{background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:3px 8px;font-size:12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:3px;}
-.react-btn:hover{background:var(--g3);}
-.react-btn.active{background:linear-gradient(135deg,rgba(109,40,217,.2),rgba(236,72,153,.1));border-color:rgba(109,40,217,.35);}
-.react-float{position:absolute;font-size:22px;pointer-events:none;animation:reactionPop .8s forwards;}
-/* Long-press reaction picker */
-.reaction-picker{position:fixed;background:var(--bg3);border:1px solid var(--b2);border-radius:99px;padding:8px 12px;display:flex;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:99999;animation:scaleIn .15s var(--ease);}
-.reaction-picker .rp-emoji{font-size:28px;cursor:pointer;transition:transform .15s;}
-.reaction-picker .rp-emoji:hover{transform:scale(1.3);}
-.reaction-picker::before{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--bg3);}
-.post-acts{display:flex;border-top:1px solid var(--b1);}
-.pa{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:9px 4px;background:none;border:none;color:var(--t3);font-size:12px;font-weight:600;cursor:pointer;transition:all var(--fast);border-radius:0;}
-.pa:hover{background:var(--g2);color:var(--t1);}
-.pa.liked{color:var(--c5);}
-.comments-wrap{padding:8px 12px 10px;border-top:1px solid var(--b1);background:rgba(0,0,0,.22);}
-.comment{display:flex;gap:7px;margin-bottom:8px;}
-.comment.reply{margin-left:32px;}
-.cm-bub{flex:1;background:var(--g2);border-radius:0 12px 12px 12px;padding:7px 10px;}
-.cm-nm{font-weight:700;font-size:12px;margin-bottom:2px;}
-.cm-txt{font-size:13px;line-height:1.55;}
-.cm-acts{display:flex;gap:10px;margin-top:5px;}
-.cm-act{font-size:10px;color:var(--t3);cursor:pointer;border:none;background:none;}
-.cm-act:hover{color:var(--neon);}
-.cm-inp-row{display:flex;gap:7px;align-items:center;margin-top:8px;}
-.cm-inp{flex:1;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:8px 14px;color:var(--t1);font-size:13px;outline:none;}
-.cm-inp:focus{border-color:var(--neon);}
-.cm-send-btn{width:34px;height:34px;flex-shrink:0;background:linear-gradient(135deg,var(--c1),var(--neon));border:none;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
-.cm-send-btn:hover{transform:scale(1.1);}
-.post-pinned-bar{background:linear-gradient(90deg,rgba(245,158,11,.1),rgba(245,158,11,.04));border-bottom:1px solid rgba(245,158,11,.18);padding:4px 12px;font-size:10px;font-weight:700;color:var(--c4);display:flex;align-items:center;gap:5px;}
-
-/* ========== POLL & QUIZ ========== */
-.poll-wrap{padding:10px 13px;}
-.poll-opt{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:9px 12px;margin-bottom:6px;cursor:pointer;position:relative;overflow:hidden;}
-.poll-opt:hover{border-color:var(--c1);}
-.poll-opt.voted{border-color:var(--neon);}
-.poll-bar{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(0,255,170,.08),rgba(0,212,255,.06));transition:width .6s var(--ease);}
-.poll-row{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;}
-.poll-txt{font-size:13px;font-weight:600;}
-.poll-pct{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--neon);}
-.poll-meta{font-size:11px;color:var(--t3);margin-top:7px;}
-.quiz-wrap{padding:10px 13px;}
-.quiz-q{font-weight:700;font-size:14px;margin-bottom:9px;}
-.quiz-opt{background:var(--g2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:all .2s;font-size:13px;}
-.quiz-opt:hover{border-color:var(--c2);}
-.quiz-opt.correct{border-color:var(--c3);background:rgba(16,185,129,.08);color:var(--c3);}
-.quiz-opt.wrong{border-color:var(--c5);background:rgba(239,68,68,.08);color:var(--c5);}
-
-/* ========== COUNTDOWN ========== */
-.countdown-wrap{padding:12px 13px;text-align:center;}
-.cd-title{font-weight:700;font-size:14px;margin-bottom:8px;}
-.cd-clocks{display:flex;justify-content:center;gap:10px;}
-.cd-unit{background:var(--g3);border:1px solid var(--b1);border-radius:12px;padding:10px 14px;min-width:56px;}
-.cd-num{font-family:var(--fm);font-size:24px;font-weight:700;color:var(--neon);}
-.cd-lbl{font-size:9px;color:var(--t3);margin-top:2px;text-transform:uppercase;font-weight:700;}
-
-/* ========== ARTICLE ========== */
-.article-card{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;margin-bottom:10px;}
-.article-img{width:100%;height:160px;object-fit:cover;background:var(--bg3);}
-.article-body{padding:12px 13px;}
-.article-tag{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--c2);margin-bottom:5px;}
-.article-ttl{font-family:var(--fd);font-size:16px;font-weight:700;line-height:1.4;margin-bottom:6px;}
-.article-excerpt{font-size:13px;color:var(--t2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-.article-meta{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:11px;color:var(--t3);}
-
-/* ========== CAROUSEL ========== */
-.carousel-wrap{position:relative;overflow:hidden;}
-.carousel-track{display:flex;transition:transform .35s var(--ease);}
-.carousel-track > *{flex-shrink:0;width:100%;}
-.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;z-index:2;}
-.carousel-prev{left:8px;}
-.carousel-next{right:8px;}
-.carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;}
-.cdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .2s;}
-.cdot.on{background:#fff;width:16px;border-radius:3px;}
-
-/* ========== FEED ADS ========== */
-.feed-ad{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(14,165,233,.05));border:1px solid rgba(109,40,217,.22);border-radius:var(--r3);padding:14px;margin-bottom:10px;position:relative;overflow:hidden;}
-.feed-ad::before{content:'';position:absolute;top:-30px;right:-30px;width:90px;height:90px;background:radial-gradient(circle,rgba(0,255,170,.14),transparent);border-radius:50%;pointer-events:none;}
-.ad-spon{font-size:9px;font-weight:800;letter-spacing:1.5px;color:var(--c2);text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
-.ad-spon::after{content:'';flex:1;height:1px;background:rgba(14,165,233,.18);}
-.ad-pts{font-size:12px;color:var(--neon);font-weight:700;font-family:var(--fm);}
-.feed-ad-strip{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(109,40,217,.08));border:1px solid rgba(109,40,217,.22);border-radius:var(--r3);padding:12px 10px 14px;margin-bottom:10px;overflow-x:auto;display:flex;gap:12px;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.feed-ad-strip::-webkit-scrollbar{display:none;}
-.ad-strip-card{flex:0 0 240px;min-width:240px;max-width:240px;border-radius:18px;overflow:hidden;background:var(--g2);border:1px solid var(--b1);box-shadow:0 12px 32px rgba(0,0,0,.08);cursor:pointer;scroll-snap-align:start;transition:transform .25s ease,box-shadow .25s ease;}
-.ad-strip-card:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(0,0,0,.15);}
-.ad-strip-thumb{position:relative;width:100%;height:150px;background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(16,185,129,.18));display:flex;align-items:center;justify-content:center;color:#fff;font-size:42px;font-weight:800;}
-.ad-strip-thumb.video{background:linear-gradient(135deg,rgba(239,68,68,.35),rgba(236,72,153,.25));}
-.ad-strip-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.35));}
-.ad-strip-info{padding:12px;}
-.ad-strip-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;}
-.ad-strip-sub{font-size:12px;color:var(--t3);line-height:1.5;margin-bottom:12px;min-height:36px;}
-.ad-strip-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.ad-strip-btn{background:linear-gradient(135deg,var(--neon),#00ff88);color:#000;border:none;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:transform .2s ease;}
-.ad-strip-btn:hover{transform:scale(1.03);}
-.ad-strip-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;}
-@media (max-width: 768px) {.ad-strip-card{min-width:200px;}}
-.native-ad{border:1px solid var(--b1);border-radius:var(--r3);overflow:hidden;margin-bottom:10px;}
-.na-img{width:100%;height:100px;background:linear-gradient(135deg,var(--bg3),var(--bg4));display:flex;align-items:center;justify-content:center;font-size:40px;}
-.na-body{padding:12px;}
-
-/* ========== INTERSTITIAL ========== */
-.ints{position:fixed;inset:0;z-index:9998;background:rgba(3,3,8,.96);backdrop-filter:blur(18px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
-.ints.show{display:flex;animation:fadeIn .3s;}
-.ints-card{background:var(--bg3);border:1px solid var(--b2);border-radius:24px;max-width:390px;width:100%;padding:22px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--sh3);}
-.ints-card::before{content:'';position:absolute;top:-50px;right:-50px;width:140px;height:140px;background:radial-gradient(circle,rgba(109,40,217,.3),transparent);border-radius:50%;pointer-events:none;}
-.ints-skip{position:absolute;top:14px;right:14px;}
-.ints-cnt{font-family:var(--fm);font-size:12px;color:var(--t3);margin-top:12px;}
-.ints-pb{height:3px;background:var(--g3);border-radius:99px;margin-top:10px;overflow:hidden;}
-.ints-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--neon));border-radius:99px;transition:width 1s linear;}
-
-/* ========== REWARD AD ========== */
-.rwad{position:fixed;inset:0;z-index:9997;background:rgba(3,3,8,.94);backdrop-filter:blur(14px);display:none;flex-direction:column;align-items:center;justify-content:center;}
-.rwad.show{display:flex;}
-.rw-card{background:var(--bg3);border:1px solid rgba(0,255,170,.25);border-radius:24px;padding:28px 20px;text-align:center;max-width:330px;width:100%;box-shadow:0 0 50px rgba(0,255,170,.14);animation:scaleIn .35s var(--ease);}
-.rw-icon{font-size:58px;display:block;margin-bottom:11px;animation:float 2.5s ease-in-out infinite;}
-.rw-pts{font-family:var(--fd);font-size:38px;font-weight:800;color:var(--neon);margin-bottom:14px;animation:neonPulse 2.5s ease-in-out infinite;}
-
-/* ========== AUTO AD ========== */
-.auto-ad{position:fixed;bottom:78px;right:12px;z-index:9996;background:var(--bg3);border:1px solid var(--b2);border-radius:16px;padding:12px;max-width:200px;box-shadow:var(--sh2);display:none;animation:notifSlide .4s var(--ease);}
-.auto-ad.show{display:block;}
-.aad-x{position:absolute;top:7px;right:9px;cursor:pointer;color:var(--t3);font-size:13px;}
-
-/* ========== VIDEO / PAUSE ADS ========== */
-.vid-ad-ov{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.92),transparent);padding:12px;z-index:10;animation:fadeIn .5s;}
-.pause-ad{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:8;padding:16px;text-align:center;animation:fadeIn .3s;}
-
-/* ========== AI PANEL ========== */
-.ai-panel{background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.05),rgba(109,40,217,.08));border:1px solid rgba(109,40,217,.25);border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 2px 16px rgba(109,40,217,.08);}
-.ai-panel-ttl{font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--neon);text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px;text-shadow:0 0 12px rgba(0,255,170,.3);}
-.ai-tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:var(--r4);font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;margin:2px;}
-.ai-tag.suggested{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#a78bfa;}
-.ai-tag.suggested:hover{background:rgba(139,92,246,.3);}
-.ai-loading{display:flex;align-items:center;gap:6px;color:var(--t3);font-size:12px;}
-.ai-loading .dot{width:5px;height:5px;border-radius:50%;background:var(--neon);animation:typingDot 1.2s infinite;}
-.ai-loading .dot:nth-child(2){animation-delay:.15s;}
-.ai-loading .dot:nth-child(3){animation-delay:.3s;}
-.ai-caption-result{font-size:13px;color:var(--t1);line-height:1.6;background:var(--g2);border:1px solid var(--b1);border-radius:10px;padding:8px 10px;margin-top:6px;}
-
-/* ========== COPYRIGHT WARNING ========== */
-.copyright-warn{background:linear-gradient(135deg,rgba(239,68,68,.12),rgba(245,158,11,.08));border:1px solid rgba(239,68,68,.28);border-radius:var(--r2);padding:10px 12px;margin:6px 0;}
-.copyright-warn .cw-title{font-weight:800;font-size:12px;color:var(--c5);margin-bottom:3px;display:flex;align-items:center;gap:5px;}
-.copyright-warn p{font-size:11px;color:var(--t2);line-height:1.5;}
-.delete-countdown{font-family:var(--fm);font-weight:700;color:var(--c4);font-size:11px;margin-top:4px;}
-
-/* ========== NFT MODAL ========== */
-.nft-card{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.05));border:1px solid rgba(139,92,246,.2);border-radius:var(--r2);padding:16px;margin-bottom:12px;}
-.nft-preview{width:100%;height:120px;background:var(--g3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:10px;}
-
-/* ========== MLM LEVELS ========== */
-.mlm-level{background:linear-gradient(135deg,rgba(0,255,170,.05),rgba(14,165,233,.03));border:1px solid rgba(0,255,170,.2);border-radius:var(--r2);padding:12px;margin-bottom:8px;}
-.mlm-level .level-name{font-weight:800;font-size:14px;color:var(--neon);}
-.mlm-level .level-commission{font-family:var(--fm);font-size:13px;color:var(--c4);}
-.mlm-level .level-members{font-size:11px;color:var(--t3);}
-
-/* ========== AVATAR ========== */
-.av{overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;flex-shrink:0;}
-.av img{width:100%;height:100%;object-fit:cover;}
-.av-round{border-radius:50%;}
-.av-xs{width:26px;height:26px;font-size:11px;}
-.av-sm{width:34px;height:34px;font-size:14px;}
-.av-md{width:42px;height:42px;font-size:17px;}
-.av-lg{width:60px;height:60px;font-size:24px;}
-.av-xl{width:80px;height:80px;font-size:32px;}
-
-/* ========== EARN PAGE ========== */
-.earn-hero{background:linear-gradient(135deg,#040012,#0c0424,#020f1c);border-radius:var(--r3);padding:18px;margin-bottom:11px;position:relative;overflow:hidden;border:1px solid rgba(109,40,217,.18);}
-.earn-hero::after{content:'';position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(109,40,217,.22),transparent);border-radius:50%;right:-50px;top:-50px;pointer-events:none;}
-.eh-label{font-size:9px;font-weight:800;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;margin-bottom:5px;}
-.eh-bal{font-family:var(--fd);font-size:40px;font-weight:800;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
-.eh-sub{font-size:12px;color:var(--t2);margin:3px 0 6px;}
-.eh-change{font-size:12px;font-weight:700;color:var(--neon);font-family:var(--fm);}
-.eh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:13px;}
-.eh-btn{background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;transition:all var(--fast);}
-.eh-btn:hover{background:rgba(0,255,170,.07);border-color:rgba(0,255,170,.18);}
-.eh-btn .ei{font-size:19px;margin-bottom:3px;}
-.eh-btn .el{font-size:9px;font-weight:700;color:var(--t2);}
-.task-card{display:flex;align-items:center;gap:11px;padding:11px;background:var(--g2);border:1px solid var(--b1);border-radius:14px;margin-bottom:7px;transition:all .2s;cursor:pointer;}
-.task-card:hover{border-color:var(--b2);transform:translateX(2px);}
-.task-ico{width:42px;height:42px;border-radius:12px;background:var(--g3);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.task-info{flex:1;}
-.task-name{font-weight:700;font-size:13px;}
-.task-desc{font-size:11px;color:var(--t3);margin-top:1px;}
-.task-reward{font-family:var(--fm);font-weight:700;color:var(--neon);font-size:13px;}
-.mission-bar{height:4px;background:var(--g3);border-radius:99px;overflow:hidden;}
-.mission-fill{height:100%;background:linear-gradient(90deg,var(--neon),var(--c2));border-radius:99px;transition:width .6s var(--ease);}
-
-/* ========== WALLET ========== */
-.wallet-hero{background:linear-gradient(135deg,#04001a,#0b0522,#040e1c);border-radius:var(--r3);padding:20px;margin-bottom:11px;position:relative;overflow:hidden;border:1px solid rgba(109,40,217,.16);}
-.wallet-hero::before{content:'';position:absolute;width:280px;height:280px;background:radial-gradient(circle,rgba(109,40,217,.16),transparent);border-radius:50%;bottom:-100px;left:-80px;pointer-events:none;}
-.wh-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.wh-lbl{font-size:9px;font-weight:800;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;margin-bottom:5px;}
-.wh-amt{font-family:var(--fd);font-size:40px;font-weight:800;letter-spacing:-1px;line-height:1;}
-.wh-pts{font-size:12px;color:var(--t3);margin-top:2px;font-family:var(--fm);}
-.wh-badge{padding:4px 13px;background:rgba(109,40,217,.16);border:1px solid rgba(109,40,217,.28);border-radius:99px;color:#a78bfa;font-size:11px;font-weight:700;}
-.pay-methods{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;}
-.pay-pill{background:rgba(255,255,255,.05);border:1px solid var(--b2);border-radius:var(--r1);padding:4px 9px;font-size:11px;font-weight:700;}
-.tx-row{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;margin-bottom:5px;}
-.tx-row:hover{border-color:var(--b2);}
-.tx-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.tx-earn{background:rgba(0,255,170,.07);}
-.tx-spend{background:rgba(239,68,68,.07);}
-.tx-info{flex:1;}
-.tx-lbl{font-weight:600;font-size:13px;}
-.tx-dt{font-size:10px;color:var(--t3);margin-top:1px;}
-.tx-amt{font-family:var(--fm);font-weight:700;font-size:13px;}
-.tx-pos{color:var(--neon);}
-.tx-neg{color:var(--c5);}
-.break-earn{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--b1);}
-
-/* ========== PROFILE ========== */
-.cover-wrap{position:relative;border-radius:var(--r2);overflow:hidden;margin-bottom:-44px;}
-.cover-img{width:100%;height:150px;background:linear-gradient(135deg,#0a0a28,#1a104a,#0a1e1a);display:block;cursor:pointer;object-fit:cover;}
-.cover-edit{position:absolute;bottom:9px;right:9px;background:rgba(0,0,0,.65);backdrop-filter:blur(7px);border:1px solid var(--b2);color:var(--t1);padding:4px 9px;border-radius:var(--r1);font-size:11px;cursor:pointer;}
-.pav-wrap{position:relative;display:inline-block;margin-left:12px;}
-.pav{width:80px;height:80px;border-radius:22px;border:3px solid var(--bg);overflow:hidden;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;}
-.pav img{width:100%;height:100%;object-fit:cover;}
-.pav-edit{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;background:var(--neon);border-radius:8px;border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;}
-.p-name{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:-.4px;}
-.p-user{font-size:13px;color:var(--t3);}
-.p-bio{font-size:13.5px;color:var(--t2);margin:7px 0;line-height:1.65;}
-.p-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b1);border-radius:14px;overflow:hidden;margin-bottom:11px;}
-.pstat{background:var(--g2);text-align:center;padding:12px 4px;cursor:pointer;}
-.pstat:hover{background:var(--g3);}
-.pstat-n{font-family:var(--fm);font-size:18px;font-weight:700;}
-.pstat-l{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
-.p-links{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:11px;}
-
-/* ========== EXPLORE ========== */
-.explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:14px;overflow:hidden;}
-.exp-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--g2);}
-.exp-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
-.exp-item:hover img{transform:scale(1.08);}
-.exp-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent);opacity:0;transition:opacity .25s;display:flex;align-items:flex-end;padding:7px;flex-wrap:wrap;gap:3px;}
-.exp-item:hover .exp-ov{opacity:1;}
-
-/* ========== LEADERBOARD ========== */
-.lb-podium{display:flex;align-items:flex-end;justify-content:center;gap:9px;padding:12px 0 20px;}
-.lb-plc{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.lb-plc.p1{transform:translateY(-14px);}
-.lb-av{border-radius:15px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;}
-.p1 .lb-av{width:68px;height:68px;border:3px solid var(--c4);font-size:24px;}
-.p2 .lb-av{width:54px;height:54px;border:3px solid #9ca3af;font-size:20px;}
-.p3 .lb-av{width:48px;height:48px;border:3px solid #b45309;font-size:17px;}
-.lb-row{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;margin-bottom:5px;}
-.lb-row:hover{border-color:var(--b2);transform:translateX(2px);}
-.lb-rank{font-family:var(--fm);font-weight:700;font-size:14px;width:24px;color:var(--t3);}
-.lb-pts{font-family:var(--fm);font-weight:700;color:var(--neon);font-size:13px;}
-
-/* ========== NOTIFICATIONS ========== */
-.notif{display:flex;gap:9px;padding:9px 11px;border-radius:12px;cursor:pointer;transition:background .15s;border-left:3px solid transparent;}
-.notif:hover{background:var(--g2);}
-.notif.unread{border-left-color:var(--neon);background:rgba(0,255,170,.03);}
-.notif-ico{width:40px;height:40px;border-radius:11px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.notif-ttl{font-weight:700;font-size:13px;}
-.notif-msg{font-size:12px;color:var(--t2);margin-top:2px;line-height:1.45;}
-.notif-time{font-size:10px;color:var(--t3);margin-top:3px;}
-
-/* ========== CHAT ========== */
-.chat-item{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:14px;cursor:pointer;transition:background .15s;}
-.chat-item:hover{background:var(--g2);}
-.chat-meta{flex:1;min-width:0;}
-.chat-nm{font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:center;}
-.chat-prev{font-size:12px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px;}
-.chat-time{font-size:10px;color:var(--t3);white-space:nowrap;flex-shrink:0;}
-.chat-unrd{background:var(--neon);color:#000;font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:99px;font-family:var(--fm);}
-.chat-enc{font-size:9px;color:var(--c3);font-weight:700;display:flex;align-items:center;gap:3px;}
-#chatRoom{position:fixed;inset:0;z-index:700;background:var(--bg);display:none;flex-direction:column;}
-#chatRoom.open{display:flex;animation:slideLeft .25s var(--ease);}
-.cr-top{padding:calc(92px + 6px) 11px 10px;background:rgba(3,3,8,.92);border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:9px;backdrop-filter:blur(24px);}
-.cr-back{background:var(--g2);border:1px solid var(--b1);border-radius:10px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t1);font-size:15px;}
-.cr-msgs{flex:1;overflow-y:auto;padding:12px;}
-.cr-msg{display:flex;gap:7px;margin-bottom:12px;}
-.cr-msg.mine{flex-direction:row-reverse;}
-.cr-bub{max-width:78%;background:var(--g2);border:1px solid var(--b1);border-radius:0 14px 14px 14px;padding:9px 12px;font-size:13px;line-height:1.6;color:var(--t1);}
-.cr-msg.mine .cr-bub{background:linear-gradient(135deg,rgba(109,40,217,.38),rgba(109,40,217,.18));border-color:rgba(109,40,217,.3);border-radius:14px 0 14px 14px;}
-.cr-bub-t{font-size:9px;color:rgba(255,255,255,.28);margin-top:4px;text-align:right;}
-.cr-bar{padding:8px 11px calc(8px + env(safe-area-inset-bottom));background:rgba(3,3,8,.92);border-top:1px solid var(--b1);display:flex;gap:6px;align-items:flex-end;}
-.cr-inp{flex:1;background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:9px 13px;color:var(--t1);font-size:13px;outline:none;resize:none;max-height:100px;}
-.cr-inp:focus{border-color:var(--neon);}
-.cr-send{width:38px;height:38px;flex-shrink:0;background:linear-gradient(135deg,var(--c1),var(--neon));border:none;border-radius:12px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-.cr-send:hover{transform:scale(1.08);}
-.cr-media{display:flex;gap:5px;padding:5px 11px 0;flex-wrap:wrap;}
-.cr-mbtn{background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;color:var(--t2);transition:all .18s;}
-.cr-mbtn:hover{background:var(--g3);color:var(--t1);}
-.voice-rec{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.3);color:var(--c5);}
-.typing-ind{font-size:11px;color:var(--t3);padding:0 12px 4px;display:none;align-items:center;gap:5px;}
-.typing-ind.show{display:flex;}
-.td span{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--t3);animation:typingDot 1.2s infinite;margin:0 1px;}
-.td span:nth-child(2){animation-delay:.2s;}
-.td span:nth-child(3){animation-delay:.4s;}
-
-/* ========== GROUP CHAT ========== */
-.group-badge{background:linear-gradient(135deg,rgba(14,165,233,.18),rgba(109,40,217,.12));border:1px solid rgba(14,165,233,.25);border-radius:var(--r4);padding:2px 7px;font-size:9px;font-weight:700;color:var(--c2);}
-.mem-chip{display:inline-flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b2);border-radius:99px;padding:4px 9px;font-size:12px;font-weight:600;margin:3px;}
-.mem-chip .rm{cursor:pointer;color:var(--c5);font-size:12px;}
-
-/* ========== STORY VIEWER ========== */
-#storyView{position:fixed;inset:0;z-index:900;background:#000;display:none;flex-direction:column;}
-#storyView.open{display:flex;}
-.sv-bars{display:flex;gap:3px;padding:48px 11px 7px;}
-.sv-bar{flex:1;height:2px;background:rgba(255,255,255,.22);border-radius:99px;overflow:hidden;}
-.sv-fill{height:100%;background:#fff;transform:scaleX(0);transform-origin:left;}
-.sv-hd{display:flex;align-items:center;gap:8px;padding:0 11px 12px;}
-.sv-body{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:11px;padding:14px;}
-.sv-x{position:absolute;top:44px;right:12px;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:15px;}
-
-/* ========== LIVE STREAM ========== */
-#liveView{position:fixed;inset:0;z-index:800;background:#000;display:none;flex-direction:column;}
-#liveView.open{display:flex;}
-.lv-vid{flex:1;background:#000;position:relative;}
-.lv-vid video{width:100%;height:100%;object-fit:cover;}
-.lv-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,transparent 30%,transparent 50%,rgba(0,0,0,.7) 100%);}
-.lv-top{position:absolute;top:0;left:0;right:0;padding:50px 11px 10px;display:flex;align-items:center;gap:9px;}
-.lv-live-badge{background:var(--c5);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:var(--r4);animation:pulse 1.2s infinite;}
-.lv-viewers{background:rgba(0,0,0,.5);color:#fff;font-size:11px;padding:3px 9px;border-radius:var(--r4);display:flex;align-items:center;gap:4px;}
-.lv-comments{position:absolute;bottom:80px;left:0;width:240px;max-height:200px;overflow:hidden;padding:10px;display:flex;flex-direction:column;gap:4px;}
-.lv-cm{background:rgba(0,0,0,.5);border-radius:var(--r4);padding:4px 10px;display:inline-flex;gap:5px;align-items:center;font-size:11px;color:#fff;}
-.lv-bottom{position:absolute;bottom:0;left:0;right:0;padding:0 11px calc(10px + env(safe-area-inset-bottom));}
-.lv-inp-row{display:flex;gap:7px;margin-bottom:10px;}
-.lv-inp{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:var(--r4);padding:8px 14px;color:#fff;font-size:13px;outline:none;}
-.lv-close{position:absolute;top:50px;right:12px;background:rgba(0,0,0,.5);border:none;border-radius:50%;width:32px;height:32px;color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-
-/* Professional Camera Controls */
-.lv-camera-controls{position:absolute;top:100px;right:12px;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 200px);overflow-y:auto;transition:opacity .3s ease,transform .3s ease;}
-.lv-camera-controls.hidden{opacity:0;transform:translateX(100%);pointer-events:none;}
-.lv-control-group{display:flex;flex-direction:column;gap:6px;}
-.lv-control-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.5px;}
-.lv-select{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 10px;color:#fff;font-size:12px;outline:none;cursor:pointer;}
-.lv-select option{background:#1a1a2e;color:#fff;}
-.lv-btn{background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(0,255,170,.15));border:1px solid rgba(0,212,255,.3);border-radius:10px;padding:8px 12px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:6px;}
-.lv-btn:hover{background:linear-gradient(135deg,rgba(0,212,255,.3),rgba(0,255,170,.25));transform:scale(1.05);}
-.lv-btn-icon{width:40px;height:40px;border-radius:50%;font-size:18px;padding:0;}
-.lv-btn-icon.active{background:linear-gradient(135deg,var(--c5),#ff6b6b);border-color:#ff4444;}
-.lv-zoom-level{color:#fff;font-size:12px;font-weight:700;text-align:center;}
-.lv-filter-row{display:flex;flex-wrap:wrap;gap:6px;}
-.lv-filter-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;color:#fff;font-size:10px;font-weight:600;cursor:pointer;transition:all .2s ease;}
-.lv-filter-btn:hover{background:rgba(255,255,255,.2);}
-.lv-filter-btn.active{background:linear-gradient(135deg,var(--neon),var(--c2));border-color:var(--neon);color:#000;}
-.lv-focus-ring{position:absolute;z-index:6;left:50%;top:50%;width:84px;height:84px;border:2px solid rgba(255,255,255,.9);border-radius:50%;box-shadow:0 0 0 999px rgba(0,0,0,.25);transform:translate(-50%,-50%) scale(.8);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
-.lv-focus-ring.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
-.lv-spotlight{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .22s ease;border-radius:24px;background:radial-gradient(circle at var(--spotlight-x,50%) var(--spotlight-y,50%), rgba(255,255,255,.16) 0%, rgba(255,255,255,.06) 18%, rgba(0,0,0,.24) 42%, rgba(0,0,0,.78) 100%);}
-.lv-spotlight.show{opacity:1;}
-.lv-focus-grid{opacity:0;transition:opacity .2s ease;}
-.lv-focus-grid.active{opacity:.24;}
-.lv-preset-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}
-.lv-preset-btn{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;border-radius:10px;padding:6px 8px;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s ease;}
-.lv-preset-btn.active{background:linear-gradient(135deg,var(--neon),var(--c2));color:#02120d;border-color:transparent;}
-.lv-thumbnail-preview{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:rgba(255,255,255,.05);display:none;overflow:hidden;align-items:center;justify-content:center;}
-.lv-thumbnail-preview.show{display:flex;}
-.lv-thumbnail-preview img{width:100%;height:100%;object-fit:cover;}
-.lv-effect-canvas{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:2;object-fit:cover;pointer-events:none;}
-.lv-preview-pill{display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.16);min-height:36px;}
-.lv-preview-pill.recording{background:rgba(239,68,68,.2);color:#ffe4e6;border-color:rgba(255,89,89,.35);} 
-.lv-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:rgba(255,255,255,.2);outline:none;}
-.lv-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
-.lv-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--c2));cursor:pointer;border:2px solid #fff;}
-
-/* Premium Live Camera Studio */
-#liveView{background:radial-gradient(circle at 50% 0%,#12202a 0%,#030308 55%,#000 100%);}
-.lv-vid{overflow:hidden;isolation:isolate;}
-.lv-vid:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 18% 16%,rgba(0,255,170,.16),transparent 28%),radial-gradient(circle at 82% 12%,rgba(14,165,233,.14),transparent 25%),linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.34));mix-blend-mode:screen;}
-.lv-vid video{transform-origin:center;transition:filter .22s ease,transform .22s ease;}
-.lv-overlay{z-index:2;background:linear-gradient(to bottom,rgba(0,0,0,.58) 0%,rgba(0,0,0,.1) 24%,rgba(0,0,0,.08) 54%,rgba(0,0,0,.82) 100%);}
-.lv-camera-frame{position:absolute;inset:76px 22px 112px;z-index:3;pointer-events:none;border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,255,170,.14),0 0 42px rgba(0,255,170,.08);}
-.lv-camera-frame span{position:absolute;width:34px;height:34px;border-color:rgba(0,255,170,.72);border-style:solid;}
-.lv-camera-frame span:nth-child(1){top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:22px 0 0 0;}
-.lv-camera-frame span:nth-child(2){top:-1px;right:-1px;border-width:2px 2px 0 0;border-radius:0 22px 0 0;}
-.lv-camera-frame span:nth-child(3){bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 22px 0;}
-.lv-camera-frame span:nth-child(4){bottom:-1px;left:-1px;border-width:0 0 2px 2px;border-radius:0 0 0 22px;}
-.lv-focus-grid{position:absolute;inset:76px 22px 112px;z-index:3;pointer-events:none;opacity:.22;background:linear-gradient(90deg,transparent 33%,rgba(255,255,255,.55) 33.2%,transparent 33.6%,transparent 66%,rgba(255,255,255,.55) 66.2%,transparent 66.6%),linear-gradient(0deg,transparent 33%,rgba(255,255,255,.55) 33.2%,transparent 33.6%,transparent 66%,rgba(255,255,255,.55) 66.2%,transparent 66.6%);}
-.lv-rec-ring{position:absolute;left:50%;top:50%;z-index:3;width:82px;height:82px;margin:-41px 0 0 -41px;border:1px solid rgba(255,255,255,.2);border-radius:50%;pointer-events:none;box-shadow:0 0 0 999px rgba(0,0,0,.01);}
-.lv-rec-ring:before,.lv-rec-ring:after{content:"";position:absolute;inset:12px;border:1px dashed rgba(0,255,170,.48);border-radius:50%;animation:spinSlow 8s linear infinite;}
-.lv-rec-ring:after{inset:25px;border-color:rgba(14,165,233,.44);animation-direction:reverse;}
-.lv-rec-ring span{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;background:rgba(255,255,255,.9);border-radius:50%;}
-.lv-studio-hud{position:absolute;top:50px;left:12px;right:56px;z-index:4;display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;}
-.lv-studio-hud::-webkit-scrollbar{display:none;}
-.lv-hud-chip{flex:0 0 auto;min-height:30px;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(3,6,12,.58);backdrop-filter:blur(16px);color:#fff;font-size:11px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.22);}
-.lv-hud-live{background:linear-gradient(135deg,rgba(239,68,68,.86),rgba(225,29,72,.68));border-color:rgba(255,255,255,.22);}
-.lv-hud-live span{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.14);animation:pulse 1.2s infinite;}
-.lv-top{z-index:4;top:40px;padding-top:48px;}
-.lv-close{z-index:7;background:rgba(3,6,12,.62);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);}
-.lv-tools-toggle{position:absolute;right:12px;top:92px;z-index:7;min-width:44px;height:32px;border:1px solid rgba(0,255,170,.28);border-radius:999px;background:linear-gradient(135deg,rgba(0,255,170,.2),rgba(14,165,233,.16));backdrop-filter:blur(14px);color:#fff;font-size:11px;font-weight:900;letter-spacing:0;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.3);}
-.lv-tools-toggle.is-hidden{background:rgba(3,6,12,.72);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.72);}
-.lv-comments,.lv-bottom{z-index:5;}
-.lv-camera-controls{z-index:6;top:126px;right:14px;width:178px;padding:10px;background:linear-gradient(180deg,rgba(6,12,22,.78),rgba(5,8,14,.58));border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(150%);}
-.lv-control-group{padding:8px;border:1px solid rgba(255,255,255,.08);border-radius:13px;background:rgba(255,255,255,.045);}
-.lv-control-group:has(.lv-btn-icon){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;}
-.lv-control-label{letter-spacing:0;color:rgba(255,255,255,.72);}
-.lv-select{height:36px;border-radius:11px;background:rgba(255,255,255,.1);}
-.lv-btn{border-radius:12px;background:linear-gradient(135deg,rgba(0,255,170,.16),rgba(14,165,233,.14));border-color:rgba(0,255,170,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
-.lv-btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,255,170,.12);}
-.lv-btn-icon{width:42px;height:42px;justify-self:center;}
-.lv-filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
-.lv-filter-btn{min-height:30px;border-radius:10px;background:rgba(255,255,255,.07);}
-.lv-filter-btn.active{color:#04100c;background:linear-gradient(135deg,#4ade80,#22d3ee);}
-.lv-slider{height:8px;background:linear-gradient(90deg,rgba(0,255,170,.85) var(--lv-progress,50%),rgba(255,255,255,.18) var(--lv-progress,50%));}
-.lv-slider::-webkit-slider-thumb{box-shadow:0 0 0 5px rgba(0,255,170,.16),0 6px 16px rgba(0,0,0,.3);}
-.lv-slider::-moz-range-thumb{box-shadow:0 0 0 5px rgba(0,255,170,.16),0 6px 16px rgba(0,0,0,.3);}
-.lv-camera-controls.hidden{opacity:.08;transform:translateX(calc(100% - 16px));}
-@keyframes spinSlow{to{transform:rotate(360deg);}}
-@media(max-width:720px){
-  .lv-camera-frame,.lv-focus-grid{inset:92px 12px 160px;border-radius:18px;}
-  .lv-rec-ring{width:64px;height:64px;margin:-32px 0 0 -32px;}
-  .lv-studio-hud{top:44px;right:50px;}
-  .lv-top{top:34px;padding-top:42px;}
-  .lv-camera-controls{top:auto;left:10px;right:10px;bottom:68px;width:auto;max-height:34vh;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow:auto;border-radius:18px;}
-  .lv-control-group{min-width:0;padding:7px;}
-  .lv-control-group:has(.lv-filter-row),.lv-control-group:has(.lv-slider),.lv-control-group:first-child{grid-column:span 2;}
-  .lv-filter-row{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .lv-control-label{font-size:10px;}
-  .lv-comments{bottom:240px;width:min(260px,78vw);}
-}
-
-/* ========== MOBILE PERFORMANCE OPTIMIZATIONS ========== */
-/* Smooth scrolling and touch optimization */
-html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
-body{touch-action:manipulation;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:contain;}
-
-/* GPU acceleration for smooth animations */
-.card,.modal,.btn,.post-media video,.post-media img{transform:translateZ(0);will-change:transform;backface-visibility:hidden;}
-
-/* Optimize images for mobile */
-img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;}
-
-/* Optimize video playback */
-video{max-width:100%;height:auto;object-fit:contain;will-change:transform;}
-
-/* Smooth touch interactions */
-button,.media-chip,.pa,.react-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;}
-
-/* Prevent layout shifts */
-.post-media{min-height:200px;position:relative;}
-.post-media video,.post-media img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
-
-/* Optimize scrolling performance */
-#feed{will-change:transform;contain:layout style paint;}
-
-/* Reduce paint on scroll */
-.card{contain:layout style paint;}
-
-/* Smooth modal transitions */
-.modal{transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s cubic-bezier(.4,0,.2,1);will-change:transform,opacity;}
-
-/* Optimize text rendering */
-body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
-
-/* Prevent bounce on mobile */
-html,body{overscroll-behavior:none;}
-
-/* Smooth bottom nav transitions */
-.bn{transition:transform .2s ease,opacity .2s ease;will-change:transform,opacity;}
-
-/* ========== VIDEO EDITOR ========== */
-#videoEditor{position:fixed;inset:0;z-index:750;background:var(--bg);display:none;flex-direction:column;}
-#videoEditor.open{display:flex;animation:slideUp .3s var(--ease);}
-.ve-top{padding:calc(92px + 8px) 12px 10px;background:rgba(3,3,8,.92);border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:9px;}
-.ve-prev{flex:1;background:var(--bg3);position:relative;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center;}
-.ve-prev video{width:100%;max-height:220px;object-fit:contain;}
-.ve-timeline{background:var(--bg3);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:10px 12px;overflow-x:auto;}
-.ve-track{height:48px;background:var(--g2);border-radius:8px;min-width:300px;position:relative;border:1px solid var(--b1);}
-.ve-thumb-strip{display:flex;height:100%;border-radius:7px;overflow:hidden;}
-.ve-thumb{flex:1;background:var(--g3);border-right:1px solid var(--bg);}
-.ve-trim-l,.ve-trim-r{position:absolute;top:0;bottom:0;width:14px;background:var(--neon);cursor:ew-resize;opacity:.9;}
-.ve-trim-l{left:0;border-radius:8px 0 0 8px;}
-.ve-trim-r{right:0;border-radius:0 8px 8px 0;}
-.ve-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px 12px;}
-.ve-tool{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .18s;}
-.ve-tool:hover{background:var(--g3);}
-.ve-tool .vi{font-size:20px;margin-bottom:4px;}
-.ve-tool .vl{font-size:10px;font-weight:700;color:var(--t2);}
-.ve-filters{display:flex;gap:8px;overflow-x:auto;padding:6px 12px;scrollbar-width:none;}
-.ve-filters::-webkit-scrollbar{display:none;}
-.ve-filter{flex-shrink:0;text-align:center;cursor:pointer;}
-.ve-filter-prev{width:56px;height:56px;border-radius:12px;background:var(--g3);margin-bottom:4px;overflow:hidden;border:2px solid transparent;transition:border-color .18s;}
-.ve-filter.on .ve-filter-prev{border-color:var(--neon);}
-.ve-filter-nm{font-size:9px;font-weight:700;color:var(--t2);}
-
-/* ========== IMAGE EDITOR ========== */
-#imageEditor{position:fixed;inset:0;z-index:750;background:var(--bg);display:none;flex-direction:column;}
-#imageEditor.open{display:flex;animation:slideUp .3s var(--ease);}
-.ie-canvas-wrap{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg3);}
-#ieCanvas{max-width:100%;max-height:100%;}
-.ie-tools{display:flex;gap:6px;padding:8px 12px;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--b1);}
-.ie-tools::-webkit-scrollbar{display:none;}
-.ie-tool-btn{flex-shrink:0;background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--t2);transition:all .18s;font-family:var(--ff);white-space:nowrap;}
-.ie-tool-btn.on,.ie-tool-btn:hover{background:var(--g3);color:var(--t1);}
-.ie-slider{width:100%;accent-color:var(--neon);}
-
-/* ========== MARKETPLACE ========== */
-.mkt-card{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;cursor:pointer;transition:all .2s;}
-.mkt-card:hover{border-color:var(--b2);transform:translateY(-2px);}
-.mkt-thumb{height:130px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
-.mkt-badge{position:absolute;top:8px;right:8px;}
-.mkt-info{padding:10px 11px;}
-.mkt-nm{font-weight:700;font-size:13px;margin-bottom:3px;}
-.mkt-by{font-size:11px;color:var(--t3);}
-.mkt-price{font-family:var(--fm);font-weight:800;font-size:14px;color:var(--neon);margin-top:5px;}
-.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-
-/* ========== NFT MARKETPLACE ========== */
-.nft-marketplace{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.nft-item{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;cursor:pointer;transition:all .2s;}
-.nft-item:hover{border-color:var(--c7);transform:translateY(-2px);}
-.nft-image{height:120px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:48px;}
-.nft-info{padding:10px;}
-.nft-name{font-weight:700;font-size:13px;}
-.nft-price{font-family:var(--fm);font-size:12px;color:var(--neon);}
-
-/* ========== SETTINGS ========== */
-.sett-sec{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;margin-bottom:8px;}
-.sett-ttl{padding:9px 13px 6px;font-size:9.5px;font-weight:800;letter-spacing:1.2px;color:var(--t3);text-transform:uppercase;}
-.sett-row{display:flex;align-items:center;gap:10px;padding:10px 13px;border-top:1px solid var(--b1);cursor:pointer;transition:background .15s;}
-.sett-row:hover{background:var(--g3);}
-.sett-ico{width:32px;height:32px;border-radius:9px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.sett-nm{font-weight:600;font-size:13px;}
-.sett-sub{font-size:11px;color:var(--t3);margin-top:1px;}
-.sett-end{color:var(--t3);font-size:16px;margin-left:auto;}
-.danger .sett-nm{color:var(--c5);}
-
-/* ========== ADMIN ========== */
-.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
-.admin-stat{background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:13px;}
-.as-i{font-size:22px;margin-bottom:5px;}
-.as-n{font-family:var(--fm);font-size:22px;font-weight:700;}
-.as-l{font-size:11px;color:var(--t3);margin-top:2px;}
-.admin-rev-card{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.24);border-radius:var(--r2);padding:14px;margin-bottom:10px;}
-
-/* ========== REFERRAL ========== */
-.ref-hero{background:linear-gradient(135deg,rgba(109,40,217,.12),rgba(0,255,170,.07));border:1px solid rgba(109,40,217,.22);border-radius:var(--r3);padding:20px;text-align:center;margin-bottom:13px;}
-
-/* ========== AUTO FRIEND NOTIFICATION ========== */
-.af-notif{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);z-index:9995;background:linear-gradient(135deg,rgba(0,255,170,.18),rgba(14,165,233,.12));border:1.5px solid rgba(0,255,170,.38);border-radius:20px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--t1);box-shadow:0 8px 32px rgba(0,255,170,.22),var(--sh2);animation:friendPop .45s var(--ease) forwards;backdrop-filter:blur(16px);min-width:220px;max-width:300px;pointer-events:none;}
-.af-notif .af-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;border:2px solid rgba(0,255,170,.4);}
-.af-notif .af-txt{flex:1;}
-.af-notif .af-lbl{font-size:10px;color:var(--neon);font-weight:800;letter-spacing:.5px;margin-bottom:1px;}
-.af-notif .af-ico{font-size:20px;flex-shrink:0;}
-.friend-card{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--g2);border:1px solid var(--b1);border-radius:14px;margin-bottom:6px;}
-.friend-card:hover{border-color:rgba(0,255,170,.22);transform:translateX(2px);}
-.friend-card .fc-av{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden;}
-.friend-card .fc-av img{width:100%;height:100%;object-fit:cover;}
-.friend-card .fc-info{flex:1;}
-.friend-card .fc-nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;}
-.friend-card .fc-sub{font-size:11px;color:var(--t3);margin-top:2px;}
-.friend-card .fc-tag{font-size:9px;font-weight:800;background:rgba(0,255,170,.1);color:var(--neon);border:1px solid rgba(0,255,170,.2);border-radius:99px;padding:2px 7px;}
-.friend-hero{background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(109,40,217,.06));border:1px solid rgba(0,255,170,.18);border-radius:var(--r3);padding:16px;margin-bottom:12px;text-align:center;}
-
-/* ========== LANGUAGE SELECTOR ========== */
-.lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-.lang-btn{background:var(--g2);border:1px solid var(--b1);border-radius:10px;padding:9px 6px;text-align:center;cursor:pointer;transition:all .18s;font-size:12px;font-weight:700;}
-.lang-btn.on,.lang-btn:hover{background:var(--g3);border-color:var(--neon);}
-.lang-flag{font-size:18px;display:block;margin-bottom:3px;}
-
-/* ========== MODALS ========== */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);z-index:800;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .26s;}
-.overlay.open{opacity:1;pointer-events:all;}
-.modal{width:100%;max-width:600px;background:var(--bg2);border:1px solid var(--b2);border-radius:22px 22px 0 0;padding:18px 14px;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .32s var(--ease);}
-.overlay.open .modal{transform:none;}
-.overlay.center{align-items:center;}
-.overlay.center .modal{border-radius:22px;max-width:430px;transform:scale(.9);}
-.overlay.center.open .modal{transform:scale(1);}
-.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;}
-.modal-ttl{font-family:var(--fd);font-size:15px;font-weight:700;letter-spacing:-.2px;}
-.modal-x{width:28px;height:28px;background:var(--g2);border:1px solid var(--b1);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);font-size:13px;}
-
-/* ========== TOGGLE ========== */
-.toggle{position:relative;width:42px;height:23px;flex-shrink:0;}
-.toggle input{opacity:0;width:0;height:0;}
-.tgl{position:absolute;cursor:pointer;inset:0;background:var(--g3);border-radius:99px;transition:.3s;}
-.tgl::before{content:'';position:absolute;height:17px;width:17px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
-.toggle input:checked+.tgl{background:var(--neon);}
-.toggle input:checked+.tgl::before{transform:translateX(19px);}
-
-/* ========== TOAST ========== */
-#toastWrap{position:fixed;top:158px;right:12px;z-index:10005;display:flex;flex-direction:column;gap:7px;pointer-events:none;}
-.toast{background:var(--bg3);border:1px solid var(--b2);border-radius:14px;padding:9px 14px;font-size:13px;font-weight:600;animation:notifSlide .32s var(--ease);display:flex;align-items:center;gap:7px;box-shadow:var(--sh2);pointer-events:all;max-width:280px;}
-.toast.t-s{border-color:rgba(0,255,170,.3);background:rgba(0,20,14,.9);}
-.toast.t-e{border-color:rgba(239,68,68,.3);background:rgba(20,0,0,.9);}
-.toast.t-w{border-color:rgba(245,158,11,.3);background:rgba(20,14,0,.9);}
-
-/* ========== OFFLINE ========== */
-.net-banner{position:fixed;top:100px;left:0;right:0;z-index:10003;padding:7px 14px;text-align:center;font-size:12px;font-weight:700;animation:fadeIn .3s;}
-
-/* ========== FAB ========== */
-#fab{position:fixed;bottom:78px;right:13px;z-index:498;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--neon));border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 18px rgba(109,40,217,.5),var(--glow1);transition:all .2s;display:none;}
-#fab:hover{transform:scale(1.08);box-shadow:0 6px 26px rgba(109,40,217,.7),var(--glow2);}
-#fab:active{transform:scale(.95);}
-
-/* ========== SCROLL HIDE/SHOW (Facebook Style) ========== */
-#adsBar,#bannerAd,#ticker,#topBar,#catBar{transition:transform .32s var(--ease),opacity .32s;}
-.ui-hidden #adsBar{transform:translateY(-38px);}
-.ui-hidden #bannerAd{transform:translateY(-68px);}
-.ui-hidden #ticker{transform:translateY(-92px);}
-.ui-hidden #topBar{transform:translateY(-162px);}
-.ui-hidden #catBar{transform:translateY(-216px);}
-.ui-hidden #btmNav{transform:translateY(70px);}
-.ui-hidden #fab{transform:translateY(80px);opacity:0;}
-#btmNav{transition:transform .32s var(--ease);}
-
-/* ========== VIDEO / AUDIO CALL SCREEN ========== */
-#callScreen{position:fixed;inset:0;z-index:9999;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;}
-#callScreen.open{display:flex;animation:fadeIn .3s;}
-.call-bg{position:absolute;inset:0;background:linear-gradient(135deg,#030312,#0a0428,#030e1a);z-index:0;}
-.call-content{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;}
-.call-remote-video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;background:#111;}
-.call-local-video{position:absolute;top:56px;right:12px;width:90px;height:130px;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.2);z-index:5;background:#222;}
-.call-local-video video{width:100%;height:100%;object-fit:cover;}
-.call-header{position:absolute;top:0;left:0;right:0;padding:50px 16px 14px;background:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);z-index:6;text-align:center;}
-.call-name{font-family:var(--fd);font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;}
-.call-status{font-size:13px;color:rgba(255,255,255,.65);font-family:var(--fm);}
-.call-avatar-center{width:100px;height:100px;border-radius:28px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;color:#fff;margin:0 auto 16px;border:3px solid rgba(255,255,255,.2);}
-.call-audio-ui{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#030312,#0a0428,#030e1a);z-index:3;}
-.call-wave{display:flex;align-items:center;gap:5px;height:40px;margin-top:12px;}
-.call-wave span{display:block;width:5px;background:var(--neon);border-radius:99px;animation:callWave 1.1s ease-in-out infinite;}
-.call-wave span:nth-child(1){animation-delay:0s;}
-.call-wave span:nth-child(2){animation-delay:.15s;}
-.call-wave span:nth-child(3){animation-delay:.3s;}
-.call-wave span:nth-child(4){animation-delay:.15s;}
-.call-wave span:nth-child(5){animation-delay:0s;}
-@keyframes callWave{0%,100%{height:8px;opacity:.4}50%{height:34px;opacity:1}}
-
-/* ===== LIGHT THEME ===== */
-body.light-theme {
-  --bg1:#f0f2f5; --bg2:#ffffff; --bg3:#e4e6ea; --bg4:#d8dadf;
-  --t1:#050505; --t2:#1c1e21; --t3:#65676b;
-  --b1:rgba(0,0,0,.12); --b2:rgba(0,0,0,.2);
-  --g2:rgba(0,0,0,.04); --g3:rgba(0,0,0,.07);
-  --sh1:0 1px 3px rgba(0,0,0,.15); --sh2:0 4px 12px rgba(0,0,0,.2);
-}
-body.light-theme .nav-bar { background:#ffffff; border-top:1px solid rgba(0,0,0,.12); }
-body.light-theme .auth-wrap { background:linear-gradient(135deg,#e8f4fd,#f0f8ee); }
-body.light-theme .auth-card { background:#ffffff; border-color:rgba(0,0,0,.12); }
-body.light-theme input, body.light-theme select, body.light-theme textarea { background:#f0f2f5; color:#050505; border-color:rgba(0,0,0,.15); }
-body.light-theme .modal { background:#ffffff; }
-body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0,0,.12); }
-
-/* ===== POLL STYLES ===== */
-.poll-opt { border:2px solid var(--b1); border-radius:10px; padding:8px 12px; margin-bottom:6px; cursor:pointer; position:relative; overflow:hidden; transition:all .2s; }
-.poll-opt:hover { border-color:var(--neon); }
-.poll-opt.voted { border-color:var(--c2); background:rgba(14,165,233,.08); }
-.poll-bar { position:absolute; top:0; left:0; height:100%; background:rgba(14,165,233,.15); transition:width .6s ease; border-radius:8px; }
-.poll-txt { position:relative; display:flex; justify-content:space-between; font-size:13px; font-weight:600; }
-
-
-/* ===== WEB3 / CRYPTO ===== */
-.web3-pill{display:inline-flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;transition:all .18s;}
-.web3-pill:hover{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-color:transparent;}
-.web3-pill.connected{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.3);color:var(--c3);}
-.crypto-price{background:var(--g2);border:1px solid var(--b1);border-radius:10px;padding:8px;text-align:center;}
-.cp-sym{font-size:10px;color:var(--t3);font-weight:700;}
-.cp-val{font-family:var(--fm);font-size:13px;font-weight:700;}
-.cp-chg.up{color:var(--c3);}
-.cp-chg.dn{color:var(--c5);}
-.web3-tx{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--g2);border:1px solid var(--b1);border-radius:10px;margin-bottom:6px;}
-.web3-tx .wt-ico{width:32px;height:32px;border-radius:8px;background:var(--g3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.web3-tx .wt-info{flex:1;}
-.web3-tx .wt-hash{font-family:var(--fm);font-size:9px;color:var(--t3);}
-/* ===== EMAIL OTP ===== */
-.otp-sent-badge{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--c3);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
-/* ===== AD PLACEMENTS ===== */
-.ad-native{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px;margin:8px 0;position:relative;}
-.ad-native .ad-label{position:absolute;top:6px;right:8px;font-size:8px;color:var(--t3);font-weight:700;letter-spacing:1px;}
-/* ===== ADMIN PANEL EXTRAS ===== */
-.admin-stat{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:12px;text-align:center;}
-.as-i{font-size:22px;margin-bottom:4px;}
-.as-n{font-family:var(--fm);font-size:18px;font-weight:800;color:var(--neon);}
-.as-l{font-size:10px;color:var(--t3);margin-top:2px;}
-.btn-o{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(245,158,11,.1));border:1px solid rgba(245,158,11,.4);color:var(--c4);}
-.btn-o:hover{background:linear-gradient(135deg,rgba(245,158,11,.4),rgba(245,158,11,.2));}
-.btn-g{background:linear-gradient(135deg,rgba(16,185,129,.25),rgba(16,185,129,.1));border:1px solid rgba(16,185,129,.4);color:var(--c3);}
-.btn-g:hover{background:linear-gradient(135deg,rgba(16,185,129,.4),rgba(16,185,129,.2));}
-
-.call-controls{position:absolute;bottom:0;left:0;right:0;padding:20px 24px calc(20px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.8),transparent);z-index:7;display:flex;justify-content:center;gap:18px;align-items:center;}
-.call-btn{width:58px;height:58px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .18s;flex-shrink:0;}
-.call-btn:active{transform:scale(.9);}
-.call-btn.end{background:var(--c5);box-shadow:0 4px 18px rgba(239,68,68,.5);}
-.call-btn.mute{background:rgba(255,255,255,.15);color:#fff;}
-.call-btn.mute.on{background:rgba(239,68,68,.4);}
-.call-btn.cam{background:rgba(255,255,255,.15);color:#fff;}
-.call-btn.cam.on{background:rgba(239,68,68,.4);}
-.call-btn.speaker{background:rgba(255,255,255,.15);color:#fff;}
-.call-timer{font-family:var(--fm);font-size:14px;color:rgba(255,255,255,.7);margin-top:4px;}
-
-/* ========== INCOMING CALL ========== */
-#incomingCall{position:fixed;bottom:80px;left:12px;right:12px;z-index:9998;background:linear-gradient(135deg,rgba(3,3,15,.97),rgba(10,4,40,.97));border:1.5px solid rgba(109,40,217,.4);border-radius:20px;padding:14px 16px;display:none;align-items:center;gap:12px;box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 40px rgba(109,40,217,.25);backdrop-filter:blur(24px);}
-#incomingCall.show{display:flex;animation:slideUp .35s var(--ease);}
-.ic-av{width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,var(--c1),var(--neon));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex-shrink:0;}
-.ic-info{flex:1;}
-.ic-name{font-weight:700;font-size:14px;}
-.ic-type{font-size:11px;color:var(--neon);margin-top:2px;}
-.ic-btns{display:flex;gap:8px;}
-.ic-dec{width:44px;height:44px;border-radius:50%;background:var(--c5);border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.ic-acc{width:44px;height:44px;border-radius:50%;background:var(--c3);border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-
-/* ========== SETTINGS BUTTON (Advanced) ========== */
-.sett-fab{position:fixed;bottom:80px;right:13px;z-index:499;display:none;}
-.bn[data-p="settings"].on .ico{animation:spin .6s var(--ease);}
-
-/* ========== NEW FEATURES CSS ========== */
-/* Analytics Dashboard */
-.analytics-hero{background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.06));border:1px solid rgba(109,40,217,.2);border-radius:var(--r3);padding:20px;text-align:center;margin-bottom:12px;}
-.analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px;}
-.analytics-card{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:14px;text-align:center;}
-.ac-ico{font-size:24px;margin-bottom:4px;}
-.ac-n{font-size:20px;font-weight:800;color:var(--neon);font-family:var(--fm);}
-.ac-l{font-size:10px;color:var(--t3);margin-top:2px;}
-.ac-trend{font-size:11px;color:var(--c3);margin-top:4px;}
-
-/* Activity Log */
-.activity-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:0 4px;}
-.activity-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--g2);border-radius:var(--r2);margin-bottom:8px;border:1px solid var(--b1);}
-.activity-ico{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:16px;}
-.activity-info{flex:1;}
-.activity-title{font-size:12px;font-weight:600;}
-.activity-time{font-size:10px;color:var(--t3);}
-.activity-pts{font-size:12px;font-weight:700;color:var(--neon);}
-
-/* Gamification */
-.gamification-hero{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(236,72,153,.06));border:1px solid rgba(245,158,11,.2);border-radius:var(--r3);padding:20px;text-align:center;margin-bottom:12px;}
-.streak-card{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(245,158,11,.06));border:1px solid rgba(239,68,68,.2);border-radius:var(--r2);padding:14px;margin-bottom:12px;}
-.streak-days{display:flex;gap:4px;margin-top:10px;justify-content:center;}
-.streak-day{width:28px;height:28px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:10px;}
-.streak-day.active{background:linear-gradient(135deg,var(--c4),var(--c5));color:#fff;}
-.streak-day.today{border:2px solid var(--neon);}
-.badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-.badge-item{background:var(--g2);border:1px solid var(--b1);border-radius:var(--r2);padding:12px;text-align:center;transition:all .2s var(--ease);}
-.badge-item.earned{border-color:var(--c4);background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.05));}
-.badge-item.locked{opacity:.5;}
-.badge-ico{font-size:28px;margin-bottom:6px;}
-.badge-name{font-size:10px;font-weight:600;}
-
-/* Push Notification Modal */
-#pushNotifModal,#paywallModal{position:fixed;inset:0;z-index:110000;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:16px;transform:none !important;opacity:1;pointer-events:auto;}
-#pushNotifModal.open,#paywallModal.open{display:flex;}
-#pushNotifModal .modal-card,#paywallModal .modal-card{position:relative;z-index:1;width:min(420px,100%);background:var(--bg2);border:1px solid var(--b2);border-radius:22px;padding:0;box-shadow:var(--sh2);max-height:90vh;overflow-y:auto;pointer-events:auto;}
-#paywallModal .modal-card{width:min(400px,100%);}
-#pushNotifModal button,#paywallModal button,#pushNotifModal .btn,#paywallModal .btn{position:relative;z-index:3;pointer-events:auto;touch-action:manipulation;}
-#pushNotifModal .modal-card{animation:scaleIn .3s var(--ease);}
-
-/* Sticky Ad Banner */
-#stickyAdBanner{animation:slideUp .4s var(--ease);}
-#stickyAdBanner.show{display:block !important;}
-
-/* Content Paywall */
-#paywallModal .modal-card{animation:scaleIn .4s var(--ease);}
-
-/* Service Worker Update Banner */
-.sw-update-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,var(--c1),var(--c2));color:#fff;padding:12px 16px;z-index:9999;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;}
-.sw-update-banner button{background:#fff;color:var(--c1);border:none;border-radius:99px;padding:6px 14px;font-weight:700;cursor:pointer;}
-
-/* ========== BOTTOM NAVIGATION CLICK FIX ========== */
-#btmNav{position:fixed !important;bottom:0 !important;left:0 !important;right:0 !important;z-index:99999 !important;pointer-events:auto !important;}
-#btmNav .bn{cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;-webkit-tap-highlight-color:transparent !important;touch-action:manipulation !important;}
-#btmNav .bn *{pointer-events:none !important;}
-#btmNav .bn:active{transform:scale(0.95) !important;}
-
-/* ════════════════════════════════════════════════════════════ */
-/* ADVANCED POST INTERACTIONS STYLES */
-/* ════════════════════════════════════════════════════════════ */
-
-/* Flower Button Enhanced */
-.flower-btn{background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(236,72,153,.06)) !important;border:1px solid rgba(0,255,170,.15) !important;transition:all .2s;}
-.flower-btn:hover{background:linear-gradient(135deg,rgba(0,255,170,.15),rgba(236,72,153,.12)) !important;border-color:rgba(236,72,153,.35) !important;transform:scale(1.05);}
-
-/* Share Modal */
-.share-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center;}
-.share-modal .modal-bg{position:absolute;inset:0;}
-.share-modal .modal-card{width:100%;max-width:500px;background:var(--bg3);border:1px solid var(--b2);border-radius:24px 24px 0 0;padding:20px 16px;position:relative;z-index:1;animation:slideUp .3s var(--ease);max-height:60vh;overflow-y:auto;}
-.share-modal .modal-card button{display:none;}
-
-/* Share Grid */
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;}
-.share-icon{background:var(--g2);border:1px solid var(--b1);border-radius:12px;padding:10px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
-.share-icon:hover{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;transform:scale(1.05);}
-.share-icon .emoji{font-size:28px;display:block;}
-.share-icon .label{font-size:10px;font-weight:700;color:var(--t2);}
-.share-icon:hover .label{color:#fff;}
-
-/* Comment Reactions */
-.cm-reacts{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;}
-.cm-reaction{font-size:12px;cursor:pointer;opacity:.6;transition:opacity .15s;padding:2px 6px;background:var(--g2);border-radius:6px;}
-.cm-reaction:hover{opacity:1;background:var(--g3);}
-
-/* Comment Edit Box */
-.cm-edit-inp{width:100%;background:var(--g2);border:1px solid var(--neon);border-radius:8px;padding:6px 8px;color:var(--t1);font-size:13px;outline:none;margin-top:5px;font-family:var(--ff);}
-.cm-edited-tag{font-size:9px;color:var(--t3);margin-left:5px;font-style:italic;}
-
-/* Media Upload Progress */
-.media-upload-progress{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--b2);border-radius:99px;padding:8px 16px;display:flex;align-items:center;gap:10px;z-index:10000;animation:slideUp .3s ease;}
-.media-upload-progress .spinner{width:16px;height:16px;border:2px solid var(--g3);border-top-color:var(--neon);border-radius:50%;animation:spin 1s linear infinite;}
-.media-upload-progress .text{font-size:12px;color:var(--t2);}
-
-/* Storage Stats */
-.storage-stats{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.05));border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:12px;margin-bottom:10px;}
-.storage-stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);}
-.storage-stat-row:last-child{border-bottom:none;}
-.storage-stat-label{font-size:12px;font-weight:600;color:var(--t2);}
-.storage-stat-value{font-size:13px;font-weight:700;color:var(--neon);font-family:var(--fm);}
-
-/* Call Recording UI */
-.call-recording{position:fixed;bottom:100px;right:12px;background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;z-index:10000;animation:slideUp .3s ease;}
-.call-recording .record-dot{width:8px;height:8px;background:var(--c5);border-radius:50%;animation:pulse 1s infinite;}
-.call-recording .timer{font-size:12px;font-weight:700;color:var(--c5);font-family:var(--fm);}
-
-/* Media Gallery Modal */
-.media-gallery{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.9);padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;overflow-y:auto;}
-.media-gallery-item{aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--b2);cursor:pointer;position:relative;background:var(--g3);}
-.media-gallery-item img,.media-gallery-item video{width:100%;height:100%;object-fit:cover;}
-.media-gallery-item.selected::after{content:'';position:absolute;inset:0;border:2px solid var(--neon);border-radius:12px;}
-
-</style>
-<!-- Enhanced Agora and WebRTC Integration -->
-<script src="https://cdn.agora.io/sdk/release/AgoraRTC_N.js"></script>
-<script>
   const agoraAppId = 'e9cfd627a92f4466a047b2a820e1382e';
   const agoraToken = '';
 
@@ -1823,46 +573,9 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     console.log('Initializing WebRTC fallback...');
     // WebRTC implementation would go here
   }
-</script>
 
-<style>
-  html, body {
-    min-height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overscroll-behavior-y: contain;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    touch-action: manipulation;
-    background: #030308;
-  }
 
-  body.mobile-friendly * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
 
-  img, video, canvas, iframe, svg {
-    max-width: 100%;
-    height: auto;
-  }
-
-  button, input, select, textarea {
-    touch-action: manipulation;
-  }
-
-  .mobile-only { display: none !important; }
-  .desktop-only { display: inherit !important; }
-
-  @media (max-width: 768px) {
-    .mobile-only { display: block !important; }
-    .desktop-only { display: none !important; }
-    body { font-size: 100%; line-height: 1.5; }
-  }
-</style>
-
-<script>
 (function() {
   const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry/i.test(navigator.userAgent);
   const html = document.documentElement;
@@ -1892,35 +605,9 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       300);
   });
 })();
-</script>
 
-<!-- Income Ads Hub CSS -->
-<link rel="stylesheet" href="css/income-ads-hub.css">
-</head>
-<body>
-<div id="remote-container"></div>
 
-<!-- ========== ADS BAR ========== -->
-<div id="adsBar" style="display:none;">
-  <div class="adbar-ttl">Ad Types</div>
-  <div class="adpill on" onclick="adTypeClick('banner',this)"><div class="led"></div>Banner ✓</div>
-  <div class="adpill" onclick="adTypeClick('interstitial',this)"><div class="led"></div>Interstitial ✓</div>
-  <div class="adpill" onclick="adTypeClick('reward',this)"><div class="led"></div>Reward ✓</div>
-  <div class="adpill" onclick="adTypeClick('native',this)"><div class="led"></div>Native ✓</div>
-  <div class="adpill" onclick="adTypeClick('video',this)"><div class="led"></div>Video ✓</div>
-  <div class="adpill" onclick="adTypeClick('auto',this)"><div class="led"></div>Auto ✓</div>
-  <div class="adpill" onclick="adTypeClick('scroll',this)"><div class="led"></div>Scroll ✓</div>
-  <div class="adpill" onclick="adTypeClick('click',this)"><div class="led"></div>Click Reward ✓</div>
-  <div class="adpill" onclick="adTypeClick('pause',this)"><div class="led"></div>Pause Ads ✓</div>
-</div>
 
-<!-- ========== BANNER AD ========== -->
-<div id="bannerAd">
-  <div class="ba-label">AD</div>
-  <div id="baT">🚀 Monetixra with AI, Crypto, NFT, MLM, Metaverse & More!</div>
-  <div class="ba-earn" onclick="clickBanner()">+2</div>
-</div>
-<script>
 (function(){
   const ads = [
     '🚀 Monetixra with AI, Crypto, NFT, MLM, Metaverse & More!',
@@ -1938,971 +625,9 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   const el = document.getElementById('baT');
   if(el) setInterval(() => { idx = (idx + 1) % ads.length; el.textContent = ads[idx]; }, 5000);
 })();
-</script>
 
-<!-- ========== TICKER ========== -->
-<div id="ticker">
-  <div class="tk-lbl">📢 LIVE</div>
-  <div class="tk-track">
-    <div class="tk-inner" id="tickerInner">
-      <span>📈 <b>+2,450 pts</b> earned today</span>
-      <span>💰 <b>$15,000</b> withdrawn today</span>
-      <span>🔥 Trending: #Crypto #AI #NFT #Metaverse</span>
-      <span>🎁 Daily Bonus — claim now!</span>
-      <span>🤖 AI Caption Generator — try now!</span>
-      <span>💎 MLM Level 1: 10% Commission</span>
-      <span>🪙 Crypto Withdrawals: BTC, ETH, USDT, BNB</span>
-      <span>🎨 NFT Marketplace — Mint your posts!</span>
-      <span>🌐 100+ Languages Auto-Translate</span>
-    </div>
-  </div>
-</div>
 
-<!-- ========== TOP BAR ========== -->
-<div id="topBar">
-  <div class="logo" onclick="nav('feed')">Monetixra<sup>X</sup></div>
-  <div class="tb-sw">
-    <span class="tb-si">🔍</span>
-    <input class="tb-s" id="globalSearch" placeholder="Search..." oninput="globalSearchFn(this.value)">
-  </div>
-  <div class="tb-r">
-    <div class="tb-pts mono" id="tbPts" onclick="nav('wallet')">0 pts</div>
-    <div class="tb-ic" onclick="nav('notif')">🔔<span class="tb-dot" id="notifDot"></span></div>
-    <div class="tb-ic" onclick="nav('messages')">💬<span class="tb-dot" id="msgDot"></span></div>
-    <div class="tb-av" id="tbAv" onclick="nav('profile')">M</div>
-  </div>
-</div>
 
-<!-- ========== CATEGORY BAR ========== -->
-<div id="catBar">
-  <div class="cat-pill on" onclick="filterCat('all',this)"><span class="ci">✨</span> All</div>
-  <div class="cat-pill" onclick="filterCat('video',this)"><span class="ci">📹</span> Video</div>
-  <div class="cat-pill" onclick="filterCat('photo',this)"><span class="ci">📷</span> Photo</div>
-  <div class="cat-pill" onclick="filterCat('music',this)"><span class="ci">🎵</span> Music</div>
-  <div class="cat-pill" onclick="filterCat('text',this)"><span class="ci">📝</span> Text</div>
-  <div class="cat-pill" onclick="filterCat('poll',this)"><span class="ci">📊</span> Poll</div>
-  <div class="cat-pill" onclick="filterCat('quiz',this)"><span class="ci">🧩</span> Quiz</div>
-  <div class="cat-pill" onclick="filterCat('article',this)"><span class="ci">📖</span> Article</div>
-  <div class="cat-pill" onclick="filterCat('live',this)"><span class="ci">🔴</span> Live</div>
-  <div class="cat-pill" onclick="filterCat('apps',this)"><span class="ci">📱</span> Apps</div>
-  <div class="cat-pill" onclick="filterCat('nft',this)"><span class="ci">🎨</span> NFT</div>
-  <div class="cat-pill" onclick="filterCat('360',this)"><span class="ci">🔄</span> 360°</div>
-</div>
-
-<!-- ========== AUTH WRAP ========== -->
-<div id="authWrap">
-  <div class="auth-card">
-    <div class="auth-top">
-      <div class="auth-gem">💎</div>
-      <div class="auth-h1">Monetixra</div>
-      <div class="auth-sub">Post • Earn • Connect • Crypto • NFT • MLM • Metaverse</div>
-    </div>
-    <div class="auth-seg">
-      <button class="seg-b on" onclick="authTab('login',this)">Sign In</button>
-      <button class="seg-b" onclick="authTab('register',this)">Sign Up</button>
-    </div>
-    <!-- LOGIN -->
-    <div class="af on" id="afLogin">
-      <div class="fg"><div class="fw"><span class="fi-p">📧</span><input class="fi" id="liId" placeholder="Email or Phone"></div></div>
-      <div class="fg"><div class="fw"><span class="fi-p">🔒</span><input class="fi" id="liPw" placeholder="Password" type="password" autocomplete="current-password"><span class="fi-s" onclick="togglePw('liPw')">👁️</span></div></div>
-      <button class="btn btn-p" onclick="doLogin()" style="margin-bottom:9px;">🚀 Sign In</button>
-      <div style="text-align:center;"><a href="#" style="color:var(--c2);font-size:12px;" onclick="authTab('forgot',null)">Forgot Password?</a></div>
-    </div>
-    <!-- REGISTER -->
-    <div class="af" id="afRegister">
-      <div class="fg"><div class="fw"><span class="fi-p">👤</span><input class="fi" id="rgName" placeholder="Full Name"></div></div>
-      <div class="fg"><div class="fw"><span class="fi-p">@</span><input class="fi" id="rgUser" placeholder="Username"></div></div>
-      <div class="fg"><div class="fw"><span class="fi-p">📧</span><input class="fi" id="rgId" placeholder="Email or Phone"></div></div>
-      <div class="fg"><div class="fw"><span class="fi-p">🔒</span><input class="fi" id="rgPw" placeholder="Password (min 6 chars)" type="password" autocomplete="new-password"><span class="fi-s" onclick="togglePw('rgPw')">👁️</span></div></div>
-      <div class="fg"><div class="fw"><span class="fi-p">🔒</span><input class="fi" id="rgPw2" placeholder="Confirm Password" type="password" oninput="checkPwMatch()"><span class="fi-s" onclick="togglePw('rgPw2')">👁️</span></div></div>
-      <div id="pwMatchMsg" style="font-size:11px;margin:-4px 0 6px;display:none;"></div>
-      <div class="fg"><div class="fw"><span class="fi-p">🎁</span><input class="fi" id="rgRef" placeholder="Referral Code (optional)"></div></div>
-      <button class="btn btn-b" onclick="sendRegOtp()" style="margin-bottom:8px;">📩 Send OTP & Verify</button>
-      <div class="fg" style="display:flex;align-items:flex-start;gap:8px;">
-        <input type="checkbox" id="rgTerms" style="margin-top:3px;flex-shrink:0;">
-        <label for="rgTerms" style="font-size:11px;color:var(--t3);cursor:pointer;">I agree to the <span style="color:var(--neon);" onclick="openTerms()">Terms of Service</span> and <span style="color:var(--neon);" onclick="openPrivacy()">Privacy Policy</span></label>
-      </div>
-      <div id="rgOtpWrap" style="display:none;">
-        <div class="otp-row"><input class="ob" maxlength="1" oninput="otpNext(this,0)" id="ob0"><input class="ob" maxlength="1" oninput="otpNext(this,1)" id="ob1"><input class="ob" maxlength="1" oninput="otpNext(this,2)" id="ob2"><input class="ob" maxlength="1" oninput="otpNext(this,3)" id="ob3"><input class="ob" maxlength="1" oninput="otpNext(this,4)" id="ob4"><input class="ob" maxlength="1" oninput="otpNext(this,5)" id="ob5"></div>
-        <button class="btn btn-p" onclick="doRegister()">✅ Verify & Create Account</button>
-      </div>
-    </div>
-    <!-- FORGOT -->
-    <div class="af" id="afForgot">
-      <div class="fg"><div class="fw"><span class="fi-p">📧</span><input class="fi" id="fiId" placeholder="Email or Phone"></div></div>
-      <button class="btn btn-b" onclick="sendForgotOtp()" style="margin-bottom:7px;">📩 Send OTP</button>
-      <div id="fOtpWrap" style="display:none;">
-        <div class="fg"><div class="fw"><span class="fi-p">🔢</span><input class="fi" id="fiOtp" placeholder="6-digit OTP"></div></div>
-        <div class="fg"><div class="fw"><span class="fi-p">🔑</span><input class="fi" id="fiPw" placeholder="New Password" type="password"></div></div>
-        <div class="fg"><div class="fw"><span class="fi-p">🔑</span><input class="fi" id="fiPw2" placeholder="Confirm Password" type="password"></div></div>
-        <button class="btn btn-p" onclick="doReset()">🔄 Reset Password</button>
-      </div>
-      <div style="text-align:center;margin-top:10px;"><a href="#" style="color:var(--c2);font-size:12px;" onclick="authTab('login',null)">← Back to Login</a></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ========== APP WRAP ========== -->
-<div id="appWrap">
-<div id="mainWrap">
-
-<!-- FEED PAGE -->
-<div class="pg on" id="pg-feed">
-  <!-- Getting Started Guide (new users only) -->
-  <div id="gettingStarted" style="display:none;background:linear-gradient(135deg,rgba(109,40,217,.15),rgba(0,255,170,.08));border:1px solid rgba(109,40,217,.3);border-radius:16px;padding:16px;margin-bottom:10px;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-      <div style="font-size:14px;font-weight:800;">🚀 Welcome to Monetixra!</div>
-      <button onclick="G('gettingStarted').style.display='none'" style="background:none;border:none;color:var(--t3);font-size:16px;cursor:pointer;">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:10px;text-align:center;cursor:pointer;" onclick="nav('earn')">
-        <div style="font-size:22px;">📺</div>
-        <div style="font-size:11px;font-weight:700;margin-top:4px;">Watch Ads</div>
-        <div style="font-size:10px;color:var(--neon);">+5 pts each</div>
-      </div>
-      <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:10px;text-align:center;cursor:pointer;" onclick="G('fab').click()">
-        <div style="font-size:22px;">✏️</div>
-        <div style="font-size:11px;font-weight:700;margin-top:4px;">Create Post</div>
-        <div style="font-size:10px;color:var(--neon);">+20 pts each</div>
-      </div>
-      <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:10px;text-align:center;cursor:pointer;" onclick="nav('referral')">
-        <div style="font-size:22px;">🤝</div>
-        <div style="font-size:11px;font-weight:700;margin-top:4px;">Invite Friends</div>
-        <div style="font-size:10px;color:var(--neon);">+100 pts/ref</div>
-      </div>
-      <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:10px;text-align:center;cursor:pointer;" onclick="openModal('kycModal')">
-        <div style="font-size:22px;">🪪</div>
-        <div style="font-size:11px;font-weight:700;margin-top:4px;">Verify KYC</div>
-        <div style="font-size:10px;color:var(--neon);">+200 pts</div>
-      </div>
-    </div>
-  </div>
-  <div class="story-row" id="storyRow"></div>
-  <div class="composer">
-    <div class="compose-top">
-      <div class="av av-round av-md" id="compAv">M</div>
-      <div class="compose-inp" onclick="openPostModal()">What's on your mind? ✨</div>
-    </div>
-    <!-- Horizontal LTR scroller for quick media actions -->
-    <div class="h-scroll-ltr" aria-label="media actions">
-      <div class="media-chip" onclick="startLiveStreamFromPost()" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);color:#fff;font-weight:800;">🔴 LIVE</div>
-      <div class="media-chip" onclick="openPostModal('image')">📷 Photo</div>
-      <div class="media-chip" onclick="openPostModal('video')">📹 Video</div>
-      <div class="media-chip" onclick="openPostModal('audio')">🎵 Audio</div>
-      <div class="media-chip" onclick="openPostModal('360')">🔄 360° Image</div>
-      <div class="media-chip" onclick="openPostModal('poll')">📊 Poll</div>
-      <div class="media-chip" onclick="openPostModal('quiz')">🧩 Quiz</div>
-      <div class="media-chip" onclick="openPostModal('article')">📝 Article</div>
-      <div class="media-chip" onclick="openPostModal('nft')">🎨 Mint NFT</div>
-    </div>
-  </div>
-  <div class="card" id="feedFriendPanel" style="margin:12px 0 10px;padding:14px;"></div>
-  <div id="feedList"></div>
-  <!-- Native Banner Ad Container -->
-  <div id="container-1805a61f4f6c6177d946441e5153e81c" style="margin:12px 0;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;min-height:90px;text-align:center;">
-    <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
-  </div>
-  <div id="feedLoadMore" style="display:none;text-align:center;padding:12px;">
-    <button class="btn btn-ghost btn-sm" onclick="loadMorePosts()">Load More Posts ↓</button>
-  </div>
-  <div style="text-align:center;padding:14px;"><button class="btn btn-ghost btn-sm" onclick="loadMorePosts()" style="width:auto;">Load More ↓</button></div>
-</div>
-
-<!-- EXPLORE PAGE -->
-<div class="pg" id="pg-explore">
-  <div class="page-title">🔭 Explore</div>
-  <div class="iw"><span class="i-pre">🔍</span><input class="ii" id="exploreQ" placeholder="Search users, posts, hashtags, NFTs..." oninput="doSearch(this.value)"></div>
-  <div id="srchResults" style="display:none;"></div>
-  <div id="trendTags" style="margin-bottom:12px;"></div>
-  <div class="explore-grid" id="expGrid"></div>
-</div>
-
-<!-- EARN PAGE -->
-<div class="pg" id="pg-earn">
-  <div class="earn-hero">
-    <div style="display:flex;justify-content:space-between;">
-      <div>
-        <div class="eh-label">Total Earnings</div>
-        <div class="eh-bal mono" id="ehBal">0</div>
-        <div class="eh-sub">Points · ≈ $<span id="ehUsd">0.00</span></div>
-        <div class="eh-change" id="ehChange">▲ +0 today</div>
-      </div>
-      <div><div style="font-size:9px;">Rank</div><div style="font-family:var(--fd);font-size:18px;color:var(--c4);" id="ehRank">—</div></div>
-    </div>
-    <div class="eh-grid">
-      <div class="eh-btn" onclick="nav('wallet')"><div class="ei">💼</div><div class="el">Wallet</div></div>
-      <div class="eh-btn" onclick="claimBonus()"><div class="ei">🎁</div><div class="el">Bonus</div></div>
-      <div class="eh-btn" onclick="nav('referral')"><div class="ei">🤝</div><div class="el">Refer</div></div>
-      <div class="eh-btn" onclick="watchAd()"><div class="ei">📺</div><div class="el">Watch Ad</div></div>
-    </div>
-  </div>
-  <div class="section-label">📋 Daily Tasks</div>
-  <div id="dailyTasks"></div>
-  <div class="section-label">🏅 Missions & Achievements</div>
-  <div id="missions"></div>
-  <div class="section-label">💰 MLM Commission (10 Levels)</div>
-  <div id="mlmLevels"></div>
-  <div class="section-label">🤖 AI Insights & Predictions</div>
-  <div id="aiRecs"></div>
-  <div class="section-label">🏆 Daily/Weekly/Monthly Leaderboards</div>
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="loadLeaderboard('daily')">Daily</div>
-    <div class="chip" onclick="loadLeaderboard('weekly')">Weekly</div>
-    <div class="chip" onclick="loadLeaderboard('monthly')">Monthly</div>
-    <div class="chip" onclick="loadLeaderboard('alltime')">All Time</div>
-  </div>
-  <div id="lbPreview"></div>
-</div>
-
-<!-- WALLET PAGE -->
-<div class="pg" id="pg-wallet">
-  <div class="wallet-hero">
-    <div class="wh-top">
-      <div><div class="wh-lbl">Available Balance</div><div class="wh-amt" id="wBal">$0.00</div><div class="wh-pts" id="wPts">0 points</div></div>
-      <div><div class="wh-badge" id="wBadge">🥉 Bronze</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px;">
-      <button class="btn btn-neon btn-sm" onclick="openModal('wdModal')">💸 Withdraw</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('stripeModal')">💳 Top-up USD</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('payModal')">📱 bKash/Nagad</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('cryptoModal')">₿ Crypto</button>
-      <button class="btn btn-ghost btn-sm" onclick="nav('nft')">🎨 Web3</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('stakeModal')">💎 Stake</button>
-    </div>
-    <!-- Watch Ad for Points Button -->
-    <button class="btn btn-p" onclick="showRewardedAd((pts)=>{addPts(pts,'Reward Ad'); trackAdRevenue('rewarded', pts/100);})" style="width:100%;margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;">
-      📺 Watch Ad & Earn 10 Points
-    </button>
-    <!-- Web3 Quick Status -->
-    <div id="walletWeb3Status" style="display:none;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:11px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span id="walletWeb3Label">🔗 Web3 Connected</span>
-        <button class="btn btn-ghost btn-xs" onclick="disconnectWeb3()">Disconnect</button>
-      </div>
-      <div id="walletWeb3Addr" style="font-family:var(--fm);font-size:10px;color:var(--neon);margin-top:2px;"></div>
-    </div>
-    <div class="pay-methods" id="payMethods"></div>
-    <div style="display:flex;align-items:center;gap:7px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.16);border-radius:9px;padding:7px 10px;margin-top:9px;font-size:11px;color:var(--c4);">⚙️ 10% platform fee | MLM: Level 1:10%, L2:5%, L3:3%, L4:2%, L5-10:1% | NFT Royalty: 5%</div>
-  </div>
-  <div class="section-label">📊 Earnings Breakdown</div>
-  <div class="card" style="margin-bottom:12px;">
-    <div class="break-earn"><span>📺 Ad Views</span><span class="mono neon" id="adPtsEl">0 pts</span></div>
-    <div class="break-earn"><span>❤️ Engagement</span><span class="mono neon" id="engPtsEl">0 pts</span></div>
-    <div class="break-earn"><span>🤝 Referrals</span><span class="mono neon" id="refPtsEl">0 pts</span></div>
-    <div class="break-earn"><span>🏆 MLM Commission</span><span class="mono neon" id="mlmPtsEl">0 pts</span></div>
-    <div class="break-earn"><span>🎨 NFT Sales</span><span class="mono neon" id="nftPtsEl">0 pts</span></div>
-    <div class="break-earn"><span>💎 Crypto Staking</span><span class="mono neon" id="stakePtsEl">0 pts</span></div>
-  </div>
-  <div class="section-label">🧾 Transaction History</div>
-  <div id="txList"></div>
-</div>
-
-<!-- NOTIFICATIONS PAGE -->
-<div class="pg" id="pg-notif">
-  <div class="page-title">🔔 Notifications</div>
-  <div id="notifList"></div>
-</div>
-
-<!-- MESSAGES PAGE -->
-<div class="pg" id="pg-messages">
-  <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-    <div class="page-title" style="margin-bottom:0;">💬 Messages</div>
-    <button class="btn btn-ghost btn-sm" onclick="openNewChat()" style="width:auto;">+ New</button>
-  </div>
-  <div class="iw"><span class="i-pre">🔍</span><input class="ii" placeholder="Search messages..."></div>
-  <div id="chatList"></div>
-</div>
-
-<!-- PROFILE PAGE -->
-<div class="pg" id="pg-profile">
-  <div class="cover-wrap">
-    <div class="cover-img" id="coverImg" onclick="changeCover()"></div>
-    <button class="cover-edit" onclick="changeCover()">📷 Edit Cover</button>
-  </div>
-  <div style="display:flex;justify-content:space-between;padding:0 4px;">
-    <div class="pav-wrap"><div class="pav" id="profAv">M</div><div class="pav-edit" onclick="changeAvatar()">✏️</div></div>
-    <div style="display:flex;gap:5px;margin-top:46px;">
-      <button class="btn btn-ghost btn-sm" onclick="openProfileEdit()">✏️ Edit</button>
-      <button class="btn btn-neon btn-sm" onclick="shareProfile()">🔗 Share</button>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('kycModal')">🪪 KYC</button>
-    </div>
-  </div>
-  <div style="padding:10px;">
-    <div class="p-name" id="profName">User</div>
-    <div class="p-user" id="profUser">@user</div>
-    <div class="p-bio" id="profBio"></div>
-    <div class="p-links" id="profLinks"></div>
-    <div class="p-stats">
-      <div class="pstat"><div class="pstat-n" id="profFollowers">0</div><div class="pstat-l">Followers</div></div>
-      <div class="pstat"><div class="pstat-n" id="profFollowing">0</div><div class="pstat-l">Following</div></div>
-      <div class="pstat"><div class="pstat-n" id="profPosts">0</div><div class="pstat-l">Posts</div></div>
-      <div class="pstat"><div class="pstat-n" id="profPts">0</div><div class="pstat-l">Points</div></div>
-    </div>
-    <div class="badge b-kyc" id="kycBadge" style="display:none;">✅ KYC Verified</div>
-    <div class="badge b-nft" id="nftBadge" style="display:none;">🎨 NFT Creator</div>
-  </div>
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="profileTab('posts',this)">📋 Posts</div>
-    <div class="chip" onclick="profileTab('media',this)">📷 Media</div>
-    <div class="chip" onclick="profileTab('saved',this)">🔖 Saved</div>
-    <div class="chip" onclick="profileTab('earnings',this)">💰 Earnings</div>
-    <div class="chip" onclick="profileTab('mlm',this)">🏆 MLM Team</div>
-    <div class="chip" onclick="profileTab('nft',this)">🎨 NFTs</div>
-    <div class="chip" onclick="profileTab('achievements',this)">🏅 Achievements</div>
-  </div>
-  <div id="profileContent"></div>
-</div>
-
-<!-- LEADERBOARD PAGE -->
-<div class="pg" id="pg-leaderboard">
-  <div class="page-title">🏆 Leaderboard</div>
-  <div class="lb-podium" id="lbPodium"></div>
-  <div id="lbList"></div>
-</div>
-
-<!-- FRIENDS PAGE -->
-<div class="pg" id="pg-friends">
-  <div class="friend-hero">
-    <div style="font-size:42px;">👥</div>
-    <div style="font-family:var(--fd);font-size:17px;font-weight:800;">Auto Friends</div>
-    <div style="font-size:12px;">Anyone who views your content becomes auto friend!</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px;">
-      <div style="background:var(--g2);border-radius:12px;padding:11px;"><div class="mono neon" id="totalAutoFriends">0</div><div>Auto Friends</div></div>
-      <div style="background:var(--g2);border-radius:12px;padding:11px;"><div class="mono" style="color:var(--c4);" id="totalViewers">0</div><div>Viewers</div></div>
-    </div>
-  </div>
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="friendsTab('auto',this)">✨ Auto Friends</div>
-    <div class="chip" onclick="friendsTab('viewers',this)">👁️ Viewers</div>
-    <div class="chip" onclick="friendsTab('following',this)">➕ Following</div>
-    <div class="chip" onclick="friendsTab('followers',this)">👤 Followers</div>
-    <div class="chip" onclick="friendsTab('discover',this)">Find Friends</div>
-  </div>
-  <div class="iw" style="margin-bottom:10px;"><span class="i-pre">🔍</span><input class="ii" id="friendSearch" placeholder="Search friends by name..." oninput="friendsTab('discover',null)"></div>
-  <div id="friendsList"></div>
-</div>
-
-<!-- REFERRAL PAGE -->
-<div class="pg" id="pg-referral">
-  <div class="ref-hero">
-    <div style="font-size:40px;">🤝</div>
-    <div style="font-family:var(--fd);font-size:17px;font-weight:800;">Referral & MLM Income</div>
-    <div style="font-size:12px;margin-bottom:14px;">Earn 50 pts per referral + 10 Levels MLM Commission!</div>
-    <div style="background:var(--g2);border-radius:14px;padding:10px;">
-      <div style="font-size:9px;">YOUR CODE</div>
-      <div class="mono neon" style="font-size:24px;" id="refCodeEl">—</div>
-    </div>
-    <div style="display:flex;gap:7px;margin-top:10px;">
-      <button class="btn btn-neon btn-sm" onclick="copyRef()" style="flex:1;">📋 Copy</button>
-      <button class="btn btn-b btn-sm" onclick="shareRef()" style="flex:1;">🔗 Share</button>
-    </div>
-  </div>
-  <div class="section-label">🏆 MLM Team Structure (10 Levels)</div>
-  <div id="mlmTeam"></div>
-</div>
-
-<!-- NFT MARKETPLACE PAGE -->
-<div class="pg" id="pg-nft">
-  <div class="page-title">🎨 NFT & Web3</div>
-  <!-- Wallet Connect -->
-  <div style="background:linear-gradient(135deg,rgba(109,40,217,.15),rgba(0,255,170,.08));border:1px solid rgba(109,40,217,.3);border-radius:16px;padding:14px;margin-bottom:12px;">
-    <div style="font-size:12px;font-weight:800;color:var(--neon);margin-bottom:8px;">🔗 Web3 Wallets</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-      <button class="btn btn-ghost btn-sm" onclick="connectMetaMask()" id="mmBtn">🦊 MetaMask</button>
-      <button class="btn btn-ghost btn-sm" onclick="connectPhantom()" id="phBtn">👻 Phantom</button>
-    </div>
-    <div id="web3Status" style="font-size:11px;color:var(--t3);text-align:center;">Not connected</div>
-    <div id="web3Address" style="font-family:var(--fm);font-size:10px;color:var(--neon);text-align:center;margin-top:4px;word-break:break-all;display:none;"></div>
-    <div id="web3Balance" style="font-size:12px;color:var(--c4);text-align:center;margin-top:4px;display:none;"></div>
-  </div>
-  <!-- Live Crypto Prices -->
-  <div style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;margin-bottom:12px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <div style="font-size:12px;font-weight:800;">📈 Live Crypto Prices</div>
-      <button class="btn btn-ghost btn-xs" onclick="loadCryptoPrices()">🔄 Refresh</button>
-    </div>
-    <div id="cryptoPrices" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-      <div style="text-align:center;padding:6px;background:var(--g3);border-radius:8px;"><div style="font-size:10px;color:var(--t3);">BTC</div><div class="mono" id="btcPrice" style="color:var(--c4);">...</div></div>
-      <div style="text-align:center;padding:6px;background:var(--g3);border-radius:8px;"><div style="font-size:10px;color:var(--t3);">ETH</div><div class="mono" id="ethPrice" style="color:var(--c2);">...</div></div>
-      <div style="text-align:center;padding:6px;background:var(--g3);border-radius:8px;"><div style="font-size:10px;color:var(--t3);">SOL</div><div class="mono" id="solPrice" style="color:var(--neon);">...</div></div>
-      <div style="text-align:center;padding:6px;background:var(--g3);border-radius:8px;"><div style="font-size:10px;color:var(--t3);">BNB</div><div class="mono" id="bnbPrice" style="color:var(--c4);">...</div></div>
-    </div>
-  </div>
-  <!-- NFT Filter + Grid -->
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="nftFilter('all',this)">All NFTs</div>
-    <div class="chip" onclick="nftFilter('trending',this)">🔥 Trending</div>
-    <div class="chip" onclick="nftFilter('recent',this)">🆕 Recent</div>
-    <div class="chip" onclick="nftFilter('mine',this)">👤 My NFTs</div>
-    <div class="chip" onclick="nftFilter('ethereum',this)">Ξ ETH</div>
-    <div class="chip" onclick="nftFilter('solana',this)">◎ SOL</div>
-  </div>
-  <div class="nft-marketplace" id="nftGrid"></div>
-  <button class="btn btn-neon" onclick="mintNFT()" style="margin-top:12px;width:100%;">🎨 Mint New NFT (500 pts)</button>
-  <!-- Send Crypto -->
-  <div style="margin-top:12px;background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;">
-    <div style="font-size:12px;font-weight:800;margin-bottom:8px;">💸 Send Crypto</div>
-    <select class="fi" id="sendCryptoType" style="margin-bottom:6px;">
-      <option value="eth">Ethereum (ETH)</option>
-      <option value="sol">Solana (SOL)</option>
-    </select>
-    <input class="fi" id="sendCryptoTo" placeholder="Recipient address" style="margin-bottom:6px;">
-    <input class="fi" id="sendCryptoAmt" type="number" placeholder="Amount" step="0.001" style="margin-bottom:6px;">
-    <button class="btn btn-p btn-sm" onclick="sendCrypto()" style="width:100%;">🚀 Send</button>
-  </div>
-  <!-- Transaction History -->
-  <div style="margin-top:12px;">
-    <div class="section-label">🧾 Web3 Transactions</div>
-    <div id="web3TxList"></div>
-  </div>
-</div>
-
-<!-- METAVERSE PAGE -->
-<div class="pg" id="pg-metaverse">
-  <div class="page-title">🌐 Metaverse</div>
-  <div class="card" style="margin-bottom:12px;">
-    <div style="font-size:14px;font-weight:700;">Your Avatar</div>
-    <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
-      <div class="av av-xl" id="avatarPreview" style="background:linear-gradient(135deg,var(--c1),var(--neon));">👤</div>
-      <button class="btn btn-ghost btn-sm" onclick="customizeAvatar()">Customize Avatar</button>
-    </div>
-  </div>
-  <div class="section-label">🌍 Virtual Worlds</div>
-  <div class="explore-grid" id="worldGrid"></div>
-  <div class="section-label">🎮 Upcoming Events</div>
-  <div id="eventsList"></div>
-</div>
-
-<!-- APPS PAGE -->
-<div class="pg" id="pg-apps">
-  <div class="page-title">📱 Apps & Installations</div>
-  <div style="background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.06));border:1px solid rgba(109,40,217,.2);border-radius:var(--r3);padding:14px;margin-bottom:12px;">
-    <div style="font-size:12px;font-weight:700;color:var(--neon);margin-bottom:6px;">📋 Rules</div>
-    <div style="font-size:11px;color:var(--t2);">✅ Only Play Store / App Store apps allowed<br>🚫 Apps from unknown sources are auto-blocked<br>💰 Earn +10 pts for each install of your app</div>
-  </div>
-  <div class="composer" style="margin-bottom:12px;">
-    <div class="compose-top">
-      <div class="av av-round av-md" id="appsAv">M</div>
-      <div class="compose-inp" onclick="openAppUploadModal()">Share your app (Play Store / App Store only)...</div>
-    </div>
-  </div>
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="appsFilter('all',this)">🌐 All Apps</div>
-    <div class="chip" onclick="appsFilter('playstore',this)">🤖 Play Store</div>
-    <div class="chip" onclick="appsFilter('appstore',this)">🍎 App Store</div>
-    <div class="chip" onclick="appsFilter('mine',this)">👤 My Apps</div>
-  </div>
-  <div class="section-label">📲 Submitted Apps</div>
-  <div id="appsList"></div>
-  <div class="section-label">📲 My Installed Apps</div>
-  <div id="installedAppsList"></div>
-</div>
-
-<!-- SETTINGS PAGE -->
-<div class="pg" id="pg-settings">
-  <div class="page-title">⚙️ Settings</div>
-
-  <!-- Profile Hero Card -->
-  <div class="sett-hero">
-    <div class="sett-hero-av" id="settAv">M</div>
-    <div class="sett-hero-info">
-      <div class="sh-name" id="settName">User</div>
-      <div class="sh-user" id="settUser">@user</div>
-      <div class="sh-pts" id="settPts">0 pts</div>
-      <div class="sett-badge-row" id="settBadges"></div>
-    </div>
-    <button class="btn btn-ghost btn-sm" onclick="openProfileEdit()" style="margin-left:auto;flex-shrink:0;">✏️ Edit</button>
-  </div>
-
-  <!-- Quick Stats -->
-  <div class="sett-stat-grid">
-    <div class="sett-stat"><div class="ss-n" id="settFollowers">0</div><div class="ss-l">Followers</div></div>
-    <div class="sett-stat"><div class="ss-n" id="settFollowing">0</div><div class="ss-l">Following</div></div>
-    <div class="sett-stat"><div class="ss-n" id="settPostCount">0</div><div class="ss-l">Posts</div></div>
-  </div>
-
-  <!-- APPEARANCE -->
-  <div class="sett-sec">
-    <div class="sett-ttl">🎨 Appearance</div>
-    <div class="sett-row" onclick="toggleTheme()"><div class="sett-ico">🌓</div><div><div class="sett-nm">Dark / Light Mode</div><div class="sett-sub" id="themeSub">Dark Mode</div></div><span class="sett-end" id="themeIcon">🌙</span></div>
-    <div class="sett-row" onclick="toggleColorBlind()"><div class="sett-ico">👁️</div><div><div class="sett-nm">Color Blind Mode</div><div class="sett-sub">High contrast view</div></div><label class="toggle"><input type="checkbox" id="cbToggle"><span class="tgl"></span></label></div>
-    <div class="sett-row" onclick="toggleLargeText()"><div class="sett-ico">🔤</div><div><div class="sett-nm">Large Text</div><div class="sett-sub">Increase font size</div></div><label class="toggle"><input type="checkbox" id="ltToggle"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">🎨</div><div><div class="sett-nm">Accent Color</div></div><div id="colorPicker" style="display:flex;gap:5px;flex-wrap:wrap;"></div></div>
-    <div class="sett-row"><div class="sett-ico">📐</div><div><div class="sett-nm">Font Size</div><div class="sett-sub" id="fontSizeLabel">100%</div></div><input type="range" class="sett-slider" id="fontSizeSlider" min="85" max="130" value="100" oninput="changeFontSize(this.value)" style="width:80px;"></div>
-    <div class="sett-row"><div class="sett-ico">✨</div><div><div class="sett-nm">Animations</div><div class="sett-sub">Enable motion effects</div></div><label class="toggle"><input type="checkbox" id="animToggle" checked onchange="toggleAnimations(this)"><span class="tgl"></span></label></div>
-  </div>
-
-  <!-- ACCOUNT -->
-  <div class="sett-sec">
-    <div class="sett-ttl">👤 Account</div>
-    <div class="sett-row" onclick="openProfileEdit()"><div class="sett-ico">✏️</div><div><div class="sett-nm">Edit Profile</div><div class="sett-sub">Name, bio, links</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="changeAvatar()"><div class="sett-ico">🖼️</div><div><div class="sett-nm">Change Avatar</div><div class="sett-sub">Upload profile photo</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="changeCover()"><div class="sett-ico">🌅</div><div><div class="sett-nm">Change Cover Photo</div><div class="sett-sub">Profile banner image</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="openModal('cpModal')"><div class="sett-ico">🔐</div><div><div class="sett-nm">Change Password</div><div class="sett-sub">Update your password</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="toggle2FA()"><div class="sett-ico">🛡️</div><div><div class="sett-nm">Two-Factor Auth</div><div class="sett-sub" id="tfaSub">Disabled</div></div><label class="toggle"><input type="checkbox" id="twoFAToggle"><span class="tgl"></span></label></div>
-    <div class="sett-row" onclick="openModal('kycModal')"><div class="sett-ico">🪪</div><div><div class="sett-nm">KYC Verification</div><div class="sett-sub" id="kycStatus">Not Verified</div></div><span class="sett-end" id="kycArrow">›</span></div>
-    <div class="sett-row" onclick="openModal('einModal')"><div class="sett-ico">📄</div><div><div class="sett-nm">E-TIN / Tax ID</div><div class="sett-sub" id="tinStatus">Not Added</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- PRIVACY & SECURITY -->
-  <div class="sett-sec">
-    <div class="sett-ttl">🔒 Privacy & Security</div>
-    <div class="sett-row"><div class="sett-ico">🔒</div><div><div class="sett-nm">Private Account</div><div class="sett-sub">Only followers see your posts</div></div><label class="toggle"><input type="checkbox" id="privToggle" onchange="savePrivacySetting('private',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">💬</div><div><div class="sett-nm">Who Can Message Me</div><div class="sett-sub" id="msgPrivSub">Everyone</div></div><button class="btn btn-ghost btn-xs" onclick="cycleMessagePrivacy()">Change</button></div>
-    <div class="sett-row"><div class="sett-ico">❤️</div><div><div class="sett-nm">Hide Like Counts</div><div class="sett-sub">Others won't see likes</div></div><label class="toggle"><input type="checkbox" id="hideLikesToggle" onchange="savePrivacySetting('hideLikes',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">👁️</div><div><div class="sett-nm">Read Receipts</div><div class="sett-sub">Show when messages are read</div></div><label class="toggle"><input type="checkbox" id="readReceiptsToggle" checked onchange="savePrivacySetting('readReceipts',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">📍</div><div><div class="sett-nm">Location Sharing</div><div class="sett-sub">Add location to posts</div></div><label class="toggle"><input type="checkbox" id="locationToggle" onchange="savePrivacySetting('location',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row" onclick="blockedList()"><div class="sett-ico">🚫</div><div><div class="sett-nm">Blocked Users</div><div class="sett-sub" id="blockedCount">0 users blocked</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="showActiveSessions()"><div class="sett-ico">📱</div><div><div class="sett-nm">Active Sessions</div><div class="sett-sub">Manage logged-in devices</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="clearSearchHistory()"><div class="sett-ico">🔍</div><div><div class="sett-nm">Clear Search History</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- NOTIFICATIONS -->
-  <div class="sett-sec">
-    <div class="sett-ttl">🔔 Notifications</div>
-    <div class="sett-row"><div class="sett-ico">📲</div><div><div class="sett-nm">Push Notifications</div><div class="sett-sub">All app alerts</div></div><label class="toggle"><input type="checkbox" id="pushToggle" checked onchange="saveNotifSetting('push',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">❤️</div><div><div class="sett-nm">Likes & Reactions</div></div><label class="toggle"><input type="checkbox" id="likeNotifToggle" checked onchange="saveNotifSetting('likes',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">💬</div><div><div class="sett-nm">Comments & Replies</div></div><label class="toggle"><input type="checkbox" id="cmtNotifToggle" checked onchange="saveNotifSetting('comments',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">➕</div><div><div class="sett-nm">New Followers</div></div><label class="toggle"><input type="checkbox" id="followNotifToggle" checked onchange="saveNotifSetting('follows',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">💰</div><div><div class="sett-nm">Earnings Alerts</div></div><label class="toggle"><input type="checkbox" id="earnToggle" checked onchange="saveNotifSetting('earnings',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">🏆</div><div><div class="sett-nm">MLM Commission</div></div><label class="toggle"><input type="checkbox" id="mlmNotifToggle" checked onchange="saveNotifSetting('mlm',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">⚠️</div><div><div class="sett-nm">Copyright Alerts</div></div><label class="toggle"><input type="checkbox" id="cpNotifToggle" checked onchange="saveNotifSetting('copyright',this)"><span class="tgl"></span></label></div>
-  </div>
-
-  <!-- CONTENT & FEED -->
-  <div class="sett-sec">
-    <div class="sett-ttl">📋 Content & Feed</div>
-    <div class="sett-row"><div class="sett-ico">🔄</div><div><div class="sett-nm">Auto-Play Video & Audio</div><div class="sett-sub">Media plays when it appears in feed</div></div><label class="toggle"><input type="checkbox" id="autoPlayToggle" checked onchange="savePrivacySetting('autoPlay',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">📶</div><div><div class="sett-nm">Auto-Play on WiFi Only</div></div><label class="toggle"><input type="checkbox" id="wifiOnlyToggle" onchange="savePrivacySetting('wifiOnly',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">🔇</div><div><div class="sett-nm">Mute Auto-Play</div></div><label class="toggle"><input type="checkbox" id="muteAutoToggle" checked onchange="savePrivacySetting('muteAuto',this)"><span class="tgl"></span></label></div>
-    <div class="sett-row"><div class="sett-ico">📥</div><div><div class="sett-nm">Download Quality</div><div class="sett-sub" id="dlQualityLabel">HD (720p)</div></div><button class="btn btn-ghost btn-xs" onclick="cycleDlQuality()">Change</button></div>
-    <div class="sett-row"><div class="sett-ico">🌐</div><div><div class="sett-nm">Auto-Translate Posts</div><div class="sett-sub">Translate to your language</div></div><label class="toggle"><input type="checkbox" id="autoTranslateToggle"><span class="tgl"></span></label></div>
-  </div>
-
-  <!-- LANGUAGE -->
-  <div class="sett-sec">
-    <div class="sett-ttl">🌍 Language & Region</div>
-    <div class="sett-row" onclick="openModal('langModal')"><div class="sett-ico">🌐</div><div><div class="sett-nm">App Language</div><div class="sett-sub" id="curLangLabel">English</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row"><div class="sett-ico">🗓️</div><div><div class="sett-nm">Date Format</div><div class="sett-sub" id="dateFormatSub">Relative (e.g. 2h ago)</div></div><button class="btn btn-ghost btn-xs" onclick="cycleDateFormat()">Change</button></div>
-  </div>
-
-  <!-- EARNINGS & WALLET -->
-  <div class="sett-sec">
-    <div class="sett-ttl">💰 Earnings & Wallet</div>
-    <div class="sett-row" onclick="nav('wallet')"><div class="sett-ico">💼</div><div><div class="sett-nm">Wallet & Balance</div><div class="sett-sub" id="settWalletBal">$0.00</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="openModal('payModal')"><div class="sett-ico">💳</div><div><div class="sett-nm">Payment Methods</div><div class="sett-sub">bKash, Nagad, PayPal...</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="openModal('cryptoModal')"><div class="sett-ico">₿</div><div><div class="sett-nm">Crypto Wallets</div><div class="sett-sub">BTC, ETH, USDT...</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="generateTaxReport()"><div class="sett-ico">📊</div><div><div class="sett-nm">Tax Report</div><div class="sett-sub">Download yearly statement</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- OFFLINE & STORAGE -->
-  <div class="sett-sec">
-    <div class="sett-ttl">📦 Storage & Offline</div>
-    <div class="sett-row" onclick="nav('offline')"><div class="sett-ico">📵</div><div><div class="sett-nm">Offline Content</div><div class="sett-sub" id="cacheInfo">0 items cached</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="clearCache()"><div class="sett-ico">🧹</div><div><div class="sett-nm">Clear Cache</div><div class="sett-sub" id="cacheSizeLabel">Calculating...</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="exportData()"><div class="sett-ico">📤</div><div><div class="sett-nm">Export My Data</div><div class="sett-sub">Download all your data (JSON)</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="backupData()"><div class="sett-ico">💾</div><div><div class="sett-nm">Backup Data</div><div class="sett-sub">Full platform backup</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="importBackup()"><div class="sett-ico">📥</div><div><div class="sett-nm">Restore Backup</div><div class="sett-sub">Import a backup file</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- ABOUT -->
-  <div class="sett-sec">
-    <div class="sett-ttl">ℹ️ About</div>
-    <div class="sett-row" onclick="toast('i','Monetixra v3.0 — Complete Platform')"><div class="sett-ico">📱</div><div><div class="sett-nm">App Version</div><div class="sett-sub">v3.0 Ultra X</div></div><span class="sett-tag">Latest</span></div>
-    <div class="sett-row" onclick="openFeedback()"><div class="sett-ico">📝</div><div><div class="sett-nm">Send Feedback</div><div class="sett-sub">Help us improve</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="toast('i','Terms of Service')"><div class="sett-ico">📜</div><div><div class="sett-nm">Terms of Service</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="toast('i','Privacy Policy')"><div class="sett-ico">🛡️</div><div><div class="sett-nm">Privacy Policy</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="rateApp()"><div class="sett-ico">⭐</div><div><div class="sett-nm">Rate This App</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- USER ACTIONS -->
-  <div class="sett-sec" id="settUserActions" style="display:none;">
-    <div class="sett-ttl">⚙️ User Actions</div>
-    <div class="sett-row" onclick="profileSettings()"><div class="sett-ico">🧑</div><div><div class="sett-nm">Profile Settings</div><div class="sett-sub">Update your personal info</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="privacySettings()"><div class="sett-ico">🔒</div><div><div class="sett-nm">Privacy Settings</div><div class="sett-sub">Manage profile visibility</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="accountPreferences()"><div class="sett-ico">✨</div><div><div class="sett-nm">Account Preferences</div><div class="sett-sub">Customize your feed and notifications</div></div><span class="sett-end">›</span></div>
-  </div>
-
-  <!-- ADMIN ACCESS (only visible to admin) -->
-  <div class="sett-sec" id="settAdminSection" style="display:none;">
-    <div class="sett-ttl">👑 Admin</div>
-    <div class="sett-row" id="settAdminBtn" onclick="nav('admin')" style="display:none;">
-      <div class="sett-ico">👑</div>
-      <div><div class="sett-nm">Admin Control Panel</div><div class="sett-sub">Full platform control</div></div>
-      <span class="sett-end">›</span>
-    </div>
-  </div>
-
-  <!-- DANGER ZONE -->
-  <div class="sett-sec danger">
-    <div class="sett-ttl">⚠️ Danger Zone</div>
-    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.clearAllNotifications ? window.MonetixraAccountManagement.clearAllNotifications() : (window.clearAllNotifs && window.clearAllNotifs()))"><div class="sett-ico">🔕</div><div><div class="sett-nm">Clear All Notifications</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.deactivateAccount ? window.MonetixraAccountManagement.deactivateAccount() : (window.deactivateAccount && window.deactivateAccount()))"><div class="sett-ico">😴</div><div><div class="sett-nm">Deactivate Account</div><div class="sett-sub">Temporarily hide your account</div></div><span class="sett-end">›</span></div>
-    <div class="sett-row" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.signOut ? window.MonetixraAccountManagement.signOut() : (window.logout && window.logout()))"><div class="sett-ico">🚪</div><div><div class="sett-nm">Sign Out</div></div></div>
-    <div class="sett-row danger" onclick="(window.MonetixraAccountManagement && window.MonetixraAccountManagement.deleteAccount ? window.MonetixraAccountManagement.deleteAccount() : (window.deleteAccount && window.deleteAccount()))"><div class="sett-ico">🗑️</div><div><div class="sett-nm">Delete Account</div><div class="sett-sub">Permanently remove all data</div></div></div>
-  </div>
-</div>
-
-<!-- ADMIN PAGE -->
-<div class="pg" id="pg-admin">
-  <div class="page-title">👑 Admin Control Panel</div>
-  <!-- Stats -->
-  <div class="admin-rev-card">
-    <div style="font-size:10px;color:var(--t3);">Platform Revenue (10% cut)</div>
-    <div class="mono" style="font-size:28px;color:var(--c4);" id="adminRevEl">$0.00</div>
-  </div>
-  <div class="admin-grid" id="adminStats"></div>
-  <!-- Analytics -->
-  <div id="adminAnalytics" style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;margin-bottom:10px;"></div>
-  <!-- Data Export & Migration -->
-  <div style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;margin-bottom:10px;">
-    <div style="font-size:11px;font-weight:700;color:var(--neon);margin-bottom:8px;">📤 DATA EXPORT & MIGRATION</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn btn-p btn-sm" onclick="exportSupabaseData()">📥 Export Supabase (JSON)</button>
-      <button class="btn btn-o btn-sm" onclick="exportLocalData()">💾 Local Backup</button>
-      <button class="btn btn-g btn-sm" onclick="migrateToS3()">☁️ Preview S3 Migration</button>
-      <button class="btn btn-r btn-sm" onclick="migrateToS3({dryRun:false})">🚀 Migrate to S3</button>
-      <button class="btn btn-p btn-sm" onclick="fullExportAndMigrate()">🔥 Full Export + Migrate</button>
-    </div>
-    <div style="font-size:10px;color:var(--t3);margin-top:8px;">
-      Export: users, posts, comments, transactions → JSON | Migrate: Supabase files → S3 Bucket
-    </div>
-  </div>
-
-  <!-- LIVE MONITOR (Real-time) -->
-  <div style="background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(0,212,255,.08));border:1px solid var(--neon);border-radius:14px;padding:12px;margin-bottom:10px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div style="font-size:12px;font-weight:700;color:var(--neon);">📡 LIVE MONITOR</div>
-      <div style="display:flex;gap:6px;">
-        <span id="liveActiveBadge" style="background:var(--g2);padding:3px 8px;border-radius:99px;font-size:10px;color:var(--c3);">🟢 0 Active</span>
-        <span id="livePostBadge" style="background:var(--g2);padding:3px 8px;border-radius:99px;font-size:10px;color:var(--c4);">📝 0/min</span>
-      </div>
-    </div>
-    
-    <!-- Active Users Section -->
-    <div style="margin-bottom:12px;">
-      <div style="font-size:10px;color:var(--t3);margin-bottom:6px;">👥 Currently Online Users</div>
-      <div id="liveActiveUsers" style="display:flex;flex-wrap:wrap;gap:6px;max-height:80px;overflow-y:auto;padding:6px;background:var(--bg3);border-radius:8px;">
-        <span style="font-size:11px;color:var(--t3);">No active users</span>
-      </div>
-    </div>
-    
-    <!-- Live Posts Feed -->
-    <div>
-      <div style="font-size:10px;color:var(--t3);margin-bottom:6px;">🔄 Latest Posts (Real-time)</div>
-      <div id="livePostsFeed" style="max-height:150px;overflow-y:auto;padding:6px;background:var(--bg3);border-radius:8px;">
-        <div style="font-size:11px;color:var(--t3);padding:8px;text-align:center;">No recent posts</div>
-      </div>
-    </div>
-    
-    <div style="display:flex;gap:8px;margin-top:10px;">
-      <button class="btn btn-p btn-xs" onclick="startLiveMonitor()">▶ Start Monitor</button>
-      <button class="btn btn-ghost btn-xs" onclick="refreshLiveMonitor()">🔄 Refresh</button>
-      <button class="btn btn-g btn-xs" onclick="adminGlobalActions()">🛠️ Global Actions</button>
-    </div>
-  </div>
-
-  <!-- Tabs -->
-  <div class="chips" style="margin-bottom:10px;" id="adminTabs">
-    <div class="chip on"  onclick="adminTab('users',this)">👥 Users</div>
-    <div class="chip" onclick="adminTab('posts',this)">📋 Posts</div>
-    <div class="chip" onclick="adminTab('kyc',this)">🪪 KYC</div>
-    <div class="chip" onclick="adminTab('withdraw',this)">💸 Withdrawals</div>
-    <div class="chip" onclick="adminTab('reports',this)">⚠️ Reports</div>
-    <div class="chip" onclick="adminTab('analytics',this)">📊 Analytics</div>
-    <div class="chip" onclick="adminTab('live',this)" style="color:var(--neon);">📡 Live</div>
-  </div>
-  <!-- Users Tab -->
-  <div id="adminTabUsers">
-    <div class="iw" style="margin-bottom:8px;"><span class="i-pre">🔍</span><input class="ii" id="adminSearch" placeholder="Search users..." oninput="adminSearchUsers(this.value)"></div>
-    <div class="chips" style="margin-bottom:8px;">
-      <div class="chip on"  onclick="adminUserFilter('all',this)">All</div>
-      <div class="chip" onclick="adminUserFilter('active',this)">Active</div>
-      <div class="chip" onclick="adminUserFilter('disabled',this)">Disabled</div>
-      <div class="chip" onclick="adminUserFilter('deactivated',this)">Deactivated</div>
-      <div class="chip" onclick="adminUserFilter('blocked',this)">Blocked</div>
-      <div class="chip" onclick="adminUserFilter('kyc',this)">KYC ✅</div>
-    </div>
-    <div id="adminUsers"></div>
-  </div>
-  <!-- Posts Tab -->
-  <div id="adminTabPosts" style="display:none;">
-    <div class="chips" style="margin-bottom:8px;">
-      <div class="chip on" onclick="adminPostFilter('all',this)">All</div>
-      <div class="chip" onclick="adminPostFilter('copyright',this)">⚠️ Copyright</div>
-      <div class="chip" onclick="adminPostFilter('reported',this)">🚩 Reported</div>
-      <div class="chip" onclick="adminPostFilter('hidden',this)">👁️ Hidden</div>
-    </div>
-    <div id="adminPosts"></div>
-  </div>
-  <!-- KYC Tab -->
-  <div id="adminTabKyc" style="display:none;">
-    <div id="kycQueue"></div>
-  </div>
-  <!-- Withdrawals Tab -->
-  <div id="adminTabWithdraw" style="display:none;">
-    <div id="withdrawQueue"></div>
-  </div>
-  <!-- Reports Tab -->
-  <div id="adminTabReports" style="display:none;">
-    <div id="modQueue"></div>
-  </div>
-</div>
-
-<!-- Admin Analytics Tab (inside pg-admin) -->
-<div id="adminTabAnalytics" style="display:none;">
-  <div id="adminFullAnalytics"></div>
-</div>
-
-<!-- Admin Live Monitor Tab -->
-<div id="adminTabLive" style="display:none;">
-  <div style="background:var(--g2);border:1px solid var(--b1);border-radius:14px;padding:12px;">
-    <div style="font-size:14px;font-weight:700;color:var(--neon);margin-bottom:10px;">📡 Real-Time Activity Monitor</div>
-    <div id="liveDetailedStats" style="font-size:11px;color:var(--t2);">
-      <p>Click "Start Monitor" to see real-time updates</p>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN USER CONTROL MODAL -->
-<div class="overlay center" id="adminUserModal">
-  <div class="modal" style="max-height:90vh;overflow-y:auto;">
-    <div class="modal-hd"><div class="modal-ttl">👑 User Control</div><div class="modal-x" onclick="closeModal('adminUserModal')">✕</div></div>
-    <div id="adminUserModalContent"></div>
-  </div>
-</div>
-
-<!-- ADMIN POST CONTROL MODAL -->
-<div class="overlay center" id="adminPostModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">📋 Post Control</div><div class="modal-x" onclick="closeModal('adminPostModal')">✕</div></div>
-    <div id="adminPostModalContent"></div>
-  </div>
-</div>
-
-<!-- OFFLINE PAGE -->
-<div class="pg" id="pg-offline">
-  <div class="page-title">📵 Offline Cache</div>
-  <div id="offlineContent"></div>
-</div>
-
-<!-- MARKETPLACE PAGE -->
-<div class="pg" id="pg-marketplace">
-  <div class="page-title">🛍️ Digital Marketplace</div>
-  <div class="chips" style="margin-bottom:10px;">
-    <div class="chip on" onclick="mktFilter('all',this)">All</div>
-    <div class="chip" onclick="mktFilter('course',this)">🎓 Course</div>
-    <div class="chip" onclick="mktFilter('template',this)">🎨 Template</div>
-    <div class="chip" onclick="mktFilter('music',this)">🎵 Music</div>
-    <div class="chip" onclick="mktFilter('ebook',this)">📚 eBook</div>
-  </div>
-  <div class="mkt-grid" id="mktGrid"></div>
-</div>
-
-</div><!-- mainWrap -->
-</div><!-- appWrap -->
-
-<!-- ========== ANALYTICS DASHBOARD PAGE ========== -->
-<div class="pg" id="pg-analytics">
-  <div class="page-title">📊 Analytics Dashboard</div>
-  <div class="analytics-hero">
-    <div style="font-size:32px;">📈</div>
-    <div style="font-family:var(--fd);font-size:16px;font-weight:800;">Your Performance</div>
-    <div style="font-size:12px;color:var(--t3);" id="analyticsPeriod">Last 30 days</div>
-  </div>
-  <div class="analytics-grid">
-    <div class="analytics-card">
-      <div class="ac-ico">👁️</div>
-      <div class="ac-n" id="totalViews">0</div>
-      <div class="ac-l">Total Views</div>
-      <div class="ac-trend" id="viewsTrend">↑ 0%</div>
-    </div>
-    <div class="analytics-card">
-      <div class="ac-ico">❤️</div>
-      <div class="ac-n" id="totalLikes">0</div>
-      <div class="ac-l">Total Likes</div>
-      <div class="ac-trend" id="likesTrend">↑ 0%</div>
-    </div>
-    <div class="analytics-card">
-      <div class="ac-ico">💬</div>
-      <div class="ac-n" id="totalComments">0</div>
-      <div class="ac-l">Comments</div>
-      <div class="ac-trend" id="commentsTrend">↑ 0%</div>
-    </div>
-    <div class="analytics-card">
-      <div class="ac-ico">🔄</div>
-      <div class="ac-n" id="totalShares">0</div>
-      <div class="ac-l">Shares</div>
-      <div class="ac-trend" id="sharesTrend">↑ 0%</div>
-    </div>
-  </div>
-  <div class="sett-sec">
-    <div class="sett-ttl">📋 Top Performing Posts</div>
-    <div id="topPostsList"></div>
-  </div>
-  <div class="sett-sec">
-    <div class="sett-ttl">🎯 Engagement Rate</div>
-    <div style="background:var(--g2);border-radius:var(--r2);padding:14px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-size:12px;">Overall Engagement</span>
-        <span style="font-size:14px;font-weight:800;color:var(--neon);" id="engagementRate">0%</span>
-      </div>
-      <div style="height:8px;background:var(--bg4);border-radius:99px;overflow:hidden;">
-        <div id="engagementBar" style="height:100%;background:linear-gradient(90deg,var(--neon),var(--c2));width:0%;transition:width 1s var(--ease);"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== ACTIVITY LOG PAGE ========== -->
-<div class="pg" id="pg-activity">
-  <div class="page-title">📝 Activity Log</div>
-  <div class="activity-filters">
-    <div class="chip on" onclick="filterActivity('all',this)">All</div>
-    <div class="chip" onclick="filterActivity('posts',this)">Posts</div>
-    <div class="chip" onclick="filterActivity('likes',this)">Likes</div>
-    <div class="chip" onclick="filterActivity('follows',this)">Follows</div>
-    <div class="chip" onclick="filterActivity('earnings',this)">Earnings</div>
-  </div>
-  <div id="activityList"></div>
-</div>
-
-<!-- ========== GAMIFICATION / BADGES PAGE ========== -->
-<div class="pg" id="pg-gamification">
-  <div class="page-title">🎮 Achievements</div>
-  <div class="gamification-hero">
-    <div style="font-size:42px;">🏆</div>
-    <div style="font-family:var(--fd);font-size:18px;font-weight:800;" id="userLevel">Level 1</div>
-    <div style="font-size:12px;color:var(--neon);" id="userXP">0 / 100 XP</div>
-    <div style="height:6px;background:var(--bg4);border-radius:99px;overflow:hidden;margin-top:8px;width:200px;">
-      <div id="xpBar" style="height:100%;background:linear-gradient(90deg,var(--neon),var(--c2));width:0%;transition:width 0.5s var(--ease);"></div>
-    </div>
-  </div>
-  <div class="streak-card">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div style="font-size:28px;">🔥</div>
-      <div>
-        <div style="font-size:14px;font-weight:700;"><span id="currentStreak">0</span> Day Streak</div>
-        <div style="font-size:11px;color:var(--t3);">Keep posting daily!</div>
-      </div>
-    </div>
-    <div class="streak-days" id="streakDays"></div>
-  </div>
-  <div class="sett-sec">
-    <div class="sett-ttl">🥇 Badges</div>
-    <div class="badges-grid" id="badgesGrid"></div>
-  </div>
-  <div class="sett-sec">
-    <div class="sett-ttl">🏅 Leaderboard Rank</div>
-    <div style="background:var(--g2);border-radius:var(--r2);padding:14px;display:flex;align-items:center;gap:12px;">
-      <div style="font-size:36px;" id="rankEmoji">🥉</div>
-      <div style="flex:1;">
-        <div style="font-size:14px;font-weight:700;" id="rankText">Top 100</div>
-        <div style="font-size:11px;color:var(--t3);">You're in the top <span id="rankPercent">10%</span> of users</div>
-      </div>
-      <button class="btn btn-neon btn-sm" onclick="nav('leaderboard')">View All</button>
-    </div>
-  </div>
-</div>
-
-<!-- ========== PUSH NOTIFICATION SETTINGS MODAL ========== -->
-<div class="modal" id="pushNotifModal">
-  <div class="modal-card" style="max-width:420px;">
-    <div class="modal-hd">
-      <div>🔔 Push Notifications</div>
-      <button class="btn btn-ghost btn-xs" data-close-modal="pushNotifModal" onclick="closeModal('pushNotifModal')">✕</button>
-    </div>
-    <div style="padding:16px;">
-      <div style="text-align:center;margin-bottom:16px;">
-        <div style="font-size:48px;margin-bottom:8px;">🔔</div>
-        <div style="font-size:14px;font-weight:700;">Stay Updated</div>
-        <div style="font-size:12px;color:var(--t3);">Get real-time notifications for likes, comments, and earnings</div>
-      </div>
-      <div id="pushStatusCard" style="background:var(--g2);border-radius:var(--r2);padding:14px;margin-bottom:12px;">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div id="pushStatusIcon" style="font-size:24px;">🔕</div>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:700;" id="pushStatusText">Notifications Disabled</div>
-            <div style="font-size:11px;color:var(--t3);" id="pushStatusSub">Enable to receive alerts</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <button class="btn btn-p" id="pushEnableBtn" onclick="subscribePushNotifications()">🔔 Enable Notifications</button>
-        <button class="btn btn-ghost" id="pushTestBtn" onclick="testPushNotification()" style="display:none;">🧪 Test Notification</button>
-        <button class="btn btn-ghost" data-close-modal="pushNotifModal" onclick="closeModal('pushNotifModal')">Close</button>
-      </div>
-      <div style="margin-top:12px;font-size:10px;color:var(--t3);text-align:center;">
-        Powered by Web Push API
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== CONTENT PAYWALL MODAL ========== -->
-<div class="modal" id="paywallModal">
-  <div class="modal-card" style="max-width:400px;">
-    <div style="padding:20px;text-align:center;">
-      <div style="font-size:48px;margin-bottom:12px;">💎</div>
-      <div style="font-size:16px;font-weight:800;margin-bottom:8px;">Premium Content</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:16px;">This post is only available to premium subscribers</div>
-      <div style="background:linear-gradient(135deg,rgba(109,40,217,.1),rgba(0,255,170,.06));border:1px solid rgba(109,40,217,.2);border-radius:var(--r2);padding:14px;margin-bottom:16px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Unlock with Premium</div>
-        <ul style="font-size:11px;color:var(--t2);text-align:left;padding-left:20px;margin:0;">
-          <li>Access all premium posts</li>
-          <li>No advertisements</li>
-          <li>Priority support</li>
-          <li>Earn 2x points</li>
-        </ul>
-      </div>
-      <button class="btn btn-p" onclick="openPremiumModal(); closeModal('paywallModal');">⭐ Upgrade to Premium</button>
-      <button class="btn btn-ghost btn-sm" data-close-modal="paywallModal" onclick="closeModal('paywallModal')" style="margin-top:8px;">Maybe Later</button>
-    </div>
-  </div>
-</div>
-
-<!-- ========== STICKY AD BANNER ========== -->
-<div id="stickyAdBanner" style="display:none;position:fixed;bottom:70px;left:10px;right:10px;background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--b1);border-radius:var(--r2);padding:10px;z-index:999;box-shadow:var(--sh2);">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div style="font-size:24px;">📢</div>
-    <div style="flex:1;min-width:0;">
-      <div style="font-size:11px;font-weight:700;color:var(--neon);" id="stickyAdTitle">Sponsored</div>
-      <div style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="stickyAdText">Check out this amazing offer!</div>
-    </div>
-    <button class="btn btn-o btn-xs" onclick="clickStickyAd()">+5 pts</button>
-    <button style="background:none;border:none;color:var(--t3);font-size:18px;cursor:pointer;" onclick="closeStickyAd()">×</button>
-  </div>
-</div>
-
-<!-- ========== BOTTOM NAV ========== -->
-<div id="btmNav">
-  <button class="bn on" data-p="feed" onclick="nav('feed')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🏠</span><span class="lbl">Feed</span></button>
-  <button class="bn" data-p="explore" onclick="nav('explore')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🔭</span><span class="lbl">Explore</span></button>
-  <button class="bn" data-p="earn" onclick="nav('earn')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💸</span><span class="lbl">Earn</span></button>
-  <button class="bn" data-p="friends" onclick="nav('friends')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">👥</span><span class="lbl">Friends</span><span class="bn-bdg" id="friendBdg"></span></button>
-  <button class="bn" data-p="wallet" onclick="nav('wallet')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💼</span><span class="lbl">Wallet</span></button>
-  <button class="bn" data-p="messages" onclick="nav('messages')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">💬</span><span class="lbl">Chat</span><span class="bn-bdg" id="msgBdg"></span></button>
-  <button class="bn" data-p="apps" onclick="nav('apps')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">📱</span><span class="lbl">Apps</span></button>
-  <button class="bn" data-p="nft" onclick="nav('nft')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🎨</span><span class="lbl">NFT</span></button>
-  <button class="bn" data-p="metaverse" onclick="nav('metaverse')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🌐</span><span class="lbl">Meta</span></button>
-  <button class="bn" data-p="analytics" onclick="nav('analytics')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">📊</span><span class="lbl">Stats</span></button>
-  <button class="bn" data-p="gamification" onclick="nav('gamification')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">🏆</span><span class="lbl">Badges</span></button>
-  <button class="bn" data-p="profile" onclick="nav('profile')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">👤</span><span class="lbl">Me</span></button>
-  <button class="bn" data-p="settings" onclick="nav('settings')" style="cursor:pointer !important;pointer-events:auto !important;position:relative !important;z-index:99999 !important;"><span class="ico">⚙️</span><span class="lbl">Settings</span></button>
-</div>
-
-<!-- ========== INTERSTITIAL AD ========== -->
-<div class="ints" id="intsAd">
-  <button type="button" class="mxt-offer-close" onclick="dismissOfferElement(this)" aria-label="Close offer">×</button>
-  <div class="ints-skip"><button onclick="closeInts()" style="background:var(--g2);border-radius:99px;padding:5px 13px;">Skip ✕</button></div>
-  
-  <!-- TOP BANNER AD -->
-  <div id="intsTopBanner" style="margin-bottom:15px;text-align:center;min-height:60px;background:var(--g2);border-radius:12px;padding:8px;max-width:468px;width:90%;">
-    <div style="font-size:9px;color:var(--t3);">Sponsored</div>
-    <div id="intsBannerSlot" style="min-height:50px;display:flex;align-items:center;justify-content:center;">
-      <!-- ProfitableCPMRate Banner 468x60 -->
-      <script>
         (function(){
           window.atOptions_ints = { key: '2c59b270de9e21b57ad543e7b88c2e3f', format: 'iframe', height: 60, width: 468, params: {} };
           window.atOptions = window.atOptions_ints;
@@ -2910,396 +635,11 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
           s.src = 'https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js';
           document.currentScript.parentNode.appendChild(s);
         })();
-      </script>
-    </div>
-  </div>
-  
-  <div class="ints-card">
-    <div style="font-size:46px;" id="intsIcon">🎯</div>
-    <div style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--neon);" id="intsTitle">Watch & Earn!</div>
-    <div style="font-size:13px;color:var(--t2);margin:8px 0;" id="intsSub">View this ad to earn points instantly</div>
-    
-    <!-- MIDDLE NATIVE BANNER AD -->
-    <div id="intsNativeAd" style="margin:12px 0;padding:8px;background:var(--g2);border-radius:10px;min-height:90px;">
-      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
-      <div id="container-ints-native"></div>
-      <script async="async" data-cfasync="false" src="https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js"></script>
-    </div>
-    
-    <button class="btn btn-o" onclick="clickInts()" style="margin-bottom:8px;font-weight:700;">✓ Ad Viewed - Claim +5 pts</button>
-    <div class="ints-cnt" id="intsCnt">Skip in 5s...</div>
-    <div class="ints-pb"><div class="ints-fill" id="intsBar"></div></div>
-    
-    <!-- SMALL BANNER AD AT BOTTOM -->
-    <div id="intsBottomBanner" style="margin-top:12px;padding:6px;background:var(--bg4);border-radius:8px;min-height:40px;">
-      <div style="font-size:8px;color:var(--t3);">Ad</div>
-      <div style="font-size:11px;color:var(--neon);">🔥 Hot Deals - Click to Explore!</div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== REWARD AD ========== -->
-<div class="rwad" id="rwAd">
-  <div class="rw-card" style="max-width:400px;padding:20px;">
-    <button type="button" class="mxt-offer-close" onclick="dismissOfferElement(this)" aria-label="Close offer">×</button>
-    <!-- Banner Ad at Top -->
-    <div style="margin-bottom:15px;background:var(--g2);border-radius:10px;padding:6px;min-height:50px;">
-      <div style="font-size:8px;color:var(--t3);">Sponsored</div>
-      <div style="font-size:12px;color:var(--neon);font-weight:600;">💰 Earn More - Premium Offers Inside!</div>
-    </div>
-    
-    <span class="rw-icon">💎</span>
-    <div style="font-size:20px;font-weight:700;color:var(--c4);">Bonus Reward!</div>
-    <div style="font-size:13px;color:var(--t2);margin:8px 0;">Watch this exclusive video ad</div>
-    <div class="rw-pts" style="font-size:32px;color:var(--neon);">+10 pts</div>
-    
-    <!-- Native Banner Ad in Middle -->
-    <div style="margin:12px 0;background:var(--bg3);border-radius:8px;padding:8px;min-height:60px;">
-      <div id="container-reward-native"></div>
-    </div>
-    
-    <button class="btn btn-g" onclick="watchRewardAd()" style="font-weight:700;width:100%;margin-bottom:8px;">🎬 Watch & Claim Now</button>
-    <button class="btn btn-ghost btn-sm" onclick="G('rwAd').classList.remove('show')" style="width:100%;">⏭ Maybe Later</button>
-    
-    <div style="font-size:10px;color:var(--t3);margin-top:10px;">✓ Takes only 15-30 seconds</div>
-  </div>
-</div>
-
-<!-- ========== AUTO AD ========== -->
-<div class="auto-ad" id="autoAd">
-  <div class="aad-x" onclick="closeAutoAd()">✕</div>
-  <div style="font-size:9px;">AUTO AD</div>
-  <div style="font-size:13.5px;" id="aadTitle">Special Offer!</div>
-  <div style="font-size:11px;" id="aadSub">Limited time</div>
-  <button class="btn btn-o btn-xs" onclick="clickAutoAd(this)">Tap → +3</button>
-</div>
-
-<!-- ========== CHAT ROOM ========== -->
-<div id="chatRoom">
-  <div class="cr-top">
-    <div class="cr-back" onclick="closeChatRoom()">←</div>
-    <div class="av av-round av-md" id="crAv">👤</div>
-    <div style="flex:1;"><div id="crName">Chat</div><div id="crStat">● Online</div></div>
-    <div class="tb-ic" onclick="startVideoCall()">📹</div>
-    <div class="tb-ic" onclick="startAudioCallBtn()">📞</div>
-    <div class="tb-ic" onclick="openModal('disappearModal')">⏱</div>
-  </div>
-  <div class="cr-msgs" id="crMsgs"></div>
-  <div class="typing-ind" id="typingInd">typing...</div>
-  <div class="cr-media">
-    <div class="cr-mbtn" onclick="attachCrFile('image')">📷 Photo</div>
-    <div class="cr-mbtn" onclick="attachCrFile('video')">📹 Video</div>
-    <div class="cr-mbtn voice-rec" onclick="toggleVoiceRecord()">🎙 Voice</div>
-  </div>
-  <div class="cr-bar">
-    <textarea class="cr-inp" id="crInp" placeholder="Message..." rows="1"></textarea>
-    <button class="cr-send" onclick="sendMsg()">➤</button>
-  </div>
-  <input type="file" id="crFile" style="display:none" onchange="handleCrMedia(this)">
-</div>
-
-<!-- ========== STORY VIEWER ========== -->
-<div id="storyView">
-  <div class="sv-bars" id="svBars"></div>
-  <div class="sv-hd" id="svHd"></div>
-  <div class="sv-body" id="svBody"></div>
-  <button class="sv-x" onclick="closeStoryView()">✕</button>
-</div>
-
-<!-- ========== LIVE STREAM ========== -->
-<div id="liveView">
-  <div class="lv-vid"><video id="liveVideo" autoplay muted playsinline></video>
-    <div class="lv-overlay"></div>
-    <div class="lv-camera-frame" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
-    </div>
-    <div class="lv-focus-grid" id="lvFocusGrid" aria-hidden="true"></div>
-    <div class="lv-spotlight" id="lvSpotlight" aria-hidden="true"></div>
-    <div class="lv-focus-ring" id="lvFocusRing" aria-hidden="true"></div>
-    <div class="lv-rec-ring" aria-hidden="true"><span></span></div>
-    <div class="lv-studio-hud" id="lvStudioHud">
-      <div class="lv-hud-chip lv-hud-live"><span></span>LIVE</div>
-      <div class="lv-hud-chip" id="lvHudMode">Front Camera</div>
-      <div class="lv-hud-chip" id="lvHudQuality">1080p</div>
-      <div class="lv-hud-chip" id="lvHudFx">FX Normal</div>
-    </div>
-    <div class="lv-top"><div class="av av-round av-sm" id="lvAv">L</div><div style="flex:1;"><span id="lvName">Live</span></div><div class="lv-live-badge">🔴 LIVE</div><div class="lv-viewers">👁 <span id="lvViewers">0</span></div></div>
-    <div class="lv-comments" id="lvComments"></div>
-    <div class="lv-bottom"><div class="lv-inp-row"><input class="lv-inp" id="lvInp" placeholder="Comment..."><button class="cr-send" onclick="sendLiveComment()">➤</button></div></div>
-    <button class="lv-close" onclick="closeLiveView()">✕</button>
-    <button class="lv-tools-toggle" id="lvToolsToggle" onclick="toggleCameraControls()" title="Camera Studio">CAM</button>
-    
-    <!-- Professional Camera Controls -->
-    <div class="lv-camera-controls" id="lvCameraControls">
-      <!-- Resolution Selector -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">📺 Quality</div>
-        <select class="lv-select" id="lvResolution" onchange="changeResolution()">
-          <option value="720">720p HD</option>
-          <option value="1080" selected>1080p FHD</option>
-          <option value="1440">1440p QHD</option>
-          <option value="2160">4K UHD</option>
-        </select>
-      </div>
       
-      <!-- Camera Toggle -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" onclick="toggleCamera()" title="Switch Camera">🔄</button>
-      </div>
 
-      <!-- Screen Share -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" onclick="startLiveScreenShare()" title="Share Screen">🖥</button>
-      </div>
-      
-      <!-- Flash Control -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" id="lvFlashBtn" onclick="toggleFlash()" title="Flash">⚡</button>
-      </div>
-      
-      <!-- Scene Mode -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎬 Scene</div>
-        <select class="lv-select" id="lvSceneMode" onchange="setSceneMode()">
-          <option value="auto">Auto</option>
-          <option value="portrait">Portrait</option>
-          <option value="night">Night</option>
-          <option value="studio">Studio</option>
-        </select>
-      </div>
 
-      <!-- Grid Overlay -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">▦ Grid</div>
-        <button class="lv-btn lv-btn-icon" id="lvGridBtn" onclick="toggleGrid()" title="Grid Overlay">▦</button>
-      </div>
 
-      <!-- Timer Capture -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">⏱ Timer</div>
-        <select class="lv-select" id="lvCaptureTimer" onchange="setCaptureTimer()">
-          <option value="0">Instant</option>
-          <option value="3">3s</option>
-          <option value="5">5s</option>
-          <option value="10">10s</option>
-        </select>
-      </div>
 
-      <!-- Zoom Controls -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" onclick="zoomOut()" title="Zoom Out">➖</button>
-        <span class="lv-zoom-level" id="lvZoomLevel">1x</span>
-        <button class="lv-btn lv-btn-icon" onclick="zoomIn()" title="Zoom In">➕</button>
-      </div>
-
-      <!-- AI Beautify -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">✨ AI</div>
-        <button class="lv-btn lv-btn-icon" id="lvBeautifyBtn" onclick="toggleAiBeautify()" title="AI Beautify">✨</button>
-      </div>
-
-      <!-- Beauty Presets -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">✨ Presets</div>
-        <div class="lv-preset-row">
-          <button class="lv-preset-btn active" data-preset="natural" onclick="setBeautyPreset('natural')">Natural</button>
-          <button class="lv-preset-btn" data-preset="glow" onclick="setBeautyPreset('glow')">Glow</button>
-          <button class="lv-preset-btn" data-preset="soft" onclick="setBeautyPreset('soft')">Soft</button>
-          <button class="lv-preset-btn" data-preset="airbrush" onclick="setBeautyPreset('airbrush')">Airbrush</button>
-        </div>
-      </div>
-
-      <!-- Skin Smoothing -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🧴 Skin</div>
-        <button class="lv-btn lv-btn-icon" id="lvSkinBtn" onclick="toggleSkinSmoothing()" title="AI Skin Smoothing">🧴</button>
-      </div>
-
-      <!-- Face Tracking -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎯 Track</div>
-        <button class="lv-btn lv-btn-icon" id="lvFaceTrackBtn" onclick="toggleAutoFaceTracking()" title="Auto Face Tracking">🎯</button>
-      </div>
-
-      <!-- Background Blur -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🪩 Blur</div>
-        <button class="lv-btn lv-btn-icon" id="lvBlurBtn" onclick="toggleBackgroundBlur()" title="Background Blur">🪩</button>
-      </div>
-
-      <!-- Voice Enhancement -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎙 Voice</div>
-        <button class="lv-btn lv-btn-icon" id="lvVoiceBtn" onclick="toggleVoiceEnhancement()" title="Voice Enhancement">🎙</button>
-      </div>
-
-      <!-- Voice Denoise -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🔇 Denoise</div>
-        <button class="lv-btn lv-btn-icon" id="lvDenoiseBtn" onclick="toggleVoiceDenoise()" title="Voice Denoise">🔇</button>
-      </div>
-
-      <!-- Night Vision -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🌙 Night</div>
-        <button class="lv-btn lv-btn-icon" id="lvNightBtn" onclick="toggleNightVision()" title="Night Vision">🌙</button>
-      </div>
-
-      <!-- Motion Speed -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">⏱ Speed</div>
-        <select class="lv-select" id="lvSpeedMode" onchange="setRecordingSpeed()">
-          <option value="normal">Normal</option>
-          <option value="slow">Slow Motion</option>
-          <option value="timelapse">Timelapse</option>
-        </select>
-      </div>
-
-      <!-- LUT Filters -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎬 LUT</div>
-        <select class="lv-select" id="lvLutPreset" onchange="setLutPreset()">
-          <option value="none">None</option>
-          <option value="cinematic">Cinematic</option>
-          <option value="moody">Moody</option>
-          <option value="vivid">Vivid</option>
-          <option value="warm">Warm</option>
-        </select>
-      </div>
-
-      <!-- Stabilization -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🛡 Stabilize</div>
-        <button class="lv-btn lv-btn-icon" id="lvStabBtn" onclick="toggleAutoStabilization()" title="Auto Stabilization">🛡</button>
-      </div>
-
-      <!-- Recording Preview -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">📺 Preview</div>
-        <div class="lv-preview-pill" id="lvRecPreview">Preview Ready</div>
-        <div class="lv-thumbnail-preview" id="lvThumbnailPreview" title="Recording thumbnail"></div>
-      </div>
-
-      <!-- Capture -->
-      <div class="lv-control-group">
-        <button class="lv-btn" id="lvCaptureBtn" onclick="startCaptureWithTimer()" title="Capture Photo">📸 Capture</button>
-      </div>
-
-      <!-- One-Tap Recording -->
-      <div class="lv-control-group">
-        <button class="lv-btn" id="lvRecordBtn" onclick="toggleOneTapRecording()" title="One-Tap Recording">⏺ Record</button>
-      </div>
-      
-      <!-- Color Filters -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎨 Filters</div>
-        <div class="lv-filter-row" id="lvFilters">
-          <button class="lv-filter-btn active" data-filter="none" onclick="applyFilter('none')">Normal</button>
-          <button class="lv-filter-btn" data-filter="grayscale(100%)" onclick="applyFilter('grayscale(100%)')">B&W</button>
-          <button class="lv-filter-btn" data-filter="sepia(100%)" onclick="applyFilter('sepia(100%)')">Sepia</button>
-          <button class="lv-filter-btn" data-filter="contrast(150%)" onclick="applyFilter('contrast(150%)')">Vivid</button>
-          <button class="lv-filter-btn" data-filter="saturate(200%)" onclick="applyFilter('saturate(200%)')">Vibrant</button>
-          <button class="lv-filter-btn" data-filter="hue-rotate(90deg)" onclick="applyFilter('hue-rotate(90deg)')">Cool</button>
-          <button class="lv-filter-btn" data-filter="hue-rotate(180deg)" onclick="applyFilter('hue-rotate(180deg)')">Warm</button>
-          <button class="lv-filter-btn" data-filter="invert(100%)" onclick="applyFilter('invert(100%)')">Negative</button>
-        </div>
-      </div>
-
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎞 Pack</div>
-        <div class="lv-preset-row">
-          <button class="lv-preset-btn active" data-pack="cinematic" onclick="applyLiveFilterPreset('cinematic')">Cine</button>
-          <button class="lv-preset-btn" data-pack="noir" onclick="applyLiveFilterPreset('noir')">Noir</button>
-          <button class="lv-preset-btn" data-pack="sunset" onclick="applyLiveFilterPreset('sunset')">Sunset</button>
-          <button class="lv-preset-btn" data-pack="bloom" onclick="applyLiveFilterPreset('bloom')">Bloom</button>
-        </div>
-      </div>
-
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎯 Focus</div>
-        <button class="lv-btn lv-btn-icon" id="lvSpotlightBtn" onclick="toggleAutoSpotlight()" title="Auto Spotlight / Subject Focus">🎯</button>
-      </div>
-
-      <div class="lv-control-group">
-        <div class="lv-control-label">🎞 Zoom</div>
-        <button class="lv-btn lv-btn-icon" id="lvZoomTransitionBtn" onclick="toggleCinematicZoom()" title="Cinematic Zoom">🎞</button>
-      </div>
-      
-      <!-- Beauty Mode -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">✨ Beauty</div>
-        <input type="range" class="lv-slider" id="lvBeautySlider" min="0" max="100" value="0" oninput="applyBeauty()" onchange="applyBeauty()">
-      </div>
-      
-      <!-- Brightness/Contrast -->
-      <div class="lv-control-group">
-        <div class="lv-control-label">☀️ Brightness</div>
-        <input type="range" class="lv-slider" id="lvBrightnessSlider" min="50" max="150" value="100" oninput="applyAdjustments()" onchange="applyAdjustments()">
-      </div>
-      
-      <div class="lv-control-group">
-        <div class="lv-control-label">🌓 Contrast</div>
-        <input type="range" class="lv-slider" id="lvContrastSlider" min="50" max="150" value="100" oninput="applyAdjustments()" onchange="applyAdjustments()">
-      </div>
-      
-      <!-- Mute/Unmute -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" id="lvMuteBtn" onclick="toggleMute()" title="Mute/Unmute">🎤</button>
-      </div>
-      
-      <!-- Screenshot -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" onclick="takeScreenshot()" title="Screenshot">📸</button>
-      </div>
-      
-      <!-- Hide Controls Toggle -->
-      <div class="lv-control-group">
-        <button class="lv-btn lv-btn-icon" onclick="toggleCameraControls()" title="Hide/Show Controls">👁</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== VIDEO EDITOR ========== -->
-<div id="videoEditor">
-  <div class="ve-top">
-    <div class="cr-back" onclick="closeVideoEditor()">‹</div>
-    <div style="font-family:var(--fd);font-size:15px;font-weight:700;">🎬 Video Editor</div>
-    <button class="btn btn-neon btn-sm" onclick="exportVideo()">Export</button>
-  </div>
-  <div class="ve-prev"><video id="veVideo" controls></video></div>
-  <div class="ve-tools">
-    <div class="ve-tool" onclick="veTool('trim')"><div class="vi">✂️</div><div class="vl">Trim</div></div>
-    <div class="ve-tool" onclick="veTool('subtitle')"><div class="vi">💬</div><div class="vl">Subtitle</div></div>
-    <div class="ve-tool" onclick="veTool('audio')"><div class="vi">🎵</div><div class="vl">Audio</div></div>
-    <div class="ve-tool" onclick="veTool('effect')"><div class="vi">✨</div><div class="vl">Effects</div></div>
-  </div>
-  <div class="ve-filters" id="veFilters"></div>
-</div>
-
-<!-- ========== IMAGE EDITOR ========== -->
-<div id="imageEditor">
-  <div class="ve-top">
-    <div class="cr-back" onclick="closeImageEditor()">‹</div>
-    <div style="font-family:var(--fd);font-size:15px;font-weight:700;">🖼️ Image Editor</div>
-    <button class="btn btn-neon btn-sm" onclick="exportImage()">Save</button>
-  </div>
-  <div class="ie-canvas-wrap"><canvas id="ieCanvas"></canvas></div>
-  <div class="ie-tools">
-    <div class="ie-tool-btn" onclick="ieTool('crop')">✂️ Crop</div>
-    <div class="ie-tool-btn" onclick="ieTool('sticker')">🎉 Sticker</div>
-    <div class="ie-tool-btn" onclick="ieTool('text')">T Text</div>
-    <div class="ie-tool-btn" onclick="ieTool('filter')">🎨 Filter</div>
-    <div class="ie-tool-btn" onclick="ieTool('aiEnhance')">🤖 AI Enhance</div>
-  </div>
-</div>
-
-<!-- ========== TOAST WRAP ========== -->
-<div id="toastWrap"></div>
-
-<!-- ========== FAB ========== -->
-<button id="fab" onclick="openPostModal()" title="Create Post">+</button>
-<script>
 // Ensure FAB works properly
 document.addEventListener('DOMContentLoaded', function() {
   let fab = document.getElementById('fab');
@@ -3338,438 +678,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   console.log('[BottomNav] Fixed', navButtons.length, 'navigation buttons');
 });
-</script>
 
-<!-- ========== MODALS ========== -->
 
-<!-- POST MODAL -->
-<div class="overlay" id="postModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">✨ Create Post</div><div class="modal-x" onclick="closeModal('postModal')">✕</div></div>
-    <div class="rich-toolbar">
-      <button class="rich-btn" onclick="execCmd('bold')"><b>B</b></button>
-      <button class="rich-btn" onclick="execCmd('italic')"><i>I</i></button>
-      <button class="rich-btn" onclick="execCmd('underline')"><u>U</u></button>
-      <button class="rich-btn" onclick="insertLink()">🔗 Link</button>
-      <button class="rich-btn" onclick="startLiveStreamFromPost()" style="background:linear-gradient(90deg,#ff4444,#ff6b6b);color:#fff;font-weight:800;">🔴 LIVE</button>
-    </div>
-    <div class="rich-editor" id="postEditor" contenteditable="true"></div>
-    <div class="fg" style="margin-top:8px;"><input class="fi" id="postTags" placeholder="#hashtags (space separated)"></div>
-    <div class="fg">
-      <label class="fl">Privacy</label>
-      <div style="display:flex;gap:8px;">
-        <label><input type="radio" name="privacy" value="public" checked> 🌐 Public</label>
-        <label><input type="radio" name="privacy" value="friends"> 👥 Friends Only</label>
-        <label><input type="radio" name="privacy" value="private"> 🔒 Only Me</label>
-      </div>
-    </div>
-    <div id="mediaPreview"></div>
-    <div class="h-scroll-ltr" style="margin:6px 0;">
-      <div class="media-chip" onclick="pickFile('image')">📷 Photo</div>
-      <div class="media-chip" onclick="pickFile('video')">📹 Video</div>
-      <div class="media-chip" onclick="pickFile('audio')">🎵 Audio</div>
-      <div class="media-chip" onclick="pickFile('360')">🔄 360° Image</div>
-      <div class="media-chip" id="voiceNoteChip" onclick="toggleVoiceRecording()">🎤 Voice Note</div>
-      <div class="media-chip" onclick="toggleAiPanel()">🤖 AI Features</div>
-    </div>
-    <div id="voiceRecordStatus" style="display:none;margin:6px 0 0;padding:8px 10px;border:1px solid rgba(239,68,68,.25);background:rgba(239,68,68,.08);border-radius:10px;color:var(--c5);font-size:12px;font-weight:700;"></div>
-    <div id="draftStatus" style="font-size:11px;color:var(--t3);margin-top:4px;">🗂 Drafts auto-save locally</div>
-    <input type="file" id="postFileIn" style="display:none" onchange="previewPostFile(this)">
-    <div class="ai-panel" id="aiPanelSection" style="display:none;">
-      <div class="h-scroll-ltr">
-        <div class="media-chip ai-chip" onclick="aiGenerateCaption()">✨ AI Caption</div>
-        <div class="media-chip ai-chip" onclick="aiSuggestHashtags()">🏷️ Hashtags</div>
-        <div class="media-chip ai-chip" onclick="aiDetectObjects()">👁️ Detect Objects</div>
-        <div class="media-chip ai-chip" onclick="aiTranslate()">🌐 Translate</div>
-        <div class="media-chip ai-chip" onclick="aiGenerateImage()">🎨 AI Image</div>
-        <div class="media-chip ai-chip" onclick="aiSummarize()">📄 Summarize</div>
-        <div class="media-chip ai-chip" onclick="aiSpellCheck()">🔍 Spell Check</div>
-        <div class="media-chip ai-chip" onclick="aiSentiment()">😊 Sentiment</div>
-      </div>
-      <div id="aiOutput"></div>
-    </div>
-    <div id="hashtagSuggestArea"></div>
-    <div class="fg">
-      <label class="fl">NFT Options</label>
-      <div style="display:flex;gap:8px;">
-        <label><input type="checkbox" id="mintAsNFT"> Mint as NFT (500 pts)</label>
-        <label><input type="checkbox" id="enableRoyalty"> Enable Royalty (5%)</label>
-      </div>
-    </div>
-    <div id="copyrightNotice" style="display:none;" class="copyright-warn">
-      <div class="cw-title">⚠️ Copyright Warning</div>
-      <p>Possible copyrighted content detected. If posted, this will be <b>auto-blocked</b> and <b>deleted in 12 hours</b> with a notification sent to you.</p>
-      <div class="copyright-auto-delete-bar">⏱ Auto-delete in: <span id="cpCountdown">12:00:00</span></div>
-    </div>
-    <button class="btn btn-p" onclick="submitPostWithLoader()">🚀 Post</button>
-  </div>
-</div>
 
-<!-- POST LOADER TOP BAR -->
-<div id="postLoaderBar" class="post-loader-bar-top"><div class="plb-fill" id="plbFill"></div></div>
-
-<!-- POST LOADER OVERLAY -->
-<div id="postLoader" class="post-loading-overlay" style="display:none;">
-  <div class="post-loading-spinner"></div>
-  <div style="color:white;font-weight:700;font-size:14px;">Publishing post...</div>
-  <div style="color:var(--neon);font-size:12px;margin-top:4px;" id="postLoadMsg">Checking content...</div>
-</div>
-
-<!-- APP UPLOAD MODAL -->
-<div class="overlay center" id="appUploadModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">📱 Submit Your App</div><div class="modal-x" onclick="closeModal('appUploadModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="appName" placeholder="App Name *"></div>
-    <div class="fg"><input class="fi" id="appLink" placeholder="App Link (Play Store / App Store / Any URL) *" oninput="previewAppLink(this.value)"></div>
-    <div id="appLinkPreview" style="margin-bottom:8px;"></div>
-    <!-- App Type selector -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:11px;font-weight:700;color:var(--t3);margin-bottom:6px;">📦 App Type</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <label style="display:flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12px;font-weight:700;">
-          <input type="radio" name="appType" value="playstore" checked style="accent-color:var(--neon);"> 🤖 Play Store
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12px;font-weight:700;">
-          <input type="radio" name="appType" value="appstore" style="accent-color:var(--neon);"> 🍎 App Store
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12px;font-weight:700;">
-          <input type="radio" name="appType" value="apk" style="accent-color:var(--neon);"> 📦 APK / Direct
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12px;font-weight:700;">
-          <input type="radio" name="appType" value="web" style="accent-color:var(--neon);"> 🌐 Web App
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;background:var(--g2);border:1px solid var(--b1);border-radius:99px;padding:4px 11px;cursor:pointer;font-size:12px;font-weight:700;">
-          <input type="radio" name="appType" value="other" style="accent-color:var(--neon);"> 🔗 Other
-        </label>
-      </div>
-    </div>
-    <!-- File Upload for APK/Direct Download -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:11px;font-weight:700;color:var(--t3);margin-bottom:6px;">📥 Upload File (APK, ZIP, etc. - Optional)</div>
-      <input type="file" id="appFileUpload" class="fi" accept=".apk,.zip,.exe,.dmg,.pkg" onchange="handleAppFileUpload(this)">
-      <div id="appFilePreview" style="font-size:11px;color:var(--neon);margin-top:4px;"></div>
-    </div>
-    <div class="fg"><textarea class="fi" id="appDesc" placeholder="Description" rows="3"></textarea></div>
-    <div class="fg"><input class="fi" id="appVersion" placeholder="Version (e.g. 1.0.0)"></div>
-    <div class="fg"><input class="fi" id="appCategory" placeholder="Category (e.g. Games, Tools, Social, Finance...)"></div>
-    <div class="fg"><input class="fi" id="appIcon" placeholder="Icon URL (optional)"></div>
-    <div class="fg"><input class="fi" id="appScreenshots" placeholder="Screenshot URLs (comma separated, optional)"></div>
-    <div style="background:rgba(0,255,170,.06);border:1px solid rgba(0,255,170,.18);border-radius:10px;padding:10px;font-size:11px;color:var(--neon);margin-bottom:10px;">
-      ✅ All app types accepted — Play Store, App Store, APK, Web Apps & more.<br>
-      💰 Earn <b>+10 pts</b> for each install of your app.
-    </div>
-    <button class="btn btn-p" onclick="submitApp()">📤 Submit App</button>
-  </div>
-</div>
-
-<!-- DOWNLOAD QUALITY MODAL -->
-<div class="dl-modal" id="dlModal">
-  <div class="dl-sheet">
-    <div class="dl-ttl">⬇️ <span id="dlModalTitle">Download</span></div>
-    <div class="dl-sub" id="dlModalSub">Choose quality</div>
-    <div class="dl-grid" id="dlQualityGrid"></div>
-    <div class="dl-progress" id="dlProgress"><div class="dl-progress-bar" id="dlProgressBar"></div></div>
-    <!-- Ad shown during download -->
-    <div id="dlAdDuring" style="display:none;margin-top:12px;padding:8px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;text-align:center;min-height:60px;">
-      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
-      <div id="dlAdDuringSlot" style="min-height:40px;"></div>
-    </div>
-    <!-- Ad shown after download completes -->
-    <div id="dlAdAfter" style="display:none;margin-top:12px;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;text-align:center;min-height:90px;">
-      <div style="font-size:9px;color:var(--t3);margin-bottom:4px;">Sponsored</div>
-      <div id="dlAdAfterSlot" style="min-height:70px;"></div>
-    </div>
-    <button class="dl-cancel" onclick="closeDlModal()">✕ Cancel</button>
-  </div>
-</div>
-
-<!-- SHARE MODAL -->
-<div class="overlay center" id="shareModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">🔗 Share Post</div><div class="modal-x" onclick="closeModal('shareModal')">✕</div></div>
-    <div class="share-grid" id="shareGrid"></div>
-  </div>
-</div>
-
-<!-- PAYMENT MODAL -->
-<div class="overlay center" id="payModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">💳 Payment Methods</div><div class="modal-x" onclick="closeModal('payModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="pmBkash" placeholder="bKash Number"></div>
-    <div class="fg"><input class="fi" id="pmNagad" placeholder="Nagad Number"></div>
-    <div class="fg"><input class="fi" id="pmRocket" placeholder="Rocket Number"></div>
-    <div class="fg"><input class="fi" id="pmPaypal" placeholder="PayPal Email"></div>
-    <div class="fg"><input class="fi" id="pmBank" placeholder="Bank Account"></div>
-    <button class="btn btn-p" onclick="savePay()">💾 Save</button>
-  </div>
-</div>
-
-<!-- CRYPTO MODAL -->
-<div class="overlay center" id="cryptoModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">₿ Crypto Wallets</div><div class="modal-x" onclick="closeModal('cryptoModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="cryptoBTC" placeholder="Bitcoin (BTC) Address"></div>
-    <div class="fg"><input class="fi" id="cryptoETH" placeholder="Ethereum (ETH) Address"></div>
-    <div class="fg"><input class="fi" id="cryptoUSDT" placeholder="USDT (TRC20/ERC20) Address"></div>
-    <div class="fg"><input class="fi" id="cryptoBNB" placeholder="BNB (BSC) Address"></div>
-    <div class="fg"><input class="fi" id="cryptoSOL" placeholder="Solana (SOL) Address"></div>
-    <button class="btn btn-p" onclick="saveCrypto()">💾 Save Crypto Wallets</button>
-  </div>
-</div>
-
-<!-- NFT MODAL -->
-<div class="overlay center" id="nftModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">🎨 Mint NFT</div><div class="modal-x" onclick="closeModal('nftModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="nftName" placeholder="NFT Name"></div>
-    <div class="fg"><textarea class="fi" id="nftDesc" placeholder="NFT Description" rows="3"></textarea></div>
-    <div class="fg"><input class="fi" id="nftPrice" type="number" placeholder="Price (in points)"></div>
-    <div class="kyc-upload" onclick="document.getElementById('nftFile').click()">
-      📤 Upload NFT Image/Video<br><small>Max 10MB</small>
-    </div>
-    <input type="file" id="nftFile" style="display:none" accept="image/*,video/*">
-    <button class="btn btn-p" onclick="mintNFTSubmit()" style="margin-top:12px;">Mint NFT (500 pts)</button>
-  </div>
-</div>
-
-<!-- WEB3 SEND MODAL -->
-<div class="overlay center" id="web3SendModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">💸 Send Transaction</div><div class="modal-x" onclick="closeModal('web3SendModal')">✕</div></div>
-    <div id="web3SendContent"></div>
-  </div>
-</div>
-
-<!-- TERMS MODAL -->
-<div class="overlay center" id="termsModal">
-  <div class="modal" style="max-height:80vh;overflow-y:auto;">
-    <div class="modal-hd"><div class="modal-ttl">📋 Terms of Service</div><div class="modal-x" onclick="closeModal('termsModal')">✕</div></div>
-    <div style="font-size:12px;line-height:1.8;color:var(--t2);">
-      <b>1. Acceptance</b><br>By using Monetixra, you agree to these terms.<br><br>
-      <b>2. Earning Rules</b><br>Points are earned through legitimate activity only. Fraud/abuse results in permanent ban.<br><br>
-      <b>3. Withdrawals</b><br>KYC verification required. Minimum 50,000 pts ($50). Admin approval required within 7 business days.<br><br>
-      <b>4. Content Policy</b><br>No adult content, hate speech, copyright violations, or spam.<br><br>
-      <b>5. Privacy</b><br>We collect minimal data necessary for platform operation. See Privacy Policy.<br><br>
-      <b>6. Termination</b><br>We reserve the right to suspend/terminate accounts violating these terms.<br><br>
-      <b>7. Liability</b><br>Monetixra is not liable for any losses arising from platform use.<br><br>
-      <b>Contact:</b> myworktoolsp3@gmail.com
-    </div>
-    <button class="btn btn-p btn-sm" style="margin-top:12px;width:100%;" onclick="closeModal('termsModal');G('rgTerms').checked=true;">✅ I Agree</button>
-  </div>
-</div>
-
-<!-- PRIVACY MODAL -->
-<div class="overlay center" id="privacyModal">
-  <div class="modal" style="max-height:80vh;overflow-y:auto;">
-    <div class="modal-hd"><div class="modal-ttl">🔒 Privacy Policy</div><div class="modal-x" onclick="closeModal('privacyModal')">✕</div></div>
-    <div style="font-size:12px;line-height:1.8;color:var(--t2);">
-      <b>Data We Collect:</b> Name, email, phone, posts, activity.<br><br>
-      <b>How We Use It:</b> Platform operation, fraud prevention, payments.<br><br>
-      <b>Third Parties:</b> Payment processors (bKash, Nagad), Google APIs, Supabase.<br><br>
-      <b>Your Rights:</b> Request data export or deletion anytime via Settings.<br><br>
-      <b>Security:</b> Data encrypted in transit. We never sell your data.<br><br>
-      <b>Contact:</b> myworktoolsp3@gmail.com
-    </div>
-  </div>
-</div>
-
-<!-- EIN / TIN MODAL -->
-<div class="overlay center" id="einModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">📄 E-TIN / Tax ID</div><div class="modal-x" onclick="closeModal('einModal')">✕</div></div>
-    <div style="font-size:12px;color:var(--t3);margin-bottom:10px;">Add your Tax Identification Number for withdrawal compliance.</div>
-    <div class="fg"><input class="fi" id="einNumber" placeholder="TIN/EIN Number (e.g. 123456789)"></div>
-    <div class="fg"><input class="fi" id="einName" placeholder="Name as per Tax ID"></div>
-    <button class="btn btn-p" onclick="submitEIN()">💾 Save TIN/EIN</button>
-  </div>
-</div>
-
-<!-- WITHDRAWAL MODAL -->
-<div class="overlay center" id="wdModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">💸 Withdraw</div><div class="modal-x" onclick="closeModal('wdModal')">✕</div></div>
-    <div style="text-align:center;padding:12px;"><div class="mono neon" id="wdAvail">0</div><div>Available Points</div></div>
-    <div class="fg"><input class="fi" id="wdAmt" type="number" placeholder="Amount (min 50000 pts = $50)"></div>
-    <select class="fi" id="wdMethod">
-      <option>bKash</option><option>Nagad</option><option>Rocket</option>
-      <option>Bank Transfer</option><option>PayPal</option><option>Bitcoin (BTC)</option>
-      <option>Ethereum (ETH)</option><option>USDT</option><option>BNB</option><option>Solana (SOL)</option>
-    </select>
-    <div class="fg"><input class="fi" id="wdAccount" placeholder="Account Number/Address"></div>
-    <button class="btn btn-p" onclick="doWithdraw()">Submit</button>
-  </div>
-</div>
-
-<!-- STRIPE TOP-UP MODAL -->
-<div class="overlay center" id="stripeModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">💳 Top-up with Stripe (USD)</div><div class="modal-x" onclick="closeModal('stripeModal')">✕</div></div>
-    <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">Pay with Visa, Mastercard, or any international card.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
-      <button class="btn btn-ghost btn-sm" onclick="topupWithStripe(1)">$1 → 1,000 pts</button>
-      <button class="btn btn-ghost btn-sm" onclick="topupWithStripe(5)">$5 → 5,000 pts</button>
-      <button class="btn btn-ghost btn-sm" onclick="topupWithStripe(10)">$10 → 10,000 pts</button>
-      <button class="btn btn-ghost btn-sm" onclick="topupWithStripe(25)">$25 → 25,000 pts</button>
-    </div>
-    <div style="font-size:11px;color:var(--t3);margin-bottom:8px;">Custom amount:</div>
-    <div style="display:flex;gap:8px;">
-      <input class="fi" id="stripeCustomAmt" type="number" placeholder="Amount in USD" min="1" step="1" style="flex:1;">
-      <button class="btn btn-p" onclick="topupWithStripe(parseFloat(V('stripeCustomAmt'))||1)">Pay</button>
-    </div>
-    <div style="font-size:10px;color:var(--t3);margin-top:8px;text-align:center;">Secured by Stripe 🔒</div>
-  </div>
-</div>
-
-<!-- STAKE MODAL -->
-<div class="overlay center" id="stakeModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">💎 Stake Points</div><div class="modal-x" onclick="closeModal('stakeModal')">✕</div></div>
-    <div style="background:rgba(109,40,217,.08);border:1px solid rgba(109,40,217,.2);border-radius:10px;padding:10px;margin-bottom:12px;font-size:12px;">
-      💎 Stake your points and earn 15% APY reward!<br>
-      <span style="color:var(--t3);">Minimum: 100 pts · Maturity: 30 days</span>
-    </div>
-    <div class="fg"><input class="fi" id="stakeAmt" type="number" placeholder="Points to stake (min 100)"></div>
-    <button class="btn btn-p" onclick="let a=parseInt(V('stakeAmt'));if(!a||a<100)return toast('e','Min 100');stakePoints();">💎 Stake Now</button>
-  </div>
-</div>
-
-<!-- KYC MODAL -->
-<div class="overlay center" id="kycModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">🪪 KYC Verification</div><div class="modal-x" onclick="closeModal('kycModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="kycFullName" placeholder="Full Name as per ID"></div>
-    <div class="fg"><input class="fi" id="kycNID" placeholder="NID / Passport Number"></div>
-    <div class="fg"><input class="fi" id="kycAddress" placeholder="Address"></div>
-    <div class="kyc-upload" onclick="document.getElementById('kycFront').click()">
-      📄 Upload ID Front<br><small>JPG, PNG, PDF</small>
-    </div>
-    <input type="file" id="kycFront" style="display:none" accept="image/*,.pdf">
-    <div class="kyc-upload" onclick="document.getElementById('kycBack').click()" style="margin-top:8px;">
-      📄 Upload ID Back / Selfie<br><small>JPG, PNG, PDF</small>
-    </div>
-    <input type="file" id="kycBack" style="display:none" accept="image/*,.pdf">
-    <button class="btn btn-p" onclick="submitKYC()" style="margin-top:12px;">Submit KYC</button>
-  </div>
-</div>
-
-<!-- E-TIN MODAL -->
-<div class="overlay center" id="einModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">📄 E-TIN Verification</div><div class="modal-x" onclick="closeModal('einModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="tinNumber" placeholder="TIN Number"></div>
-    <div class="fg"><input class="fi" id="tinName" placeholder="Taxpayer Name"></div>
-    <button class="btn btn-p" onclick="saveTIN()">Save TIN</button>
-  </div>
-</div>
-
-<!-- LANGUAGE MODAL -->
-<div class="overlay center" id="langModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">🌐 Select Language (100+ Languages)</div><div class="modal-x" onclick="closeModal('langModal')">✕</div></div>
-    <div class="lang-grid" id="langGrid"></div>
-    <div style="margin-top:10px;"><input class="fi" id="langSearch" placeholder="Search language..." oninput="searchLanguage(this.value)"></div>
-  </div>
-</div>
-
-<!-- CHANGE PASSWORD MODAL -->
-<div class="overlay center" id="cpModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">🔐 Change Password</div><div class="modal-x" onclick="closeModal('cpModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="cpOld" placeholder="Current Password" type="password"></div>
-    <div class="fg"><input class="fi" id="cpNew" placeholder="New Password" type="password"></div>
-    <div class="fg"><input class="fi" id="cpNew2" placeholder="Confirm Password" type="password"></div>
-    <button class="btn btn-p" onclick="doChangePass()">Update</button>
-  </div>
-</div>
-
-<!-- EDIT PROFILE MODAL -->
-<div class="overlay center" id="editProfileModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">✏️ Edit Profile</div><div class="modal-x" onclick="closeModal('editProfileModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="epName" placeholder="Name"></div>
-    <div class="fg"><input class="fi" id="epUser" placeholder="Username"></div>
-    <div class="fg"><textarea class="fi" id="epBio" placeholder="Bio" rows="3"></textarea></div>
-    <div class="fg"><input class="fi" id="epLocation" placeholder="Location"></div>
-    <div class="fg"><input class="fi" id="epWebsite" placeholder="Website"></div>
-    <button class="btn btn-p" onclick="saveProfile()">Save</button>
-  </div>
-</div>
-
-<!-- DISAPPEAR MODAL -->
-<div class="overlay center" id="disappearModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">⏱ Disappearing Messages</div><div class="modal-x" onclick="closeModal('disappearModal')">✕</div></div>
-    <div class="eh-grid">
-      <div class="eh-btn" onclick="setDisappear(0)"><div class="ei">🚫</div><div class="el">Off</div></div>
-      <div class="eh-btn" onclick="setDisappear(30)"><div class="ei">⚡</div><div class="el">30s</div></div>
-      <div class="eh-btn" onclick="setDisappear(300)"><div class="ei">⏱</div><div class="el">5m</div></div>
-      <div class="eh-btn" onclick="setDisappear(3600)"><div class="ei">⌚</div><div class="el">1h</div></div>
-      <div class="eh-btn" onclick="setDisappear(86400)"><div class="ei">📅</div><div class="el">24h</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- GROUP CHAT MODAL -->
-<div class="overlay center" id="groupModal">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-ttl">👥 Create Group</div><div class="modal-x" onclick="closeModal('groupModal')">✕</div></div>
-    <div class="fg"><input class="fi" id="grpName" placeholder="Group Name"></div>
-    <div class="fg"><input class="fi" id="grpSearch" placeholder="Search users..." oninput="searchGrpMembers(this.value)"></div>
-    <div id="grpMemberList"></div>
-    <div id="grpSelected"></div>
-    <button class="btn btn-p" onclick="createGroup()">Create Group</button>
-  </div>
-</div>
-
-<!-- ========== VIDEO / AUDIO CALL SCREEN ========== -->
-<div id="callScreen">
-  <div class="call-bg"></div>
-  <div class="call-content">
-    <!-- Audio Call UI -->
-    <div class="call-audio-ui" id="callAudioUI">
-      <div class="call-header">
-        <div class="call-name" id="callName">Friend</div>
-        <div class="call-status" id="callStatus">Calling...</div>
-        <div class="call-timer" id="callTimer" style="display:none;">00:00</div>
-      </div>
-      <div class="call-avatar-center" id="callAvatar">👤</div>
-      <div class="call-wave" id="callWave" style="display:none;">
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-    </div>
-    <!-- Video Call UI -->
-    <video id="callRemoteVideo" class="call-remote-video" autoplay playsinline style="display:none;"></video>
-    <div class="call-local-video" id="callLocalWrap" style="display:none;">
-      <video id="callLocalVideo" autoplay playsinline muted></video>
-    </div>
-    <!-- Controls -->
-    <div class="call-controls">
-      <button class="call-btn mute" id="callMuteBtn" onclick="toggleCallMute()" title="Mute">🎤</button>
-      <button class="call-btn end" onclick="endCall()" title="End Call">📵</button>
-      <button class="call-btn speaker" id="callSpeakerBtn" onclick="toggleSpeaker()" title="Speaker">🔊</button>
-      <button class="call-btn cam" id="callCamBtn" onclick="toggleCallCam()" title="Camera" style="display:none;">📷</button>
-    </div>
-  </div>
-</div>
-
-<!-- ========== INCOMING CALL ========== -->
-<div id="incomingCall">
-  <div class="ic-av" id="icAv">👤</div>
-  <div class="ic-info">
-    <div class="ic-name" id="icName">Friend</div>
-    <div class="ic-type" id="icType">📞 Incoming Audio Call</div>
-  </div>
-  <div class="ic-btns">
-    <button class="ic-dec" onclick="declineCall()" title="Decline">📵</button>
-    <button class="ic-acc" onclick="acceptCall()" title="Accept">📞</button>
-  </div>
-</div>
-
-<!-- FILE INPUTS -->
-<input type="file" id="avIn" style="display:none" accept="image/*" onchange="handleAv(this)">
-<input type="file" id="covIn" style="display:none" accept="image/*" onchange="handleCov(this)">
-
-<script>
 // ========== COMPLETE JAVASCRIPT ==========
 const ADMIN_EMAIL = 'myworktoolsp3@gmail.com';
 const ADMIN_PHONE = '01757008864';
@@ -4257,30 +1168,6 @@ function ensurePersistentRecovery() {
     if (!D.stories) D.stories = [];
     if (!D.groups) D.groups = {};
     if (!D.marketplace) D.marketplace = [];
-
-    // Initialize enhanced persistence system for optimal ad display and revenue
-    if (typeof initializeEnhancedPersistence === 'function') {
-      initializeEnhancedPersistence();
-    }
-
-    // Ensure data integrity and user activity tracking
-    if (CU && D.users[CU.id]) {
-      // Track user activity for ad optimization
-      if (typeof persistUserActivity === 'function') {
-        persistUserActivity();
-      }
-      
-      // Optimize ad display based on user engagement
-      if (typeof displayOptimizedAds === 'function') {
-        displayOptimizedAds();
-      }
-      
-      // Track user engagement for maximum monetization
-      if (typeof trackUserEngagement === 'function') {
-        trackUserEngagement();
-      }
-    }
-
     if (!D.nfts) D.nfts = [];
     if (!D.apps) D.apps = [];
     if (!D.withdrawals) D.withdrawals = [];
@@ -5176,16 +2063,13 @@ function mount() {
   
   // Track user login and online status
   if(CU) {
+    let today = new Date().toDateString();
     let u = D.users[CU.id];
     if(u) {
-      const now = Date.now();
-      u.lastLogin = now;
-      u.lastLoginDate = new Date(now).toDateString();
+      u.lastLogin = today;
       u.loginCount = (u.loginCount || 0) + 1;
       u.isOnline = true;
-      u.isLoggedIn = true;
-      u.lastActive = now;
-      u.lastAction = now;
+      u.lastActive = Date.now();
     }
     saveData();
     
@@ -5220,82 +2104,12 @@ function mount() {
 }
 
 // Sync UI
-function refreshWalletUI() {
-  if(!CU) return;
-  const u = D.users[CU.id] || CU;
-  const pts = Number(u.points || 0);
-  const ptsPerUsd = (typeof PTS_PER_USD !== 'undefined' ? PTS_PER_USD : 1000);
-  const usd = (pts / ptsPerUsd).toFixed(2);
-
-  const tbPtsEl = G('tbPts');
-  if(tbPtsEl) tbPtsEl.textContent = fmt(pts) + ' pts';
-
-  const ehBalEl = G('ehBal');
-  if(ehBalEl) ehBalEl.textContent = fmt(pts);
-
-  const ehUsdEl = G('ehUsd');
-  if(ehUsdEl) ehUsdEl.textContent = usd;
-
-  const wBalEl = G('wBal');
-  if(wBalEl) wBalEl.textContent = '$' + usd;
-
-  const wPtsEl = G('wPts');
-  if(wPtsEl) wPtsEl.textContent = fmt(pts) + ' pts';
-
-  const wBadgeEl = G('wBadge');
-  if(wBadgeEl) wBadgeEl.textContent = pts > 10000 ? '💎 Diamond' : pts > 5000 ? '🥇 Gold' : pts > 2000 ? '🥈 Silver' : '🥉 Bronze';
-
-  const adPtsEl = G('adPtsEl');
-  if(adPtsEl) adPtsEl.textContent = (u.adPts || 0) + ' pts';
-
-  const engPtsEl = G('engPtsEl');
-  if(engPtsEl) engPtsEl.textContent = (u.engPts || 0) + ' pts';
-
-  const refPtsEl = G('refPtsEl');
-  if(refPtsEl) refPtsEl.textContent = (u.refPts || 0) + ' pts';
-
-  const mlmPtsEl = G('mlmPtsEl');
-  if(mlmPtsEl) mlmPtsEl.textContent = (u.mlmPts || 0) + ' pts';
-
-  const nftPtsEl = G('nftPtsEl');
-  if(nftPtsEl) nftPtsEl.textContent = (u.nftPts || 0) + ' pts';
-
-  const stakePtsEl = G('stakePtsEl');
-  if(stakePtsEl) stakePtsEl.textContent = (u.stakePts || 0) + ' pts';
-
-  const settPtsEl = G('settPts');
-  if(settPtsEl) settPtsEl.textContent = fmt(pts) + ' pts · $' + usd;
-
-  const settWalletBalEl = G('settWalletBal');
-  if(settWalletBalEl) settWalletBalEl.textContent = '$' + usd;
-}
-function mxtRefreshSocialShell(force=false) {
-  try {
-    if(typeof normalizePostsVisibility === 'function') normalizePostsVisibility();
-    if(typeof syncUI === 'function') syncUI();
-    if(typeof refreshWalletUI === 'function') refreshWalletUI();
-    if(typeof rFeed === 'function') rFeed(force !== false);
-    if(typeof rProfile === 'function' && document.querySelector('.pg.on')?.id === 'pg-profile') rProfile();
-  } catch (e) {
-    console.warn('[Feed] Social shell refresh failed', e);
-  }
-}
-window.mxtRefreshSocialShell = mxtRefreshSocialShell;
-document.addEventListener('visibilitychange', () => {
-  if(document.visibilityState === 'visible') {
-    setTimeout(() => mxtRefreshSocialShell(false), 80);
-  }
-}, {passive:true});
-window.addEventListener('online', () => {
-  setTimeout(() => mxtRefreshSocialShell(true), 120);
-}, {passive:true});
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => mxtRefreshSocialShell(false), 240);
-}, {once:true});
 function syncUI() {
   if(!CU) return;
   let av = G('tbAv'); if(av) av.innerHTML = CU.avatar ? `<img src="${CU.avatar}">` : (CU.name?.charAt(0).toUpperCase()||'M');
-  refreshWalletUI();
+  G('tbPts').textContent = fmt((D.users[CU.id]||CU).points||0)+' pts';
+  G('ehBal') && (G('ehBal').textContent = fmt((D.users[CU.id]||CU).points||0));
+  G('ehUsd') && (G('ehUsd').textContent = (((D.users[CU.id]||CU).points||0)/PTS_PER_USD).toFixed(2));
   let unreadNotif = (D.notifs||[]).filter(n=>!n.read && n.to===CU.id).length;
   G('notifDot') && (G('notifDot').style.display = unreadNotif?'block':'none');
   let unreadMsg = countUnreadMsgs();
@@ -5508,51 +2322,30 @@ function nav(page) {
 
 // Force Follow (cannot unfollow)
 // Modified Follow Function (Permanent Follow)
-// Enhanced Friend System with Facebook-like features
-function permanentFollow(uid, postId = null) {
+function toggleFollow(uid) {
   if(!CU || CU.id === uid) return;
   let target = D.users[uid];
   if(!target) return;
 
-  // Check if already following through any method
   CU.following = CU.following || [];
   CU.forceFollowed = CU.forceFollowed || [];
-  CU.autoFriends = CU.autoFriends || [];
-  
-  if(CU.following.includes(uid) || CU.forceFollowed.includes(uid) || CU.autoFriends.includes(uid)) {
-    toast('i', 'You are already connected with this user');
+  if(CU.following.includes(uid) || (CU.autoFriends||[]).includes(uid) || CU.forceFollowed.includes(uid)) {
+    toast('i', 'You are already following this user. Only they can remove you.');
     return;
   }
 
-  // Follow the user with enhanced persistence
   CU.following.push(uid);
   CU.forceFollowed.push(uid);
-  CU.autoFriends.push(uid);
 
-  // Update target user's followers
   target.followers = target.followers || [];
   if(!target.followers.includes(CU.id)) target.followers.push(CU.id);
   target.forceFollowed = target.forceFollowed || [];
   if(!target.forceFollowed.includes(CU.id)) target.forceFollowed.push(CU.id);
-  target.autoFriends = target.autoFriends || [];
-  if(!target.autoFriends.includes(CU.id)) target.autoFriends.push(CU.id);
 
-  // Award points and send notification
-  addPts(15, 'Connected with new friend', 'engage');
+  addPts(10, 'Followed User', 'engage');
   addNotif(uid, 'follow', '👤', `${CU.name} started following you`);
-  
-  // Show enhanced friend notification
-  showEnhancedFriendNotification(target);
-  
   saveData(); syncUI();
-  toast('s', '✅ Connected with ' + target.name);
-  
-  // If this was triggered by a post, show the post
-  if(postId) {
-    setTimeout(() => {
-      openPostDetail(postId);
-    }, 500);
-  }
+  toast('s', '✅ Following ' + target.name);
 }
 
 // Function for user to remove their own followers (The one who is being followed)
@@ -5712,219 +2505,12 @@ function closeStoryView() { G('storyView').classList.remove('open'); }
 let _feedPage = 0;
 const _FEED_SIZE = 10;
 
-function normalizePostsVisibility() {
-  if(!D.posts || !Array.isArray(D.posts)) return;
-  let changed = false;
-  D.posts.forEach(post => {
-    if(!post) return;
-    if(post.visibility === undefined || post.visibility === null || post.visibility === '') {
-      post.visibility = 'public';
-      changed = true;
-    }
-    if(post.visibility === 'me') {
-      post.visibility = 'public';
-      changed = true;
-    }
-    
-    // Ensure posts have proper visibility for Facebook-like behavior
-    if(post.author === CU?.id) {
-      // User's own posts should be visible in both feed and profile
-      post.visibility = 'public';
-      changed = true;
-    }
-    
-    // Ensure posts are properly timestamped for chronological ordering
-    if(!post.createdAt) {
-      post.createdAt = Date.now();
-      changed = true;
-    }
-    
-    // Ensure posts have proper metadata for social features
-    if(!post.hashtags) post.hashtags = [];
-    if(!post.likes) post.likes = 0;
-    if(!post.comments) post.comments = [];
-    if(!post.shares) post.shares = 0;
-    if(!post.views) post.views = 0;
-    if(!post.reactions) post.reactions = {};
-    if(!post.floweredBy) post.floweredBy = [];
-    if(!post.autoFollows) post.autoFollows = [];
-    if(!post.viewers) post.viewers = [];
-    if(!post.isNFT) post.isNFT = false;
-    if(!post.pinned) post.pinned = false;
-    if(!post.scheduledAt) post.scheduledAt = null;
-    if(!post.published) post.published = true;
-    if(!post.type) post.type = 'text';
-    if(!post.source) post.source = 'app';
-    if(!post.isLive) post.isLive = false;
-    if(!post.streamerName) post.streamerName = null;
-    if(!post.viewers) post.viewers = 0;
-    if(!post.isLive) post.isLive = false;
-    if(!post.isLive) post.isLive = false;
-    if(!post.isLive) post.isLive = false;
-  });
-  if(changed) saveData();
-}
-
-// Enhanced profile persistence with comprehensive data preservation
-function persistProfileData() {
-  if(!CU) return;
-  
-  // Ensure all profile data is properly persisted
-  const profileData = {
-    id: CU.id,
-    name: CU.name,
-    username: CU.username,
-    bio: CU.bio,
-    avatar: CU.avatar,
-    cover: CU.cover,
-    location: CU.location,
-    website: CU.website,
-    email: CU.email,
-    phone: CU.phone,
-    points: CU.points,
-    followers: CU.followers || [],
-    following: CU.following || [],
-    savedPosts: CU.savedPosts || [],
-    posts: CU.posts || [],
-    tasksToday: CU.tasksToday || {},
-    todayPts: CU.todayPts || {},
-    adPts: CU.adPts || 0,
-    engPts: CU.engPts || 0,
-    refPts: CU.refPts || 0,
-    mlmPts: CU.mlmPts || 0,
-    nftPts: CU.nftPts || 0,
-    stakePts: CU.stakePts || 0,
-    createdAt: CU.createdAt,
-    lastLoginDate: CU.lastLoginDate,
-    loginCount: CU.loginCount,
-    isOnline: CU.isOnline,
-    isLoggedIn: CU.isLoggedIn,
-    lastActive: CU.lastActive,
-    lastAction: CU.lastAction,
-    kycVerified: CU.kycVerified,
-    verified: CU.verified,
-    isAdmin: CU.isAdmin,
-    disabled: CU.disabled,
-    twoFA: CU.twoFA,
-    tin: CU.tin,
-    cryptoWallets: CU.cryptoWallets || {},
-    achievements: CU.achievements || [],
-    adViews: CU.adViews || 0,
-    adPts: CU.adPts || 0,
-    engPts: CU.engPts || 0,
-    refPts: CU.refPts || 0,
-    mlmPts: CU.mlmPts || 0,
-    nftPts: CU.nftPts || 0,
-    stakePts: CU.stakePts || 0,
-    refCode: CU.refCode,
-    forceFollowed: CU.forceFollowed || [],
-    autoFriends: CU.autoFriends || [],
-    viewers: CU.viewers || [],
-    autoFollows: CU.autoFollows || [],
-    hiddenFor: CU.hiddenFor || [],
-    deleted: CU.deleted || false,
-    pendingKYC: CU.kycPending,
-    engagementData: CU.engagementData || {},
-    activityData: CU.activityData || {}
-  };
-  
-  // Save to localStorage with backup
-  try {
-    localStorage.setItem(STORAGE_KEY + 'profile_' + CU.id, JSON.stringify(profileData));
-    
-    // Also save to main data for consistency
-    if (D.users[CU.id]) {
-      Object.assign(D.users[CU.id], profileData);
-      saveData();
-    }
-  } catch(e) {
-    console.warn('Profile persistence failed:', e);
-  }
-}
-
-// Enhanced profile loading with comprehensive data restoration
-function loadProfileData() {
-  if(!CU) return;
-  
-  try {
-    const savedProfile = localStorage.getItem(STORAGE_KEY + 'profile_' + CU.id);
-    if (savedProfile) {
-      const profileData = JSON.parse(savedProfile);
-      
-      // Restore profile data
-      Object.assign(CU, profileData);
-      
-      // Ensure critical data is present
-      if (!CU.posts) CU.posts = [];
-      if (!CU.followers) CU.followers = [];
-      if (!CU.following) CU.following = [];
-      if (!CU.savedPosts) CU.savedPosts = [];
-      if (!CU.tasksToday) CU.tasksToday = {};
-      if (!CU.todayPts) CU.todayPts = {};
-      if (!CU.achievements) CU.achievements = [];
-      if (!CU.forceFollowed) CU.forceFollowed = [];
-      if (!CU.autoFriends) CU.autoFriends = [];
-      if (!CU.viewers) CU.viewers = [];
-      if (!CU.autoFollows) CU.autoFollows = [];
-      if (!CU.hiddenFor) CU.hiddenFor = [];
-      if (!CU.engagementData) CU.engagementData = {};
-      if (!CU.activityData) CU.activityData = {};
-      
-      // Save restored data
-      saveData();
-      
-      console.log('[Profile] Profile data restored successfully');
-    }
-  } catch(e) {
-    console.warn('Profile loading failed:', e);
-  }
-}
-
-// Enhanced profile synchronization
-function syncProfileData() {
-  if(!CU) return;
-  
-  // Persist profile data
-  persistProfileData();
-  
-  // Load profile data from backup
-  loadProfileData();
-  
-  // Ensure profile is up to date
-  if (D.users[CU.id]) {
-    const userData = D.users[CU.id];
-    
-    // Update CU with latest data
-    Object.assign(CU, userData);
-    
-    // Ensure critical fields are present
-    if (!CU.posts) CU.posts = [];
-    if (!CU.followers) CU.followers = [];
-    if (!CU.following) CU.following = [];
-    if (!CU.savedPosts) CU.savedPosts = [];
-    if (!CU.tasksToday) CU.tasksToday = {};
-    if (!CU.todayPts) CU.todayPts = {};
-    if (!CU.achievements) CU.achievements = [];
-    if (!CU.forceFollowed) CU.forceFollowed = [];
-    if (!CU.autoFriends) CU.autoFriends = [];
-    if (!CU.viewers) CU.viewers = [];
-    if (!CU.autoFollows) CU.autoFollows = [];
-    if (!CU.hiddenFor) CU.hiddenFor = [];
-    if (!CU.engagementData) CU.engagementData = {};
-    if (!CU.activityData) CU.activityData = {};
-    
-    // Save updated data
-    saveData();
-  }
-}
-
 // Filter posts by privacy settings
 function canViewPost(post) {
-  if(!post) return false;
-  if(!CU) return true; // Guests can view public content
+  if(!CU) return post.visibility === 'public'; // Non-logged users see only public
   if(post.author === CU.id) return true; // Author can always see their own posts
   if(CU.isAdmin) return true; // Admin can see all posts
-  if(post.visibility === undefined || post.visibility === null || post.visibility === 'public') return true; // Public posts visible to all
+  if(post.visibility === 'public') return true; // Public posts visible to all
   if(post.visibility === 'friends') {
     // Friends only - check if current user is following the author
     let author = D.users[post.author];
@@ -5939,15 +2525,12 @@ function canViewPost(post) {
 const _allPosts = () => [...(D.posts||[])].filter(canViewPost).sort((a,b)=>b.createdAt-a.createdAt);
 
 function rFeed(reset=true) {
-  let list = G('feedList'); if(!list) return;
-  normalizePostsVisibility();
+  let list = G('feedList'); if(!list||!CU) return;
   renderFriendSuggestions();
   if(reset) { _feedPage = 0; list.innerHTML=''; }
   let posts = _allPosts();
   if(activeCat!=='all') posts = posts.filter(p=>p.category===activeCat||p.type===activeCat||(activeCat==='music'&&p.type==='audio'));
-  posts = posts.filter(Boolean).sort((a,b)=> (b.createdAt||0) - (a.createdAt||0));
   if(!posts.length){
-    if(typeof syncUI === 'function') syncUI();
     list.innerHTML=`<div style="text-align:center;padding:40px 20px;">
       <div style="font-size:48px;margin-bottom:12px;">🌟</div>
       <div style="font-size:18px;font-weight:800;margin-bottom:8px;">Welcome to Monetixra!</div>
@@ -5959,14 +2542,13 @@ function rFeed(reset=true) {
   }
   const start = _feedPage * _FEED_SIZE;
   const chunk = posts.slice(start, start + _FEED_SIZE);
-  if(typeof syncUI === 'function') syncUI();
   const frag  = document.createDocumentFragment();
   let adIdx   = _feedPage * Math.ceil(_FEED_SIZE / 3);
   chunk.forEach((p,i) => {
     if(i>0 && i%3===0){ let ad=mkFeedMediaStrip(adIdx++); if(ad) frag.appendChild(ad); }
-    try { frag.appendChild(mkPost(p)); } catch (e) { console.warn('[Feed] Failed to render post', p?.id, e); }
+    frag.appendChild(mkPost(p));
   });
-  requestAnimationFrame(() => list.appendChild(frag));
+  list.appendChild(frag);
   if(typeof initFeedAdStrips === 'function') {
     setTimeout(initFeedAdStrips, 100);
   }
@@ -6017,16 +2599,8 @@ function mkPost(post) {
   if(post.file) {
     if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
     else if(post.mimetype?.startsWith('image/')) h += `<div class="post-media"><img src="${post.file}" loading="lazy" onclick="window.open('${post.file}')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" onload="registerPostView('${post.id}','${post.author}','image')" title="Hold/right-click to download"><div class="media-overlay"></div></div>`;
-    else if(post.mimetype?.startsWith('video/')) {
-      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-      const userInteracted = window.mxtUserInteracted || false;
-      h += `<div class="post-media"><video controls playsinline preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')" ${isMobile && !userInteracted ? '' : 'autoplay'}><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
-    }
-    else if(post.mimetype?.startsWith('audio/')) {
-      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-      const userInteracted = window.mxtUserInteracted || false;
-      h += `<div class="post-media" style="position:relative;"><audio controls ${isMobile && !userInteracted ? '' : 'autoplay'} onplay="registerPostView('${post.id}','${post.author}','audio')"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
-    }
+    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video controls playsinline preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
+    else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio controls onplay="registerPostView('${post.id}','${post.author}','audio')"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
   }
   if(post.hashtags?.length) h += `<div class="post-tags">${post.hashtags.map(t=>`<span class="post-tag" onclick="searchTag('${t}')">#${t}</span>`).join('')}</div>`;
   if(post.poll) h += renderPoll(post);
@@ -7136,28 +3710,6 @@ async function submitPostWithLoader() {
 }
 function submitPost() {
   if(!CU){ toast('e','Login required'); closeModal('postModal'); return; }
-  const postDraft = {
-    id: pid(),
-    author: CU.id,
-    scheduledAt: null,
-    published: true,
-    type: pfMime?.startsWith('video')?'video':pfMime?.startsWith('image')?'photo':pfMime?.startsWith('audio')?'audio':pfMime?.includes('360')?'360':'text',
-    text: '',
-    file: pfData||null,
-    mimetype: pfMime||null,
-    hashtags: [],
-    likedBy: [],
-    reactions: {},
-    comments: [],
-    views: 0,
-    shares: 0,
-    pts: 20,
-    pinned: false,
-    createdAt: Date.now(),
-    visibility: 'public',
-    isNFT: false,
-    source: 'app'
-  };
   
   if (voiceRecordingActive && voiceRecorder && voiceRecorder.state !== 'inactive') {
     voiceRecorder.stop();
@@ -7171,7 +3723,7 @@ function submitPost() {
   let editor=document.getElementById('postEditor');
   let text=editor?editor.innerText.trim():'';
   let tags=(V('postTags')||'').match(/#\w+/g)||[];
-  let privacy='public';
+  let privacy=document.querySelector('input[name="privacy"]:checked')?.value||'public';
   if(!text && !pfData){ toast('e','Write something or add media'); closeModal('postModal'); return; }
   // Check schedule
   let schedToggle = G('scheduleToggle');
@@ -7179,7 +3731,7 @@ function submitPost() {
   let isScheduled = schedToggle?.checked && schedTime?.value;
   let scheduledAt = isScheduled ? new Date(schedTime.value).getTime() : null;
   if(scheduledAt && scheduledAt <= Date.now()) { toast('e','Schedule time must be in the future'); return; }
-  let post={ ...postDraft, id:pid(), author:CU.id, scheduledAt:scheduledAt||null, published:!scheduledAt, text, file:pfData||null, mimetype:pfMime||null, hashtags:tags.map(t=>t.slice(1).toLowerCase()), createdAt:Date.now(), visibility:'public', isNFT:false, source:'app' };
+  let post={ id:pid(), author:CU.id, scheduledAt:scheduledAt||null, published:!scheduledAt, type:pfMime?.startsWith('video')?'video':pfMime?.startsWith('image')?'photo':pfMime?.startsWith('audio')?'audio':pfMime?.includes('360')?'360':'text', text, file:pfData||null, mimetype:pfMime||null, hashtags:tags.map(t=>t.slice(1).toLowerCase()), likedBy:[], reactions:{}, comments:[], views:0, shares:0, pts:20, pinned:false, createdAt:Date.now(), visibility:privacy, isNFT:false };
   D.posts=D.posts||[];
   D.posts.unshift(post);
   CU.posts=CU.posts||[]; CU.posts.unshift(post.id);
@@ -7230,11 +3782,6 @@ function submitPost() {
   
   if(typeof trackUserActivity === 'function') {
     trackUserActivity('post');
-  }
-  if(typeof window !== 'undefined' && window.requestAnimationFrame) {
-    window.requestAnimationFrame(() => {
-      try { window.mxtRefreshSocialShell?.(true); } catch (e) { console.warn('[Feed] Post refresh failed', e); }
-    });
   }
   if(socketReady && socket) socket.emit('post:create', {post});
   OfflineCache.save(post);
@@ -7291,75 +3838,41 @@ async function aiGenerateCaption(fromMedia=false) {
     return MonetixraAI.generateCaption('photo');
   }
   
-  // Enhanced fallback with smart media type detection
+  // Fallback
   let out = G('aiOutput');
   let editor = document.getElementById('postEditor');
-  let text = editor ? editor.innerText.trim() : '';
-  
-  if (out) out.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>AI analyzing media...</span></div>';
-  
+  let text = editor ? editor.innerText.trim() : 'social media post';
+  if (out) out.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>AI generating...</span></div>';
   try {
     if (fromMedia && pfData) {
-      // Smart media type detection
       if (pfMime && pfMime.startsWith('image/')) {
         await aiDetectObjects();
         return;
       }
-      if (pfMime && pfMime.startsWith('video/')) {
+      if (pfMime && (pfMime.startsWith('audio/') || pfMime.startsWith('video/'))) {
         try {
           const r = await fetch('/api/ai/transcribe',{
             method:'POST',headers:{'Content-Type':'application/json'},
             body:JSON.stringify({name:pfName||'',data:pfData,type:pfMime})
           });
           const d = await r.json();
-          let cap = d.text || d.transcript || (`Video caption: ${pfName||'trending video content'} — watch now!`);
-          setComposerText(cap, 'Video caption');
+          let cap = d.text || d.transcript || (`Auto-caption for ${pfName||'media'}`);
+          setComposerText(cap, 'Media caption');
           return;
         } catch (e) {
-          let fallback = `Video: ${pfName||'Trending video'} — watch and earn! #Video #Viral #Monetixra`;
-          setComposerText(fallback, 'Video caption');
-          return;
-        }
-      }
-      if (pfMime && pfMime.startsWith('audio/')) {
-        try {
-          const r = await fetch('/api/ai/transcribe',{
-            method:'POST',headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name:pfName||'',data:pfData,type:pfMime})
-          });
-          const d = await r.json();
-          let cap = d.text || d.transcript || (`Audio: ${pfName||'Voice message'} — listen and earn! #Audio #Podcast #Monetixra`);
-          setComposerText(cap, 'Audio caption');
-          return;
-        } catch (e) {
-          let fallback = `Audio: ${pfName||'Voice note'} — share and earn! #Audio #Voice #Monetixra`;
-          setComposerText(fallback, 'Audio caption');
+          let fallback = `Auto-caption: ${pfName||'media'} — ready to publish`;
+          setComposerText(fallback, 'Fallback media caption');
           return;
         }
       }
     }
 
-    // For text posts or when no media is selected
-    const r = await fetch('/api/ai/caption',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageDescription:text||'social media post',tone:'engaging',hashtags:true})});
+    const r = await fetch('/api/ai/caption',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageDescription:text||'amazing post',tone:'engaging',hashtags:true})});
     const d = await r.json();
-    const caption = d.caption || 'Great post! 🔥 #Monetixra #Trending #Viral #Crypto #NFT';
+    const caption = d.caption || 'Great post!';
     setComposerText(caption, 'AI caption');
   } catch(e) {
-    // Fallback based on media type
-    let fallback = '';
-    if (pfData) {
-      if (pfMime && pfMime.startsWith('image/')) {
-        fallback = 'Beautiful image! 📸 #Photo #Instagram #Monetixra #Viral';
-      } else if (pfMime && pfMime.startsWith('video/')) {
-        fallback = 'Trending video! 🎥 #Video #TikTok #Monetixra #Viral';
-      } else if (pfMime && pfMime.startsWith('audio/')) {
-        fallback = 'Voice note! 🎙️ #Audio #Voice #Monetixra #Podcast';
-      } else {
-        fallback = 'Amazing content! ✨ #Monetixra #Trending #Viral #Crypto #NFT';
-      }
-    } else {
-      fallback = 'Amazing content! ✨ #Monetixra #Trending #Viral #Crypto #NFT';
-    }
+    const fallback = 'Amazing content! 🔥 #Monetixra #Trending #Viral #Crypto #NFT';
     setComposerText(fallback, 'Fallback caption');
   }
 }
@@ -7671,8 +4184,8 @@ function watchAd() {
 // Wallet (simplified)
 function rWallet() {
   syncCU(); if(!CU) return;
-  refreshWalletUI();
   let u = D.users[CU.id]||CU;
+  G('wBal').textContent='$'+((u.points||0)/PTS_PER_USD).toFixed(2);
   // Web3 wallet display
   let w3s = G('walletWeb3Status');
   if(w3s) {
@@ -7683,7 +4196,7 @@ function rWallet() {
       G('walletWeb3Addr').textContent = addr.slice(0,8)+'...'+addr.slice(-6);
     }
   }
-  let pts=Number(u.points||0); let tx=G('txList'); if(tx){ let myTxs=(D.txs||[]).filter(t=>t.user===CU.id).slice(0,20); tx.innerHTML=myTxs.length?myTxs.map(t=>`<div class="tx-row"><div class="tx-ic ${t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft'?'tx-earn':'tx-spend'}">${t.type==='earn'?'💰':t.type==='engage'?'❤️':t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💸'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt ${t.pts>0?'tx-pos':'tx-neg'}">${t.pts>0?'+':''}${t.pts}</div></div>`).join(''):'<div style="padding:20px;text-align:center;">No transactions</div>'; } }
+  let pts=CU.points||0; G('wPts').textContent=fmt(pts)+' pts'; G('wBadge').textContent=pts>10000?'💎 Diamond':pts>5000?'🥇 Gold':pts>2000?'🥈 Silver':'🥉 Bronze'; G('adPtsEl').textContent=(CU.adPts||0)+' pts'; G('engPtsEl').textContent=(CU.engPts||0)+' pts'; G('refPtsEl').textContent=(CU.refPts||0)+' pts'; G('mlmPtsEl').textContent=(CU.mlmPts||0)+' pts'; G('nftPtsEl').textContent=(CU.nftPts||0)+' pts'; G('stakePtsEl').textContent=(CU.stakePts||0)+' pts'; let tx=G('txList'); if(tx){ let myTxs=(D.txs||[]).filter(t=>t.user===CU.id).slice(0,20); tx.innerHTML=myTxs.length?myTxs.map(t=>`<div class="tx-row"><div class="tx-ic ${t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft'?'tx-earn':'tx-spend'}">${t.type==='earn'?'💰':t.type==='engage'?'❤️':t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💸'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt ${t.pts>0?'tx-pos':'tx-neg'}">${t.pts>0?'+':''}${t.pts}</div></div>`).join(''):'<div style="padding:20px;text-align:center;">No transactions</div>'; } }
 // savePay defined in FIX 19 above
 // saveCrypto defined in FIX 19 above
 async function doWithdraw() {
@@ -7743,7 +4256,7 @@ function showActiveSessions() { toast('i','Active Sessions','This device only\nL
 function loadLeaderboard(type) { let users=Object.values(D.users).filter(u=>!u.isAdmin).sort((a,b)=>{ if(type==='daily') return (b.todayPts?.pts||0)-(a.todayPts?.pts||0); if(type==='weekly') return (b.weeklyPts||0)-(a.weeklyPts||0); if(type==='monthly') return (b.monthlyPts||0)-(a.monthlyPts||0); return (b.points||0)-(a.points||0); }).slice(0,10); let lbDiv=G('lbPreview'); if(lbDiv){ lbDiv.innerHTML='<div class="section-label">🏆 '+type.toUpperCase()+' Leaderboard</div>'; users.forEach((u,i)=>{ let pts=type==='daily'?u.todayPts?.pts||0:type==='weekly'?u.weeklyPts||0:type==='monthly'?u.monthlyPts||0:u.points||0; lbDiv.innerHTML+=`<div class="lb-row"><div class="lb-rank">${i+1}</div><div class="av av-round av-sm">${u.name.charAt(0)}</div><div><div style="font-weight:700;">${esc(u.name)}</div></div><div class="lb-pts">${fmt(pts)}</div></div>`; }); } }
 
 // Profile (simplified)
-function rProfile() { if(!CU) return; if(typeof normalizePostsVisibility === 'function') normalizePostsVisibility(); G('profName').textContent=CU.name||'User'; G('profUser').textContent='@'+(CU.username||''); G('profBio').textContent=CU.bio||'No bio'; G('profFollowers').textContent=fmt(CU.followers?.length||0); G('profFollowing').textContent=fmt(CU.following?.length||0); G('profPosts').textContent=fmt(CU.posts?.length||0); G('profPts').textContent=fmt(CU.points||0); let av=G('profAv'); if(av) av.innerHTML=CU.avatar?`<img src="${CU.avatar}">`:(CU.name?.charAt(0).toUpperCase()||'M'); let cov=G('coverImg'); if(cov&&CU.cover) cov.style.background=`url(${CU.cover}) center/cover`; profileTab('posts',null); }
+function rProfile() { if(!CU) return; G('profName').textContent=CU.name||'User'; G('profUser').textContent='@'+(CU.username||''); G('profBio').textContent=CU.bio||'No bio'; G('profFollowers').textContent=fmt(CU.followers?.length||0); G('profFollowing').textContent=fmt(CU.following?.length||0); G('profPosts').textContent=fmt(CU.posts?.length||0); G('profPts').textContent=fmt(CU.points||0); let av=G('profAv'); if(av) av.innerHTML=CU.avatar?`<img src="${CU.avatar}">`:(CU.name?.charAt(0).toUpperCase()||'M'); let cov=G('coverImg'); if(cov&&CU.cover) cov.style.background=`url(${CU.cover}) center/cover`; profileTab('posts',null); }
 function profileTab(tab,el) { document.querySelectorAll('#pg-profile .chips .chip').forEach(c=>c.classList.remove('on')); if(el) el.classList.add('on'); let cont=G('profileContent'); if(!cont||!CU) return; let myPosts=D.posts.filter(p=>p.author===CU.id); if(tab==='posts'){ cont.innerHTML=''; if(!myPosts.length){ cont.innerHTML='<div style="padding:30px;text-align:center;">No posts</div>'; return; } myPosts.forEach(p=>cont.appendChild(mkPost(p))); } else if(tab==='media'){ let media=myPosts.filter(p=>p.file); cont.innerHTML=media.length?'<div class="explore-grid">'+media.map(p=>`<div class="exp-item" onclick="window.open('${p.file}')"><img src="${p.file}"></div>`).join('')+'</div>':'<div style="padding:30px;">No media</div>'; } else if(tab==='saved'){ let saved=D.posts.filter(p=>CU.savedPosts?.includes(p.id)); cont.innerHTML=saved.length?saved.map(p=>mkPost(p).outerHTML).join(''):'<div style="padding:30px;">Nothing saved</div>'; } else if(tab==='earnings'){ cont.innerHTML='<div class="wallet-hero"><div class="wh-lbl">Creator Earnings</div><div class="wh-amt">$'+((CU.creatorEarnings||0)/100).toFixed(2)+'</div></div>'; let earnTxs=(D.txs||[]).filter(t=>t.user===CU.id && (t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft')).slice(0,20); earnTxs.forEach(t=>{ let el=document.createElement('div'); el.className='tx-row'; el.innerHTML=`<div class="tx-ic tx-earn">${t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💰'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt tx-pos">+${t.pts}</div>`; cont.appendChild(el); }); } else if(tab==='mlm'){ cont.innerHTML='<div class="mlm-levels">'; MLM_LEVELS.forEach(level=>{ let members=getMLMMembersCount(CU.id,level.level); cont.innerHTML+=`<div class="mlm-level"><div class="level-name">${level.name}</div><div class="level-commission">Commission: ${level.commission*100}%</div><div class="level-members">Members: ${members}</div></div>`; }); cont.innerHTML+='</div><div class="card" style="margin-top:12px;"><div class="section-label">Direct Referrals</div>'; (CU.refs||[]).forEach(ref=>{ let refUser=D.users[ref]; if(refUser) cont.innerHTML+=`<div class="chat-item"><div class="av av-round av-sm">${refUser.name.charAt(0)}</div><div>${esc(refUser.name)}</div><div>${fmt(refUser.points||0)} pts</div></div>`; }); cont.innerHTML+='</div>'; } else if(tab==='nft'){ let myNFTs=(D.nfts||[]).filter(n=>n.creator===CU.id||n.owner===CU.id); cont.innerHTML=myNFTs.length?'<div class="nft-marketplace">'+myNFTs.map(n=>`<div class="nft-item"><div class="nft-image"><img src="${n.image}" style="width:100%;height:100%;object-fit:cover;"></div><div class="nft-info"><div class="nft-name">${esc(n.name)}</div><div class="nft-price">${n.price} pts</div><div>${n.sold?'Sold':'Available'}</div></div></div>`).join('')+'</div>':'<div style="padding:30px;">No NFTs yet</div>'; } else if(tab==='achievements'){ cont.innerHTML='<div class="section-label">🏅 Achievements</div>'; ACHIEVEMENTS.forEach(ach=>{ let earned=CU?.achievements?.includes(ach.id); cont.innerHTML+=`<div class="task-card"><div class="task-ico">${ach.icon}</div><div class="task-info"><div class="task-name">${ach.name}</div><div class="task-desc">${ach.desc}</div></div><div class="task-reward">+${ach.reward}</div>${earned?'<span class="badge b-g">✅ Earned</span>':'<span class="badge b-o">🔒 Locked</span>'}</div>`; }); } }
 function viewUser(uid) { if(uid===CU?.id){ nav('profile'); } else { toast('i','View user: '+uid); } }
 function changeAvatar() { G('avIn').click(); }
@@ -7949,9 +4462,7 @@ function trackUserActivity(actionType = 'general') {
   // Update last active timestamp
   user.lastActive = now;
   user.lastAction = now;
-  user.lastSeen = now;
   user.isOnline = true;
-  user.isLoggedIn = true;
   
   // Track session
   if(!user.sessionStart) {
@@ -7969,7 +4480,6 @@ function trackUserActivity(actionType = 'general') {
   // Track specific actions
   if(actionType === 'login') {
     user.lastLogin = now;
-    user.lastLoginDate = today;
     user.loginCount = (user.loginCount || 0) + 1;
     user.dailyUsage[today].loginCount++;
     user.isLoggedIn = true;
@@ -7989,28 +4499,15 @@ setInterval(() => {
 // Mark user as offline when leaving
 window.addEventListener('beforeunload', () => {
   if(CU && D.users[CU.id]) {
-    const me = D.users[CU.id];
-    me.isOnline = false;
-    me.isLoggedIn = false;
-    me.lastActive = Date.now();
-    me.lastSeen = Date.now();
-    me.lastAction = Date.now();
-    const dayKey = new Date().toDateString();
-    me.dailyUsage = me.dailyUsage || {};
-    me.dailyUsage[dayKey] = me.dailyUsage[dayKey] || {};
-    me.dailyUsage[dayKey].lastSeen = Date.now();
-    me.dailyUsage[dayKey].lastAction = Date.now();
-    try { saveData(); } catch (e) {}
+    D.users[CU.id].isOnline = false;
+    D.users[CU.id].lastActive = Date.now();
+    saveData();
   }
 });
 
 // Function to initialize user tracking fields for accurate statistics
 function initializeUserTracking() {
   if(!D.users) return;
-  D.analytics = D.analytics || {};
-  D.analytics.loginEvents = D.analytics.loginEvents || [];
-  D.analytics.usageEvents = D.analytics.usageEvents || [];
-  D.analytics.activeSessions = D.analytics.activeSessions || {};
   
   Object.keys(D.users).forEach(userId => {
     let user = D.users[userId];
@@ -8024,117 +4521,52 @@ function initializeUserTracking() {
     if(!user.isLoggedIn) user.isLoggedIn = false;
     if(!user.isOnline) user.isOnline = false;
     if(!user.dailyUsage) user.dailyUsage = {};
-    if(!user.lastSeen) user.lastSeen = 0;
-    if(!user.lastLoginDate) user.lastLoginDate = '';
   });
   
   saveData();
-}
-
-function getLiveTimestamp(value) {
-  if(value === null || value === undefined || value === '') return 0;
-  if(typeof value === 'number' && Number.isFinite(value)) return value;
-  if(typeof value === 'string') {
-    const trimmed = value.trim();
-    if(/^\d+$/.test(trimmed)) return Number(trimmed);
-    const parsed = Date.parse(trimmed);
-    return Number.isNaN(parsed) ? 0 : parsed;
-  }
-  return 0;
-}
-
-function buildAdminStatsSnapshot() {
-  if(!D?.users) return {
-    totalUsers: 0,
-    onlineNow: 0,
-    activeToday: 0,
-    kycVerified: 0,
-    totalPosts: 0,
-    totalWithdrawals: 0,
-    disabledUsers: 0,
-    revenuePts: 0,
-    loggedInUsers: 0,
-    activeSessions: 0,
-    usedAppToday: 0,
-    todayLogin: 0
-  };
-
-  const users = Object.values(D.users).filter(u => u && !u.deleted);
-  const posts = D.posts || [];
-  const withdrawals = D.withdrawals || [];
-  const txs = D.txs || [];
-  const analytics = D.analytics || {};
-  const loginEvents = Array.isArray(analytics.loginEvents) ? analytics.loginEvents : [];
-  const usageEvents = Array.isArray(analytics.usageEvents) ? analytics.usageEvents : [];
-  const activeSessionEntries = Object.values(analytics.activeSessions || {});
-  const now = Date.now();
-  const today = new Date(now).toDateString();
-  const todayStart = new Date(now).setHours(0,0,0,0);
-  const fiveMinutesAgo = now - 300000;
-  const thirtyMinutesAgo = now - 1800000;
-
-  const totalUsers = users.length;
-  const activeSessionUsers = new Set(activeSessionEntries.filter(s => getLiveTimestamp(s.at) > fiveMinutesAgo).map(s => s.userId).filter(Boolean));
-  const onlineNow = users.filter(u => {
-    const lastSeen = getLiveTimestamp(u.lastActive || u.lastAction || u.lastLogin || u.lastSeen);
-    return activeSessionUsers.has(u.id) || lastSeen > fiveMinutesAgo;
-  }).length;
-  const activeToday = users.filter(u => {
-    const lastAction = getLiveTimestamp(u.lastAction || u.lastActive || u.lastLogin || u.lastSeen);
-    const dailyLastSeen = getLiveTimestamp(u.dailyUsage?.[today]?.lastSeen || u.dailyUsage?.[today]?.lastAction);
-    const lastLogin = getLiveTimestamp(u.lastLogin || u.lastLoginAt);
-    return Math.max(lastAction, lastLogin, dailyLastSeen) >= todayStart;
-  }).length;
-  const kycVerified = users.filter(u => u.kycVerified).length;
-  const totalPosts = posts.length;
-  const totalWithdrawals = withdrawals.length;
-  const disabledUsers = users.filter(u => u.disabled).length;
-  const revenuePts = txs.reduce((sum, tx) => {
-    const pts = Number(tx?.pts || 0);
-    return pts > 0 ? sum + pts : sum;
-  }, 0) + Number(D.users[ADMIN_ID]?.adminRevenue || 0);
-  const loggedInUsers = users.filter(u => {
-    const lastSeen = getLiveTimestamp(u.lastActive || u.lastAction || u.lastLogin || u.lastSeen);
-    return activeSessionUsers.has(u.id) || lastSeen > thirtyMinutesAgo;
-  }).length;
-  const activeSessions = activeSessionEntries.filter(s => getLiveTimestamp(s.at) > fiveMinutesAgo).length;
-  const usedAppToday = new Set([
-    ...usageEvents.filter(e => getLiveTimestamp(e.at) >= todayStart).map(e => e.userId),
-    ...users.filter(u => {
-      const lastAction = getLiveTimestamp(u.lastAction || u.lastActive || u.lastLogin || u.lastSeen);
-      const dailyLastSeen = getLiveTimestamp(u.dailyUsage?.[today]?.lastSeen || u.dailyUsage?.[today]?.lastAction);
-      return Math.max(lastAction, dailyLastSeen) >= todayStart;
-    }).map(u => u.id)
-  ].filter(Boolean)).size;
-  const todayLogin = new Set([
-    ...loginEvents.filter(e => getLiveTimestamp(e.at) >= todayStart).map(e => e.userId),
-    ...users.filter(u => getLiveTimestamp(u.lastLogin || u.lastLoginAt) >= todayStart).map(u => u.id)
-  ].filter(Boolean)).size;
-  const todayLoginUse = `${todayLogin}/${usedAppToday}`;
-
-  return {
-    totalUsers,
-    onlineNow,
-    activeToday,
-    kycVerified,
-    totalPosts,
-    totalWithdrawals,
-    disabledUsers,
-    revenuePts,
-    loggedInUsers,
-    activeSessions,
-    usedAppToday,
-    todayLogin,
-    todayLoginUse
-  };
 }
 
 // Function to refresh admin statistics in real-time
 function refreshAdminStats() {
   if(!D.users) return;
   
-  const stats = buildAdminStatsSnapshot();
-  const { totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals, disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin, todayLoginUse } = stats;
+  let users = Object.values(D.users);
+  let allPosts = D.posts||[];
+  let today = new Date().toDateString();
+  let fiveMinutesAgo = Date.now() - 300000;
+  
+  // Calculate statistics
+  let totalUsers = users.length;
+  let onlineNow = users.filter(u => {
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return lastActive > fiveMinutesAgo;
+  }).length;
+  let activeToday = users.filter(u => {
+    let lastLogin = u.lastLogin || 0;
+    let lastActive = u.lastActive || 0;
+    let loginDate = new Date(lastLogin).toDateString();
+    let activeDate = new Date(lastActive).toDateString();
+    return loginDate === today || activeDate === today || u.todayPts?.date === today;
+  }).length;
+  let kycVerified = users.filter(u => u.kycVerified).length;
+  let totalPosts = allPosts.length;
+  let totalWithdrawals = (D.withdrawals || []).length;
+  let disabledUsers = users.filter(u => u.disabled).length;
+  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
+  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length;
+  let activeSessions = users.filter(u => {
+    let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
+    return sessionDate === today;
+  }).length;
+  let usedAppToday = users.filter(u => {
+    let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
+    let actionDate = new Date(lastAction).toDateString();
+    return actionDate === today;
+  }).length;
+  let todayLogin = users.filter(u => {
+    let loginDate = new Date(u.lastLogin || 0).toDateString();
+    return loginDate === today;
+  }).length;
   
   // Update the stats display
   let statsEl = document.getElementById('adminStats');
@@ -8148,17 +4580,18 @@ function refreshAdminStats() {
       <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${totalWithdrawals}</div><div class="as-l">Withdrawals</div></div>
       <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${disabledUsers}</div><div class="as-l">Disabled</div></div>
       <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(revenuePts)}</div><div class="as-l">Revenue pts</div></div>
-      <div class="admin-stat" id="adminUsageStats"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
+      <div class="admin-stat"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
       <div class="admin-stat"><div class="as-i">📱</div><div class="as-n">${activeSessions}</div><div class="as-l">Sessions</div></div>
       <div class="admin-stat"><div class="as-i">🎯</div><div class="as-n">${usedAppToday}</div><div class="as-l">Used App</div></div>
       <div class="admin-stat"><div class="as-i">🔑</div><div class="as-n">${todayLogin}</div><div class="as-l">Today Login</div></div>
-      <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${todayLoginUse}</div><div class="as-l">Today Login/Use</div></div>
-      <div class="admin-stat" style="grid-column:1 / -1;font-size:10px;color:var(--t3);padding-top:4px;">🧠 Live metrics synced from real login, activity and transaction events.</div>
     `;
   }
   
   // Update stored data
-  window.adminStatsData = stats;
+  window.adminStatsData = {
+    totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals,
+    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin
+  };
 }
 
 function rAdmin() {
@@ -8170,11 +4603,69 @@ function rAdmin() {
   
   // Stats
   let users = Object.values(D.users);
+  let allPosts = D.posts||[];
   let revenue = (D.users[ADMIN_ID]?.adminRevenue||0);
-  const stats = buildAdminStatsSnapshot();
-  const { totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals, disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin, todayLoginUse } = stats;
-  const pendingWithdrawals = (D.withdrawals || []).filter(w => w.status === 'pending').length;
-  const completedWithdrawals = (D.withdrawals || []).filter(w => w.status === 'completed').length;
+  
+  // Calculate accurate statistics
+  let today = new Date().toDateString();
+  let fiveMinutesAgo = Date.now() - 300000; // 5 minutes ago threshold
+  
+  // Total Users
+  let totalUsers = users.length;
+  
+  // Online Now (users active within last 5 minutes)
+  let onlineNow = users.filter(u => {
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return lastActive > fiveMinutesAgo;
+  }).length;
+  
+  // Active Today (users who logged in or used app today)
+  let activeToday = users.filter(u => {
+    let lastLogin = u.lastLogin || 0;
+    let lastActive = u.lastActive || 0;
+    let loginDate = new Date(lastLogin).toDateString();
+    let activeDate = new Date(lastActive).toDateString();
+    return loginDate === today || activeDate === today || u.todayPts?.date === today;
+  }).length;
+  
+  // KYC Verified
+  let kycVerified = users.filter(u => u.kycVerified).length;
+  
+  // Total Posts
+  let totalPosts = allPosts.length;
+  
+  // Withdrawals (total and pending)
+  let totalWithdrawals = (D.withdrawals || []).length;
+  let pendingWithdrawals = (D.withdrawals || []).filter(w => w.status === 'pending').length;
+  let completedWithdrawals = (D.withdrawals || []).filter(w => w.status === 'completed').length;
+  
+  // Disabled Users
+  let disabledUsers = users.filter(u => u.disabled).length;
+  
+  // Revenue Points (total points earned by all users)
+  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
+  
+  // Logged In Users (users with active session)
+  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length; // 30 min
+  
+  // Active Sessions (track unique sessions today)
+  let activeSessions = users.filter(u => {
+    let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
+    return sessionDate === today;
+  }).length;
+  
+  // Used App Today (users who performed any action today)
+  let usedAppToday = users.filter(u => {
+    let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
+    let actionDate = new Date(lastAction).toDateString();
+    return actionDate === today;
+  }).length;
+  
+  // Today Login (users who logged in today)
+  let todayLogin = users.filter(u => {
+    let loginDate = new Date(u.lastLogin || 0).toDateString();
+    return loginDate === today;
+  }).length;
   
   // Build analytics
   renderAdminAnalytics(users);
@@ -8187,16 +4678,17 @@ function rAdmin() {
     <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${totalWithdrawals}</div><div class="as-l">Withdrawals</div></div>
     <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${disabledUsers}</div><div class="as-l">Disabled</div></div>
     <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(revenuePts)}</div><div class="as-l">Revenue pts</div></div>
-    <div class="admin-stat" id="adminUsageStats"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
+    <div class="admin-stat"><div class="as-i">🔐</div><div class="as-n">${loggedInUsers}</div><div class="as-l">Logged In</div></div>
     <div class="admin-stat"><div class="as-i">📱</div><div class="as-n">${activeSessions}</div><div class="as-l">Sessions</div></div>
     <div class="admin-stat"><div class="as-i">🎯</div><div class="as-n">${usedAppToday}</div><div class="as-l">Used App</div></div>
     <div class="admin-stat"><div class="as-i">🔑</div><div class="as-n">${todayLogin}</div><div class="as-l">Today Login</div></div>
-    <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${todayLoginUse}</div><div class="as-l">Today Login/Use</div></div>
-    <div class="admin-stat" style="grid-column:1 / -1;font-size:10px;color:var(--t3);padding-top:4px;">🧠 Live metrics synced from real login, activity and wallet events.</div>
   `;
   
   // Store statistics for real-time refresh
-  window.adminStatsData = stats;
+  window.adminStatsData = {
+    totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals,
+    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin
+  };
   
   // Start auto-refresh for statistics when admin panel is open
   if(window.adminStatsRefreshInterval) clearInterval(window.adminStatsRefreshInterval);
@@ -8232,7 +4724,7 @@ function rAdmin() {
         <span>Active Today: <b style="color:var(--c3);">${Object.values(D.users).filter(u=>u.todayPts?.date===new Date().toDateString()).length}</b></span>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:11px;">
-        <span>Total Posts: <b style="color:var(--neon);">${totalPosts}</b></span>
+        <span>Total Posts: <b style="color:var(--neon);">${allPosts.length}</b></span>
         <span>Platform Revenue: <b style="color:var(--c4);">$${(revenue/PTS_PER_USD).toFixed(2)}</b></span>
       </div>`;
   }
@@ -12052,20 +8544,6 @@ function startBanner() {
 }
 function clickBanner() { addPts(2,'Banner Click'); let btn=G('bannerAd')?.querySelector('.ba-earn'); if(btn){ btn.textContent='✅'; setTimeout(()=>btn.textContent='+2',1500); } }
 function closeBanner() { let b=G('bannerAd'); if(b) b.style.display='none'; }
-function dismissOfferElement(trigger) {
-  const gate = trigger?.closest?.('.mxt-reward-gate');
-  if(gate) { gate.remove(); return true; }
-  const overlay = trigger?.closest?.('#rwAd,#autoAd,#intsAd,#interstitialOverlay');
-  if(overlay) {
-    overlay.classList?.remove('show');
-    if(overlay.id === 'interstitialOverlay') overlay.remove();
-    else if(overlay.id === 'rwAd' || overlay.id === 'autoAd' || overlay.id === 'intsAd') overlay.style.display = 'none';
-    return true;
-  }
-  const box = trigger?.closest?.('.ad-container,.ad-native,.feed-ad,.mxt-rotating-ad,.mxt-bottom-live-ad,.mxt-floating-pts,.mxt-reward-card,.rewarded-ad-container,.ad-wrapper');
-  if(box) { box.remove(); return true; }
-  return false;
-}
 function adTypeClick(type,el) { document.querySelectorAll('.adpill').forEach(p=>p.classList.remove('on')); el.classList.add('on'); if(type==='interstitial') showInts(); else if(type==='reward') G('rwAd').classList.add('show'); else if(type==='auto') showAutoAd(); else if(type==='click'){ addPts(2,'Click Reward'); toast('s','+2 pts!'); } else toast('i','Ad type: '+type); }
 let intsTimer=null; const INTS_ADS=[
   {icon:'🎯',title:'Watch & Earn!',sub:'Keep watching to earn more points!'},
@@ -13054,8 +9532,9 @@ async function toggleScreenShare() {
   } catch(e){if(e.name!=='NotAllowedError')toast('e','Screen share error: '+e.message);}
 }
 
-</script>
-<script>
+
+
+
 // PWA Service Worker
 if('serviceWorker' in navigator && location.protocol !== 'file:'){
   window.addEventListener('load', ()=>{
@@ -13687,44 +10166,29 @@ window.checkPaywall = checkPaywall;
 //  Hybrid Storage Modules (21GB+ Free Storage)
 //  IndexedDB + Supabase + MEGA Integration
 // ============================================================
-</script>
 
-<!-- Offline Storage (IndexedDB) - 500MB+ -->
-<script src="js/indexeddb-storage.js"></script>
 
-<!-- Large File Storage (MEGA) - 20GB -->
-<script src="js/mega-storage.js"></script>
 
-<!-- Supabase JS Client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 
-<!-- Real-time Subscriptions (Supabase) -->
-<script src="js/supabase-realtime.js"></script>
 
-<!-- Ultimate Persistence Manager - Points, Session, Media, Posts, Chats -->
-<script src="js/persistence-manager.js"></script>
 
-<!-- Ad Rotation System - Different ad networks on each click -->
-<script src="js/ad-rotation-system.js"></script>
 
-<!-- ═════════════════════════════════════════════════════════════ -->
-<!-- MONETIXRA - MODULAR SYSTEMS (NEW) -->
-<!-- ═════════════════════════════════════════════════════════════ -->
 
-<!-- Hardened Authentication System -->
-<script src="js/auth-system.js"></script>
 
-<!-- Account Management (Notifications, Deactivate, Delete, SignOut) -->
-<script src="js/account-management.js"></script>
 
-<!-- AI Features (Caption, Hashtags, Objects, Translation) -->
-<script src="js/ai-features.js"></script>
 
-<!-- Complete Offline Sync System -->
-<script src="js/offline-sync.js"></script>
 
-<!-- Initialize Hybrid Storage -->
-<script>
+
+
+
+
+
+
+
+
+
+
+
 // Auto-initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('[Monetixra] Initializing Hybrid Storage System...');
@@ -13756,14 +10220,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   console.log('[Monetixra] Hybrid Storage System ready! (21GB+ capacity)');
 });
-</script>
 
-<!-- ProfitableCPMRate — Native Banner Container (global) -->
-<div id="container-1805a61f4f6c6177d946441e5153e81c"></div>
 
-<!-- ProfitableCPMRate — Banner 468x60 -->
-<div id="footerBanner468"></div>
-<script>
+
 (function() {
   window.atOptions_banner468 = { 'key' : '2c59b270de9e21b57ad543e7b88c2e3f', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
   window.atOptions = window.atOptions_banner468;
@@ -13771,11 +10230,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   s.src = 'https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js';
   document.getElementById('footerBanner468').appendChild(s);
 })();
-</script>
 
-<!-- ProfitableCPMRate — Banner 300x50 -->
-<div id="footerBanner300"></div>
-<script>
+
+
 (function() {
   window.atOptions_banner300 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 50, 'width' : 300, 'params' : {} };
   window.atOptions = window.atOptions_banner300;
@@ -13783,40 +10240,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
   document.getElementById('footerBanner300').appendChild(s);
 })();
-</script>
 
-<!-- ProfitableCPMRate — Smartlink (hidden, earns on redirect) -->
-<iframe src="https://www.profitablecpmratenetwork.com/qu1bqnynm6?key=d753b3018195910056f99110db5b614a" style="width:0;height:0;border:none;position:absolute;left:-9999px;" aria-hidden="true"></iframe>
 
-<!-- ═══════════════════════════════════════════════════════════
-     MAXIMUM REVENUE AD PLACEMENTS — Added for High CPM
-     ═══════════════════════════════════════════════════════════ -->
 
-<!-- Leaderboard 728x90 (Desktop) — Highest CPM -->
-<div id="leaderboard728" style="margin:15px auto;text-align:center;max-width:728px;"></div>
-<script>
 (function() {
   window.atOptions_728 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
   let s = document.createElement('script');
   s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
   document.getElementById('leaderboard728').appendChild(s);
 })();
-</script>
 
-<!-- Wide Skyscraper 160x600 (Sidebar) — High CPM -->
-<div id="skyscraper160" style="position:fixed;right:10px;top:150px;width:160px;height:600px;z-index:999;background:var(--glass);border-radius:12px;padding:5px;" class="desktop-only"></div>
-<script>
+
+
 (function() {
   window.atOptions_160 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
   let s = document.createElement('script');
   s.src = 'https://www.highperformanceformat.com/ddb48e8829959135fea1323207677af1/invoke.js';
   document.getElementById('skyscraper160').appendChild(s);
 })();
-</script>
 
-<!-- Mobile Banner 320x50 — Mobile High CPM -->
-<div id="mobileBanner320" style="margin:10px auto;text-align:center;max-width:320px;" class="mobile-only"></div>
-<script>
+
+
 (function() {
   if(window.innerWidth <= 768) {
     window.atOptions_320 = { 'key' : 'ddb48e8829959135fea1323207677af1', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
@@ -13825,12 +10269,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('mobileBanner320').appendChild(s);
   }
 })();
-</script>
 
-<!-- In-Feed Native Ads — Content Match High CPM -->
-<div id="infeedNative1" style="margin:20px auto;padding:15px;background:var(--card);border-radius:12px;max-width:600px;"></div>
-<div id="infeedNative2" style="margin:20px auto;padding:15px;background:var(--card);border-radius:12px;max-width:600px;"></div>
-<script>
+
+
 (function(){
   const nativeAds = [
     {icon:'🎯',title:'Earn $5 Per Referral!',desc:'Invite friends & earn unlimited. No cap on earnings!'},
@@ -13845,19 +10286,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   setTimeout(() => { injectNative('infeedNative1', nativeAds[0]); injectNative('infeedNative2', nativeAds[1]); }, 2000);
 })();
-</script>
 
-<!-- Video Pre-Roll Ad Placeholder — Video CPM Highest -->
-<div id="videoAdContainer" style="margin:20px auto;max-width:480px;background:var(--dark2);border-radius:12px;overflow:hidden;display:none;">
-  <div style="background:linear-gradient(90deg,var(--c1),var(--c2));padding:8px 12px;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:space-between;">
-    <span>📺 Video Ad — Earn +15 pts</span>
-    <span id="videoTimer" style="background:rgba(0,0,0,0.3);padding:3px 10px;border-radius:20px;font-size:11px;">15s</span>
-  </div>
-  <div style="padding:30px;text-align:center;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>▶️</text></svg>') center/80px no-repeat,var(--dark2);min-height:200px;position:relative;">
-    <button onclick="watchVideoAd()" style="background:var(--neon);color:#000;border:none;padding:12px 30px;border-radius:30px;font-weight:700;cursor:pointer;font-size:14px;position:absolute;bottom:20px;left:50%;transform:translateX(-50%);">Watch & Earn +15</button>
-  </div>
-</div>
-<script>
+
+
 function watchVideoAd() {
   let timer = 15;
   const btn = document.querySelector('#videoAdContainer button');
@@ -13869,42 +10300,17 @@ function watchVideoAd() {
   }, 1000);
 }
 setTimeout(() => { const el = document.getElementById('videoAdContainer'); if(el) el.style.display='block'; }, 60000);
-</script>
 
-<!-- Floating Action Button Ad — Persistent Earning (REMOVED) -->
-<style>
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
-.mxt-safe-fab{position:fixed !important;right:18px !important;width:64px !important;height:64px !important;border-radius:50% !important;display:none !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;z-index:100020 !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;touch-action:manipulation !important;-webkit-tap-highlight-color:transparent !important;box-shadow:0 12px 34px rgba(0,0,0,.38),0 0 28px rgba(0,212,255,.22) !important;animation:pulse 2s infinite;}
-.mxt-create-fab{bottom:calc(92px + env(safe-area-inset-bottom)) !important;background:linear-gradient(135deg,#6d28d9,#00ffaa) !important;}
-.mxt-fire-fab{bottom:calc(166px + env(safe-area-inset-bottom)) !important;background:linear-gradient(135deg,#ff6b6b,#ee5a6f) !important;}
-.mxt-safe-fab span{font-size:0 !important;line-height:1 !important;user-select:none !important;}
-.mxt-create-fab span::before{content:'+';font-size:34px;font-weight:800;color:#06030a;}
-.mxt-fire-fab span::before{content:'🔥';font-size:28px;}
-@media (max-width:520px){.mxt-safe-fab{right:18px !important;width:62px !important;height:62px !important}.mxt-create-fab{bottom:calc(94px + env(safe-area-inset-bottom)) !important}.mxt-fire-fab{bottom:calc(168px + env(safe-area-inset-bottom)) !important}}
-.mxt-safe-fab{transition:right .22s ease,transform .22s ease,opacity .22s ease !important;}
-.mxt-safe-fab.outside{right:-42px !important;opacity:.9 !important;}
-.mxt-safe-fab.inside{right:18px !important;opacity:1 !important;}
-</style>
-<script>
+
+
 // FAB handlers removed - floating action buttons disabled
-</script>
 
-<!-- Exit Intent Popup — High Conversion -->
-<div id="exitIntent" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
-  <div style="background:var(--glass);border:1px solid var(--neon);border-radius:20px;padding:30px;max-width:350px;text-align:center;backdrop-filter:blur(20px);">
-    <div style="font-size:40px;margin-bottom:10px;">💎</div>
-    <div style="font-size:18px;font-weight:700;color:var(--neon);margin-bottom:10px;">Wait! Don't Leave!</div>
-    <div style="font-size:14px;color:var(--t2);margin-bottom:20px;">Claim your <b>+50 bonus points</b> before you go!</div>
-    <button onclick="addPts(50,'Exit Intent Bonus');document.getElementById('exitIntent').style.display='none';toast('s','+50 Bonus pts!');" style="background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:12px 30px;border-radius:30px;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;">Claim +50 pts</button>
-    <button onclick="document.getElementById('exitIntent').style.display='none'" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;">No thanks</button>
-  </div>
-</div>
-<script>
+
+
 document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStorage.getItem('exitIntentShown')) { document.getElementById('exitIntent').style.display='flex'; localStorage.setItem('exitIntentShown', Date.now()); } });
-</script>
 
-<!-- Scroll Depth Ad Trigger — Engagement Based -->
-<script>
+
+
 (function(){
   let scrollTriggered = false;
   window.addEventListener('scroll', () => {
@@ -13914,10 +10320,9 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
     }
   });
 })();
-</script>
 
-<!-- Time on Site Reward — Retention Ad -->
-<script>
+
+
 (function(){
   const rewards = [ {time:30,pts:3,msg:'30s on site! +3 pts'}, {time:60,pts:5,msg:'1 min! +5 pts'}, {time:180,pts:10,msg:'3 mins! +10 pts'}, {time:300,pts:20,msg:'5 mins! +20 pts'} ];
   rewards.forEach(r => setTimeout(() => { addPts(r.pts,'Time Reward'); toast('s',r.msg); }, r.time * 1000));
@@ -14102,17 +10507,6 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
       const adEl = document.createElement('div');
       adEl.className = `ad-container ad-${type}`;
       adEl.style.cssText = 'margin:10px 0;padding:10px;background:var(--g2);border:1px solid var(--b1);border-radius:12px;overflow:hidden;';
-      const closeBtn = document.createElement('button');
-      closeBtn.type = 'button';
-      closeBtn.className = 'ad-close';
-      closeBtn.setAttribute('aria-label','Close offer');
-      closeBtn.innerHTML = '×';
-      closeBtn.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        dismissOfferElement(closeBtn);
-      });
-      adEl.appendChild(closeBtn);
       
       switch(type) {
         case 'quiz':
@@ -14122,8 +10516,8 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-weight:700;margin-bottom:10px;">Quick Quiz: Earn +5 pts!</div>
               <div style="font-size:13px;color:var(--t3);margin-bottom:12px;">Which crypto grew most in 2024?</div>
               <div style="display:flex;gap:8px;justify-content:center;">
-                <button onclick="addPts(5,'Quiz Ad');dismissOfferElement(this)" class="btn btn-p btn-sm">Bitcoin</button>
-                <button onclick="addPts(5,'Quiz Ad');dismissOfferElement(this)" class="btn btn-p btn-sm">Ethereum</button>
+                <button onclick="addPts(5,'Quiz Ad');this.closest('.ad-container').remove()" class="btn btn-p btn-sm">Bitcoin</button>
+                <button onclick="addPts(5,'Quiz Ad');this.closest('.ad-container').remove()" class="btn btn-p btn-sm">Ethereum</button>
               </div>
             </div>`;
           break;
@@ -14135,9 +10529,9 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-weight:700;margin-bottom:10px;">Quick Poll</div>
               <div style="font-size:12px;margin-bottom:12px;">What's your favorite feature?</div>
               <div style="display:flex;flex-direction:column;gap:6px;">
-                <button onclick="addPts(3,'Poll Ad');dismissOfferElement(this)" class="btn btn-ghost btn-sm">💰 Earning</button>
-                <button onclick="addPts(3,'Poll Ad');dismissOfferElement(this)" class="btn btn-ghost btn-sm">👥 Social</button>
-                <button onclick="addPts(3,'Poll Ad');dismissOfferElement(this)" class="btn btn-ghost btn-sm">🎮 Games</button>
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">💰 Earning</button>
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">👥 Social</button>
+                <button onclick="addPts(3,'Poll Ad');this.closest('.ad-container').remove()" class="btn btn-ghost btn-sm">🎮 Games</button>
               </div>
             </div>`;
           break;
@@ -14161,7 +10555,7 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-size:28px;margin-bottom:8px;">🎰</div>
               <div style="font-weight:700;margin-bottom:10px;">Spin & Win!</div>
               <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">Watch ad to spin</div>
-              <button onclick="watchAd();addPts(10,'Game Ad');dismissOfferElement(this)" class="btn btn-neon btn-sm">🎲 Spin Now</button>
+              <button onclick="watchAd();addPts(10,'Game Ad');this.closest('.ad-container').remove()" class="btn btn-neon btn-sm">🎲 Spin Now</button>
             </div>`;
           break;
           
@@ -14209,7 +10603,7 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-size:32px;margin-bottom:8px;">🎬</div>
               <div style="font-weight:700;margin-bottom:8px;">Watch Video & Earn</div>
               <div style="font-size:12px;color:var(--t3);margin-bottom:12px;">30 sec video = +15 points</div>
-              <button onclick="watchAd();addPts(15,'Video Offer');dismissOfferElement(this)" class="btn btn-neon">▶ Watch Now</button>
+              <button onclick="watchAd();addPts(15,'Video Offer');this.closest('.ad-container').remove()" class="btn btn-neon">▶ Watch Now</button>
             </div>`;
           break;
           
@@ -14219,7 +10613,7 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-size:32px;margin-bottom:8px;">🎁</div>
               <div style="font-weight:700;margin-bottom:8px;">Special Reward!</div>
               <div style="font-size:12px;margin-bottom:12px;">Complete offer & get +50 points</div>
-              <button onclick="addPts(50,'Rewarded Offer');toast('s','+50 points!');dismissOfferElement(this)" class="btn btn-sm" style="background:white;color:#ee5a6f;">Claim Reward</button>
+              <button onclick="addPts(50,'Rewarded Offer');toast('s','+50 points!');this.closest('.ad-container').remove()" class="btn btn-sm" style="background:white;color:#ee5a6f;">Claim Reward</button>
             </div>`;
           break;
           
@@ -14691,10 +11085,10 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
               <div style="font-size:32px;margin-bottom:10px;">💎</div>
               <div style="font-weight:700;">Premium Upgrade</div>
               <div style="font-size:12px;margin:10px 0;">2x Earnings + Priority Support</div>
-              <button onclick="nav('wallet');dismissOfferElement(this)" class="btn btn-neon">Upgrade Now</button>
+              <button onclick="nav('wallet');this.closest('#interstitialOverlay').remove()" class="btn btn-neon">Upgrade Now</button>
             </div>
           </div>
-          <button onclick="dismissOfferElement(this);addPts(3,'Ad Skip')" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:8px 20px;border-radius:99px;cursor:pointer;">Skip Ad (+3 pts)</button>
+          <button onclick="this.closest('#interstitialOverlay').remove();addPts(3,'Ad Skip')" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:8px 20px;border-radius:99px;cursor:pointer;">Skip Ad (+3 pts)</button>
         </div>
       `;
       interstitial.id = 'interstitialOverlay';
@@ -15305,198 +11699,6 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 // WEBSITE SPEED OPTIMIZATION
 // ═══════════════════════════════════════════════════════════════════
 (function() {
-  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  const saveDataBudget = connection?.saveData ? true : false;
-
-  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Initialize user interaction tracking for autoplay control
-  window.mxtUserInteracted = false;
-  window.mxtTouchStartTime = 0;
-  
-  // Track user interactions to control autoplay behavior
-  const trackUserInteraction = () => {
-    window.mxtUserInteracted = true;
-    window.mxtTouchStartTime = Date.now();
-  };
-  
-  document.addEventListener('touchstart', trackUserInteraction, {passive: true});
-  document.addEventListener('mousedown', trackUserInteraction, {passive: true});
-  document.addEventListener('keydown', trackUserInteraction, {passive: true});
-
-  if (isMobile) {
-    document.documentElement.classList.add('mxt-mobile-boost');
-    if (saveDataBudget) {
-      document.documentElement.classList.add('mxt-data-saver');
-    }
-    
-    // 🚀 Advanced Mobile Performance Optimizations
-    document.documentElement.style.setProperty('--transition-speed', '0.1s');
-    document.documentElement.style.setProperty('--tap-highlight', 'transparent');
-    document.documentElement.style.setProperty('--scroll-behavior', 'smooth');
-    document.documentElement.style.setProperty('--touch-action', 'manipulation');
-    
-    // Force GPU acceleration for smooth animations
-    document.body.style.setProperty('-webkit-transform', 'translateZ(0)');
-    document.body.style.setProperty('transform', 'translateZ(0)');
-    document.body.style.setProperty('-webkit-backface-visibility', 'hidden');
-    document.body.style.setProperty('backface-visibility', 'hidden');
-    
-    // Optimize font rendering
-    document.body.style.setProperty('-webkit-font-smoothing', 'antialiased');
-    document.body.style.setProperty('-moz-osx-font-smoothing', 'grayscale');
-    document.body.style.setProperty('text-rendering', 'optimizeLegibility');
-    
-    // Disable hover effects on mobile for better performance
-    document.documentElement.style.setProperty('--hover-transition', 'none');
-    
-    // Optimize image loading
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        if (!img.hasAttribute('loading')) {
-          img.setAttribute('loading', 'lazy');
-        }
-        if (!img.hasAttribute('decoding')) {
-          img.setAttribute('decoding', 'async');
-        }
-        img.style.setProperty('will-change', 'transform');
-      });
-    });
-    
-    // Reduce concurrent animations
-    document.documentElement.style.setProperty('--max-concurrent-animations', '2');
-    document.documentElement.style.setProperty('--animation-duration', '0.2s');
-    
-    // Optimize scrolling performance
-    document.documentElement.style.setProperty('overflow-x', 'hidden');
-    document.documentElement.style.setProperty('overscroll-behavior', 'contain');
-    
-    // Disable text selection for app-like feel
-    document.documentElement.style.setProperty('user-select', 'none');
-    document.documentElement.style.setProperty('-webkit-user-select', 'none');
-    
-    // Prevent pull-to-refresh
-    document.body.style.setProperty('overscroll-behavior-y', 'contain');
-    
-    // Optimize touch response
-    document.documentElement.style.setProperty('touch-action', 'manipulation');
-    document.documentElement.style.setProperty('-webkit-tap-highlight-color', 'transparent');
-    
-    // Memory optimization - clear unused intervals
-    const originalSetInterval = window.setInterval;
-    window.setInterval = function(callback, delay, ...args) {
-      const id = originalSetInterval(callback, delay, ...args);
-      if (delay < 16) {
-        console.warn('⚠️ High-frequency interval detected:', delay);
-      }
-      return id;
-    };
-    
-    // Reduce video quality on mobile
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
-    });
-    
-    // Optimize network requests
-    if (connection) {
-      if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-        document.documentElement.classList.add('mxt-slow-network');
-        // Disable non-critical features on slow networks
-        document.documentElement.style.setProperty('--disable-animations', 'true');
-      }
-    }
-    
-    // Preload critical resources
-    const criticalResources = ['icon-192.png', 'icon-512.png'];
-    criticalResources.forEach(resource => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = '/' + resource;
-      document.head.appendChild(link);
-    });
-    
-    console.log('🚀 Advanced mobile optimizations applied');
-    
-    // Add mobile-specific CSS custom properties
-    document.documentElement.style.setProperty('--mobile-safe-area', 'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)');
-    document.documentElement.style.setProperty('--mobile-font-size-base', '16px');
-    document.documentElement.style.setProperty('--mobile-tap-highlight', 'transparent');
-  }
-
-  if (reduceMotion) {
-    document.documentElement.style.setProperty('--transition-speed', '0.01s');
-    document.documentElement.style.setProperty('--animation-duration', '0.001s');
-    document.documentElement.style.setProperty('--scroll-behavior', 'auto');
-  }
-  
-  // Optimize viewport for mobile
-  const viewport = document.querySelector('meta[name="viewport"]');
-  if (viewport && isMobile) {
-    viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover');
-  }
-  
-  // Initialize performance monitoring
-  window.mxtPerformance = {
-    startTime: Date.now(),
-    frameCount: 0,
-    lastFrameTime: Date.now(),
-    fps: 60,
-    init: function() {
-      this.lastFrameTime = Date.now();
-      this.scheduleFrameUpdate();
-    },
-    scheduleFrameUpdate: function() {
-      requestAnimationFrame(() => {
-        const now = Date.now();
-        this.frameCount++;
-        const delta = now - this.lastFrameTime;
-        
-        if (delta >= 1000) {
-          this.fps = Math.round((this.frameCount * 1000) / delta);
-          this.frameCount = 0;
-          this.lastFrameTime = now;
-          
-          // Adjust performance based on FPS
-          if (this.fps < 30) {
-            document.documentElement.classList.add('mxt-low-performance');
-          } else {
-            document.documentElement.classList.remove('mxt-low-performance');
-          }
-        }
-        
-        this.scheduleFrameUpdate();
-      });
-    }
-  };
-  
-  // Start performance monitoring
-  window.mxtPerformance.init();
-  
-  // Enhanced memory management for mobile
-  if (isMobile) {
-    // Limit concurrent animations and transitions
-    document.documentElement.style.setProperty('--max-concurrent-transitions', '2');
-    document.documentElement.style.setProperty('--transition-duration', '0.2s');
-    
-    // Optimize image loading for mobile
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        if (!img.hasAttribute('loading')) {
-          img.setAttribute('loading', 'lazy');
-        }
-        if (!img.hasAttribute('decoding')) {
-          img.setAttribute('decoding', 'async');
-        }
-      });
-    });
-  }
-
   // 1. Lazy load images with better performance
   const lazyLoadImages = () => {
     const images = document.querySelectorAll('img[data-src]');
@@ -15749,14 +11951,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   
   console.log('[SpeedOpt] Website optimizations loaded');
 })();
-</script>
 
-<!-- ═══════════════════════════════════════════════════════════
-     END MAXIMUM REVENUE AD PLACEMENTS
-     ═══════════════════════════════════════════════════════════ -->
 
-<!-- Enhanced Download Tracking with Earnings -->
-<script>
+
   // Download earnings tracking
   let downloadEarnings = {
     total: 0,
@@ -15854,1141 +12051,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 
   // Load earnings on page load
   loadDownloadEarnings();
-</script>
 
-<!-- Enhanced CSS for New Components -->
-<style>
-/* AI Caption System Styles */
-.ai-processing-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-}
 
-.ai-processing-modal {
-  background: var(--g2);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: center;
-  max-width: 400px;
-  border: 2px solid var(--neon);
-  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
-}
 
-.ai-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid var(--g3);
-  border-top: 4px solid var(--neon);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 20px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: var(--g3);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 20px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--neon), #00ff88);
-  width: 0%;
-  transition: width 0.3s ease;
-}
-
-.ai-caption-btn {
-  background: linear-gradient(135deg, var(--neon), #00ff88);
-  color: var(--bg);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 10px;
-  transition: all 0.3s ease;
-}
-
-.ai-caption-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 255, 170, 0.4);
-}
-
-/* Admin Panel Styles */
-.admin-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 100vh;
-  background: var(--g2);
-  border-left: 2px solid var(--neon);
-  z-index: 10000;
-  overflow-y: auto;
-  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-}
-
-.admin-header {
-  background: linear-gradient(135deg, var(--neon), #00ff88);
-  color: var(--bg);
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.close-admin-btn {
-  background: transparent;
-  border: none;
-  color: var(--bg);
-  font-size: 24px;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.close-admin-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.admin-tabs {
-  display: flex;
-  background: var(--g3);
-  border-bottom: 1px solid var(--b1);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 15px 10px;
-  background: transparent;
-  border: none;
-  color: var(--t1);
-  cursor: pointer;
-  font-size: 12px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.tab-btn.active {
-  background: var(--neon);
-  color: var(--bg);
-}
-
-.tab-btn:hover:not(.active) {
-  background: var(--g4);
-}
-
-.admin-content {
-  padding: 20px;
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.stat-card {
-  background: var(--g3);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid var(--b1);
-}
-
-.stat-card h3 {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: var(--t2);
-}
-
-.stat-number {
-  font-family: var(--fm);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--neon);
-}
-
-.user-controls, .content-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.user-controls input, .user-controls select,
-.content-controls input, .content-controls select {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid var(--b1);
-  border-radius: 8px;
-  background: var(--g3);
-  color: var(--t1);
-}
-
-.user-card, .content-card {
-  background: var(--g3);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid var(--b1);
-}
-
-.user-info, .content-info {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.user-avatar, .content-thumbnail {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-details h4, .content-info h4 {
-  margin: 0 0 5px;
-  font-size: 16px;
-}
-
-.user-details p, .content-info p {
-  margin: 0;
-  font-size: 12px;
-  color: var(--t2);
-}
-
-.user-actions, .content-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-view, .btn-deactivate, .btn-delete {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.btn-view {
-  background: var(--neon);
-  color: var(--bg);
-}
-
-.btn-deactivate {
-  background: #f59e0b;
-  color: white;
-}
-
-.btn-delete {
-  background: #ef4444;
-  color: white;
-}
-
-.btn-view:hover, .btn-deactivate:hover, .btn-delete:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.activity-log {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.activity-item {
-  background: var(--g3);
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  border: 1px solid var(--b1);
-}
-
-.activity-user {
-  font-weight: bold;
-  color: var(--t1);
-}
-
-.activity-time {
-  font-size: 11px;
-  color: var(--t3);
-  margin: 5px 0;
-}
-
-.activity-status.active {
-  color: #10b981;
-}
-
-.activity-status.inactive {
-  color: #ef4444;
-}
-
-.admin-panel-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-  transition: all 0.3s ease;
-}
-
-.admin-panel-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
-}
-
-/* Data Persistence Status Indicator */
-.persistence-status {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: var(--g3);
-  border: 1px solid var(--b1);
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 12px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.persistence-status.online {
-  border-color: #10b981;
-  color: #10b981;
-}
-
-.persistence-status.offline {
-  border-color: #ef4444;
-  color: #ef4444;
-}
-
-.persistence-status.syncing {
-  border-color: #f59e0b;
-  color: #f59e0b;
-}
-
-/* Enhanced Advertising Styles */
-.ad-container {
-  animation: fadeIn 0.5s ease;
-  margin: 10px 0;
-}
-
-.ad-wrapper {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.ad-label {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 10px;
-  z-index: 1;
-}
-
-.ad-close, .mxt-offer-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  font-size: 16px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.ad-close:hover, .mxt-offer-close:hover {
-  background: rgba(255, 0, 0, 0.8);
-}
-
-.ad-container, .ad-native, .ad-wrapper, .mxt-reward-card, .rw-card, .ints-card, .auto-ad {
-  position: relative;
-}
-
-.points-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10001;
-  animation: slideInRight 0.3s ease;
-}
-
-.interstitial-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-}
-
-.rewarded-ad-container {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 300px;
-  z-index: 1000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .admin-panel {
-    width: 100%;
-    right: -100%;
-    transition: right 0.3s ease;
-  }
-  
-  .admin-panel.show {
-    right: 0;
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .user-controls, .content-controls {
-    flex-direction: column;
-  }
-  
-  .user-info, .content-info {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .user-actions, .content-actions {
-    justify-content: center;
-  }
-  
-  .ad-container.sidebar {
-    position: relative;
-    width: 100%;
-    right: auto;
-    top: auto;
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Download System Styles */
-.download-manager {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--g2);
-  border: 2px solid var(--neon);
-  border-radius: 16px;
-  padding: 20px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  z-index: 10000;
-  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
-}
-
-.download-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--b1);
-}
-
-.download-header h3 {
-  margin: 0;
-  color: var(--t1);
-  font-size: 18px;
-}
-
-.earnings-display {
-  display: flex;
-  gap: 20px;
-}
-
-.earning-item {
-  text-align: center;
-}
-
-.earning-label {
-  font-size: 12px;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.earning-value {
-  font-family: var(--fm);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--neon);
-  display: block;
-  margin-top: 5px;
-}
-
-.download-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.stat-item {
-  background: var(--g3);
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid var(--b1);
-}
-
-.stat-label {
-  font-size: 11px;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.stat-value {
-  font-family: var(--fm);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--t1);
-}
-
-.download-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.download-controls input {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid var(--b1);
-  border-radius: 8px;
-  background: var(--g3);
-  color: var(--t1);
-  font-size: 14px;
-}
-
-.btn-download, .btn-history, .btn-earnings {
-  background: var(--neon);
-  color: var(--bg);
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-download:hover, .btn-history:hover, .btn-earnings:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 170, 0.4);
-}
-
-.download-queue {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.download-item {
-  background: var(--g3);
-  border: 1px solid var(--b1);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  transition: all 0.3s ease;
-}
-
-.download-item:hover {
-  border-color: var(--neon);
-  transform: translateX(5px);
-}
-
-.download-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.download-name {
-  font-weight: bold;
-  color: var(--t1);
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.download-status {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.download-status.starting { background: #f59e0b; color: white; }
-.download-status.downloading { background: var(--neon); color: var(--bg); }
-.download-status.paused { background: #6b7280; color: white; }
-.download-status.completed { background: #10b981; color: white; }
-.download-status.error { background: #ef4444; color: white; }
-
-.download-progress {
-  margin-bottom: 10px;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: var(--g4);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--neon), #00ff88);
-  transition: width 0.3s ease;
-}
-
-.progress-text {
-  font-size: 11px;
-  color: var(--t2);
-  text-align: center;
-  margin-top: 5px;
-}
-
-.download-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  color: var(--t3);
-}
-
-.download-earnings {
-  color: var(--neon);
-  font-weight: bold;
-}
-
-.download-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.btn-pause, .btn-cancel, .btn-retry {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-pause { background: #6b7280; color: white; }
-.btn-cancel { background: #ef4444; color: white; }
-.btn-retry { background: #3b82f6; color: white; }
-
-/* Video Call Styles */
-.video-call-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg);
-  z-index: 10000;
-  display: none;
-}
-
-.video-call-container.show {
-  display: block;
-}
-
-.video-header {
-  background: var(--g2);
-  padding: 20px;
-  border-bottom: 1px solid var(--b1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.video-header h3 {
-  margin: 0;
-  color: var(--t1);
-}
-
-.call-status {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.status-connected { background: #10b981; color: white; }
-.status-disconnected { background: #ef4444; color: white; }
-
-.video-main {
-  display: flex;
-  height: calc(100vh - 200px);
-}
-
-.remote-videos {
-  flex: 1;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  overflow-y: auto;
-}
-
-.local-video-container {
-  position: relative;
-  width: 200px;
-  height: 150px;
-  background: var(--g3);
-  border: 2px solid var(--neon);
-  border-radius: 12px;
-  margin: 20px;
-  overflow: hidden;
-}
-
-.local-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.local-video-label {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 10px;
-}
-
-.video-controls {
-  background: var(--g2);
-  padding: 20px;
-  border-top: 1px solid var(--b1);
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.btn-call, .btn-hangup, .btn-mute, .btn-video-off, .btn-unmute, .btn-video-on, .btn-screenshare-start, .btn-screenshare-stop {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-call { background: #10b981; color: white; }
-.btn-hangup { background: #ef4444; color: white; }
-.btn-mute, .btn-video-off { background: #6b7280; color: white; }
-.btn-unmute, .btn-video-on { background: #10b981; color: white; }
-.btn-screenshare-start { background: #3b82f6; color: white; }
-.btn-screenshare-stop { background: #f59e0b; color: white; }
-
-.video-input {
-  background: var(--g3);
-  padding: 15px;
-  border-top: 1px solid var(--b1);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.video-input input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid var(--b1);
-  border-radius: 6px;
-  background: var(--g4);
-  color: var(--t1);
-}
-
-.video-input button {
-  background: var(--neon);
-  color: var(--bg);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Cloudinary Upload Styles */
-.upload-widget {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--g2);
-  border: 2px solid var(--neon);
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 500px;
-  width: 90%;
-  z-index: 10000;
-  box-shadow: 0 20px 40px rgba(0, 255, 170, 0.3);
-}
-
-.upload-area {
-  border: 2px dashed var(--b2);
-  border-radius: 12px;
-  padding: 40px 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.upload-area:hover, .upload-area.drag-over {
-  border-color: var(--neon);
-  background: rgba(0, 255, 170, 0.05);
-}
-
-.upload-content h3 {
-  margin: 0 0 10px;
-  color: var(--t1);
-}
-
-.upload-content p {
-  margin: 5px 0;
-  color: var(--t2);
-}
-
-.upload-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.upload-btn {
-  background: var(--neon);
-  color: var(--bg);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: all 0.3s ease;
-}
-
-.upload-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 170, 0.4);
-}
-
-.upload-progress {
-  margin: 20px 0;
-}
-
-.upload-results {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.upload-result {
-  background: var(--g3);
-  border: 1px solid var(--b1);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-}
-
-.upload-result.success {
-  border-color: #10b981;
-}
-
-.upload-result.error {
-  border-color: #ef4444;
-}
-
-.result-preview {
-  margin-bottom: 15px;
-}
-
-.result-preview img, .result-preview video {
-  max-width: 100%;
-  max-height: 200px;
-  border-radius: 8px;
-}
-
-.result-info h4 {
-  margin: 0 0 10px;
-  color: var(--t1);
-}
-
-.result-info p {
-  margin: 5px 0;
-  color: var(--t2);
-  font-size: 12px;
-}
-
-.result-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.result-actions button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* Modal Styles */
-.download-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10001;
-}
-
-.modal-content {
-  background: var(--g2);
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  border: 2px solid var(--neon);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--b1);
-}
-
-.modal-header h3 {
-  margin: 0;
-  color: var(--t1);
-}
-
-.modal-close {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--t3);
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.history-list, .earnings-details {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.history-item, .earnings-row {
-  background: var(--g3);
-  border: 1px solid var(--b1);
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.history-info {
-  flex: 1;
-}
-
-.history-name {
-  font-weight: bold;
-  color: var(--t1);
-  margin-bottom: 5px;
-}
-
-.history-details {
-  display: flex;
-  gap: 15px;
-  font-size: 11px;
-  color: var(--t3);
-}
-
-.earnings-amount {
-  font-family: var(--fm);
-  font-weight: 700;
-  color: var(--neon);
-  font-size: 16px;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .download-manager {
-    width: 95%;
-    max-height: 90vh;
-  }
-  
-  .earnings-display {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .download-stats {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  .download-controls {
-    flex-direction: column;
-  }
-  
-  .video-controls {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .remote-videos {
-    grid-template-columns: 1fr;
-  }
-  
-  .upload-widget {
-    width: 95%;
-    padding: 20px;
-  }
-  
-  .modal-content {
-    width: 95%;
-    padding: 20px;
-  }
-}
-</style>
-
-<script>
 /* Monetixra mobile reliability layer */
 (function(){
   const touchTimers = new Map();
@@ -17737,9 +12802,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     enforceAdminVisibility();
   });
 })();
-</script>
 
-<script>
+
+
 // Monetixra account/session consistency patch
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn();
@@ -17755,7 +12820,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   };
 
   function ensureAnalytics(){
-    try { if(!D) return null; } catch(e) { return null; }
+    if(!window.D) return null;
     D.analytics = D.analytics || {};
     D.analytics.loginEvents = D.analytics.loginEvents || [];
     D.analytics.usageEvents = D.analytics.usageEvents || [];
@@ -17767,28 +12832,6 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     try { return CU && D && D.users ? (D.users[CU.id] || CU) : null; } catch(e) { return null; }
   }
 
-  function touchDailyUsage(user, action, now = Date.now()) {
-    if(!user) return;
-    const dayKey = new Date(now).toDateString();
-    user.dailyUsage = user.dailyUsage || {};
-    user.dailyUsage[dayKey] = user.dailyUsage[dayKey] || {};
-    const day = user.dailyUsage[dayKey];
-    day.lastSeen = now;
-    day.lastAction = now;
-    day.lastActionType = action;
-    day.actions = (day.actions || 0) + 1;
-    if(action === 'login') day.logins = (day.logins || 0) + 1;
-    if(action === 'use') day.uses = (day.uses || 0) + 1;
-    if(action === 'post') day.posts = (day.posts || 0) + 1;
-    if(action === 'points') day.points = (day.points || 0) + 1;
-    user.lastSeen = now;
-    user.lastAction = now;
-    user.lastActive = now;
-    user.isOnline = true;
-    user.isLoggedIn = true;
-    return day;
-  }
-
   function markUsage(action='use'){
     const me = currentUserRef();
     const a = ensureAnalytics();
@@ -17796,9 +12839,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     const now = Date.now();
     const sid = sessionStorage.getItem('mxt_session_id') || ('sess_' + now + '_' + Math.random().toString(36).slice(2,8));
     sessionStorage.setItem('mxt_session_id', sid);
-    touchDailyUsage(me, action, now);
+    me.lastActive = now;
+    me.lastSeen = now;
     me.usedCount = (me.usedCount || 0) + 1;
-    me.sessionStart = me.sessionStart || now;
     a.activeSessions[sid] = {userId:me.id, name:me.name || me.username || me.id, at:now, ua:navigator.userAgent.slice(0,90)};
     a.usageEvents.unshift({userId:me.id, action, at:now});
     a.usageEvents = a.usageEvents.slice(0,500);
@@ -17811,14 +12854,10 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     const now = Date.now();
     const sid = sessionStorage.getItem('mxt_session_id') || ('sess_' + now + '_' + Math.random().toString(36).slice(2,8));
     sessionStorage.setItem('mxt_session_id', sid);
-    touchDailyUsage(me, 'login', now);
     me.loginCount = (me.loginCount || 0) + 1;
     me.lastLoginAt = now;
-    me.lastLogin = now;
-    me.lastLoginDate = new Date(now).toDateString();
-    me.sessionStart = now;
+    me.lastLogin = new Date(now).toDateString();
     me.isOnline = true;
-    me.isLoggedIn = true;
     a.loginEvents.unshift({userId:me.id, name:me.name || me.username || me.id, at:now, sessionId:sid});
     a.loginEvents = a.loginEvents.slice(0,500);
     markUsage('login');
@@ -17834,7 +12873,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
   }
 
   function mergeSnapshot(snapshot, loginId){
-    try { if(!snapshot || !D) return false; } catch(e) { return false; }
+    if(!snapshot || !window.D) return false;
     let changed = false;
     D.users = D.users || {};
     D.posts = D.posts || [];
@@ -18062,27 +13101,15 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       const me = currentUserRef();
       const a = ensureAnalytics();
       const sid = sessionStorage.getItem('mxt_session_id');
-      if(me) {
-        const now = Date.now();
-        me.isOnline = false;
-        me.isLoggedIn = false;
-        me.lastActive = now;
-        me.lastSeen = now;
-        me.lastAction = now;
-        me.dailyUsage = me.dailyUsage || {};
-        const dayKey = new Date(now).toDateString();
-        me.dailyUsage[dayKey] = me.dailyUsage[dayKey] || {};
-        me.dailyUsage[dayKey].lastSeen = now;
-        me.dailyUsage[dayKey].lastAction = now;
-      }
+      if(me) { me.isOnline = false; me.lastActive = Date.now(); }
       if(a && sid) delete a.activeSessions[sid];
       try { localStorage.setItem(STORAGE_KEY + 'data', JSON.stringify(D)); } catch(e) {}
     });
   });
 })();
-</script>
 
-<script>
+
+
 /* Monetixra requested feature hardening */
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -18357,9 +13384,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     setInterval(() => { enforceAdminOnly(); syncAccount('auto-sync'); }, 25000);
   });
 })();
-</script>
 
-<script>
+
+
 /* Monetixra modal and floating action reliability */
 (function(){
   function closeByElement(target){
@@ -18398,9 +13425,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     });
   });
 })();
-</script>
 
-<script>
+
+
 /* Monetixra universal language + smooth UI layer */
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -18658,9 +13685,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     window.mxtApplyLanguage = applyAll;
   });
 })();
-</script>
 
-<script>
+
+
 /* Monetixra i18n pro + smoothness enhancer */
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -18877,21 +13904,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     window.mxtTranslateEverything = apply;
   });
 })();
-</script>
 
-<style>
-.mxt-smooth-ui{scroll-behavior:smooth}
-.mxt-smooth-ui body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.mxt-smooth-ui .pg{contain:layout paint style}
-.mxt-smooth-ui .post,.mxt-smooth-ui .task-card,.mxt-smooth-ui .friend-card,.mxt-smooth-ui .nft-item{content-visibility:auto;contain-intrinsic-size:420px}
-.mxt-smooth-ui img{content-visibility:auto}
-.mxt-smooth-ui button,.mxt-smooth-ui .btn,.mxt-smooth-ui .bn,.mxt-smooth-ui .chip,.mxt-smooth-ui .cat-pill{touch-action:manipulation}
-@media (prefers-reduced-motion:reduce){
-  .mxt-smooth-ui *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-}
-</style>
 
-<script>
+
 /* Monetixra safety upgrades: signup ads, click rewards, mobile menus, chat delete */
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -19503,9 +14518,9 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     setInterval(showFloatingClickReward, 60000);
   });
 })();
-</script>
 
-<script>
+
+
 /* Monetixra revenue ads + media AI caption comfort layer */
 (function(){
   const ready = fn => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn();
@@ -20203,431 +15218,23 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     setInterval(installComfortCaps, 5000);
   });
 })();
-</script>
 
-<style>
-.mxt-bottom-shelf{margin:18px 0 88px;padding:12px;border:1px solid var(--b1);border-radius:12px;background:rgba(255,255,255,.025)}
-.mxt-bs-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:11px;color:var(--t3);text-transform:uppercase}
-.mxt-bs-head span{font-weight:900;color:var(--t2)}
-.mxt-bs-head b{color:var(--neon);font-size:10px}
-.mxt-bs-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.mxt-bottom-shelf-card{min-height:208px;border:1px solid var(--b1);border-radius:8px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));overflow:hidden;display:flex;flex-direction:column;contain:content}
-.mxt-bs-badge{padding:6px 8px;background:linear-gradient(135deg,var(--mxt-a),var(--mxt-b));color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mxt-bs-media{position:relative;height:72px;background:linear-gradient(135deg,var(--mxt-a),var(--mxt-b));overflow:hidden}
-.mxt-bs-media:before{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.22);border-radius:8px}
-.mxt-bs-media-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:46px;height:28px;border-radius:999px;background:rgba(3,3,8,.38);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px}
-.mxt-bs-video .mxt-bs-media-mark:before{content:"";width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #fff;margin-right:5px}
-.mxt-bs-photo .mxt-bs-media-mark:before{content:"";width:12px;height:9px;border-radius:2px;border:1px solid #fff;margin-right:5px}
-.mxt-bs-media-shine{position:absolute;inset:auto -20% -45% auto;width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.16)}
-.mxt-bs-main{display:flex;gap:8px;padding:9px;flex:1;min-width:0}
-.mxt-bs-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:var(--neon);font-size:10px;font-weight:900;flex:0 0 auto}
-.mxt-bs-copy{min-width:0;flex:1}
-.mxt-bs-copy h4{font-size:12px;line-height:1.25;color:var(--t1);margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mxt-bs-copy p{font-size:10px;line-height:1.35;color:var(--t3);margin:0 0 6px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.mxt-bs-copy span{display:inline-flex;max-width:100%;border:1px solid rgba(0,255,170,.22);border-radius:6px;padding:3px 5px;color:var(--neon);font-size:9px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mxt-bs-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 9px 9px}
-.mxt-bs-actions button{min-height:32px;border:1px solid var(--b1);border-radius:7px;background:var(--g2);color:var(--t2);font-size:11px;font-weight:900;cursor:pointer}
-.mxt-bs-actions button:last-child{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:#fff}
-.mxt-bs-actions button:disabled{opacity:.7;cursor:default}
-.mxt-rotating-ad{background:var(--g2);border:1px solid var(--b1);border-radius:12px;overflow:hidden;margin:10px 0}
-.mxt-ra-network{font-size:9px;color:var(--t3);padding:4px 10px;text-align:right;border-bottom:1px solid var(--b1)}
-.mxt-ra-head{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px}
-.mxt-ra-head b{color:var(--t2)}
-.mxt-ra-body{display:flex;align-items:center;gap:10px;padding:10px;background:linear-gradient(135deg,var(--mxt-a),var(--mxt-b));color:#fff}
-.mxt-ra-mark{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex:0 0 auto}
-.mxt-ra-copy{flex:1;min-width:0}
-.mxt-ra-title{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mxt-ra-sub{font-size:11px;opacity:.82;margin-top:2px;line-height:1.35}
-.mxt-ra-btn{border:1px solid rgba(255,255,255,.38);background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:900;cursor:pointer;white-space:nowrap}
-.mxt-ra-btn:disabled{opacity:.7;cursor:default}
-.mxt-network-wrap{padding:8px 10px;border-top:1px solid var(--b1);background:rgba(255,255,255,.025)}
-.mxt-live-slot{display:flex;align-items:center;justify-content:center;width:100%;min-height:72px;border:1px dashed var(--b1);border-radius:8px;color:var(--t3);font-size:11px;text-align:center;overflow:hidden}
-.mxt-admob-slot{background:linear-gradient(135deg,rgba(15,118,110,.12),rgba(37,99,235,.12));color:var(--t2);font-weight:700}
-.mxt-page-scalable-ad{margin:10px 0 12px}
-.mxt-mobile-boost *{-webkit-tap-highlight-color:transparent}
-.mxt-mobile-boost img,.mxt-mobile-boost video{content-visibility:auto;contain-intrinsic-size:320px;max-width:100%}
-.mxt-mobile-boost .pg,.mxt-mobile-boost .post,.mxt-mobile-boost .mxt-bottom-shelf-card{content-visibility:auto}
-.mxt-mobile-boost button,.mxt-mobile-boost .bn,.mxt-mobile-boost .chip,.mxt-mobile-boost .btn{touch-action:manipulation}
-.mxt-draggable-control{touch-action:none;user-select:none}
-.mxt-dragging-control{transition:none !important;filter:drop-shadow(0 16px 34px rgba(0,0,0,.42))}
-@media (max-width:520px){
-  .mxt-ra-body{align-items:flex-start}
-  .mxt-ra-title{white-space:normal}
-  .mxt-live-slot{min-height:56px}
-  .mxt-bs-grid{grid-template-columns:1fr}
-  .mxt-bottom-shelf{margin-bottom:96px;padding:10px}
-  .mxt-bottom-shelf-card{min-height:196px}
-  .mxt-bs-media{height:82px}
-}
-@media (min-width:521px) and (max-width:920px){
-  .mxt-bs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-.mxt-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mxt-feature-grid button{background:var(--g2);border:1px solid var(--b1);color:var(--t1);border-radius:8px;padding:10px 8px;font-size:12px;font-weight:700;text-align:left;cursor:pointer}
-.mxt-feature-grid button:active{transform:scale(.98)}
-.mxt-msg-actions{display:flex;gap:6px;margin-top:6px;opacity:.75}
-.mxt-msg-actions button{border:1px solid var(--b1);background:var(--g2);color:var(--t2);border-radius:6px;padding:3px 6px;font-size:10px;cursor:pointer}
-.mxt-msg-actions button:active{transform:scale(.97)}
-.mxt-reward-gate{position:fixed;inset:0;z-index:120000;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:18px}
-.mxt-reward-card{width:min(360px,100%);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:18px;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.mxt-ad-label{font-size:10px;font-weight:800;letter-spacing:.8px;opacity:.72;text-transform:uppercase}
-.mxt-ad-title{font-size:20px;font-weight:900;margin-top:10px}
-.mxt-ad-body{font-size:13px;line-height:1.45;opacity:.84;margin-top:7px}
-.mxt-ad-pts{font-family:var(--fm);font-size:24px;font-weight:900;margin-top:14px}
-.mxt-ad-progress{height:4px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin:14px 0}
-.mxt-ad-progress span{display:block;height:100%;width:100%;background:#fff;animation:mxtAdWait 2s linear forwards}
-.mxt-ad-skip{width:100%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;border-radius:10px;padding:10px;font-weight:800;cursor:pointer}
-.mxt-ad-skip:disabled{opacity:.55;cursor:wait}
-.mxt-floating-pts{position:fixed;right:14px;bottom:calc(150px + env(safe-area-inset-bottom));z-index:120000;display:flex;align-items:center;gap:6px;animation:slideUp .25s var(--ease);filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));background:rgba(3,3,8,.92);backdrop-filter:blur(24px);padding:6px 8px;border-radius:26px;}
-.mxt-floating-pts-btn{border:0;background:linear-gradient(135deg,var(--neon),var(--c2));color:#00130d;border-radius:999px;padding:10px 16px;font-weight:900;font-family:var(--fm);cursor:pointer;min-width:82px}
-.mxt-floating-pts-btn:disabled{opacity:.65;cursor:wait}
-.mxt-floating-pts-x{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:var(--t1);border-radius:50%;width:30px;height:30px;cursor:pointer;font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center;line-height:1;}
-.mxt-floating-pts-x:hover{background:rgba(255,255,255,.16);}
-@keyframes mxtAdWait{from{width:0}to{width:100%}}
 
-/* 🚀 Advanced Mobile Performance CSS */
-@media (max-width:520px){
-  .post{content-visibility:auto;contain-intrinsic-size:520px}
-  .mxt-feature-grid{grid-template-columns:1fr}
-  
-  /* Force GPU acceleration for smooth animations */
-  * {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  
-  /* Optimize scrolling */
-  html, body {
-    overflow-x: hidden;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Disable hover effects on mobile */
-  *:hover {
-    transition: none !important;
-  }
-  
-  /* Optimize images */
-  img {
-    will-change: transform;
-    content-visibility: auto;
-  }
-  
-  /* Reduce animation duration */
-  * {
-    animation-duration: 0.2s !important;
-    transition-duration: 0.15s !important;
-  }
-  
-  /* Optimize touch targets */
-  button, a, input, textarea {
-    min-height: 44px;
-    min-width: 44px;
-    touch-action: manipulation;
-  }
-  
-  /* Disable text selection for app-like feel */
-  * {
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Optimize font rendering */
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-  
-  /* Reduce shadow blur for performance */
-  * {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-  }
-  
-  /* Optimize borders */
-  * {
-    border-width: 1px !important;
-  }
-  
-  /* Disable complex filters */
-  * {
-    filter: none !important;
-    backdrop-filter: blur(4px) !important;
-  }
-  
-  /* Optimize gradients */
-  .post, .card, .modal {
-    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)) !important;
-  }
-  
-  /* Reduce border radius for performance */
-  * {
-    border-radius: 8px !important;
-  }
-  
-  /* Optimize flexbox layouts */
-  .post, .card, .modal {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  
-  /* Hide non-critical elements */
-  .desktop-only {
-    display: none !important;
-  }
-  
-  /* Optimize video elements */
-  video {
-    object-fit: cover;
-    max-width: 100%;
-  }
-  
-  /* Prevent layout shifts */
-  img, video, iframe {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Optimize scroll containers */
-  .scroll-container {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-  }
-  
-  /* Reduce padding on mobile */
-  .post, .card, .modal {
-    padding: 12px !important;
-  }
-  
-  /* Optimize button sizes */
-  button {
-    padding: 12px 16px !important;
-    font-size: 14px !important;
-  }
-  
-  /* Disable complex animations */
-  .animate-pulse, .animate-bounce, .animate-spin {
-    animation: none !important;
-  }
-  
-  /* Optimize input fields */
-  input, textarea {
-    font-size: 16px !important;
-    padding: 12px !important;
-  }
-  
-  /* Prevent zoom on input focus */
-  input[type="text"], input[type="email"], input[type="password"], textarea {
-    font-size: 16px !important;
-  }
-  
-  /* Optimize modal animations */
-  .modal {
-    animation: slideUp 0.2s ease-out !important;
-  }
-  
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Optimize loading states */
-  .loading {
-    animation: spin 0.5s linear infinite !important;
-  }
-  
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  
-  /* Optimize notification animations */
-  .notification {
-    animation: slideIn 0.2s ease-out !important;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Optimize dropdown menus */
-  .dropdown {
-    animation: fadeIn 0.15s ease-out !important;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  /* Optimize tab switching */
-  .tab-content {
-    animation: fadeSlide 0.2s ease-out !important;
-  }
-  
-  @keyframes fadeSlide {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  /* Optimize card hover effects */
-  .card:hover {
-    transform: none !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  }
-  
-  /* Optimize list items */
-  .list-item {
-    padding: 12px !important;
-    min-height: 60px;
-  }
-  
-  /* Optimize grid layouts */
-  .grid {
-    gap: 8px !important;
-  }
-  
-  /* Optimize spacing */
-  .container {
-    padding: 12px !important;
-  }
-  
-  /* Optimize typography */
-  h1, h2, h3, h4, h5, h6 {
-    line-height: 1.2 !important;
-  }
-  
-  p, span, div {
-    line-height: 1.4 !important;
-  }
-  
-  /* Optimize safe area for notched devices */
-  .safe-top {
-    padding-top: max(12px, env(safe-area-inset-top)) !important;
-  }
-  
-  .safe-bottom {
-    padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
-  }
-  
-  .safe-left {
-    padding-left: max(12px, env(safe-area-inset-left)) !important;
-  }
-  
-  .safe-right {
-    padding-right: max(12px, env(safe-area-inset-right)) !important;
-  }
-  
-  /* Optimize bottom navigation */
-  #btmNav {
-    padding-bottom: max(0, env(safe-area-inset-bottom)) !important;
-  }
-  
-  /* Optimize floating elements */
-  .floating {
-    bottom: calc(80px + env(safe-area-inset-bottom)) !important;
-  }
-  
-  /* Optimize status bar */
-  .status-bar {
-    padding-top: max(20px, env(safe-area-inset-top)) !important;
-  }
-  
-  /* Optimize landscape mode */
-  @media (orientation: landscape) {
-    .modal {
-      max-height: 80vh !important;
-      overflow-y: auto !important;
-    }
-    
-    .dropdown {
-      max-height: 60vh !important;
-      overflow-y: auto !important;
-    }
-  }
-  
-  /* Optimize dark mode transitions */
-  @media (prefers-color-scheme: dark) {
-    * {
-      transition: background-color 0.1s ease, color 0.1s ease !important;
-    }
-  }
-  
-  /* Optimize light mode transitions */
-  @media (prefers-color-scheme: light) {
-    * {
-      transition: background-color 0.1s ease, color 0.1s ease !important;
-    }
-  }
-  
-  /* Optimize reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-  
-  /* Optimize high contrast mode */
-  @media (prefers-contrast: high) {
-    * {
-      border-width: 2px !important;
-    }
-  }
-  
-  /* Optimize print styles */
-  @media print {
-    * {
-      animation: none !important;
-      transition: none !important;
-      box-shadow: none !important;
-    }
-  }
-  
-  #btmNav .bn{min-width:62px}
-  .post-more{min-width:40px;min-height:40px;touch-action:manipulation}
-  .post-menu-dropdown{max-width:calc(100vw - 16px) !important}
-  .mxt-floating-pts{right:10px;bottom:calc(124px + env(safe-area-inset-bottom))}
-}
-</style>
 
-<!-- Income Ads Hub - Dynamic Ad System with Auto-Rotation -->
-<script defer src="js/data-persistence-permanent.js"></script>
-<script defer src="js/ad-dismissal-system.js"></script>
-<script defer src="js/income-ads-hub.js"></script>
-<script defer src="js/income-ads-hub-integration.js"></script>
-<script defer src="js/income-ads-hub-admin.js"></script>
 
-<!-- 🎯 Dynamic Sponsored Ads - Replace Static Labels with Rotating Income Ads -->
-<script defer src="js/dynamic-sponsored-ads.js"></script>
-<script defer src="js/dynamic-ads-integration.js"></script>
 
-<!-- Initialize Dynamic Ads System -->
-<script>
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     if (window.DynamicSponsoredAds) {
@@ -20649,347 +15256,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 500);
 });
-</script>
-
-<!-- 🚀 Advanced Mobile Performance Booster -->
-<script>
-(function() {
-  'use strict';
-  
-  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  
-  if (!isMobile) return;
-  
-  console.log('🚀 Initializing Advanced Mobile Performance Booster...');
-  
-  // 🎯 Memory Management System
-  const MobilePerformance = {
-    memoryLimit: 50 * 1024 * 1024, // 50MB
-    cleanupInterval: 30000, // 30 seconds
-    
-    init() {
-      this.startMemoryMonitoring();
-      this.optimizeEventListeners();
-      this.cleanupUnusedElements();
-      this.optimizeScrollPerformance();
-      this.optimizeTouchInteractions();
-      this.preloadCriticalAssets();
-    },
-    
-    startMemoryMonitoring() {
-      if (window.performance && window.performance.memory) {
-        setInterval(() => {
-          const used = window.performance.memory.usedJSHeapSize;
-          if (used > this.memoryLimit) {
-            console.warn('⚠️ Memory limit exceeded, triggering cleanup...');
-            this.forceCleanup();
-          }
-        }, this.cleanupInterval);
-      }
-    },
-    
-    optimizeEventListeners() {
-      // Use passive event listeners for better scroll performance
-      const passiveOptions = { passive: true };
-      
-      document.addEventListener('touchstart', () => {}, passiveOptions);
-      document.addEventListener('touchmove', () => {}, passiveOptions);
-      document.addEventListener('scroll', () => {}, passiveOptions);
-      
-      // Debounce resize events
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          // Handle resize
-        }, 250);
-      });
-    },
-    
-    cleanupUnusedElements() {
-      // Remove hidden elements from DOM
-      setInterval(() => {
-        const hiddenElements = document.querySelectorAll('[style*="display: none"]');
-        hiddenElements.forEach(el => {
-          if (el.parentElement && !el.hasAttribute('data-keep')) {
-            el.remove();
-          }
-        });
-      }, 60000);
-    },
-    
-    forceCleanup() {
-      // Force garbage collection hint
-      if (window.gc) {
-        window.gc();
-      }
-      
-      // Clear caches
-      if (window.caches) {
-        window.caches.keys().then(names => {
-          names.forEach(name => window.caches.delete(name));
-        });
-      }
-    },
-    
-    optimizeScrollPerformance() {
-      // Enable hardware acceleration for scroll containers
-      const scrollContainers = document.querySelectorAll('.scroll-container, [overflow-y="auto"]');
-      scrollContainers.forEach(container => {
-        container.style.willChange = 'transform';
-        container.style.transform = 'translateZ(0)';
-      });
-      
-      // Implement virtual scrolling for long lists
-      const longLists = document.querySelectorAll('ul, ol');
-      longLists.forEach(list => {
-        if (list.children.length > 50) {
-          list.style.contain = 'strict';
-          list.style.contentVisibility = 'auto';
-        }
-      });
-    },
-    
-    optimizeTouchInteractions() {
-      // Prevent default touch behaviors that cause delays
-      document.addEventListener('touchstart', (e) => {
-        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-          e.target.style.transform = 'scale(0.98)';
-        }
-      }, { passive: true });
-      
-      document.addEventListener('touchend', (e) => {
-        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-          setTimeout(() => {
-            e.target.style.transform = 'scale(1)';
-          }, 100);
-        }
-      }, { passive: true });
-    },
-    
-    preloadCriticalAssets() {
-      // Preload critical fonts and icons
-      const criticalAssets = [
-        '/icon-192.png',
-        '/icon-512.png'
-      ];
-      
-      criticalAssets.forEach(asset => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = asset;
-        document.head.appendChild(link);
-      });
-    }
-  };
-  
-  // 🎯 Network Optimization
-  const NetworkOptimizer = {
-    init() {
-      this.monitorConnection();
-      this.optimizeRequests();
-      this.enableServiceWorker();
-    },
-    
-    monitorConnection() {
-      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      
-      if (connection) {
-        connection.addEventListener('change', () => {
-          console.log('📶 Network changed:', connection.effectiveType);
-          this.adjustQuality(connection.effectiveType);
-        });
-        
-        // Initial quality adjustment
-        this.adjustQuality(connection.effectiveType);
-      }
-    },
-    
-    adjustQuality(quality) {
-      const isSlow = quality === 'slow-2g' || quality === '2g';
-      
-      if (isSlow) {
-        document.documentElement.classList.add('low-quality-mode');
-        
-        // Disable non-critical features
-        const nonCritical = document.querySelectorAll('.video-player, .animated-bg');
-        nonCritical.forEach(el => el.style.display = 'none');
-        
-        // Reduce image quality
-        document.querySelectorAll('img').forEach(img => {
-          img.style.filter = 'blur(0.5px)';
-        });
-      }
-    },
-    
-    optimizeRequests() {
-      // Intercept and optimize fetch requests
-      const originalFetch = window.fetch;
-      window.fetch = function(...args) {
-        const url = args[0];
-        
-        // Add cache headers for static assets
-        if (typeof url === 'string' && (url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.css'))) {
-          args[1] = args[1] || {};
-          args[1].cache = 'force-cache';
-        }
-        
-        return originalFetch.apply(this, args);
-      };
-    },
-    
-    enableServiceWorker() {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-          console.log('✅ Service Worker registered');
-        }).catch(err => {
-          console.log('❌ Service Worker registration failed:', err);
-        });
-      }
-    }
-  };
-  
-  // 🎯 Animation Optimizer
-  const AnimationOptimizer = {
-    init() {
-      this.reduceAnimations();
-      this.optimizeTransitions();
-      this.disableHeavyEffects();
-    },
-    
-    reduceAnimations() {
-      // Check for reduced motion preference
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      if (prefersReducedMotion) {
-        document.documentElement.style.setProperty('--animation-duration', '0s');
-        document.documentElement.style.setProperty('--transition-duration', '0s');
-      }
-    },
-    
-    optimizeTransitions() {
-      // Use CSS transforms instead of position changes
-      document.querySelectorAll('.animate').forEach(el => {
-        el.style.willChange = 'transform';
-        el.style.transform = 'translateZ(0)';
-      });
-    },
-    
-    disableHeavyEffects() {
-      // Disable heavy blur and shadow effects on mobile
-      document.documentElement.style.setProperty('--disable-blur', 'true');
-      document.documentElement.style.setProperty('--disable-shadows', 'true');
-    }
-  };
-  
-  // 🎯 Battery Optimizer
-  const BatteryOptimizer = {
-    init() {
-      if (navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-          this.monitorBattery(battery);
-        });
-      }
-    },
-    
-    monitorBattery(battery) {
-      const updateOptimizations = () => {
-        if (battery.level < 0.2) {
-          // Low battery mode
-          document.documentElement.classList.add('battery-saver');
-          this.enablePowerSaving();
-        } else {
-          document.documentElement.classList.remove('battery-saver');
-          this.disablePowerSaving();
-        }
-      };
-      
-      battery.addEventListener('levelchange', updateOptimizations);
-      battery.addEventListener('chargingchange', updateOptimizations);
-      
-      updateOptimizations();
-    },
-    
-    enablePowerSaving() {
-      // Reduce update intervals
-      clearInterval(window.mainUpdateInterval);
-      window.mainUpdateInterval = setInterval(() => {}, 60000); // 1 minute
-      
-      // Disable background sync
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistration().then(reg => {
-          if (reg) {
-            reg.sync.register('background-sync');
-          }
-        });
-      }
-    },
-    
-    disablePowerSaving() {
-      // Restore normal intervals
-      clearInterval(window.mainUpdateInterval);
-    }
-  };
-  
-  // Initialize all optimizers
-  document.addEventListener('DOMContentLoaded', () => {
-    MobilePerformance.init();
-    NetworkOptimizer.init();
-    AnimationOptimizer.init();
-    BatteryOptimizer.init();
-    
-    console.log('✅ Advanced Mobile Performance Booster Initialized');
-  });
-  
-  // 🎯 App-like Experience Enhancer
-  const AppExperience = {
-    init() {
-      this.preventPullToRefresh();
-      this.handleSafeArea();
-      this.optimizeStatusBar();
-      this.enableFullscreen();
-    },
-    
-    preventPullToRefresh() {
-      document.body.style.overscrollBehaviorY = 'contain';
-      document.body.style.overscrollBehaviorX = 'contain';
-    },
-    
-    handleSafeArea() {
-      const safeAreaTop = getComputedStyle(document.documentElement).getPropertyValue('safe-area-inset-top');
-      const safeAreaBottom = getComputedStyle(document.documentElement).getPropertyValue('safe-area-inset-bottom');
-      
-      document.documentElement.style.setProperty('--safe-area-top', safeAreaTop || '0px');
-      document.documentElement.style.setProperty('--safe-area-bottom', safeAreaBottom || '0px');
-    },
-    
-    optimizeStatusBar() {
-      // Handle status bar appearance
-      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      if (isDarkMode) {
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#030308');
-      } else {
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
-      }
-    },
-    
-    enableFullscreen() {
-      // Request fullscreen on user interaction
-      document.addEventListener('click', () => {
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen().catch(err => {
-            console.log('Fullscreen request failed:', err);
-          });
-        }
-      }, { once: true });
-    }
-  };
-  
-  AppExperience.init();
-  
-})();
-</script>
-</body>
-</html>

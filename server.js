@@ -953,17 +953,51 @@ app.get('/api/auth/check-admin', async(req,res)=>{
 // Get dashboard statistics
 app.get('/api/admin/dashboard-stats', requireAdmin, async(req,res)=>{
   try {
-    // In production: get real stats from database
-    const pendingWithdrawals = syncStore.backups.filter(x => x.type === 'withdrawal' && x.data?.status === 'pending').length;
+    const users = Array.from(syncStore.users.values()).filter(u => u && !u.deleted);
+    const posts = Array.from(syncStore.posts.values()).filter(p => p && !p.deleted);
+    const withdrawals = syncStore.backups.filter(x => x.type === 'withdrawal').map(x => x.data || {});
+    const todayStart = new Date(); todayStart.setHours(0, 0, 0, 0);
+    const todayMs = todayStart.getTime();
+    const now = Date.now();
+    const fiveMinutesAgo = now - 5 * 60 * 1000;
+    const thirtyMinutesAgo = now - 30 * 60 * 1000;
+    const onlineUserIds = new Set(Array.from(onlineSessions.values()).map(s => String(s.userId || '')).filter(Boolean));
+    const activeSessionRows = Array.from(onlineSessions.values()).filter(s => Number(s.lastSeen || s.connectedAt || 0) >= fiveMinutesAgo);
+    const asMs = value => {
+      if(!value) return 0;
+      if(typeof value === 'number') return Number.isFinite(value) ? value : 0;
+      const parsed = Date.parse(value);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    };
+    const userLastActivity = u => Math.max(
+      asMs(u.lastAction),
+      asMs(u.lastActive),
+      asMs(u.lastSeen),
+      asMs(u.lastLogin),
+      asMs(u.lastLoginAt),
+      asMs(u.updatedAt || u.updated_at)
+    );
+    const positivePointTotal = Array.from(syncStore.points.values()).reduce((sum, p) => sum + Math.max(0, Number(p?.points || 0)), 0);
+    const adminRevenue = users.reduce((sum, u) => sum + Number(u.adminRevenue || u.admin_revenue || 0), 0);
+    const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
     const stats = {
-      totalUsers: syncStore.users.size,
-      activeUsers: new Set(Array.from(onlineSessions.values()).map(s => s.userId)).size,
-      activeSessions: onlineSessions.size,
-      totalPosts: syncStore.posts.size,
+      totalUsers: users.length,
+      onlineNow: users.filter(u => onlineUserIds.has(String(u.id)) || userLastActivity(u) >= fiveMinutesAgo).length,
+      activeUsers: new Set(activeSessionRows.map(s => s.userId)).size,
+      activeToday: users.filter(u => userLastActivity(u) >= todayMs).length,
+      kycVerified: users.filter(u => u.kycVerified || u.kyc_verified).length,
+      activeSessions: activeSessionRows.length,
+      totalPosts: posts.length,
       reports: syncStore.backups.filter(x => x.type === 'report').length + Array.from(syncStore.posts.values()).filter(p => Number(p.reports || 0) > 0).length,
       pendingWithdrawals,
-      totalWithdrawals: syncStore.backups.filter(x => x.type === 'withdrawal').length
+      totalWithdrawals: withdrawals.length,
+      disabledUsers: users.filter(u => u.disabled || u.deactivated || u.adminBlocked || u.deleted).length,
+      revenuePts: Math.max(adminRevenue, positivePointTotal),
+      loggedInUsers: users.filter(u => onlineUserIds.has(String(u.id)) || userLastActivity(u) >= thirtyMinutesAgo).length,
+      usedAppToday: users.filter(u => userLastActivity(u) >= todayMs).length,
+      todayLogin: users.filter(u => Math.max(asMs(u.lastLogin), asMs(u.lastLoginAt)) >= todayMs).length
     };
+    stats.todayLoginUse = `${stats.todayLogin}/${stats.usedAppToday}`;
     res.json(stats);
   } catch(e) {
     res.status(500).json({error: 'Failed to load dashboard stats'});
