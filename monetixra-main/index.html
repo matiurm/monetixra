@@ -4550,7 +4550,7 @@ async function loadSession() {
       
       // PERSISTENCE: Restore points from persistence manager
       if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
-        const savedPoints = await PersistenceManager.loadPoints(uid);
+        const savedPoints = await safeLoadPoints(uid);
         if(savedPoints > 0 && (u.points || 0) < savedPoints) {
           u.points = savedPoints;
           console.log('[PersistenceManager] Points restored:', savedPoints);
@@ -4558,6 +4558,29 @@ async function loadSession() {
       }
     }
   } catch(e) {}
+}
+function getPersistenceApi() {
+  const api = (typeof window !== 'undefined') ? window.PersistenceManager : null;
+  return api && typeof api === 'object' ? api : null;
+}
+async function safeLoadPoints(userId) {
+  const api = getPersistenceApi();
+  if (api && typeof api.loadPoints === 'function') {
+    try {
+      return await api.loadPoints(userId);
+    } catch (e) {
+      console.warn('[PersistenceManager] loadPoints failed:', e);
+    }
+  }
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY + 'data') || localStorage.getItem(STORAGE_KEY + 'backup_data') || localStorage.getItem('mxt_rescue_snapshot');
+    if (raw) {
+      const data = JSON.parse(raw);
+      const user = data?.users?.[userId];
+      return Number(user?.points || 0);
+    }
+  } catch (e) {}
+  return Number(D?.users?.[userId]?.points || CU?.points || 0);
 }
 // Helper: always re-sync CU to D.users after loadSession
 
@@ -4767,7 +4790,7 @@ async function doLogin() {
     let isAdminId = loginCandidates.some(candidate => {
       const candidateText = String(candidate || '').trim().toLowerCase();
       const candidatePhone = candidateText.replace(/\D/g, '');
-      return candidateText === ADMIN_EMAIL.toLowerCase() || candidatePhone === normalizedAdminPhone || candidateText === 'admin';
+      return candidateText === ADMIN_EMAIL.toLowerCase() || candidatePhone === normalizedAdminPhone || candidateText === String(ADMIN_ID || '').toLowerCase();
     });
     let isAdminPassword = pw === ADMIN_PASS || pw === ADMIN_PASS_DEFAULT || pw === ADMIN_PASS_FALLBACK;
     let foundUid = null;
@@ -4903,7 +4926,7 @@ async function doLogin() {
     
     // PERSISTENCE: Restore points from persistence manager on login
     if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
-      const savedPoints = await PersistenceManager.loadPoints(foundUid);
+      const savedPoints = await safeLoadPoints(foundUid);
       if(savedPoints > 0 && (CU.points || 0) < savedPoints) {
         CU.points = savedPoints;
         D.users[foundUid].points = savedPoints;
