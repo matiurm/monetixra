@@ -154,12 +154,48 @@ app.use((err, req, res, next) => {
 });
 
 // ── State ──────────────────────────────────────────────────────
-const onlineUsers  = new Map();
+const onlineUsers  = new Map(); // userId -> Set(socketId)
 const onlineSessions = new Map();
 const callSessions = new Map();
 const rooms        = new Map();
 let cachedICE=null, iceExpiry=0;
 let bkashToken=null, bkashTokenExp=0;
+
+function getOnlineSocketIds(userId) {
+  const entry = onlineUsers.get(String(userId));
+  if (!entry) return [];
+  return Array.isArray(entry) ? entry : Array.from(entry);
+}
+
+function isUserOnline(userId) {
+  return getOnlineSocketIds(userId).length > 0;
+}
+
+function emitToUser(userId, event, payload) {
+  for (const sid of getOnlineSocketIds(userId)) {
+    io.to(sid).emit(event, payload);
+  }
+}
+
+function addOnlineSocket(userId, socketId) {
+  const key = String(userId);
+  const current = onlineUsers.get(key) || new Set();
+  current.add(socketId);
+  onlineUsers.set(key, current);
+}
+
+function removeOnlineSocket(userId, socketId) {
+  const key = String(userId);
+  const current = onlineUsers.get(key);
+  if (!current) return 0;
+  current.delete(socketId);
+  if (current.size === 0) {
+    onlineUsers.delete(key);
+    return 0;
+  }
+  onlineUsers.set(key, current);
+  return current.size;
+}
 
 const syncStore = {
   users: new Map(),
@@ -953,51 +989,17 @@ app.get('/api/auth/check-admin', async(req,res)=>{
 // Get dashboard statistics
 app.get('/api/admin/dashboard-stats', requireAdmin, async(req,res)=>{
   try {
-    const users = Array.from(syncStore.users.values()).filter(u => u && !u.deleted);
-    const posts = Array.from(syncStore.posts.values()).filter(p => p && !p.deleted);
-    const withdrawals = syncStore.backups.filter(x => x.type === 'withdrawal').map(x => x.data || {});
-    const todayStart = new Date(); todayStart.setHours(0, 0, 0, 0);
-    const todayMs = todayStart.getTime();
-    const now = Date.now();
-    const fiveMinutesAgo = now - 5 * 60 * 1000;
-    const thirtyMinutesAgo = now - 30 * 60 * 1000;
-    const onlineUserIds = new Set(Array.from(onlineSessions.values()).map(s => String(s.userId || '')).filter(Boolean));
-    const activeSessionRows = Array.from(onlineSessions.values()).filter(s => Number(s.lastSeen || s.connectedAt || 0) >= fiveMinutesAgo);
-    const asMs = value => {
-      if(!value) return 0;
-      if(typeof value === 'number') return Number.isFinite(value) ? value : 0;
-      const parsed = Date.parse(value);
-      return Number.isNaN(parsed) ? 0 : parsed;
-    };
-    const userLastActivity = u => Math.max(
-      asMs(u.lastAction),
-      asMs(u.lastActive),
-      asMs(u.lastSeen),
-      asMs(u.lastLogin),
-      asMs(u.lastLoginAt),
-      asMs(u.updatedAt || u.updated_at)
-    );
-    const positivePointTotal = Array.from(syncStore.points.values()).reduce((sum, p) => sum + Math.max(0, Number(p?.points || 0)), 0);
-    const adminRevenue = users.reduce((sum, u) => sum + Number(u.adminRevenue || u.admin_revenue || 0), 0);
-    const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
+    // In production: get real stats from database
+    const pendingWithdrawals = syncStore.backups.filter(x => x.type === 'withdrawal' && x.data?.status === 'pending').length;
     const stats = {
-      totalUsers: users.length,
-      onlineNow: users.filter(u => onlineUserIds.has(String(u.id)) || userLastActivity(u) >= fiveMinutesAgo).length,
-      activeUsers: new Set(activeSessionRows.map(s => s.userId)).size,
-      activeToday: users.filter(u => userLastActivity(u) >= todayMs).length,
-      kycVerified: users.filter(u => u.kycVerified || u.kyc_verified).length,
-      activeSessions: activeSessionRows.length,
-      totalPosts: posts.length,
+      totalUsers: syncStore.users.size,
+      activeUsers: new Set(Array.from(onlineSessions.values()).map(s => s.userId)).size,
+      activeSessions: onlineSessions.size,
+      totalPosts: syncStore.posts.size,
       reports: syncStore.backups.filter(x => x.type === 'report').length + Array.from(syncStore.posts.values()).filter(p => Number(p.reports || 0) > 0).length,
       pendingWithdrawals,
-      totalWithdrawals: withdrawals.length,
-      disabledUsers: users.filter(u => u.disabled || u.deactivated || u.adminBlocked || u.deleted).length,
-      revenuePts: Math.max(adminRevenue, positivePointTotal),
-      loggedInUsers: users.filter(u => onlineUserIds.has(String(u.id)) || userLastActivity(u) >= thirtyMinutesAgo).length,
-      usedAppToday: users.filter(u => userLastActivity(u) >= todayMs).length,
-      todayLogin: users.filter(u => Math.max(asMs(u.lastLogin), asMs(u.lastLoginAt)) >= todayMs).length
+      totalWithdrawals: syncStore.backups.filter(x => x.type === 'withdrawal').length
     };
-    stats.todayLoginUse = `${stats.todayLogin}/${stats.usedAppToday}`;
     res.json(stats);
   } catch(e) {
     res.status(500).json({error: 'Failed to load dashboard stats'});
@@ -1113,8 +1115,7 @@ app.post('/api/posts/sync', async(req,res)=>{
     const author = syncStore.users.get(String(savedPost.author || '')) || {};
     const audience = new Set([...(author.followers || []), ...(author.following || []), ...(author.autoFriends || []), ...(author.forceFollowed || [])]);
     for(const userId of audience) {
-      const sid = onlineUsers.get(String(userId));
-      if(sid) io.to(sid).emit('notif:receive', {type:'post', postId:savedPost.id, msg:`${author.name || 'Someone'} created a new post`});
+      emitToUser(userId, 'notif:receive', {type:'post', postId:savedPost.id, msg:`${author.name || 'Someone'} created a new post`});
     }
     console.log(`[Sync] Post: ${postData.id}`);
     res.json({success: true, synced: true, persisted: true, id: postData.id, totalPosts: syncStore.posts.size});
@@ -1638,17 +1639,16 @@ io.on('connection', socket=>{
     if(!effectiveUserId) return;
     if(socket.userId && userId && String(userId) !== String(socket.userId)) return socket.emit('auth:error',{error:'user_mismatch'});
     socket.userId=String(effectiveUserId); socket.userName=name||'User';
-    onlineUsers.set(socket.userId,socket.id);
+    addOnlineSocket(socket.userId, socket.id);
     onlineSessions.set(socket.id, {userId: socket.userId, name: socket.userName, connectedAt: Date.now(), lastSeen: Date.now()});
     socket.join('user:'+socket.userId);
-    socket.broadcast.emit('user:status',{userId:socket.userId,status:'online'});
+    io.emit('user:status',{userId:socket.userId,status:'online'});
   });
 
   // Chat
   socket.on('chat:message', ({to,from,text,media,msgId,timestamp})=>{
     if(socket.userId && from && String(from) !== String(socket.userId)) return socket.emit('auth:error',{error:'sender_mismatch'});
     from = socket.userId || from;
-    const toSid=onlineUsers.get(to);
     const payload={from,text,media,msgId,timestamp:timestamp||Date.now()};
     supabaseRest('messages', 'POST', {
       id:msgId || 'm_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
@@ -1659,16 +1659,15 @@ io.on('connection', socket=>{
       read:false,
       created_at:new Date(payload.timestamp).toISOString()
     }, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation').catch(()=>{});
-    if(toSid) io.to(toSid).emit('chat:message',payload);
+    emitToUser(to, 'chat:message', payload);
     socket.emit('chat:message:sent',{msgId,to,timestamp:payload.timestamp});
     // Push notification if offline
-    if(!toSid) sendPushToUser(to,{title:'New Message',body:(text||'📎 Media').slice(0,80),icon:'/icon-192.png',url:'/'});
+    if(!isUserOnline(to)) sendPushToUser(to,{title:'New Message',body:(text||'📎 Media').slice(0,80),icon:'/icon-192.png',url:'/'});
   });
-  socket.on('chat:typing',  ({to,from,isTyping})=>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:typing',{from,isTyping}); });
-  socket.on('chat:read',    ({to,from,msgId})   =>{ from = socket.userId || from; const s=onlineUsers.get(to); if(s) io.to(s).emit('chat:read',{from,msgId}); });
+  socket.on('chat:typing',  ({to,from,isTyping})=>{ from = socket.userId || from; emitToUser(to, 'chat:typing', {from,isTyping}); });
+  socket.on('chat:read',    ({to,from,msgId})   =>{ from = socket.userId || from; emitToUser(to, 'chat:read', {from,msgId}); });
   socket.on('chat:delete',  ({to,msgId,scope='everyone'})=>{
-    const s=onlineUsers.get(to);
-    if(s) io.to(s).emit('chat:delete',{msgId,scope,from:socket.userId});
+    emitToUser(to, 'chat:delete',{msgId,scope,from:socket.userId});
   });
 
   // Rooms
@@ -1708,14 +1707,12 @@ io.on('connection', socket=>{
     if(toSocketId) io.to(toSocketId).emit('live:offer',{postId,streamerId:socket.userId || streamerId,offer});
   });
   socket.on('live:answer', ({postId,streamerId,viewerId,answer})=>{
-    const target = onlineUsers.get(streamerId);
-    if(target) io.to(target).emit('live:answer',{postId,viewerId:socket.userId || viewerId || socket.id,viewerSocketId:socket.id,answer});
+    emitToUser(streamerId, 'live:answer',{postId,viewerId:socket.userId || viewerId || socket.id,viewerSocketId:socket.id,answer});
   });
   socket.on('live:ice', ({postId,toSocketId,toUserId,fromUserId,candidate})=>{
     if(toSocketId) io.to(toSocketId).emit('live:ice',{postId,fromUserId:socket.userId || fromUserId || socket.id,fromSocketId:socket.id,candidate});
     else if(toUserId) {
-      const target = onlineUsers.get(toUserId);
-      if(target) io.to(target).emit('live:ice',{postId,fromUserId:socket.userId || fromUserId || socket.id,fromSocketId:socket.id,candidate});
+      emitToUser(toUserId, 'live:ice',{postId,fromUserId:socket.userId || fromUserId || socket.id,fromSocketId:socket.id,candidate});
     }
   });
 
@@ -1730,7 +1727,7 @@ io.on('connection', socket=>{
     io.emit('post:new', {post:savedPost});
   });
   socket.on('post:react',   ({postId,userId,reaction})=>{ userId = socket.userId || userId; io.emit('post:reacted',{postId,userId,reaction}); });
-  socket.on('post:comment', ({postId,authorId,comment})=>{ const s=onlineUsers.get(authorId); if(s) io.to(s).emit('post:new:comment',{postId,comment}); io.emit('post:commented',{postId,comment}); });
+  socket.on('post:comment', ({postId,authorId,comment})=>{ emitToUser(authorId, 'post:new:comment', {postId,comment}); io.emit('post:commented',{postId,comment}); });
 
   // Notifications
   socket.on('notif:send', ({to,notif})=>{
@@ -1738,8 +1735,7 @@ io.on('connection', socket=>{
       io.emit('notif:receive', notif);
       return;
     }
-    const s=onlineUsers.get(to);
-    if(s) io.to(s).emit('notif:receive',notif);
+    if (isUserOnline(to)) emitToUser(to, 'notif:receive', notif);
     else sendPushToUser(to,{title:notif.msg||'Notification',body:'',icon:'/icon-192.png',url:'/'});
   });
 
@@ -1747,10 +1743,10 @@ io.on('connection', socket=>{
   socket.on('call:invite', async({callId,callerId,calleeId,type,callerName,callerAvatar})=>{
     if(socket.userId && callerId && String(callerId) !== String(socket.userId)) return socket.emit('auth:error',{error:'caller_mismatch'});
     callerId = socket.userId || callerId;
-    const calleeSid=onlineUsers.get(calleeId);
     const iceServers=await getICE();
-    callSessions.set(callId,{callId,callerId,calleeId,type,callerSocket:socket.id,calleeSocket:calleeSid,state:'ringing'});
-    if(calleeSid){ io.to(calleeSid).emit('call:incoming',{callId,callerId,callerName,callerAvatar,type,iceServers}); }
+    const calleeSockets = getOnlineSocketIds(calleeId);
+    callSessions.set(callId,{callId,callerId,calleeId,type,callerSocket:socket.id,calleeSockets,state:'ringing'});
+    if(calleeSockets.length){ emitToUser(calleeId, 'call:incoming',{callId,callerId,callerName,callerAvatar,type,iceServers}); }
     else {
       socket.emit('call:missed',{callId,calleeId,reason:'offline'});
       sendPushToUser(calleeId,{title:'Missed Call',body:`${callerName} called you`,icon:'/icon-192.png',url:'/'});
@@ -1758,18 +1754,17 @@ io.on('connection', socket=>{
   });
   socket.on('call:accept', async({callId,calleeId})=>{ const sess=callSessions.get(callId); if(!sess) return; sess.state='connected'; const ice=await getICE(); io.to(sess.callerSocket).emit('call:accepted',{callId,calleeId,iceServers:ice}); });
   socket.on('call:decline', ({callId})=>{ const sess=callSessions.get(callId); if(!sess) return; io.to(sess.callerSocket).emit('call:declined',{callId}); callSessions.delete(callId); });
-  socket.on('call:end',     ({callId})=>{ const sess=callSessions.get(callId); if(!sess) return; const other=socket.id===sess.callerSocket?sess.calleeSocket:sess.callerSocket; if(other) io.to(other).emit('call:ended',{callId}); callSessions.delete(callId); });
-  socket.on('webrtc:offer',         ({callId,to,offer})    =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('webrtc:offer',        {callId,from:socket.userId,offer}); });
-  socket.on('webrtc:answer',        ({callId,to,answer})   =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('webrtc:answer',       {callId,from:socket.userId,answer}); });
-  socket.on('webrtc:ice-candidate', ({callId,to,candidate})=>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('webrtc:ice-candidate',{callId,from:socket.userId,candidate}); });
-  socket.on('webrtc:screen-share',  ({callId,to,sharing})  =>{ const s=onlineUsers.get(to); if(s) io.to(s).emit('webrtc:screen-share', {callId,from:socket.userId,sharing}); });
+  socket.on('call:end',     ({callId})=>{ const sess=callSessions.get(callId); if(!sess) return; const other=socket.id===sess.callerSocket?sess.calleeSockets:sess.callerSocket; if(Array.isArray(other)) other.forEach(sid=>io.to(sid).emit('call:ended',{callId})); else if(other) io.to(other).emit('call:ended',{callId}); callSessions.delete(callId); });
+  socket.on('webrtc:offer',         ({callId,to,offer})    =>{ emitToUser(to, 'webrtc:offer',        {callId,from:socket.userId,offer}); });
+  socket.on('webrtc:answer',        ({callId,to,answer})   =>{ emitToUser(to, 'webrtc:answer',       {callId,from:socket.userId,answer}); });
+  socket.on('webrtc:ice-candidate', ({callId,to,candidate})=>{ emitToUser(to, 'webrtc:ice-candidate',{callId,from:socket.userId,candidate}); });
+  socket.on('webrtc:screen-share',  ({callId,to,sharing})  =>{ emitToUser(to, 'webrtc:screen-share', {callId,from:socket.userId,sharing}); });
 
   socket.on('disconnect', ()=>{
     if(socket.userId){
       onlineSessions.delete(socket.id);
-      const stillOnline = Array.from(onlineSessions.values()).some(s => s.userId === socket.userId);
+      const stillOnline = removeOnlineSocket(socket.userId, socket.id) > 0;
       if(!stillOnline) {
-        onlineUsers.delete(socket.userId);
         socket.broadcast.emit('user:status',{userId:socket.userId,status:'offline'});
       }
       for(const [callId,sess] of callSessions){
