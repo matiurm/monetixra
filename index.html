@@ -1227,14 +1227,15 @@ iframe[src*="adzilla"],
 .lv-mini-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.14);border-color:rgba(0,255,170,.22);box-shadow:0 12px 26px rgba(0,0,0,.2);}
 .lv-mini-btn.active{background:linear-gradient(135deg,rgba(0,255,170,.24),rgba(14,165,233,.22));border-color:rgba(0,255,170,.34);box-shadow:0 12px 28px rgba(0,255,170,.12);}
 
-.lv-social-panel{position:absolute;right:12px;top:104px;z-index:8;width:min(360px,calc(100vw - 24px));max-height:calc(100vh - 212px);display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:28px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(6,12,22,.94),rgba(5,8,14,.8));backdrop-filter:blur(24px) saturate(180%);box-shadow:0 28px 80px rgba(0,0,0,.42);transform:translateX(22px) scale(.98);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;}
+.lv-social-panel{position:absolute;right:12px;top:104px;z-index:999;width:min(360px,calc(100vw - 24px));max-height:calc(100vh - 212px);display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:28px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(6,12,22,.94),rgba(5,8,14,.8));backdrop-filter:blur(24px) saturate(180%);box-shadow:0 28px 80px rgba(0,0,0,.42);transform:translateX(22px) scale(.98);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;}
 .lv-social-panel.show{opacity:1;pointer-events:auto;transform:translateX(0) scale(1);}
 .lv-social-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:10px 10px 12px;border-radius:20px;background:linear-gradient(135deg,rgba(0,255,170,.12),rgba(14,165,233,.08));border:1px solid rgba(255,255,255,.08);}
 .lv-social-head > div:first-child{min-width:0;flex:1;}
 .lv-social-title{font-size:15px;font-weight:900;color:#fff;letter-spacing:.2px;}
 .lv-social-sub{font-size:11px;color:rgba(255,255,255,.74);line-height:1.4;margin-top:4px;}
-.lv-social-close{width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-weight:900;cursor:pointer;flex:0 0 auto;}
-.lv-social-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:0 2px;}
+.lv-social-close{width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-weight:900;cursor:pointer;flex:0 0 auto;pointer-events:auto;z-index:9999;position:relative;transition:background .2s ease,transform .2s ease;}
+.lv-social-close:hover{background:rgba(255,68,68,.3);transform:scale(1.1);}
+.lv-social-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 2px;}
 .lv-social-tab{min-height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);font-size:11px;font-weight:800;cursor:pointer;transition:transform .18s ease,background .18s ease,border-color .18s ease,color .18s ease;}
 .lv-social-tab:hover{transform:translateY(-1px);background:rgba(255,255,255,.11);}
 .lv-social-tab.active{background:linear-gradient(135deg,rgba(0,255,170,.24),rgba(14,165,233,.2));border-color:rgba(0,255,170,.3);color:#fff;}
@@ -1323,6 +1324,34 @@ iframe[src*="adzilla"],
 .lv-control-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.5px;}
 .lv-select{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 12px;color:#fff;font-size:13px;outline:none;cursor:pointer;}
 .lv-select option{background:#12121f;color:#fff;}
+
+/* Quality Dropdown Styles */
+.lv-dropdown-container{position:relative;}
+.lv-dropdown-btn{width:100%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .2s ease,border-color .2s ease;}
+.lv-dropdown-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3);}
+.lv-dropdown-arrow{font-size:10px;transition:transform .2s ease;}
+.lv-dropdown-btn.open .lv-dropdown-arrow{transform:rotate(180deg);}
+.lv-dropdown-menu{position:absolute;top:100%;left:0;right:0;margin-top:8px;background:rgba(6,12,22,.95);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:12px;max-height:400px;overflow-y:auto;z-index:100;display:none;animation:slideDown .2s ease;backdrop-filter:blur(20px);box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.lv-dropdown-menu.open{display:block;}
+.lv-dropdown-section{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08);}
+.lv-dropdown-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.lv-dropdown-section-title{font-size:10px;font-weight:800;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;padding:0 4px;}
+.lv-dropdown-item{width:100%;background:transparent;border:none;padding:10px 12px;color:rgba(255,255,255,.9);font-size:13px;font-weight:600;text-align:left;cursor:pointer;border-radius:10px;transition:background .15s ease,color .15s ease;display:flex;align-items:center;gap:8px;}
+.lv-dropdown-item:hover{background:rgba(0,255,170,.15);color:#fff;}
+.lv-dropdown-item.active{background:linear-gradient(135deg,rgba(0,255,170,.2),rgba(14,165,233,.18));border:1px solid rgba(0,255,170,.3);color:#fff;}
+.lv-dropdown-item.lv-expandable{justify-content:space-between;}
+.lv-submenu-arrow{font-size:10px;transition:transform .2s ease;}
+.lv-dropdown-item.lv-expandable.open .lv-submenu-arrow{transform:rotate(180deg);}
+.lv-dropdown-submenu{display:none;padding-left:8px;margin-top:4px;animation:slideDown .2s ease;}
+.lv-dropdown-submenu.open{display:block;}
+.lv-dropdown-item.lv-sub-item{font-size:12px;padding:8px 10px;margin-bottom:2px;}
+
+/* Live Timer */
+.lv-live-timer{position:absolute;top:20px;left:20px;background:rgba(255,68,68,.9);color:#fff;padding:8px 16px;border-radius:20px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;animation:pulse 2s infinite;z-index:10;}
+.lv-live-timer::before{content:'';width:10px;height:10px;background:#fff;border-radius:50%;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.4);}50%{box-shadow:0 0 0 10px rgba(255,68,68,0);}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
 .lv-btn{background:linear-gradient(135deg,rgba(0,255,170,.14),rgba(14,165,233,.16));border:1px solid rgba(0,255,170,.26);border-radius:14px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;display:flex;align-items:center;justify-content:center;gap:8px;}
 .lv-btn:hover{background:linear-gradient(135deg,rgba(0,255,170,.22),rgba(14,165,233,.24));transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,255,170,.12);}
 .lv-btn-icon{width:46px;height:46px;border-radius:50%;font-size:20px;padding:0;display:flex;align-items:center;justify-content:center;}
@@ -2681,6 +2710,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <!-- OFFLINE & STORAGE -->
   <div class="sett-sec">
     <div class="sett-ttl">📦 Storage & Offline</div>
+    <div class="sett-row" onclick="if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence.showPersistenceStatus) enhancedPersistence.showPersistenceStatus()"><div class="sett-ico">📊</div><div><div class="sett-nm">Data Persistence Status</div><div class="sett-sub">View saved posts, media & storage info</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="nav('offline')"><div class="sett-ico">📵</div><div><div class="sett-nm">Offline Content</div><div class="sett-sub" id="cacheInfo">0 items cached</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="clearCache()"><div class="sett-ico">🧹</div><div><div class="sett-nm">Clear Cache</div><div class="sett-sub" id="cacheSizeLabel">Calculating...</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="exportData()"><div class="sett-ico">📤</div><div><div class="sett-nm">Export My Data</div><div class="sett-sub">Download all your data (JSON)</div></div><span class="sett-end">›</span></div>
@@ -3229,41 +3259,51 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <button class="lv-mini-btn" id="lvPortraitBtn" onclick="toggleLivePortraitMode()" title="Portrait mode">
         <span class="lv-mini-ico">⦿</span><span class="lv-mini-lbl">Portrait</span>
       </button>
-      <button class="lv-mini-btn" id="lvSocialPanelBtn" onclick="toggleLiveSocialPanel()" title="Live panel">
-        <span class="lv-mini-ico">👥</span><span class="lv-mini-lbl">Social</span>
-      </button>
       <button class="lv-mini-btn" onclick="toggleCameraControls()" title="Studio controls">
         <span class="lv-mini-ico">⋯</span><span class="lv-mini-lbl">Studio</span>
       </button>
     </div>
 
-    <div class="lv-social-panel" id="lvSocialPanel" aria-label="Live social panel">
-      <div class="lv-social-head">
-        <div>
-          <div class="lv-social-title">Live Room</div>
-          <div class="lv-social-sub" id="lvSocialSub">Chat, group chat, and group call with active friends.</div>
-        </div>
-        <button type="button" class="lv-social-close" onclick="toggleLiveSocialPanel(false)">✕</button>
-      </div>
-      <div class="lv-social-tabs">
-        <button type="button" class="lv-social-tab active" data-tab="chat" onclick="setLiveSocialTab('chat')">Chat</button>
-        <button type="button" class="lv-social-tab" data-tab="groupchat" onclick="setLiveSocialTab('groupchat')">Group Chat</button>
-        <button type="button" class="lv-social-tab" data-tab="groupcall" onclick="setLiveSocialTab('groupcall')">Group Call</button>
-      </div>
-      <div class="lv-social-body" id="lvSocialBody"></div>
-    </div>
-
     <!-- Professional Camera Controls -->
     <div class="lv-camera-controls" id="lvCameraControls">
-      <!-- Resolution Selector -->
+      <!-- Quality & Live Room Dropdown -->
       <div class="lv-control-group">
         <div class="lv-control-label">📺 Quality</div>
-        <select class="lv-select" id="lvResolution" onchange="changeResolution()">
-          <option value="720">720p HD</option>
-          <option value="1080" selected>1080p FHD</option>
-          <option value="1440">1440p QHD</option>
-          <option value="2160">4K UHD</option>
-        </select>
+        <div class="lv-dropdown-container">
+          <button class="lv-dropdown-btn" id="lvQualityDropdownBtn" onclick="toggleQualityDropdown()">
+            <span id="lvQualityLabel">1080p FHD</span>
+            <span class="lv-dropdown-arrow">▼</span>
+          </button>
+          <div class="lv-dropdown-menu" id="lvQualityDropdown">
+            <!-- Resolution Options -->
+            <div class="lv-dropdown-section">
+              <div class="lv-dropdown-section-title">Resolution</div>
+              <button class="lv-dropdown-item" onclick="changeResolution('720')">720p HD</button>
+              <button class="lv-dropdown-item active" onclick="changeResolution('1080')">1080p FHD</button>
+              <button class="lv-dropdown-item" onclick="changeResolution('1440')">1440p QHD</button>
+              <button class="lv-dropdown-item" onclick="changeResolution('2160')">4K UHD</button>
+            </div>
+            <!-- Live Room Options -->
+            <div class="lv-dropdown-section">
+              <button class="lv-dropdown-item lv-expandable" onclick="toggleLiveRoomSubmenu()">
+                <span>👥 Live Room</span>
+                <span class="lv-submenu-arrow">▼</span>
+              </button>
+              <div class="lv-dropdown-submenu" id="lvLiveRoomSubmenu">
+                <button class="lv-dropdown-item lv-sub-item" onclick="openLiveChat()">💬 Chat</button>
+                <button class="lv-dropdown-item lv-sub-item" onclick="openGroupChat()">👥 Group Chat</button>
+                <button class="lv-dropdown-item lv-sub-item" onclick="openGroupCall()">📞 Group Call</button>
+                <button class="lv-dropdown-item lv-sub-item" onclick="openGroupLive()">🔴 Group Live</button>
+              </div>
+            </div>
+            <!-- Video Controls -->
+            <div class="lv-dropdown-section">
+              <div class="lv-dropdown-section-title">Video Controls</div>
+              <button class="lv-dropdown-item" onclick="startVideoStream()">▶️ Start Video</button>
+              <button class="lv-dropdown-item" onclick="stopVideoStream()">⏹️ Stop Video</button>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Camera Toggle -->
@@ -4935,6 +4975,22 @@ async function doLogin() {
       }
     }
     
+    // ENHANCED PERSISTENCE: Restore posts and media on login (survives logout/login)
+    if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
+      await enhancedPersistence.restore();
+      console.log('[EnhancedPersistence] Data restored on login for:', foundUid);
+      
+      // Restore points from enhanced persistence
+      const restoredPoints = enhancedPersistence.restorePoints(foundUid);
+      if (restoredPoints > 0 && (CU.points || 0) < restoredPoints) {
+        CU.points = restoredPoints;
+        D.users[foundUid].points = restoredPoints;
+        console.log('[EnhancedPersistence] Points restored on login:', restoredPoints);
+        saveData(); // Save the restored points
+        toast('s', `💰 Points restored: ${restoredPoints} pts`);
+      }
+    }
+    
     trackUserActivity('login');
     mount();
     toast('s','✅ Welcome back, '+CU.name+'!');
@@ -5230,6 +5286,10 @@ function logout(skipConfirm = false) {
       console.warn('[PersistenceManager] Session clear failed:', err);
     });
   }
+  
+  // NOTE: We do NOT clear enhancedPersistence data on logout
+  // This ensures posts, media, and content survive logout/login cycles like Facebook/YouTube
+  // User data persists across sessions but is tied to their account
 
   if (typeof saveData === 'function') {
     saveData();
@@ -5246,6 +5306,10 @@ function logout(skipConfirm = false) {
       sessionStorage.removeItem(STORAGE_KEY+'backup_session');
       sessionStorage.removeItem('mxt_rescue_session');
     } catch(e) {}
+    
+    // IMPORTANT: Do NOT clear enhanced persistence data
+    // This ensures posts, media, drafts survive logout/login like Facebook/YouTube
+    console.log('[Logout] Enhanced persistence data preserved for next login');
   } catch (e) {}
 
   if (typeof document !== 'undefined') {
@@ -7044,6 +7108,25 @@ function submitPost() {
         postId: post.id
       }).catch(err => {
         console.warn('[PersistenceManager] Media save failed:', err);
+      });
+    }
+  }
+  
+  // ENHANCED PERSISTENCE: Save to enhanced persistence (survives logout/login)
+  if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
+    enhancedPersistence.savePost(post).catch(err => {
+      console.warn('[EnhancedPersistence] Post save failed:', err);
+    });
+    
+    // Save media file if present
+    if(post.file && post.file.length > 0) {
+      enhancedPersistence.saveMedia(post.id, post.file, {
+        type: post.type,
+        mimetype: post.mimetype,
+        postId: post.id,
+        authorId: CU.id
+      }).catch(err => {
+        console.warn('[EnhancedPersistence] Media save failed:', err);
       });
     }
   }
@@ -11139,7 +11222,9 @@ function renderLiveSocialPanel() {
       ? `Live room chat with ${selectedCount} active friends and ${viewerCount} viewers.`
       : liveSocialState.tab === 'groupchat'
         ? `Build a group chat room from the active friends in this live session.`
-        : `Start a group call room with a Facebook-style live audience panel.`;
+        : liveSocialState.tab === 'grouplive'
+          ? `Start a group live stream with friends and viewers.`
+          : `Start a group call room with a Facebook-style live audience panel.`;
   }
 
   const tabs = panel.querySelectorAll('.lv-social-tab');
@@ -11163,13 +11248,18 @@ function renderLiveSocialPanel() {
 
   const topFriends = friends.slice(0, liveSocialState.tab === 'chat' ? 4 : 6);
   const lead = friends[0];
-  const modeLabel = liveSocialState.tab === 'chat' ? 'Live Chat' : liveSocialState.tab === 'groupchat' ? 'Group Chat Room' : 'Group Call Room';
+  const modeLabel = liveSocialState.tab === 'chat' ? 'Live Chat' : liveSocialState.tab === 'groupchat' ? 'Group Chat Room' : liveSocialState.tab === 'grouplive' ? 'Group Live Room' : 'Group Call Room';
   const trend = getLiveTrendingReactionBadge(viewerCount);
   const actionButtons = liveSocialState.tab === 'groupchat'
     ? `
       <button type="button" class="primary" onclick="window.startQuickGroupChat?.();">Start Group Chat</button>
       <button type="button" class="secondary" onclick="window.openGroupCallRoom?.();">Open Call Room</button>
     `
+    : liveSocialState.tab === 'grouplive'
+      ? `
+        <button type="button" class="primary" onclick="window.openGroupLiveRoom?.();">Start Group Live</button>
+        <button type="button" class="secondary" onclick="window.startQuickGroupChat?.();">Open Chat Room</button>
+      `
     : liveSocialState.tab === 'groupcall'
       ? `
         <button type="button" class="primary" onclick="window.openGroupCallRoom?.();">Start Group Call</button>
@@ -11215,7 +11305,7 @@ function renderLiveSocialPanel() {
 
     <div class="lv-social-section">
       <div class="lv-social-section-title">
-        <span>${liveSocialState.tab === 'chat' ? 'Audience' : liveSocialState.tab === 'groupchat' ? 'Chat-ready friends' : 'Call-ready friends'}</span>
+        <span>${liveSocialState.tab === 'chat' ? 'Audience' : liveSocialState.tab === 'groupchat' ? 'Chat-ready friends' : liveSocialState.tab === 'grouplive' ? 'Live-ready friends' : 'Call-ready friends'}</span>
         <span class="lv-social-pill">${topFriends.length} shown</span>
       </div>
       <div class="lv-active-friends">
@@ -11226,7 +11316,10 @@ function renderLiveSocialPanel() {
 
 function toggleLiveSocialPanel(force) {
   const panel = G('lvSocialPanel');
-  if (!panel) return;
+  if (!panel) {
+    console.warn('[toggleLiveSocialPanel] Panel not found');
+    return;
+  }
   const next = typeof force === 'boolean' ? force : !liveSocialState.open;
   liveSocialState.open = next;
   panel.classList.toggle('show', next);
@@ -11234,6 +11327,8 @@ function toggleLiveSocialPanel(force) {
   if (btn) btn.classList.toggle('active', next);
   if (next) renderLiveSocialPanel();
   else closeLiveReactionTray();
+  
+  console.log('[toggleLiveSocialPanel] Panel state:', next);
 }
 
 function setLiveSocialTab(tab) {
@@ -11361,9 +11456,28 @@ function applyLiveVideoEffects() {
 }
 
 // Change camera resolution
-async function changeResolution() {
-  let resolution = parseInt(G('lvResolution').value);
+async function changeResolution(resolution) {
+  if (!resolution) {
+    resolution = parseInt(G('lvResolution')?.value || '1080');
+  }
   cameraState.currentResolution = resolution;
+  
+  // Update dropdown button label
+  const label = G('lvQualityLabel');
+  if (label) {
+    const labels = { '720': '720p HD', '1080': '1080p FHD', '1440': '1440p QHD', '2160': '4K UHD' };
+    label.textContent = labels[resolution] || resolution + 'p';
+  }
+  
+  // Update active state in dropdown
+  const dropdownItems = document.querySelectorAll('.lv-dropdown-item');
+  dropdownItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.textContent.includes(resolution + 'p')) {
+      item.classList.add('active');
+    }
+  });
+  
   updateLiveStudioHud();
   
   if (liveStreamState.stream) {
@@ -11376,6 +11490,156 @@ async function changeResolution() {
       toast('e', liveErrorDetails(err));
     }
   }
+  
+  // Close dropdown
+  toggleQualityDropdown(false);
+}
+
+// Toggle quality dropdown
+function toggleQualityDropdown(force) {
+  const dropdown = G('lvQualityDropdown');
+  const btn = G('lvQualityDropdownBtn');
+  if (!dropdown || !btn) return;
+  
+  const isOpen = typeof force === 'boolean' ? force : !dropdown.classList.contains('open');
+  
+  if (isOpen) {
+    dropdown.classList.add('open');
+    btn.classList.add('open');
+  } else {
+    dropdown.classList.remove('open');
+    btn.classList.remove('open');
+  }
+}
+
+// Toggle Live Room submenu
+function toggleLiveRoomSubmenu() {
+  const submenu = G('lvLiveRoomSubmenu');
+  const expandBtn = document.querySelector('.lv-expandable');
+  if (!submenu || !expandBtn) return;
+  
+  const isOpen = !submenu.classList.contains('open');
+  submenu.classList.toggle('open', isOpen);
+  expandBtn.classList.toggle('open', isOpen);
+}
+
+// Live Room Functions
+function openLiveChat() {
+  toggleQualityDropdown(false);
+  toast('i', '💬 Live Chat feature activated');
+}
+
+function openGroupChat() {
+  toggleQualityDropdown(false);
+  toast('i', '👥 Group Chat feature activated');
+}
+
+function openGroupCall() {
+  toggleQualityDropdown(false);
+  toast('i', '📞 Group Call feature activated');
+}
+
+function openGroupLive() {
+  toggleQualityDropdown(false);
+  toast('i', '🔴 Group Live feature activated');
+  // Start group live stream
+  if (typeof startLiveStreamFromPost === 'function') {
+    startLiveStreamFromPost();
+  }
+}
+
+// Video Stream Controls
+let liveRecordingTimer = null;
+let liveRecordingSeconds = 0;
+let isVideoStreamActive = false;
+
+function startVideoStream() {
+  if (isVideoStreamActive) {
+    toast('w', 'Video stream is already active');
+    return;
+  }
+  
+  isVideoStreamActive = true;
+  toggleQualityDropdown(false);
+  
+  // Show timer
+  showLiveTimer();
+  
+  // Start recording timer
+  liveRecordingSeconds = 0;
+  if (liveRecordingTimer) clearInterval(liveRecordingTimer);
+  liveRecordingTimer = setInterval(() => {
+    liveRecordingSeconds++;
+    updateLiveTimer();
+  }, 1000);
+  
+  toast('s', '▶️ Video stream started');
+  
+  // Start actual live stream if not already running
+  if (!liveStreamState.stream && typeof startLiveStreamFromPost === 'function') {
+    startLiveStreamFromPost();
+  }
+}
+
+function stopVideoStream() {
+  if (!isVideoStreamActive) {
+    toast('w', 'Video stream is not active');
+    return;
+  }
+  
+  isVideoStreamActive = false;
+  toggleQualityDropdown(false);
+  
+  // Stop timer
+  if (liveRecordingTimer) {
+    clearInterval(liveRecordingTimer);
+    liveRecordingTimer = null;
+  }
+  
+  // Hide timer
+  hideLiveTimer();
+  
+  toast('s', `⏹️ Video stream stopped (${formatLiveTime(liveRecordingSeconds)})`);
+  
+  // Stop live stream
+  if (liveStreamState.stream && typeof stopLiveStream === 'function') {
+    stopLiveStream();
+  }
+}
+
+function showLiveTimer() {
+  let timer = G('lvLiveTimer');
+  if (!timer) {
+    timer = document.createElement('div');
+    timer.id = 'lvLiveTimer';
+    timer.className = 'lv-live-timer';
+    const liveView = G('liveView');
+    if (liveView) {
+      liveView.appendChild(timer);
+    }
+  }
+  timer.style.display = 'flex';
+  updateLiveTimer();
+}
+
+function hideLiveTimer() {
+  const timer = G('lvLiveTimer');
+  if (timer) {
+    timer.style.display = 'none';
+  }
+}
+
+function updateLiveTimer() {
+  const timer = G('lvLiveTimer');
+  if (timer) {
+    timer.textContent = formatLiveTime(liveRecordingSeconds);
+  }
+}
+
+function formatLiveTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // Toggle front/back camera
@@ -12742,6 +13006,13 @@ window.addEventListener('load', async () => {
       });
     }
     
+    // ENHANCED PERSISTENCE: Initialize enhanced persistence for Facebook/YouTube-like data survival
+    if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
+      await enhancedPersistence.init().catch(err => {
+        console.warn('[EnhancedPersistence] Init failed:', err);
+      });
+    }
+    
     if(typeof initData === 'function') initData();
     if(typeof loadData === 'function') await loadData();
     if(typeof ensurePersistentRecovery === 'function') ensurePersistentRecovery();
@@ -13943,6 +14214,9 @@ window.checkPaywall = checkPaywall;
 
 <!-- Ultimate Persistence Manager - Points, Session, Media, Posts, Chats -->
 <script src="js/persistence-manager.js"></script>
+
+<!-- Enhanced Persistence - Complete post/media restoration like Facebook/YouTube -->
+<script src="js/enhanced-persistence.js"></script>
 
 <!-- Ad Rotation System - Different ad networks on each click -->
 <script src="js/ad-rotation-system.js"></script>
@@ -20470,4 +20744,5 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
