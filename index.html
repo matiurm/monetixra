@@ -29,7 +29,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Monetixra">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover">
 <meta name="description" content="Monetixra — Complete Social Earn Platform with AI, Crypto, NFT, MLM & Live">
 <title>Monetixra — Complete Social Earn Platform</title>
 <!-- Open Graph / Social Sharing (dynamic) -->
@@ -116,26 +116,76 @@ window.atOptions_468x60 = {
 </script>
 <script defer src="https://www.highperformanceformat.com/2c59b270de9e21b57ad543e7b88c2e3f/invoke.js"></script>
 
+<!-- Mobile Performance: Conditional Script Loading -->
+<script>
+(function() {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry/i.test(navigator.userAgent);
+  const isSlowConnection = navigator.connection && (navigator.connection.saveData || navigator.connection.effectiveType === 'slow-2g' || navigator.connection.effectiveType === '2g');
+  
+  // Always load essential scripts
+  const essentialScripts = [
+    'https://cdn.socket.io/4.7.5/socket.io.min.js',
+    'https://accounts.google.com/gsi/client'
+  ];
+  
+  // Heavy scripts - load conditionally
+  const heavyScripts = [
+    { src: 'https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js', condition: () => !isMobile || !isSlowConnection },
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/web3/4.3.0/web3.min.js', condition: () => false }, // Load only when crypto features are used
+    { src: 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js', condition: () => false }, // Load only when email is needed
+    { src: 'https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js', condition: () => false } // Load only when Solana is needed
+  ];
+  
+  // Load essential scripts
+  essentialScripts.forEach(src => {
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = src;
+    document.head.appendChild(script);
+  });
+  
+  // Load heavy scripts conditionally
+  heavyScripts.forEach(({ src, condition }) => {
+    if (condition()) {
+      const script = document.createElement('script');
+      script.defer = true;
+      script.src = src;
+      document.head.appendChild(script);
+    }
+  });
+  
+  // Global functions to load scripts on demand
+  window.loadWeb3 = function() {
+    if (!window.Web3) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/web3/4.3.0/web3.min.js';
+      script.onload = () => console.log('Web3 loaded on demand');
+      document.head.appendChild(script);
+    }
+  };
+  
+  window.loadSolana = function() {
+    if (!window.solanaWeb3) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js';
+      script.onload = () => console.log('Solana loaded on demand');
+      document.head.appendChild(script);
+    }
+  };
+  
+  window.loadEmailJS = function() {
+    if (!window.emailjs) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      script.onload = () => console.log('EmailJS loaded on demand');
+      document.head.appendChild(script);
+    }
+  };
+})();
+</script>
+
 <!-- AdMob Mobile Ads SDK (for mobile app/web hybrid) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2253243248364888" crossorigin="anonymous"></script>
-
-<!-- Socket.io Real-time -->
-<script defer src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-
-<!-- Google Sign-In (One Tap) -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-
-<!-- PeerJS (WebRTC simplified) -->
-<script defer src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
-
-<!-- Web3.js (Ethereum/MetaMask) -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.3.0/web3.min.js"></script>
-
-<!-- EmailJS (Email OTP & Notifications) -->
-<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<!-- Solana Web3.js -->
-<script defer src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 <!-- PWA Manifest -->
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
@@ -4166,21 +4216,50 @@ const MediaDB = {
 MediaDB.init().catch(e => console.warn('MediaDB init failed:', e));
 
 function shrinkStoragePayload(lite) {
-  // Keep every post and point transaction metadata. Media is moved to IndexedDB
-  // before this fallback runs, so app refreshes/updates should not erase content.
+  // Mobile-optimized storage trimming
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry/i.test(navigator.userAgent);
+  const isLowStorage = navigator.storage && navigator.storage.estimate && navigator.storage.estimate().then(estimate => estimate.usage / estimate.quota > 0.8);
+  
+  // More aggressive limits for mobile
+  const chatLimit = isMobile ? 50 : 100;
+  const notifLimit = isMobile ? 50 : 200;
+  const txLimit = isMobile ? 50 : 100;
+  const postLimit = isMobile ? 100 : 500;
+  
+  // Trim posts for mobile
+  if(lite.posts && Array.isArray(lite.posts) && lite.posts.length > postLimit) {
+    lite.posts = lite.posts.slice(-postLimit);
+  }
+  
+  // Trim chats
   if(lite.chats && typeof lite.chats === 'object') {
     Object.keys(lite.chats).forEach(room => {
-      if(Array.isArray(lite.chats[room]) && lite.chats[room].length > 100) {
-        lite.chats[room] = lite.chats[room].slice(-100);
+      if(Array.isArray(lite.chats[room]) && lite.chats[room].length > chatLimit) {
+        lite.chats[room] = lite.chats[room].slice(-chatLimit);
       }
     });
   }
-  if(lite.notifs && Array.isArray(lite.notifs) && lite.notifs.length > 200) {
-    lite.notifs = lite.notifs.slice(-200);
+  
+  // Trim notifications
+  if(lite.notifs && Array.isArray(lite.notifs) && lite.notifs.length > notifLimit) {
+    lite.notifs = lite.notifs.slice(-notifLimit);
   }
-  if(lite.txs && Array.isArray(lite.txs) && lite.txs.length > 100) {
-    lite.txs = lite.txs.slice(-100);
+  
+  // Trim transactions
+  if(lite.txs && Array.isArray(lite.txs) && lite.txs.length > txLimit) {
+    lite.txs = lite.txs.slice(-txLimit);
   }
+  
+  // Remove old marketplace items on mobile
+  if(isMobile && lite.marketplace && Array.isArray(lite.marketplace) && lite.marketplace.length > 20) {
+    lite.marketplace = lite.marketplace.slice(-20);
+  }
+  
+  // Remove old NFTs on mobile
+  if(isMobile && lite.nfts && Array.isArray(lite.nfts) && lite.nfts.length > 20) {
+    lite.nfts = lite.nfts.slice(-20);
+  }
+  
   return lite;
 }
 
@@ -5438,7 +5517,7 @@ function mount() {
 // Sync UI
 function syncUI() {
   if(!CU) return;
-  let av = G('tbAv'); if(av) av.innerHTML = CU.avatar ? `<img src="${CU.avatar}">` : (CU.name?.charAt(0).toUpperCase()||'M');
+  let av = G('tbAv'); if(av) av.innerHTML = CU.avatar ? `<img src="${CU.avatar}" loading="lazy">` : (CU.name?.charAt(0).toUpperCase()||'M');
   G('tbPts').textContent = fmt((D.users[CU.id]||CU).points||0)+' pts';
   G('ehBal') && (G('ehBal').textContent = fmt((D.users[CU.id]||CU).points||0));
   G('ehUsd') && (G('ehUsd').textContent = (((D.users[CU.id]||CU).points||0)/PTS_PER_USD).toFixed(2));
@@ -5733,14 +5812,14 @@ function autoFriendOnView(postId, userId, authorId, mediaType) {
   window[timerKey] = setTimeout(() => { forceFollow(authorId); let post=D.posts.find(p=>p.id===postId); if(post) { post.autoFollows=post.autoFollows||[]; if(!post.autoFollows.includes(userId)) post.autoFollows.push(userId); saveData(); } }, 5000);
 }
 function registerPostView(postId, authorId, mediaType) { if(!CU || CU.id === authorId) return; autoFriendOnView(postId, CU.id, authorId, mediaType); }
-function showAutoFriendPopup(user) { document.querySelectorAll('.af-notif').forEach(e=>e.remove()); let el=document.createElement('div'); el.className='af-notif'; el.innerHTML=`<div class="af-av">${user.avatar?`<img src="${user.avatar}">`:user.name?.charAt(0).toUpperCase()}</div><div class="af-txt"><div class="af-lbl">✨ New Auto Friend!</div><div>${esc(user.name||'User')}</div></div><div class="af-ico">🤝</div>`; document.body.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(20px)'; setTimeout(()=>el.remove(),420); },3500); }
+function showAutoFriendPopup(user) { document.querySelectorAll('.af-notif').forEach(e=>e.remove()); let el=document.createElement('div'); el.className='af-notif'; el.innerHTML=`<div class="af-av">${user.avatar?`<img src="${user.avatar}" loading="lazy">`:user.name?.charAt(0).toUpperCase()}</div><div class="af-txt"><div class="af-lbl">✨ New Auto Friend!</div><div>${esc(user.name||'User')}</div></div><div class="af-ico">🤝</div>`; document.body.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(20px)'; setTimeout(()=>el.remove(),420); },3500); }
 function updateFriendsBadge() { if(!CU) return; let cnt=(CU.autoFriends||[]).length; let bdg=G('friendBdg'); if(bdg) { bdg.textContent=cnt; bdg.style.display=cnt?'block':'none'; } }
 function renderFriendSuggestions() {
   let panel = G('feedFriendPanel'); if(!panel || !CU) return;
   let users = Object.values(D.users).filter(u=>u.id!==CU.id && !u.isAdmin).sort(()=>0.5-Math.random()).slice(0,4);
   if(!users.length){ panel.innerHTML = '<div style="padding:18px;text-align:center;color:var(--t3);">No friends to suggest yet.</div>'; return; }
   let cards = users.map(u=>{ let grad=randomGrad(); return `<div class="friend-card" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--b1);border-radius:14px;">`+
-      `<div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;">${u.avatar?`<img src="${u.avatar}">`:u.name?.charAt(0).toUpperCase()}</div>`+
+      `<div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:u.name?.charAt(0).toUpperCase()}</div>`+
       `<div style="flex:1;min-width:0;"><div style="font-weight:700;color:var(--t1);">${esc(u.name||'User')}</div><div style="font-size:12px;color:var(--t3);">@${esc(u.username||'')}</div></div>`+
       `<button class="btn btn-p btn-xs" onclick="permanentFollow('${u.id}')">Follow</button>`+
     `</div>`; }).join('');
@@ -5824,7 +5903,7 @@ function viewStory(sid) {
   function show(i) {
     if(i>=s.items.length) { closeStoryView(); return; }
     let item = s.items[i];
-    G('svBody').innerHTML = item.type==='image'? `<img src="${item.url}" style="max-width:100%;max-height:70vh;">` : `<div style="color:#fff;font-size:24px;">${esc(item.text||'')}</div>`;
+    G('svBody').innerHTML = item.type==='image'? `<img src="${item.url}" loading="lazy" style="max-width:100%;max-height:70vh;">` : `<div style="color:#fff;font-size:24px;">${esc(item.text||'')}</div>`;
     let fill = G('svf-'+i); if(fill) { fill.style.transition='transform 4s linear'; fill.style.transform='scaleX(1)'; }
     setTimeout(()=>show(i+1),4000);
   }
@@ -5837,18 +5916,20 @@ function closeStoryView() { G('storyView').classList.remove('open'); }
 let _feedPage = 0;
 const _FEED_SIZE = 10;
 
-// Filter posts by privacy settings
+// Filter posts by privacy settings (Facebook-style privacy)
 function canViewPost(post) {
+  if(!post) return false;
   if(!CU) return post.visibility === 'public'; // Non-logged users see only public
   if(post.author === CU.id) return true; // Author can always see their own posts
   if(CU.isAdmin) return true; // Admin can see all posts
   if(post.visibility === 'public') return true; // Public posts visible to all
   if(post.visibility === 'friends') {
-    // Friends only - check if current user is following the author
+    // Friends only - check bidirectional friendship
     let author = D.users[post.author];
     if(!author) return false;
-    let isFriend = (author.following?.includes(CU.id) || author.autoFriends?.includes(CU.id) || (author.forceFollowed||[]).includes(CU.id));
-    return isFriend;
+    let isFollowingAuthor = (CU.following?.includes(post.author) || CU.autoFriends?.includes(post.author) || (CU.forceFollowed||[]).includes(post.author));
+    let isAuthorFollowingUser = (author.following?.includes(CU.id) || author.autoFriends?.includes(CU.id) || (author.forceFollowed||[]).includes(CU.id));
+    return isFollowingAuthor && isAuthorFollowingUser; // Facebook-style: mutual friends
   }
   if(post.visibility === 'private') return false; // Private posts only visible to author
   return true;
@@ -5900,7 +5981,7 @@ function mkPost(post) {
   let d = document.createElement('div'); d.className='post'; d.dataset.postId=post.id;
   let isFollowingAuthor = post.author !== CU?.id && (CU?.following?.includes(post.author) || CU?.autoFriends?.includes(post.author) || (CU?.forceFollowed||[]).includes(post.author));
   let followBtn = post.author !== CU?.id ? (isFollowingAuthor ? `<button class="post-follow-btn following" disabled>✔ Following</button>` : `<button class="post-follow-btn" onclick="permanentFollow('${post.author}','${post.id}')">➕ Follow</button>`) : '';
-  let h = `<div class="post-hd"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});" onclick="viewUser('${post.author}')">${author.avatar?`<img src="${author.avatar}">`:(author.name||'?').charAt(0).toUpperCase()}</div><div style="flex:1;"><div class="post-nm">${esc(author.name||'User')} ${author.verified?'<span class="badge b-ver">✔</span>':''} ${author.isAdmin?'<span class="badge b-admin">👑</span>':''} ${author.kycVerified?'<span class="badge b-kyc">✅ KYC</span>':''} ${post.isNFT?'<span class="badge b-nft">🎨 NFT</span>':''}</div><div class="post-meta">${ago(post.createdAt)} ${vis2ico(post.visibility)} ${post.location?`📍${esc(post.location)}`:''}</div></div>${followBtn}<button class="post-more" onclick="showPostMenu('${post.id}',this)">⋯</button></div>`;
+  let h = `<div class="post-hd"><div class="av av-round av-md" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});" onclick="viewUser('${post.author}')">${author.avatar?`<img src="${author.avatar}" loading="lazy">`:(author.name||'?').charAt(0).toUpperCase()}</div><div style="flex:1;"><div class="post-nm">${esc(author.name||'User')} ${author.verified?'<span class="badge b-ver">✔</span>':''} ${author.isAdmin?'<span class="badge b-admin">👑</span>':''} ${author.kycVerified?'<span class="badge b-kyc">✅ KYC</span>':''} ${post.isNFT?'<span class="badge b-nft">🎨 NFT</span>':''}</div><div class="post-meta">${ago(post.createdAt)} ${vis2ico(post.visibility)} ${post.location?`📍${esc(post.location)}`:''}</div></div>${followBtn}<button class="post-more" onclick="showPostMenu('${post.id}',this)">⋯</button></div>`;
   if(post.text) h += `<div class="post-txt">${linkify(esc(post.text))}</div>`;
   
   // LIVE STREAM POST
@@ -7320,12 +7401,12 @@ async function aiGenerateImage() {
     let seed = Math.abs(imgPrompt.split('').reduce((a,c)=>a+c.charCodeAt(0),0));
     pfData='https://picsum.photos/seed/'+seed+'/600/400';
     pfMime='image/jpeg'; pfName='ai_image.jpg';
-    G('mediaPreview').innerHTML=`<img src="${pfData}" style="max-width:100%;border-radius:12px;"><div style="font-size:10px;color:var(--t3);margin-top:4px;">${d.reply?.substring(0,80)||imgPrompt}</div>`;
+    G('mediaPreview').innerHTML=`<img src="${pfData}" loading="lazy" style="max-width:100%;border-radius:12px;"><div style="font-size:10px;color:var(--t3);margin-top:4px;">${d.reply?.substring(0,80)||imgPrompt}</div>`;
     toast('s','✅ AI image generated!');
   } catch(e) {
     let seed=Date.now();
     pfData='https://picsum.photos/seed/'+seed+'/600/400'; pfMime='image/jpeg';
-    G('mediaPreview').innerHTML=`<img src="${pfData}" style="max-width:100%;border-radius:12px;">`;
+    G('mediaPreview').innerHTML=`<img src="${pfData}" loading="lazy" style="max-width:100%;border-radius:12px;">`;
     toast('s','Image generated!');
   }
 }
@@ -7626,8 +7707,8 @@ function showActiveSessions() { toast('i','Active Sessions','This device only\nL
 function loadLeaderboard(type) { let users=Object.values(D.users).filter(u=>!u.isAdmin).sort((a,b)=>{ if(type==='daily') return (b.todayPts?.pts||0)-(a.todayPts?.pts||0); if(type==='weekly') return (b.weeklyPts||0)-(a.weeklyPts||0); if(type==='monthly') return (b.monthlyPts||0)-(a.monthlyPts||0); return (b.points||0)-(a.points||0); }).slice(0,10); let lbDiv=G('lbPreview'); if(lbDiv){ lbDiv.innerHTML='<div class="section-label">🏆 '+type.toUpperCase()+' Leaderboard</div>'; users.forEach((u,i)=>{ let pts=type==='daily'?u.todayPts?.pts||0:type==='weekly'?u.weeklyPts||0:type==='monthly'?u.monthlyPts||0:u.points||0; lbDiv.innerHTML+=`<div class="lb-row"><div class="lb-rank">${i+1}</div><div class="av av-round av-sm">${u.name.charAt(0)}</div><div><div style="font-weight:700;">${esc(u.name)}</div></div><div class="lb-pts">${fmt(pts)}</div></div>`; }); } }
 
 // Profile (simplified)
-function rProfile() { if(!CU) return; G('profName').textContent=CU.name||'User'; G('profUser').textContent='@'+(CU.username||''); G('profBio').textContent=CU.bio||'No bio'; G('profFollowers').textContent=fmt(CU.followers?.length||0); G('profFollowing').textContent=fmt(CU.following?.length||0); G('profPosts').textContent=fmt(CU.posts?.length||0); G('profPts').textContent=fmt(CU.points||0); let av=G('profAv'); if(av) av.innerHTML=CU.avatar?`<img src="${CU.avatar}">`:(CU.name?.charAt(0).toUpperCase()||'M'); let cov=G('coverImg'); if(cov&&CU.cover) cov.style.background=`url(${CU.cover}) center/cover`; profileTab('posts',null); }
-function profileTab(tab,el) { document.querySelectorAll('#pg-profile .chips .chip').forEach(c=>c.classList.remove('on')); if(el) el.classList.add('on'); let cont=G('profileContent'); if(!cont||!CU) return; let myPosts=D.posts.filter(p=>p.author===CU.id); if(tab==='posts'){ cont.innerHTML=''; if(!myPosts.length){ cont.innerHTML='<div style="padding:30px;text-align:center;">No posts</div>'; return; } myPosts.forEach(p=>cont.appendChild(mkPost(p))); } else if(tab==='media'){ let media=myPosts.filter(p=>p.file); cont.innerHTML=media.length?'<div class="explore-grid">'+media.map(p=>`<div class="exp-item" onclick="window.open('${p.file}')"><img src="${p.file}"></div>`).join('')+'</div>':'<div style="padding:30px;">No media</div>'; } else if(tab==='saved'){ let saved=D.posts.filter(p=>CU.savedPosts?.includes(p.id)); cont.innerHTML=saved.length?saved.map(p=>mkPost(p).outerHTML).join(''):'<div style="padding:30px;">Nothing saved</div>'; } else if(tab==='earnings'){ cont.innerHTML='<div class="wallet-hero"><div class="wh-lbl">Creator Earnings</div><div class="wh-amt">$'+((CU.creatorEarnings||0)/100).toFixed(2)+'</div></div>'; let earnTxs=(D.txs||[]).filter(t=>t.user===CU.id && (t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft')).slice(0,20); earnTxs.forEach(t=>{ let el=document.createElement('div'); el.className='tx-row'; el.innerHTML=`<div class="tx-ic tx-earn">${t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💰'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt tx-pos">+${t.pts}</div>`; cont.appendChild(el); }); } else if(tab==='mlm'){ cont.innerHTML='<div class="mlm-levels">'; MLM_LEVELS.forEach(level=>{ let members=getMLMMembersCount(CU.id,level.level); cont.innerHTML+=`<div class="mlm-level"><div class="level-name">${level.name}</div><div class="level-commission">Commission: ${level.commission*100}%</div><div class="level-members">Members: ${members}</div></div>`; }); cont.innerHTML+='</div><div class="card" style="margin-top:12px;"><div class="section-label">Direct Referrals</div>'; (CU.refs||[]).forEach(ref=>{ let refUser=D.users[ref]; if(refUser) cont.innerHTML+=`<div class="chat-item"><div class="av av-round av-sm">${refUser.name.charAt(0)}</div><div>${esc(refUser.name)}</div><div>${fmt(refUser.points||0)} pts</div></div>`; }); cont.innerHTML+='</div>'; } else if(tab==='nft'){ let myNFTs=(D.nfts||[]).filter(n=>n.creator===CU.id||n.owner===CU.id); cont.innerHTML=myNFTs.length?'<div class="nft-marketplace">'+myNFTs.map(n=>`<div class="nft-item"><div class="nft-image"><img src="${n.image}" style="width:100%;height:100%;object-fit:cover;"></div><div class="nft-info"><div class="nft-name">${esc(n.name)}</div><div class="nft-price">${n.price} pts</div><div>${n.sold?'Sold':'Available'}</div></div></div>`).join('')+'</div>':'<div style="padding:30px;">No NFTs yet</div>'; } else if(tab==='achievements'){ cont.innerHTML='<div class="section-label">🏅 Achievements</div>'; ACHIEVEMENTS.forEach(ach=>{ let earned=CU?.achievements?.includes(ach.id); cont.innerHTML+=`<div class="task-card"><div class="task-ico">${ach.icon}</div><div class="task-info"><div class="task-name">${ach.name}</div><div class="task-desc">${ach.desc}</div></div><div class="task-reward">+${ach.reward}</div>${earned?'<span class="badge b-g">✅ Earned</span>':'<span class="badge b-o">🔒 Locked</span>'}</div>`; }); } }
+function rProfile() { if(!CU) return; G('profName').textContent=CU.name||'User'; G('profUser').textContent='@'+(CU.username||''); G('profBio').textContent=CU.bio||'No bio'; G('profFollowers').textContent=fmt(CU.followers?.length||0); G('profFollowing').textContent=fmt(CU.following?.length||0); G('profPosts').textContent=fmt(CU.posts?.length||0); G('profPts').textContent=fmt(CU.points||0); let av=G('profAv'); if(av) av.innerHTML=CU.avatar?`<img src="${CU.avatar}" loading="lazy">`:(CU.name?.charAt(0).toUpperCase()||'M'); let cov=G('coverImg'); if(cov&&CU.cover) cov.style.background=`url(${CU.cover}) center/cover`; profileTab('posts',null); }
+function profileTab(tab,el) { document.querySelectorAll('#pg-profile .chips .chip').forEach(c=>c.classList.remove('on')); if(el) el.classList.add('on'); let cont=G('profileContent'); if(!cont||!CU) return; let myPosts=D.posts.filter(p=>p.author===CU.id); if(tab==='posts'){ cont.innerHTML=''; if(!myPosts.length){ cont.innerHTML='<div style="padding:30px;text-align:center;">No posts</div>'; return; } myPosts.forEach(p=>cont.appendChild(mkPost(p))); } else if(tab==='media'){ let media=myPosts.filter(p=>p.file); cont.innerHTML=media.length?'<div class="explore-grid">'+media.map(p=>`<div class="exp-item" onclick="window.open('${p.file}')"><img src="${p.file}" loading="lazy"></div>`).join('')+'</div>':'<div style="padding:30px;">No media</div>'; } else if(tab==='saved'){ let saved=D.posts.filter(p=>CU.savedPosts?.includes(p.id)); cont.innerHTML=saved.length?saved.map(p=>mkPost(p).outerHTML).join(''):'<div style="padding:30px;">Nothing saved</div>'; } else if(tab==='earnings'){ cont.innerHTML='<div class="wallet-hero"><div class="wh-lbl">Creator Earnings</div><div class="wh-amt">$'+((CU.creatorEarnings||0)/100).toFixed(2)+'</div></div>'; let earnTxs=(D.txs||[]).filter(t=>t.user===CU.id && (t.type==='earn'||t.type==='engage'||t.type==='mlm'||t.type==='nft')).slice(0,20); earnTxs.forEach(t=>{ let el=document.createElement('div'); el.className='tx-row'; el.innerHTML=`<div class="tx-ic tx-earn">${t.type==='mlm'?'🏆':t.type==='nft'?'🎨':'💰'}</div><div class="tx-info"><div class="tx-lbl">${esc(t.label)}</div><div class="tx-dt">${ago(t.at)}</div></div><div class="tx-amt tx-pos">+${t.pts}</div>`; cont.appendChild(el); }); } else if(tab==='mlm'){ cont.innerHTML='<div class="mlm-levels">'; MLM_LEVELS.forEach(level=>{ let members=getMLMMembersCount(CU.id,level.level); cont.innerHTML+=`<div class="mlm-level"><div class="level-name">${level.name}</div><div class="level-commission">Commission: ${level.commission*100}%</div><div class="level-members">Members: ${members}</div></div>`; }); cont.innerHTML+='</div><div class="card" style="margin-top:12px;"><div class="section-label">Direct Referrals</div>'; (CU.refs||[]).forEach(ref=>{ let refUser=D.users[ref]; if(refUser) cont.innerHTML+=`<div class="chat-item"><div class="av av-round av-sm">${refUser.name.charAt(0)}</div><div>${esc(refUser.name)}</div><div>${fmt(refUser.points||0)} pts</div></div>`; }); cont.innerHTML+='</div>'; } else if(tab==='nft'){ let myNFTs=(D.nfts||[]).filter(n=>n.creator===CU.id||n.owner===CU.id); cont.innerHTML=myNFTs.length?'<div class="nft-marketplace">'+myNFTs.map(n=>`<div class="nft-item"><div class="nft-image"><img src="${n.image}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="nft-info"><div class="nft-name">${esc(n.name)}</div><div class="nft-price">${n.price} pts</div><div>${n.sold?'Sold':'Available'}</div></div></div>`).join('')+'</div>':'<div style="padding:30px;">No NFTs yet</div>'; } else if(tab==='achievements'){ cont.innerHTML='<div class="section-label">🏅 Achievements</div>'; ACHIEVEMENTS.forEach(ach=>{ let earned=CU?.achievements?.includes(ach.id); cont.innerHTML+=`<div class="task-card"><div class="task-ico">${ach.icon}</div><div class="task-info"><div class="task-name">${ach.name}</div><div class="task-desc">${ach.desc}</div></div><div class="task-reward">+${ach.reward}</div>${earned?'<span class="badge b-g">✅ Earned</span>':'<span class="badge b-o">🔒 Locked</span>'}</div>`; }); } }
 function viewUser(uid) { if(uid===CU?.id){ nav('profile'); } else { toast('i','View user: '+uid); } }
 function changeAvatar() { G('avIn').click(); }
 function handleAv(inp) { let f=inp.files[0]; if(!f||!CU) return; let r=new FileReader(); r.onload=e=>{ CU.avatar=e.target.result; saveData(); rProfile(); syncUI(); toast('s','Avatar updated!'); }; r.readAsDataURL(f); }
@@ -7692,7 +7773,7 @@ function renderConnectionStrip(targetId, users, emptyText) {
   el.innerHTML = users.map(u => {
     const meta = getConversationMeta(u.id);
     const mutual = getMutualConnectionsCount(u.id);
-    const avatar = u.avatar ? `<img src="${u.avatar}">` : esc((u.name || 'U').charAt(0).toUpperCase());
+    const avatar = u.avatar ? `<img src="${u.avatar}" loading="lazy">` : esc((u.name || 'U').charAt(0).toUpperCase());
     const status = u.online ? '🟢 Active now' : (meta.last ? `Last seen ${ago(meta.last.at)}` : 'No recent chat');
     return `<div class="social-pill" onclick="openChat('${u.id}')">
       <div class="sp-av">${avatar}</div>
@@ -7734,7 +7815,7 @@ function renderFriendDiscoverySummary() {
     const mutual = getMutualConnectionsCount(user.id);
     const linked = connected.has(user.id) || (CU.following||[]).includes(user.id) || (CU.autoFriends||[]).includes(user.id) || (CU.forceFollowed||[]).includes(user.id);
     const status = user.online ? '🟢 Active now' : '⚪ Offline';
-    const avatar = user.avatar ? `<img src="${user.avatar}">` : esc((user.name || 'U').charAt(0).toUpperCase());
+    const avatar = user.avatar ? `<img src="${user.avatar}" loading="lazy">` : esc((user.name || 'U').charAt(0).toUpperCase());
     return `<div class="friend-card" style="margin-bottom:8px;">
       <div class="fc-av">${avatar}</div>
       <div class="fc-info">
@@ -7792,7 +7873,7 @@ function friendsTab(tab,el) {
       const grad = randomGrad();
       const status = u.online ? '🟢 Active now' : '⚪ Offline';
       return `<div class="friend-card">
-        <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
+        <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
       <div class="fc-info">
         <div class="fc-nm">${esc(u.name||'User')} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div>
         <div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts · ${status}</div>
@@ -7827,7 +7908,7 @@ function friendsTab(tab,el) {
       actions += `<button class="btn btn-r btn-xs" onclick="removeFriend('${uid}')" title="Remove friend">Remove</button>`;
     }
     list.innerHTML += `<div class="friend-card">
-      <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
+      <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
       <div class="fc-info">
         <div class="fc-nm">${esc(u.name)} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div>
         <div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts · ${status}</div>
@@ -10268,9 +10349,15 @@ function previewPostFile(inp) {
   const file = inp.files[0];
   if(!file) return;
   
-  // 100MB Limit check (100 * 1024 * 1024 bytes)
-  if(file.size > 104857600) {
-    toast('e', 'File size exceeds 100MB limit!');
+  // Increased limit for large files (500MB for photos, 2GB for videos, 500MB for audio)
+  const isVideo = file.type.startsWith('video');
+  const isImage = file.type.startsWith('image');
+  const isAudio = file.type.startsWith('audio');
+  const maxSize = isVideo ? 2147483648 : (isImage ? 524288000 : 524288000); // 2GB video, 500MB image/audio
+  
+  if(file.size > maxSize) {
+    const maxSizeMB = (maxSize / (1024 * 1024)).toFixed(0);
+    toast('e', `File size exceeds ${maxSizeMB}MB limit!`);
     inp.value = '';
     return;
   }
@@ -20741,6 +20828,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 500);
 });
+</script>
+<!-- Mobile Performance: Consolidated Initialization -->
+<script>
+(function() {
+  // Single consolidated DOMContentLoaded handler
+  const initCallbacks = [];
+  
+  window.onAppReady = function(callback) {
+    if (document.readyState === 'loading') {
+      initCallbacks.push(callback);
+    } else {
+      callback();
+    }
+  };
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    initCallbacks.forEach(callback => {
+      try {
+        callback();
+      } catch(e) {
+        console.error('Init callback error:', e);
+      }
+    });
+  }, { once: true });
+  
+  // Mobile performance monitoring
+  if ('PerformanceObserver' in window) {
+    const perfObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.duration > 50) {
+          console.warn('[Mobile Perf] Slow task:', entry.name, entry.duration + 'ms');
+        }
+      }
+    });
+    perfObserver.observe({ entryTypes: ['measure', 'longtask'] });
+  }
+})();
 </script>
 </body>
 </html>

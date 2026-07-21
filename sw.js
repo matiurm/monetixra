@@ -1,8 +1,9 @@
 // ============================================================
-//  Monetixra — Offline-safe Service Worker (PWA)
+//  Monetixra — Mobile-Optimized Service Worker (PWA)
 //  Keeps the app usable across refresh, update, reset, and offline use.
+//  Optimized for mobile performance with aggressive caching
 // ============================================================
-const CACHE_NAME = 'monetixra-v8';
+const CACHE_NAME = 'monetixra-v9-mobile';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
