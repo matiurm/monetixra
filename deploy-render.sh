@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Preparing Render deployment environment..."
+echo "1) Make sure the following environment variables are set in Render:"
+echo "   SUPABASE_URL"
+echo "   SUPABASE_ANON_KEY"
+echo "   SUPABASE_SERVICE_ROLE_KEY"
+echo "   NODE_ENV"
+echo "   PORT"
+echo "   JWT_SECRET"
+echo "   ADMIN_PASS"
+echo "   FRONTEND_URL"
+echo "   ALLOWED_ORIGINS"
+echo ""
+echo "2) Deploy with:"
+echo "   npm install"
+echo "   node server.js"
+echo ""
+echo "3) Verify with:"
+echo "   curl https://YOUR_RENDER_APP.onrender.com/api/health"
+echo "   curl https://YOUR_RENDER_APP.onrender.com/api/config"

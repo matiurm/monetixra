@@ -17,11 +17,13 @@ services:
       - key: PORT
         value: 10000
       - key: SUPABASE_URL
-        value: https://rkiyxsskrypowghxfauy.supabase.co
+        value: ${SUPABASE_URL}
       - key: SUPABASE_ANON_KEY
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJraXl4c3Nrcnlwb3dnaHhmYXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNzYzNzgsImV4cCI6MjA5Mzk1MjM3OH0.WC3NUHlzJE-cez7MVhNN8s7UiZKC1WeFn5FpjewALHE
+        value: ${SUPABASE_ANON_KEY}
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: ${SUPABASE_SERVICE_ROLE_KEY}
       - key: CLOUDINARY_CLOUD_NAME
-        value: djdqqkdyf
+        value: ${CLOUDINARY_CLOUD_NAME}
       - key: CLOUDINARY_API_KEY
         value: 333568318583158
       - key: CLOUDINARY_API_SECRET

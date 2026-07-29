@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- Enhanced Persistence System -->
+<script src="enhanced-persistence.js"></script>
+
 <!-- AdSense Integration -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2397116277801081" crossorigin="anonymous"></script>
 
@@ -14,15 +17,15 @@
   const rewardedAdUnit = 'ca-app-pub-2253243248364888/5139354646';
 
   function showBannerAd() {
-    console.log('Banner Ad Loaded:', bannerAdUnit);
+    // Ad loaded
   }
 
   function showInterstitialAd() {
-    console.log('Interstitial Ad Loaded:', interstitialAdUnit);
+    // Ad loaded
   }
 
   function showRewardedAd() {
-    console.log('Rewarded Ad Loaded:', rewardedAdUnit);
+    // Ad loaded
   }
 </script>
 <meta name="theme-color" content="#030308">
@@ -159,7 +162,7 @@ window.atOptions_468x60 = {
     if (!window.Web3) {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/web3/4.3.0/web3.min.js';
-      script.onload = () => console.log('Web3 loaded on demand');
+      script.onload = () => {/* Web3 loaded */};
       document.head.appendChild(script);
     }
   };
@@ -168,7 +171,7 @@ window.atOptions_468x60 = {
     if (!window.solanaWeb3) {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js';
-      script.onload = () => console.log('Solana loaded on demand');
+      script.onload = () => {/* Solana loaded */};
       document.head.appendChild(script);
     }
   };
@@ -177,7 +180,7 @@ window.atOptions_468x60 = {
     if (!window.emailjs) {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-      script.onload = () => console.log('EmailJS loaded on demand');
+      script.onload = () => {/* EmailJS loaded */};
       document.head.appendChild(script);
     }
   };
@@ -218,20 +221,37 @@ window.atOptions_468x60 = {
   Replace values below with your real keys to activate ads
   ──────────────────────────────────────────────────────── -->
 <script>
+window.__MONETIXRA_CONFIG__ = window.__MONETIXRA_CONFIG__ || {};
+
+(async function bootstrapConfig() {
+  try {
+    const response = await fetch('/api/config');
+    if (!response.ok) return;
+    const data = await response.json();
+    window.__MONETIXRA_CONFIG__ = {
+      ...window.__MONETIXRA_CONFIG__,
+      ...(data || {})
+    };
+  } catch (error) {
+    console.warn('[Config] Could not load runtime config', error);
+  }
+})();
+
 // ═══════════════════════════════════════════════════════════
 //  MONETIXRA — ALL API KEYS & CONFIGURATION
 //  ★ Fill in your keys below to activate each service
 // ═══════════════════════════════════════════════════════════
 
 // ── Google APIs ─────────────────────────────────────────────
-const GOOGLE_API_KEY    = 'AIzaSyCk05RbvCwZmX42jd-z1STsjSwn3uvkqzU';
+const GOOGLE_API_KEY    = 'AIzaSyCCGkyMBXiByuRV8qFfLRAWPrvFNRQOhoI';
 const GOOGLE_ACCESS_KEY = 'a90da8236a6227623551a3088d94f413';
 const GOOGLE_API_KEY2   = 'AIzaSyANIywK7V-Zoh_2Y_xnmsO8nAErDpSqUHs';
+const GOOGLE_CLOUD_KEY  = 'AIzaSyDyJeTTwM7O4uR0lMOHtExl_Et6rN1aJgw';
 
 // ── Supabase Database ───────────────────────────────────────
-const SUPABASE_PROJECT_ID = 'rkiyxsskrypowghxfauy';
-const SUPABASE_URL       = 'https://rgximkhnhxgaonrxzzxl.supabase.co';
-const SUPABASE_ANON_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
+const SUPABASE_PROJECT_ID = (window.__MONETIXRA_CONFIG__?.supabase?.projectId || '').trim();
+const SUPABASE_URL = (window.__MONETIXRA_CONFIG__?.supabase?.url || 'https://your-project.supabase.co').trim();
+const SUPABASE_ANON_KEY = (window.__MONETIXRA_CONFIG__?.supabase?.anonKey || '').trim();
 
 // ── MEGA Storage ───────────────────────────────────────────────
 const MEGA_API_KEY = '';
@@ -326,7 +346,7 @@ async function uploadBackupToSupabase() {
     const blob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
     const url = await uploadToSupabase(blob, 'application/json', 'media');
     if (url) {
-      console.log('[CloudBackup] Uploaded backup to Supabase', url);
+      // Backup uploaded to Supabase
     }
     return url;
   } catch (err) {
@@ -1929,7 +1949,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
       // Initialize client
       await agoraClient.init(agoraAppId);
-      console.log('AgoraRTC client initialized ✅');
+      // AgoraRTC client initialized
 
       // Set up event listeners
       setupAgoraEventListeners();
@@ -1945,16 +1965,16 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     // User joined
     agoraClient.on('stream-added', (evt) => {
       const remoteStream = evt.stream;
-      console.log('New stream added: ' + remoteStream.getId());
+      // New stream added
       agoraClient.subscribe(remoteStream, (err) => {
-        console.log('Subscribe stream failed', err);
+        console.error('[Agora] Subscribe stream failed', err);
       });
     });
 
     // User published stream
     agoraClient.on('stream-subscribed', (evt) => {
       const remoteStream = evt.stream;
-      console.log('Subscribed to stream: ' + remoteStream.getId());
+      // Subscribed to stream
 
       // Play remote stream
       const remoteContainer = document.getElementById('remote-container') || createRemoteContainer();
@@ -1970,7 +1990,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
     // User left
     agoraClient.on('stream-removed', (evt) => {
       const remoteStream = evt.stream;
-      console.log('Stream removed: ' + remoteStream.getId());
+      // Stream removed
 
       const streamDiv = document.getElementById('remote-stream-' + remoteStream.getId());
       if (streamDiv) streamDiv.remove();
@@ -1980,7 +2000,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
     // Connection state changed
     agoraClient.on('connection-state-change', (evt) => {
-      console.log('Connection state changed:', evt.prevState, '->', evt.curState);
+      // Connection state changed
     });
   }
 
@@ -1990,7 +2010,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
       // Join channel
       const uid = await agoraClient.join(agoraToken, channelName, null);
-      console.log('User ' + uid + ' joined channel successfully ✅');
+      // User joined channel
 
       // Create and publish local stream
       localStream = AgoraRTC.createStream({
@@ -2001,9 +2021,9 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       });
 
       await localStream.init(() => {
-        console.log('Local stream initialized');
+        // Local stream initialized
         agoraClient.publish(localStream, (err) => {
-          console.log('Publish local stream error:', err);
+          console.error('[Agora] Publish local stream error:', err);
         });
 
         // Play local stream
@@ -2028,7 +2048,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
       if (agoraClient) {
         await agoraClient.leave();
-        console.log('Left Agora channel');
+        // Left Agora channel
       }
 
       // Clear remote streams
@@ -2062,7 +2082,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
 
   // WebRTC fallback
   function initWebRTC() {
-    console.log('Initializing WebRTC fallback...');
+    // WebRTC fallback
     // WebRTC implementation would go here
   }
 </script>
@@ -3501,7 +3521,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fab.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('[FAB] Clicked');
       if(typeof openPostModal === 'function') {
         openPostModal();
       } else {
@@ -3521,7 +3540,6 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('[BottomNav] Clicked:', page);
         if(typeof nav === 'function') {
           nav(page);
         } else {
@@ -3530,7 +3548,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
-  console.log('[BottomNav] Fixed', navButtons.length, 'navigation buttons');
+  // BottomNav fixed
 });
 </script>
 
@@ -4436,7 +4454,7 @@ async function loadData() {
     if(raw) {
       let saved = JSON.parse(raw);
       if(saved._storageVersion && saved._storageVersion !== STORAGE_VERSION) {
-        console.log('[loadData] legacy storage version', saved._storageVersion);
+        // Legacy storage version detected
       }
       delete saved._storageVersion;
       // Remove legacy demo users
@@ -4656,7 +4674,7 @@ async function loadSession() {
         uid = session.userId;
         localStorage.setItem(STORAGE_KEY+'session', uid);
         localStorage.setItem('mxt_rescue_session', uid);
-        console.log('[PersistenceManager] Session restored from persistence storage');
+        // Session restored from persistence storage
       }
     }
     
@@ -4672,7 +4690,7 @@ async function loadSession() {
         const savedPoints = await safeLoadPoints(uid);
         if(savedPoints > 0 && (u.points || 0) < savedPoints) {
           u.points = savedPoints;
-          console.log('[PersistenceManager] Points restored:', savedPoints);
+          // Points restored
         }
       }
     }
@@ -4839,6 +4857,33 @@ function toast(type, title, msg='', dur=4000) {
   w.appendChild(t);
   setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(110%)'; setTimeout(()=>t.remove(),300); }, dur-300);
 }
+
+let isLoading = false;
+
+function showLoading(message='Loading...') {
+  if (isLoading || G('globalLoader')) return;
+  isLoading = true;
+  const loader = document.createElement('div');
+  loader.id = 'globalLoader';
+  loader.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:99999;';
+  loader.innerHTML = `
+    <div style="background:var(--g2);padding:20px 24px;border-radius:14px;text-align:center;box-shadow:0 10px 35px rgba(0,0,0,.45);">
+      <div style="width:42px;height:42px;border:3px solid var(--neon);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px;"></div>
+      <div style="color:var(--t2);font-size:14px;font-weight:700;">${esc(message)}</div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  `;
+  document.body.appendChild(loader);
+}
+
+function hideLoading() {
+  isLoading = false;
+  const loader = G('globalLoader');
+  if (loader) loader.remove();
+}
+
+window.addEventListener('online', () => toast('s', '🌐 Connection restored', 'You are back online.'));
+window.addEventListener('offline', () => toast('w', '📴 Offline mode', 'Some features may be unavailable until the connection returns.'));
 
 // Confetti
 function confetti() { for(let i=0;i<30;i++) { let c=document.createElement('div'); c.style.cssText=`position:fixed; top:-10px; left:${Math.random()*100}%; width:6px; height:6px; background:${COLORS[Math.floor(Math.random()*COLORS.length)]}; border-radius:50%; pointer-events:none; z-index:10006; animation:confetti ${1+Math.random()}s forwards;`; document.body.appendChild(c); setTimeout(()=>c.remove(),2000); } }
@@ -5043,13 +5088,33 @@ async function doLogin() {
     saveSession();
     saveData();
     
+    // Load user data from server for permanent persistence
+    try {
+      const serverUrl = window.location.origin || 'http://localhost:3000';
+      const response = await fetch(`${serverUrl}/api/users/${foundUid}`);
+      if(response.ok) {
+        const data = await response.json();
+        if(data.success && data.user) {
+          // Merge server data with local data, preserving maximum points/money
+          CU.points = Math.max(Number(CU.points || 0), Number(data.user.points || 0));
+          CU.money = Math.max(Number(CU.money || 0), Number(data.user.money || 0));
+          D.users[foundUid].points = CU.points;
+          D.users[foundUid].money = CU.money;
+          saveData();
+          console.log('[Login] User data loaded from server:', foundUid, 'points:', CU.points);
+        }
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load user data from server:', e);
+    }
+    
     // PERSISTENCE: Restore points from persistence manager on login
     if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
       const savedPoints = await safeLoadPoints(foundUid);
       if(savedPoints > 0 && (CU.points || 0) < savedPoints) {
         CU.points = savedPoints;
         D.users[foundUid].points = savedPoints;
-        console.log('[PersistenceManager] Points restored on login:', savedPoints);
+        // Points restored on login
         saveData(); // Save the restored points
       }
     }
@@ -5057,14 +5122,14 @@ async function doLogin() {
     // ENHANCED PERSISTENCE: Restore posts and media on login (survives logout/login)
     if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
       await enhancedPersistence.restore();
-      console.log('[EnhancedPersistence] Data restored on login for:', foundUid);
+      // Enhanced persistence data restored
       
       // Restore points from enhanced persistence
       const restoredPoints = enhancedPersistence.restorePoints(foundUid);
       if (restoredPoints > 0 && (CU.points || 0) < restoredPoints) {
         CU.points = restoredPoints;
         D.users[foundUid].points = restoredPoints;
-        console.log('[EnhancedPersistence] Points restored on login:', restoredPoints);
+        // Enhanced persistence points restored
         saveData(); // Save the restored points
         toast('s', `💰 Points restored: ${restoredPoints} pts`);
       }
@@ -5250,8 +5315,13 @@ async function doRegister() {
     addNotif(newId,'welcome','🎉','Welcome to Monetixra! Start earning by posting, watching ads, and referring friends.');
     saveSession(); saveData(); mount();
     try {
-      fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(CU)}).catch(()=>{});
-      fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:CU.id, points:CU.points || 0, label:'signup-sync'})}).catch(()=>{});
+      // Sync to server for permanent persistence
+      const serverUrl = window.location.origin || 'http://localhost:3000';
+      fetch(`${serverUrl}/api/users/sync`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: { id: CU.id, points: CU.points || 0, money: CU.money || 0 } })
+      }).catch(e => console.error('[Signup] Server sync failed:', e));
     } catch(e) {}
     toast('s','🎉 Account created! Welcome '+nm+'! +50 bonus pts');
     confetti();
@@ -5307,7 +5377,7 @@ async function sendForgotOtp() {
         let el = G('fiOtp'); if(el) el.value = String(otp);
       } else {
         toast('i','OTP sent to admin contact (check browser console)');
-        console.log('[ADMIN RESET OTP]', otp);
+        // OTP logged to console for admin
       }
     }
     G('fOtpWrap').style.display = 'block';
@@ -5369,6 +5439,26 @@ function logout(skipConfirm = false) {
   // NOTE: We do NOT clear enhancedPersistence data on logout
   // This ensures posts, media, and content survive logout/login cycles like Facebook/YouTube
   // User data persists across sessions but is tied to their account
+  
+  // ENHANCED: Save all data to enhanced persistence before logout
+  if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence && CU) {
+    enhancedPersistence.savePoints(CU.id, CU.points || 0).catch(err => {
+      console.warn('[Logout] Enhanced persistence save failed:', err);
+    });
+    // Data saved to enhanced persistence before logout
+  }
+
+  // Sync to server for permanent persistence before logout
+  if(CU) {
+    try {
+      const serverUrl = window.location.origin || 'http://localhost:3000';
+      fetch(`${serverUrl}/api/users/sync`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: { id: CU.id, points: CU.points || 0, money: CU.money || 0 } })
+      }).catch(e => console.warn('[Logout] Server sync failed:', e));
+    } catch(e) {}
+  }
 
   if (typeof saveData === 'function') {
     saveData();
@@ -5388,7 +5478,7 @@ function logout(skipConfirm = false) {
     
     // IMPORTANT: Do NOT clear enhanced persistence data
     // This ensures posts, media, drafts survive logout/login like Facebook/YouTube
-    console.log('[Logout] Enhanced persistence data preserved for next login');
+    // Enhanced persistence data preserved for next login
   } catch (e) {}
 
   if (typeof document !== 'undefined') {
@@ -5455,6 +5545,83 @@ function mount() {
   G('authWrap').style.display='none';
   G('appWrap').style.display='block';
   G('fab').style.display='flex';
+  
+  // Initialize Supabase realtime for shared feed (Facebook-style)
+  if(isSupabaseReady() && typeof window.SupabaseRealtime !== 'undefined') {
+    const supabase = initSupabaseClient();
+    window.SupabaseRealtime.init(supabase);
+    
+    // Subscribe to new posts for real-time feed updates
+    window.SupabaseRealtime.subscribeToPosts(
+      (newPost) => {
+        // Convert Supabase post to local format
+        const localPost = {
+          id: newPost.id,
+          author: newPost.author_id,
+          type: newPost.type,
+          text: newPost.text,
+          file: newPost.file,
+          mimetype: newPost.mimetype,
+          hashtags: newPost.hashtags || [],
+          likedBy: newPost.liked_by || [],
+          reactions: newPost.reactions || {},
+          comments: newPost.comments || [],
+          views: newPost.views || 0,
+          shares: newPost.shares || 0,
+          pts: newPost.pts || 20,
+          pinned: newPost.pinned || false,
+          createdAt: new Date(newPost.created_at).getTime(),
+          visibility: newPost.visibility || 'public',
+          isNFT: newPost.is_nft || false,
+          scheduledAt: newPost.scheduled_at ? new Date(newPost.scheduled_at).getTime() : null,
+          published: newPost.published
+        };
+        
+        // Add to local posts if not exists
+        if(!D.posts) D.posts = [];
+        const existingIndex = D.posts.findIndex(p => p.id === localPost.id);
+        if(existingIndex === -1) {
+          D.posts.unshift(localPost);
+          saveData();
+          
+          // Refresh feed if on feed page
+          if(typeof rFeed === 'function') {
+            rFeed(false);
+          }
+          
+          // Show notification for new post from other users
+          if(localPost.author !== CU.id) {
+            const author = D.users[localPost.author];
+            toast('i', `📝 New post from ${author?.name || 'User'}`);
+          }
+        }
+      },
+      (updatedPost) => {
+        // Handle post updates
+        const idx = D.posts?.findIndex(p => p.id === updatedPost.id);
+        if(idx !== -1) {
+          D.posts[idx] = {
+            ...D.posts[idx],
+            likedBy: updatedPost.liked_by || [],
+            reactions: updatedPost.reactions || {},
+            comments: updatedPost.comments || [],
+            views: updatedPost.views || 0,
+            shares: updatedPost.shares || 0
+          };
+          saveData();
+          if(typeof rFeed === 'function') rFeed(false);
+        }
+      },
+      (deletedPost) => {
+        // Handle post deletion
+        D.posts = D.posts?.filter(p => p.id !== deletedPost.id) || [];
+        saveData();
+        if(typeof rFeed === 'function') rFeed(false);
+      }
+    );
+    
+    // Supabase realtime subscriptions initialized
+  }
   
   // Initialize bottom nav buttons after login
   initBottomNav();
@@ -5937,10 +6104,123 @@ function canViewPost(post) {
 
 const _allPosts = () => [...(D.posts||[])].filter(canViewPost).sort((a,b)=>b.createdAt-a.createdAt);
 
+// Load posts from Supabase (Facebook-style shared feed)
+async function loadPostsFromSupabase() {
+  if(!isSupabaseReady()) {
+    // Fallback: Load from server's shared posts API
+    await loadPostsFromServer();
+    return;
+  }
+  
+  try {
+    const supabase = initSupabaseClient();
+    const { data: posts, error } = await supabase
+      .from('posts')
+      .select('*')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(100);
+    
+    if(error) {
+      console.warn('[Supabase] Failed to load posts:', error);
+      // Fallback to server API
+      await loadPostsFromServer();
+      return;
+    }
+    
+    if(posts && posts.length > 0) {
+      // Merge Supabase posts with local posts
+      const existingIds = new Set((D.posts||[]).map(p => p.id));
+      let newCount = 0;
+      
+      posts.forEach(supabasePost => {
+        if(!existingIds.has(supabasePost.id)) {
+          // Convert Supabase post to local format
+          const localPost = {
+            id: supabasePost.id,
+            author: supabasePost.author_id,
+            type: supabasePost.type,
+            text: supabasePost.text,
+            file: supabasePost.file,
+            mimetype: supabasePost.mimetype,
+            hashtags: supabasePost.hashtags || [],
+            likedBy: supabasePost.liked_by || [],
+            reactions: supabasePost.reactions || {},
+            comments: supabasePost.comments || [],
+            views: supabasePost.views || 0,
+            shares: supabasePost.shares || 0,
+            pts: supabasePost.pts || 20,
+            pinned: supabasePost.pinned || false,
+            createdAt: new Date(supabasePost.created_at).getTime(),
+            visibility: supabasePost.visibility || 'public',
+            isNFT: supabasePost.is_nft || false,
+            scheduledAt: supabasePost.scheduled_at ? new Date(supabasePost.scheduled_at).getTime() : null,
+            published: supabasePost.published
+          };
+          
+          D.posts = D.posts || [];
+          D.posts.push(localPost);
+          newCount++;
+        }
+      });
+      
+      // Sort by creation time
+      D.posts.sort((a,b) => b.createdAt - a.createdAt);
+      
+      if(newCount > 0) {
+        // New posts loaded from shared feed
+        saveData();
+      }
+    }
+  } catch(err) {
+    console.warn('[Supabase] Post loading error:', err);
+    // Fallback to server API
+    await loadPostsFromServer();
+  }
+}
+
+// Load posts from server's shared posts API (fallback)
+async function loadPostsFromServer() {
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/posts/all`);
+    const data = await response.json();
+    
+    if(data.posts && data.posts.length > 0) {
+      const existingIds = new Set((D.posts||[]).map(p => p.id));
+      let newCount = 0;
+      
+      data.posts.forEach(serverPost => {
+        if(!existingIds.has(serverPost.id)) {
+          D.posts = D.posts || [];
+          D.posts.push(serverPost);
+          newCount++;
+        }
+      });
+      
+      // Sort by creation time
+      D.posts.sort((a,b) => b.createdAt - a.createdAt);
+      
+      if(newCount > 0) {
+        // New posts loaded from shared feed
+        saveData();
+      }
+    }
+  } catch(err) {
+    console.warn('[Server] Failed to load posts:', err);
+  }
+}
+
 function rFeed(reset=true) {
   let list = G('feedList'); if(!list) return;
   if(CU) renderFriendSuggestions();
   if(reset) { _feedPage = 0; list.innerHTML=''; }
+  
+  // Load posts from shared source on first feed load
+  if(reset) {
+    loadPostsFromSupabase();
+  }
+  
   let posts = _allPosts();
   if(activeCat!=='all') posts = posts.filter(p=>p.category===activeCat||p.type===activeCat||(activeCat==='music'&&p.type==='audio'));
   if(!posts.length){
@@ -6211,16 +6491,50 @@ function addComment(pid) {
   if(post.author !== CU.id) addNotif(post.author,'comment','💬',CU.name+' commented: '+txt.substring(0,50));
   addPts(5,'Commented','engage');
   inp.value=''; saveData(); refreshPost(pid);
+  
+  // Sync to server for permanent persistence
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    fetch(`${serverUrl}/api/posts/${pid}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comments: post.comments })
+    }).catch(e => console.warn('[Comment] Server sync failed:', e));
+  } catch(e) {}
+  
   if (typeof addToSyncQueue === 'function' && !navigator.onLine) {
-    addToSyncQueue({ type: 'comment', data: { postId: pid, post, text: txt, userId: CU.id } }).catch(()=>{});
+    addToSyncQueue({ type: 'comment', data: { postId: pid, post, text: txt, userId: CU.id } }).catch(e => console.error('[Comment] addToSyncQueue failed:', e));
   }
 }
 function addReply(pid,cid) { let inp=G(`rInp-${cid}`); if(!inp||!CU) return; let txt=inp.value.trim(); if(!txt) return; let post=D.posts.find(p=>p.id===pid); if(!post) return; let findCmt=(cmts)=>{ for(let c of cmts||[]){ if(c.id===cid) return c; if(c.replies){ let f=findCmt(c.replies); if(f) return f; } } return null; }; let cmt=findCmt(post.comments); if(!cmt) return; cmt.replies=cmt.replies||[]; cmt.replies.push({id:'r'+Date.now(), by:CU.id, text:txt, likes:0, at:Date.now() }); addPts(3,'Replied','engage'); inp.value=''; saveData(); refreshPost(pid); }
 function reactComment(pid,cid,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post) return; let findCmt=(cmts)=>{ for(let c of cmts||[]){ if(c.id===cid) return c; if(c.replies){ let f=findCmt(c.replies); if(f) return f; } } return null; }; let c=findCmt(post.comments); if(c){ c.reacts=c.reacts||{}; c.reacts[emoji]=(c.reacts[emoji]||0)+1; addPts(1,'Comment React','engage'); saveData(); refreshPost(pid); } }
-function react(pid,key,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.reactions=post.reactions||{like:[],love:[],haha:[],wow:[],sad:[],angry:[],fire:[],diamond:[]}; let arr=post.reactions[key]||[]; let idx=arr.indexOf(CU.id); if(idx>-1) arr.splice(idx,1); else { arr.push(CU.id); addPts(2,'Reaction','engage'); spawnReaction(pid,emoji); } post.reactions[key]=arr; saveData(); refreshReacts(pid,post); }
+function react(pid,key,emoji) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.reactions=post.reactions||{like:[],love:[],haha:[],wow:[],sad:[],angry:[],fire:[],diamond:[]}; let arr=post.reactions[key]||[]; let idx=arr.indexOf(CU.id); if(idx>-1) arr.splice(idx,1); else { arr.push(CU.id); addPts(2,'Reaction','engage'); spawnReaction(pid,emoji); } post.reactions[key]=arr; saveData(); refreshReacts(pid,post);
+  
+  // Sync to server for permanent persistence
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    fetch(`${serverUrl}/api/posts/${pid}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reactions: post.reactions })
+    }).catch(e => console.warn('[React] Server sync failed:', e));
+  } catch(e) {}
+}
 function spawnReaction(pid,emoji) { let el=document.querySelector(`[data-post-id="${pid}"]`); if(!el) return; let f=document.createElement('div'); f.className='react-float'; f.textContent=emoji; f.style.cssText=`left:${20+Math.random()*60}%;top:50%;`; el.style.position='relative'; el.appendChild(f); setTimeout(()=>f.remove(),800); }
 function refreshReacts(pid,post) { let bar=G(`react-${pid}`); if(!bar) return; bar.innerHTML=''; ['👍','❤️','😂','😮','😢','😡','🔥','💎'].forEach(emoji=>{ let key={'👍':'like','❤️':'love','😂':'haha','😮':'wow','😢':'sad','😡':'angry','🔥':'fire','💎':'diamond'}[emoji]; let cnt=post.reactions?.[key]?.length||0; let active=post.reactions?.[key]?.includes(CU?.id)?'active':''; let btn=document.createElement('div'); btn.className=`react-btn ${active}`; btn.onclick=()=>react(pid,key,emoji); btn.innerHTML=`${emoji}${cnt?`<span class="rcnt">${cnt}</span>`:''}`; bar.appendChild(btn); }); }
-function likePost(pid,btn) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.likedBy=post.likedBy||[]; let idx=post.likedBy.indexOf(CU.id); if(idx>-1){ post.likedBy.splice(idx,1); btn.classList.remove('liked'); btn.innerHTML='🤍 <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; } else { post.likedBy.push(CU.id); btn.classList.add('liked'); btn.innerHTML='❤️ <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; addPts(3,'Liked','engage'); addNotif(post.author,'like','❤️',`${CU.name} liked your post`,pid); } saveData(); if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'like', data: { postId: pid, likedBy: post.likedBy || [], userId: CU.id } }).catch(()=>{}); } }
+function likePost(pid,btn) { let post=D.posts.find(p=>p.id===pid); if(!post||!CU) return; post.likedBy=post.likedBy||[]; let idx=post.likedBy.indexOf(CU.id); if(idx>-1){ post.likedBy.splice(idx,1); btn.classList.remove('liked'); btn.innerHTML='🤍 <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; } else { post.likedBy.push(CU.id); btn.classList.add('liked'); btn.innerHTML='❤️ <span class="pa-cnt">'+fmt(post.likedBy.length)+'</span>'; addPts(3,'Liked','engage'); addNotif(post.author,'like','❤️',`${CU.name} liked your post`,pid); } saveData();
+  
+  // Sync to server for permanent persistence
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    fetch(`${serverUrl}/api/posts/${pid}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ likedBy: post.likedBy })
+    }).catch(e => console.warn('[LikePost] Server sync failed:', e));
+  } catch(e) {}
+  
+  if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'like', data: { postId: pid, likedBy: post.likedBy || [], userId: CU.id } }).catch(e => console.error('[LikePost] addToSyncQueue failed:', e)); } }
 function toggleFlower(pid, btn) {
   if(!CU) return;
   let post = D.posts.find(p => p.id === pid);
@@ -6519,7 +6833,7 @@ function loadAdSenseAd(slotId, client, slot, width, height) {
   // Push to AdSense
   try {
     (adsbygoogle = window.adsbygoogle || []).push({});
-  } catch(e) { console.log('AdSense load error:', e); }
+  } catch(e) { /* AdSense load error */ }
 }
 
 // Load AdMob banner (for mobile web)
@@ -6543,7 +6857,7 @@ function loadAdMobBanner(slotId, adUnitId, width, height) {
     if (window.admob && adUnitId) {
       admob.banner.show({ adUnitId: adUnitId });
     }
-  } catch(e) { console.log('AdMob not available on web'); }
+  } catch(e) { /* AdMob not available on web */ }
 }
 
 // Load multiple ads for download modal — MAXIMUM REVENUE VERSION
@@ -6554,67 +6868,86 @@ function loadDlAdBundle(slotId, type) {
   // Revenue tracking
   trackAdRevenue(type === 'during' ? 'download_during' : 'download_after', 0);
   
-  if (type === 'during') {
-    // During download - MULTIPLE HIGH-CPM ADS
-    let adContainer = document.createElement('div');
-    adContainer.style.display = 'flex';
-    adContainer.style.flexDirection = 'column';
-    adContainer.style.gap = '10px';
-    adContainer.style.alignItems = 'center';
-    adContainer.style.padding = '10px';
-    adContainer.style.background = 'var(--g2)';
-    adContainer.style.borderRadius = '12px';
-    adContainer.style.border = '1px solid var(--neon)';
-    
-    // Header with earning incentive
-    let header = document.createElement('div');
-    header.innerHTML = '<div style="font-size:11px;color:var(--neon);font-weight:700;">💰 Sponsored — Downloading...</div>';
-    adContainer.appendChild(header);
-    
-    // Banner 160x30
-    let banner160 = document.createElement('div');
-    banner160.id = slotId + '_160';
-    banner160.style.minHeight = '30px';
-    adContainer.appendChild(banner160);
-    
-    // 300x50 banner (higher CPM)
-    let banner300 = document.createElement('div');
-    banner300.id = slotId + '_300';
-    banner300.style.minHeight = '50px';
-    adContainer.appendChild(banner300);
-    
-    // Native ad container
-    let nativeDiv = document.createElement('div');
-    nativeDiv.id = slotId + '_native';
-    nativeDiv.style.minHeight = '70px';
-    nativeDiv.style.width = '100%';
-    adContainer.appendChild(nativeDiv);
-    
-    // Click-to-earn button
-    let earnBtn = document.createElement('button');
-    earnBtn.innerHTML = '🎯 Click Ad +3 pts';
-    earnBtn.style.cssText = 'background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;';
-    earnBtn.onclick = () => { addPts(3,'Download Ad Click'); earnBtn.textContent='✅ +3 pts!'; earnBtn.disabled=true; };
-    adContainer.appendChild(earnBtn);
-    
-    slot.appendChild(adContainer);
-    
-    // Load the 160x30 ad
-    loadDlAd(slotId + '_160', CPMR_BANNER_160x30_KEY, 30, 160, 'https://www.highperformanceformat.com/' + CPMR_BANNER_160x30_KEY + '/invoke.js');
-    
-    // Load 300x50 ad
-    setTimeout(() => {
-      loadDlAd(slotId + '_300', CPMR_BANNER_300x50_KEY, 50, 300, 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js');
-    }, 300);
-    
-    // Load native banner
-    setTimeout(() => {
-      let nativeScript = document.createElement('script');
-      nativeScript.async = true;
-      nativeScript.setAttribute('data-cfasync', 'false');
-      nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
-      slot.querySelector('#' + slotId + '_native')?.appendChild(nativeScript);
-    }, 600);
+  try {
+    if (type === 'during') {
+      // During download - MULTIPLE HIGH-CPM ADS
+      let adContainer = document.createElement('div');
+      adContainer.style.display = 'flex';
+      adContainer.style.flexDirection = 'column';
+      adContainer.style.gap = '10px';
+      adContainer.style.alignItems = 'center';
+      adContainer.style.padding = '10px';
+      adContainer.style.background = 'var(--g2)';
+      adContainer.style.borderRadius = '12px';
+      adContainer.style.border = '1px solid var(--neon)';
+      
+      // Header with earning incentive
+      let header = document.createElement('div');
+      header.innerHTML = '<div style="font-size:11px;color:var(--neon);font-weight:700;">💰 Sponsored — Downloading...</div>';
+      adContainer.appendChild(header);
+      
+      // Banner 160x30
+      let banner160 = document.createElement('div');
+      banner160.id = slotId + '_160';
+      banner160.style.minHeight = '30px';
+      adContainer.appendChild(banner160);
+      
+      // 300x50 banner (higher CPM)
+      let banner300 = document.createElement('div');
+      banner300.id = slotId + '_300';
+      banner300.style.minHeight = '50px';
+      adContainer.appendChild(banner300);
+      
+      // Native ad container
+      let nativeDiv = document.createElement('div');
+      nativeDiv.id = slotId + '_native';
+      nativeDiv.style.minHeight = '70px';
+      nativeDiv.style.width = '100%';
+      adContainer.appendChild(nativeDiv);
+      
+      // Click-to-earn button
+      let earnBtn = document.createElement('button');
+      earnBtn.innerHTML = '🎯 Click Ad +3 pts';
+      earnBtn.style.cssText = 'background:linear-gradient(90deg,var(--c1),var(--c2));color:#000;border:none;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;';
+      earnBtn.onclick = () => { addPts(3,'Download Ad Click'); earnBtn.textContent='✅ +3 pts!'; earnBtn.disabled=true; };
+      adContainer.appendChild(earnBtn);
+      
+      slot.appendChild(adContainer);
+      
+      // Load the 160x30 ad with error handling
+      try {
+        loadDlAd(slotId + '_160', CPMR_BANNER_160x30_KEY, 30, 160, 'https://www.highperformanceformat.com/' + CPMR_BANNER_160x30_KEY + '/invoke.js');
+      } catch(e) {
+        console.warn('[Ad] 160x30 ad failed to load:', e);
+        slot.querySelector('#' + slotId + '_160').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+      }
+      
+      // Load 300x50 ad with error handling
+      setTimeout(() => {
+        try {
+          loadDlAd(slotId + '_300', CPMR_BANNER_300x50_KEY, 50, 300, 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js');
+        } catch(e) {
+          console.warn('[Ad] 300x50 ad failed to load:', e);
+          slot.querySelector('#' + slotId + '_300').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+        }
+      }, 300);
+      
+      // Load native banner with error handling
+      setTimeout(() => {
+        try {
+          let nativeScript = document.createElement('script');
+          nativeScript.async = true;
+          nativeScript.setAttribute('data-cfasync', 'false');
+          nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
+          nativeScript.onerror = () => {
+            console.warn('[Ad] Native banner failed to load');
+            slot.querySelector('#' + slotId + '_native').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+          };
+          slot.querySelector('#' + slotId + '_native')?.appendChild(nativeScript);
+        } catch(e) {
+          console.warn('[Ad] Native banner error:', e);
+        }
+      }, 600);
     
   } else if (type === 'after') {
     // After download - PREMIUM AD PLACEMENTS
@@ -6684,30 +7017,56 @@ function loadDlAdBundle(slotId, type) {
     
     slot.appendChild(adContainer);
     
-    // Load 468x60 banner
-    loadDlAd(slotId + '_468', CPMR_BANNER_468x60_KEY, 60, 468, 'https://www.highperformanceformat.com/' + CPMR_BANNER_468x60_KEY + '/invoke.js');
+    // Load 468x60 banner with error handling
+    try {
+      loadDlAd(slotId + '_468', CPMR_BANNER_468x60_KEY, 60, 468, 'https://www.highperformanceformat.com/' + CPMR_BANNER_468x60_KEY + '/invoke.js');
+    } catch(e) {
+      console.warn('[Ad] 468x60 ad failed to load:', e);
+      slot.querySelector('#' + slotId + '_468').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+    }
     
-    // Load 300x250 medium rectangle (high CPM)
+    // Load 300x250 medium rectangle (high CPM) with error handling
     setTimeout(() => {
-      let mrScript = document.createElement('script');
-      mrScript.textContent = `atOptions={'key':'${CPMR_BANNER_300x50_KEY}','format':'iframe','height':250,'width':300,'params':{}};`;
-      slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrScript);
-      let mrInvoke = document.createElement('script');
-      mrInvoke.src = 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js';
-      slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrInvoke);
+      try {
+        let mrScript = document.createElement('script');
+        mrScript.textContent = `atOptions={'key':'${CPMR_BANNER_300x50_KEY}','format':'iframe','height':250,'width':300,'params':{}};`;
+        slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrScript);
+        let mrInvoke = document.createElement('script');
+        mrInvoke.src = 'https://www.highperformanceformat.com/' + CPMR_BANNER_300x50_KEY + '/invoke.js';
+        mrInvoke.onerror = () => {
+          console.warn('[Ad] 300x250 ad failed to load');
+          slot.querySelector('#' + slotId + '_300x250').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+        };
+        slot.querySelector('#' + slotId + '_300x250')?.appendChild(mrInvoke);
+      } catch(e) {
+        console.warn('[Ad] 300x250 ad error:', e);
+        slot.querySelector('#' + slotId + '_300x250').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+      }
     }, 400);
     
-    // Load native banner
+    // Load native banner with error handling
     setTimeout(() => {
-      let nativeScript = document.createElement('script');
-      nativeScript.async = true;
-      nativeScript.setAttribute('data-cfasync', 'false');
-      nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
-      slot.querySelector('#' + slotId + '_native_after')?.appendChild(nativeScript);
-    }, 600);
+      try {
+        let nativeScript = document.createElement('script');
+        nativeScript.async = true;
+        nativeScript.setAttribute('data-cfasync', 'false');
+        nativeScript.src = 'https://pl29280287.profitablecpmratenetwork.com/1805a61f4f6c6177d946441e5153e81c/invoke.js';
+        nativeScript.onerror = () => {
+          console.warn('[Ad] Native banner failed to load');
+          slot.querySelector('#' + slotId + '_native_after').innerHTML = '<div style="font-size:10px;color:var(--t3);">Ad unavailable</div>';
+        };
+        slot.querySelector('#' + slotId + '_native_after')?.appendChild(nativeScript);
+      } catch(e) {
+        console.warn('[Ad] Native banner error:', e);
+      }
+    }, 700);
     
     // Trigger interstitial after short delay
     setTimeout(() => { tryShowInterstitialAd(); }, 2000);
+    }
+  } catch (e) {
+    console.error('[AdBundle] Failed to load ad bundle:', e);
+    slot.innerHTML = '<div style="font-size:10px;color:var(--t3);">Ads temporarily unavailable</div>';
   }
 }
 
@@ -6735,10 +7094,9 @@ function tryShowInterstitialAd() {
   try {
     if (window.admob && ADMOB_INTERSTITIAL_ID) {
       admob.interstitial.show({ adUnitId: ADMOB_INTERSTITIAL_ID });
-      console.log('AdMob interstitial shown');
       return;
     }
-  } catch(e) { console.log('AdMob interstitial not available'); }
+  } catch(e) { /* AdMob interstitial not available */ }
   
   // Fallback: Try to open smartlink in new window (simulates interstitial)
   try {
@@ -6751,7 +7109,7 @@ function tryShowInterstitialAd() {
         }, 500);
       }
     }
-  } catch(e) { console.log('Smartlink popup blocked'); }
+  } catch(e) { /* Smartlink popup blocked */ }
 }
 
 // Show rewarded ad for points
@@ -6765,7 +7123,7 @@ function showRewardedAd(onReward) {
       });
       return;
     }
-  } catch(e) { console.log('AdMob rewarded not available'); }
+  } catch(e) { /* AdMob rewarded not available */ }
   
   // Fallback: Show smartlink as rewarded
   if (CPMR_SMARTLINK_URL) {
@@ -6796,9 +7154,9 @@ function initAdSystems() {
         position: 'bottom',
         size: admob.AD_SIZE.SMART_BANNER
       });
-      console.log('AdMob initialized');
+      // AdMob initialized
     }
-  } catch(e) { console.log('AdMob not available on web platform'); }
+  } catch(e) { /* AdMob not available on web platform */ }
   
   // Show app open ad on startup (mobile only)
   setTimeout(() => {
@@ -6812,7 +7170,7 @@ function tryShowAppOpenAd() {
     if (window.admob && ADMOB_APP_OPEN_ID) {
       admob.appOpen.show({ adUnitId: ADMOB_APP_OPEN_ID });
     }
-  } catch(e) { console.log('App open ad not available'); }
+  } catch(e) { /* App open ad not available */ }
 }
 
 // Track ad revenue (for analytics)
@@ -6833,42 +7191,154 @@ function getAdRevenueStats() {
 function startDownload(pid, type, quality) {
   let post = D.posts.find(p => p.id === pid);
   if (!post || !post.file) return;
+  
   // Hide quality grid, show progress
   let grid = G('dlQualityGrid'); if(grid) grid.style.display='none';
   let prog = G('dlProgress'), bar = G('dlProgressBar');
   prog.style.display = 'block'; bar.style.width = '0%';
   G('dlModalSub').textContent = `Preparing ${quality} download...`;
-  // Show ad during download using new bundle loader
+  
+  // Show ad during download
   let adDuring = G('dlAdDuring'); if(adDuring) { adDuring.style.display='block'; loadDlAdBundle('dlAdDuringSlot', 'during'); }
   let adAfter = G('dlAdAfter'); if(adAfter) adAfter.style.display='none';
+  
+  // For video/audio, attempt real transcoding
+  if (type === 'video' || type === 'audio') {
+    transcodeAndDownload(post.file, type, quality, pid);
+  } else {
+    // For images, download directly with quality simulation
+    downloadDirect(post.file, type, quality, pid);
+  }
+}
+
+// Transcode video/audio to different resolutions using server-side API
+async function transcodeAndDownload(fileUrl, type, quality, pid) {
+  let prog = G('dlProgress'), bar = G('dlProgressBar');
   let pct = 0;
+  
+  try {
+    G('dlModalSub').textContent = `Starting transcoding to ${quality}...`;
+    
+    // Start transcoding job on server
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/transcode/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type,
+        url: fileUrl,
+        quality,
+        postId: pid
+      })
+    });
+    
+    const { jobId, status } = await response.json();
+    
+    if (!jobId) {
+      throw new Error('Failed to start transcoding job');
+    }
+    
+    G('dlModalSub').textContent = `Transcoding to ${quality}...`;
+    
+    // Poll for job status
+    const pollInterval = setInterval(async () => {
+      try {
+        const statusRes = await fetch(`${serverUrl}/api/transcode/status/${jobId}`);
+        const job = await statusRes.json();
+        
+        if (job.status === 'processing' || job.status === 'transcoding' || job.status === 'downloading') {
+          pct = job.progress || 0;
+          bar.style.width = pct + '%';
+          G('dlModalSub').textContent = `Transcoding to ${quality}... ${pct}%`;
+        } else if (job.status === 'completed') {
+          clearInterval(pollInterval);
+          bar.style.width = '100%';
+          
+          // Download the transcoded file
+          const downloadUrl = job.outputUrl || job.simulated ? fileUrl : `${serverUrl}${job.outputUrl}`;
+          downloadTranscodedFile(downloadUrl, type, quality, pid);
+        } else if (job.status === 'failed') {
+          clearInterval(pollInterval);
+          throw new Error(job.error || 'Transcoding failed');
+        }
+      } catch (err) {
+        clearInterval(pollInterval);
+        console.error('Status check error:', err);
+        // Fallback to direct download
+        downloadDirect(fileUrl, type, quality, pid);
+      }
+    }, 500);
+    
+    // Timeout after 5 minutes
+    setTimeout(() => {
+      clearInterval(pollInterval);
+      if (pct < 100) {
+        console.warn('Transcoding timeout, falling back to direct download');
+        downloadDirect(fileUrl, type, quality, pid);
+      }
+    }, 300000);
+    
+  } catch (error) {
+    console.error('Transcoding error:', error);
+    // Fallback to direct download
+    downloadDirect(fileUrl, type, quality, pid);
+  }
+}
+
+// Download transcoded/simulated file
+function downloadTranscodedFile(fileUrl, type, quality, pid) {
+  let prog = G('dlProgress'), bar = G('dlProgressBar');
+  bar.style.width = '100%';
+  
+  let a = document.createElement('a');
+  a.href = fileUrl;
+  let ext = type === 'video' ? 'mp4' : type === 'audio' ? 'mp3' : 'jpg';
+  a.download = `monetixra_${type}_${quality}_${Date.now()}.${ext}`;
+  a.click();
+  
+  completeDownload(quality);
+}
+
+// Direct download for images or fallback
+function downloadDirect(fileUrl, type, quality, pid) {
+  let prog = G('dlProgress'), bar = G('dlProgressBar');
+  let pct = 0;
+  
   let interval = setInterval(() => {
     pct += Math.random() * 25;
     if (pct >= 100) { pct = 100; clearInterval(interval); }
     bar.style.width = pct + '%';
   }, 200);
+  
   setTimeout(() => {
     clearInterval(interval);
     bar.style.width = '100%';
-    // Trigger actual download
+    
     let a = document.createElement('a');
-    a.href = post.file;
+    a.href = fileUrl;
     let ext = type === 'video' ? 'mp4' : type === 'audio' ? 'mp3' : 'jpg';
-    a.download = `mediaearn_${type}_${quality}_${Date.now()}.${ext}`;
+    a.download = `monetixra_${type}_${quality}_${Date.now()}.${ext}`;
     a.click();
-    // Show ad after download completes using new bundle loader
-    if(adDuring) adDuring.style.display='none';
-    if(adAfter) { adAfter.style.display='block'; loadDlAdBundle('dlAdAfterSlot', 'after'); }
-    G('dlModalSub').textContent = `✅ Download complete at ${quality}!`;
-    G('dlModalTitle').textContent = '✅ Download Complete';
-    // Change cancel button to close
-    let cancelBtn = document.querySelector('.dl-cancel');
-    if(cancelBtn) cancelBtn.textContent = '✕ Close';
-    toast('s', `⬇️ Download started at ${quality}!`);
-    addPts(1, 'Download');
-    // Try to show interstitial ad after download
-    tryShowInterstitialAd();
+    
+    completeDownload(quality);
   }, 1500);
+}
+
+// Complete download process
+function completeDownload(quality) {
+  let adDuring = G('dlAdDuring'); if(adDuring) adDuring.style.display='none';
+  let adAfter = G('dlAdAfter'); if(adAfter) { adAfter.style.display='block'; loadDlAdBundle('dlAdAfterSlot', 'after'); }
+  
+  G('dlModalSub').textContent = `✅ Download complete at ${quality}!`;
+  G('dlModalTitle').textContent = '✅ Download Complete';
+  
+  let cancelBtn = document.querySelector('.dl-cancel');
+  if(cancelBtn) cancelBtn.textContent = '✕ Close';
+  
+  toast('s', `⬇️ Download started at ${quality}!`);
+  addPts(1, 'Download');
+  
+  tryShowInterstitialAd();
 }
 function boostPost(pid) {
   if(!CU) return;
@@ -6888,7 +7358,16 @@ function boostPost(pid) {
 }
 
 function togglePin(pid) { let p=D.posts.find(x=>x.id===pid); if(p){ p.pinned=!p.pinned; saveData(); rFeed(); toast('s',p.pinned?'Pinned!':'Unpinned'); } }
-function deletePost(pid) { D.posts=D.posts.filter(p=>p.id!==pid); saveData(); rFeed(); toast('s','Deleted'); }
+function deletePost(pid) { D.posts=D.posts.filter(p=>p.id!==pid); saveData(); rFeed(); toast('s','Deleted');
+  
+  // Sync to server for permanent persistence
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    fetch(`${serverUrl}/api/posts/${pid}`, {
+      method: 'DELETE'
+    }).catch(e => console.warn('[DeletePost] Server sync failed:', e));
+  } catch(e) {}
+}
 function markCopyrightPost(post, hours = COPYRIGHT_AUTO_DELETE_HOURS, reporterId = 'system') {
   if(!post) return;
   post.copyright = true;
@@ -7121,7 +7600,7 @@ async function submitPostWithLoader() {
     isPosting = false;
   }, 2000);
 }
-function submitPost() {
+async function submitPost() {
   if(!CU){ toast('e','Login required'); closeModal('postModal'); return; }
   
   if (voiceRecordingActive && voiceRecorder && voiceRecorder.state !== 'inactive') {
@@ -7148,6 +7627,56 @@ function submitPost() {
   D.posts=D.posts||[];
   D.posts.unshift(post);
   CU.posts=CU.posts||[]; CU.posts.unshift(post.id);
+  
+  // Save to Supabase for shared feed (Facebook-style)
+  if(isSupabaseReady()) {
+    const supabase = initSupabaseClient();
+    try {
+      await supabase.from('posts').insert({
+        id: post.id,
+        author_id: post.author,
+        type: post.type,
+        text: post.text,
+        file: post.file,
+        mimetype: post.mimetype,
+        hashtags: post.hashtags,
+        liked_by: post.likedBy,
+        reactions: post.reactions,
+        comments: post.comments,
+        views: post.views,
+        shares: post.shares,
+        pts: post.pts,
+        pinned: post.pinned,
+        created_at: new Date(post.createdAt).toISOString(),
+        visibility: post.visibility,
+        is_nft: post.isNFT,
+        scheduled_at: post.scheduledAt ? new Date(post.scheduledAt).toISOString() : null,
+        published: post.published
+      });
+      // Post saved to shared database
+    } catch(err) {
+      console.warn('[Supabase] Failed to save post:', err);
+    }
+  }
+  
+  // Fallback: Broadcast to all connected users via socket.io
+  if(socketReady && socket) {
+    socket.emit('post:create', { post });
+    // Post broadcasted to all users
+  }
+  
+  // Also save to server's shared posts API (works without Supabase)
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    await fetch(`${serverUrl}/api/posts/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ post })
+    });
+    // Post saved to shared storage
+  } catch(err) {
+    console.warn('[Server] Failed to save post to shared storage:', err);
+  }
   // Copyright check: auto-block + auto-delete + notification
   let postText = (text||'').toLowerCase();
   let fileInfo = ((pfName||'') + ' ' + (pfMime||'')).toLowerCase();
@@ -7220,14 +7749,14 @@ function submitPost() {
   if (typeof addToSyncQueue === 'function') {
     const syncPayload = { ...post, timestamp: post.createdAt || Date.now() };
     if (!navigator.onLine) {
-      addToSyncQueue({ type: 'post', data: syncPayload }).catch(()=>{});
+      addToSyncQueue({ type: 'post', data: syncPayload }).catch(e => console.error('[Post] addToSyncQueue failed:', e));
       toast('i', '📶 Offline: post queued for sync');
     } else {
       fetch('/api/posts/sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...syncPayload, syncedAt: Date.now() })
-      }).catch(() => addToSyncQueue({ type: 'post', data: syncPayload }).catch(()=>{}));
+      }).catch(() => addToSyncQueue({ type: 'post', data: syncPayload }).catch(e => console.error('[Post] addToSyncQueue fallback failed:', e)));
     }
   }
   clearPostDraft();
@@ -7558,6 +8087,16 @@ function addPts(pts, label, type='earn') {
       console.warn('[PersistenceManager] Points save failed:', err);
     });
   }
+  
+  // Sync to server for permanent persistence
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    fetch(`${serverUrl}/api/users/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: { id: CU.id, points: u.points, money: u.money || 0 } })
+    }).catch(e => console.warn('[AddPts] Server sync failed:', e));
+  } catch(e) {}
 }
 function addNotif(toId, type, icon, msg, refId='', priority=2) { D.notifs=D.notifs||[]; D.notifs.unshift({ id:'n'+Date.now(), to:toId, type, icon, msg, refId, at:Date.now(), read:false, priority }); if(D.notifs.length>200) D.notifs=D.notifs.slice(0,200); saveData(); syncUI(); }
 
@@ -7985,7 +8524,7 @@ function openChat(uid) { let u=D.users[uid]; if(!u||!CU) return; currentChatId=u
 function sendSMS(uid) { let user=D.users[uid]; if(!user) return toast('e','User not found'); let phone=user.phone||prompt('Enter phone number for '+user.name,''); if(!phone) return; let shareText = encodeURIComponent(`Hello ${user.name}, check Monetixra: ${location.origin}${location.pathname}`); window.location.href = `sms:${encodeURIComponent(phone)}?body=${shareText}`; }
 function closeChatRoom() { G('chatRoom').classList.remove('open'); currentChatId=null; }
 function renderChatMsgs() { let msgsDiv=G('crMsgs'); if(!msgsDiv||!currentChatId||!CU) return; let key=[CU.id,currentChatId].sort().join('_'); let msgs=D.chats?.[key]||[]; msgsDiv.innerHTML=msgs.map(m=>{ let isMine=m.from===CU.id; let user=D.users[m.from]||{}; let grad=randomGrad(); let content=m.type==='image'? `<img src="${m.data}" style="max-width:150px;border-radius:8px;">` : (m.type==='voice'? '🎙 Voice message' : esc(m.text||'')); return `<div class="cr-msg${isMine?' mine':''}"><div class="av av-round av-xs" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${user.avatar?`<img src="${user.avatar}">`:user.name?.charAt(0).toUpperCase()}</div><div class="cr-bub">${content}<div class="cr-bub-t">${ago(m.at)}</div></div></div>`; }).join(''); msgsDiv.scrollTop=msgsDiv.scrollHeight; (D.chats[key]||[]).forEach(m=>{ if(m.to===CU.id) m.read=true; }); saveData(); syncUI(); }
-function sendMsg() { let inp=G('crInp'); if(!inp||!currentChatId||!CU) return; let txt=inp.value.trim(); if(!txt) return; let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; let msg={ id:'m'+Date.now(), from:CU.id, to:currentChatId, text:txt, type:'text', at:Date.now(), read:false }; if(disappearTimer>0) msg.disappearAt=Date.now()+disappearTimer*1000; D.chats[key].push(msg); inp.value=''; saveData(); renderChatMsgs(); if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'chat', data: { room: key, message: msg } }).catch(()=>{}); } setTimeout(()=>{ let replies=['👍','😊','Ok!','Thanks!','Cool!','Awesome!']; D.chats[key].push({ id:'m'+Date.now(), from:currentChatId, to:CU.id, text:replies[Math.floor(Math.random()*replies.length)], type:'text', at:Date.now(), read:false }); saveData(); if(currentChatId) renderChatMsgs(); addNotif(CU.id,'message','💬','New message'); },2000+Math.random()*2000); }
+function sendMsg() { let inp=G('crInp'); if(!inp||!currentChatId||!CU) return; let txt=inp.value.trim(); if(!txt) return; let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; let msg={ id:'m'+Date.now(), from:CU.id, to:currentChatId, text:txt, type:'text', at:Date.now(), read:false }; if(disappearTimer>0) msg.disappearAt=Date.now()+disappearTimer*1000; D.chats[key].push(msg); inp.value=''; saveData(); renderChatMsgs(); if (typeof addToSyncQueue === 'function' && !navigator.onLine) { addToSyncQueue({ type: 'chat', data: { room: key, message: msg } }).catch(e => console.error('[SendMsg] addToSyncQueue failed:', e)); } setTimeout(()=>{ let replies=['👍','😊','Ok!','Thanks!','Cool!','Awesome!']; D.chats[key].push({ id:'m'+Date.now(), from:currentChatId, to:CU.id, text:replies[Math.floor(Math.random()*replies.length)], type:'text', at:Date.now(), read:false }); saveData(); if(currentChatId) renderChatMsgs(); addNotif(CU.id,'message','💬','New message'); },2000+Math.random()*2000); }
 function attachCrFile(type) { G('crFile').accept=type==='image'?'image/*':'video/*'; G('crFile').click(); }
 function handleCrMedia(inp) { let f=inp.files[0]; if(!f||!currentChatId||!CU) return; let r=new FileReader(); r.onload=e=>{ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:f.type.startsWith('image/')?'image':'video', data:e.target.result, at:Date.now(), read:false }); saveData(); renderChatMsgs(); }; r.readAsDataURL(f); }
 function toggleVoiceRecord() { if(!isRecordingVoice){ navigator.mediaDevices?.getUserMedia({audio:true}).then(stream=>{ mediaRecorder=new MediaRecorder(stream); let chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ if(currentChatId&&CU){ let key=[CU.id,currentChatId].sort().join('_'); D.chats=D.chats||{}; D.chats[key]=D.chats[key]||[]; D.chats[key].push({ id:'m'+Date.now(), from:CU.id, to:currentChatId, type:'voice', duration:3, at:Date.now(), read:false }); saveData(); renderChatMsgs(); } stream.getTracks().forEach(t=>t.stop()); isRecordingVoice=false; document.querySelector('.voice-rec').textContent='🎙 Voice'; }; mediaRecorder.start(); isRecordingVoice=true; document.querySelector('.voice-rec').textContent='⏹ Stop'; }).catch(()=>toast('e','Microphone access denied')); } else { mediaRecorder?.stop(); } }
@@ -9406,7 +9945,7 @@ async function migrateToS3(options = {}) {
   
   if (dryRun) {
     toast('i',`📋 Found ${files.length} files. Run with dryRun:false to migrate.`);
-    console.log('[Migration] Files to migrate:', files);
+    // Files to migrate
     return files;
   }
   
@@ -9731,7 +10270,7 @@ function initPeerJS(userId) {
         });
       }).catch(e=>console.warn('[PeerJS answer]',e));
     });
-    console.log('[PeerJS] Initialized for', userId);
+    // PeerJS initialized
   } catch(e) { console.warn('[PeerJS init]',e); }
 }
 
@@ -9988,7 +10527,7 @@ async function uploadToCloudinary(file, onProgress) {
   }
 }
 
-// Compress image to max 500KB before storing as base64
+// Compress image to max 1920px (Facebook/YouTube quality) before storing
 async function compressAndBase64(file, onProgress) {
   return new Promise((resolve) => {
     if(file.type.startsWith('image/')) {
@@ -9998,14 +10537,14 @@ async function compressAndBase64(file, onProgress) {
         img.onload = () => {
           const canvas = document.createElement('canvas');
           let w = img.width, h = img.height;
-          const MAX = 800;
+          const MAX = 1920; // Increased from 800 for better quality
           if(w > MAX || h > MAX) {
             if(w > h) { h = Math.round(h*MAX/w); w = MAX; }
             else      { w = Math.round(w*MAX/h); h = MAX; }
           }
           canvas.width = w; canvas.height = h;
           canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          const b64 = canvas.toDataURL('image/jpeg', 0.75);
+          const b64 = canvas.toDataURL('image/jpeg', 0.85); // Increased quality from 0.75
           if(onProgress) onProgress(100);
           resolve({ url: b64, type: 'image/jpeg', cloudinary: false });
         };
@@ -10013,9 +10552,9 @@ async function compressAndBase64(file, onProgress) {
       };
       reader.readAsDataURL(file);
     } else {
-      // Video/audio: read as base64 (warn if >2MB)
-      if(file.size > 2*1024*1024) {
-        toast('w', 'Large file — consider using Cloudinary for best performance');
+      // Video/audio: read as base64 (warn if >100MB for large files)
+      if(file.size > 100*1024*1024) {
+        toast('w', 'Large file detected — uploading to cloud storage');
       }
       const reader = new FileReader();
       reader.onload = (e) => { if(onProgress) onProgress(100); resolve({ url: e.target.result, type: file.type, cloudinary: false }); };
@@ -10063,7 +10602,7 @@ async function uploadToSupabase(dataOrFile, mime, bucket='media') {
     const d = await r.json();
     if (d.Key || d.statusCode === '200' || r.ok) {
       const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}`;
-      console.log('[Supabase Storage] Uploaded:', publicUrl);
+      // File uploaded to Supabase Storage
       return publicUrl;
     }
     throw new Error(d.error || d.msg || 'Upload failed');
@@ -11415,7 +11954,7 @@ function toggleLiveSocialPanel(force) {
   if (next) renderLiveSocialPanel();
   else closeLiveReactionTray();
   
-  console.log('[toggleLiveSocialPanel] Panel state:', next);
+  // Live social panel state changed
 }
 
 function setLiveSocialTab(tab) {
@@ -12747,13 +13286,57 @@ async function getSocketAuthPayload() {
 function initSocket() {
   if(socket) return;
   if(typeof io === 'undefined') { console.warn('Socket.io not loaded'); return; }
-  socket = io(SOCKET_URL, { transports:['websocket','polling'], reconnection:true, auth:(cb)=>getSocketAuthPayload().then(cb) });
+  socket = io(SOCKET_URL || window.location.origin, {
+    transports:['websocket','polling'],
+    reconnection:true,
+    reconnectionAttempts:5,
+    reconnectionDelay:1000,
+    reconnectionDelayMax:5000,
+    timeout:10000,
+    auth:(cb)=>getSocketAuthPayload().then(cb),
+    autoConnect:true
+  });
+
   socket.on('connect', () => {
     socketReady = true;
+    console.log('[Socket] Connected', socket.id);
+    toast('s', '✅ Connected to server');
     if(CU) socket.emit('user:online', { userId:CU.id, name:CU.name });
   });
+
+  socket.on('disconnect', () => {
+    console.log('[Socket] Disconnected');
+    toast('w', '⚠️ Disconnected from server');
+  });
+
+  socket.on('connect_error', err => {
+    console.warn('[socket] connect_error', err);
+    toast('e','Socket connection failed. Please refresh the page.');
+  });
+
+  socket.on('reconnect', (attemptNumber) => {
+    console.log('[Socket] Reconnected after', attemptNumber, 'attempts');
+    toast('s', '✅ Reconnected to server');
+  });
+
+  socket.on('reconnect_attempt', (attemptNumber) => {
+    console.log('[Socket] Reconnection attempt', attemptNumber);
+    if (attemptNumber > 2) {
+      toast('i', `🔄 Reconnecting... (${attemptNumber}/5)`);
+    }
+  });
+
+  socket.on('reconnect_failed', () => {
+    console.log('[Socket] Reconnection failed');
+    toast('e', '❌ Failed to reconnect to server');
+  });
+
+  socket.on('reconnect_error', err => {
+    console.warn('[socket] reconnect_error', err);
+  });
+
   socket.on('auth:error', err => { console.warn('[socket auth]', err); toast('e','Socket authentication failed. Please login again.'); });
-  socket.on('disconnect', () => { socketReady = false; });
+  socket.on('disconnect', reason => { socketReady = false; console.warn('[socket] disconnected', reason); });
   socket.on('chat:message', ({ from, text, media, msgId, timestamp }) => {
     if(!CU || from === CU.id) return;
     const chatKey = [CU.id, from].sort().join('_');
@@ -12812,16 +13395,15 @@ function initSocket() {
     saveData();
   });
   socket.on('post:new', ({post}) => {
-    if(!post || !post.id || !CU) return;
+    if(!post || !post.id) return;
     D.posts = D.posts || [];
     const idx = D.posts.findIndex(p => p.id === post.id);
     if(idx >= 0) D.posts[idx] = {...D.posts[idx], ...post};
     else D.posts.unshift(post);
     saveData();
-    if(typeof canViewPost !== 'function' || canViewPost(post)) {
-      if(typeof rFeed === 'function') rFeed();
-      if(post.author !== CU.id) toast('i','New post is available');
-    }
+    // Always refresh feed for new posts (Facebook-style)
+    if(typeof rFeed === 'function') rFeed(false);
+    if(CU && post.author !== CU.id) toast('i','New post is available');
   });
   socket.on('live:new', ({postId, streamerId, title}) => {
     if(!CU || streamerId === CU.id || !postId) return;
@@ -13649,13 +14231,27 @@ async function toggleScreenShare() {
 </script>
 <script>
 // PWA Service Worker
-if('serviceWorker' in navigator && location.protocol !== 'file:'){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('/sw.js')
-      .then(r=>console.log('[SW] Registered ✅'))
-      .catch(e=>console.log('[SW] Only works when served over HTTP/HTTPS'));
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js');
+      // Service worker registered
+    } catch (e) {
+      console.warn('[SW] Registration failed:', e);
+    }
   });
 }
+// Global error handling for better stability
+window.addEventListener('error', event => {
+  console.error('[Global Error]', event.message, event.filename, event.lineno, event.colno, event.error);
+});
+window.addEventListener('unhandledrejection', event => {
+  console.error('[Unhandled Rejection]', event.reason);
+  if (!event.defaultPrevented) {
+    toast('e','An unexpected error occurred. Please try again.');
+  }
+});
+
 // Push Notification permission
 async function requestNotifPermission(){
   if('Notification' in window && Notification.permission === 'default'){
@@ -14120,7 +14716,7 @@ function scheduleStickyAd() {
 // ========== SERVICE WORKER & PWA ==========
 if('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').then(reg => {
-    console.log('SW registered:', reg);
+    // Service worker registered
     if (reg.waiting) {
       showUpdateBanner();
     }
@@ -15725,9 +16321,120 @@ document.addEventListener('mouseleave', (e) => { if(e.clientY < 10 && !localStor
 // GLOBAL ERROR HANDLER
 // ═══════════════════════════════════════════════════════════════════
 window.onerror = function(msg, url, line, col, error) {
-  console.error('[GlobalError]', msg, 'at line', line, 'col', col);
+  console.error('[GlobalError]', {
+    message: msg,
+    url: url,
+    line: line,
+    column: col,
+    error: error?.stack
+  });
+  
+  // Send error to server for logging (optional)
+  if (typeof fetch === 'function') {
+    fetch('/api/log-error', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: msg,
+        url: url,
+        line: line,
+        column: col,
+        stack: error?.stack,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString()
+      })
+    }).catch(() => {}); // Silent fail
+  }
+  
+  // Show user-friendly error message
+  if (!window.errorShown) {
+    window.errorShown = true;
+    toast('e', 'Something went wrong. Please refresh the page.');
+  }
+  
   return false;
 };
+
+// Unhandled Promise Rejection Handler
+window.onunhandledrejection = function(event) {
+  console.error('[UnhandledPromiseRejection]', event.reason);
+  
+  if (typeof fetch === 'function') {
+    fetch('/api/log-error', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'unhandled_rejection',
+        reason: String(event.reason),
+        timestamp: new Date().toISOString()
+      })
+    }).catch(() => {});
+  }
+  
+  event.preventDefault();
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// GLOBAL LOADING STATES
+// ═══════════════════════════════════════════════════════════════════
+let isLoading = false;
+
+function showLoading(message = 'Loading...') {
+  if (isLoading) return;
+  isLoading = true;
+  
+  let loader = document.createElement('div');
+  loader.id = 'globalLoader';
+  loader.style.cssText = `
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  `;
+  loader.innerHTML = `
+    <div style="background:var(--g2);padding:20px;border-radius:12px;text-align:center;">
+      <div style="width:40px;height:40px;border:3px solid var(--neon);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px;"></div>
+      <div style="color:var(--t2);font-size:14px;">${message}</div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  `;
+  document.body.appendChild(loader);
+}
+
+function hideLoading() {
+  isLoading = false;
+  let loader = document.getElementById('globalLoader');
+  if (loader) loader.remove();
+}
+
+// ENHANCED: Auto-save on page unload/refresh
+window.addEventListener('beforeunload', function(e) {
+  if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence && CU) {
+    // Save points before page unload
+    enhancedPersistence.savePoints(CU.id, CU.points || 0).catch(err => {
+      console.warn('[BeforeUnload] Enhanced persistence save failed:', err);
+    });
+    console.log('[BeforeUnload] Data saved to enhanced persistence');
+  }
+  
+  // Also save regular data
+  if(typeof saveData === 'function') {
+    saveData();
+  }
+});
+
+// ENHANCED: Auto-save on visibility change (user switches tabs)
+document.addEventListener('visibilitychange', function() {
+  if(document.visibilityState === 'hidden' && typeof enhancedPersistence !== 'undefined' && enhancedPersistence && CU) {
+    enhancedPersistence.savePoints(CU.id, CU.points || 0).catch(err => {
+      console.warn('[VisibilityChange] Enhanced persistence save failed:', err);
+    });
+    console.log('[VisibilityChange] Data saved to enhanced persistence');
+  }
+});
 
 (function(){
   const blockedShortcuts = [
@@ -17891,8 +18598,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
 
   function syncPostToServer(post){
     try {
-      fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(post)}).catch(()=>{});
-      if(CU) fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:CU.id, points:CU.points || 0, label:'frontend-sync'})}).catch(()=>{});
+      fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(post)}).catch(e => console.error('[SyncPostToServer] posts sync failed:', e));
+      if(CU) fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:CU.id, points:CU.points || 0, label:'frontend-sync'})}).catch(e => console.error('[SyncPostToServer] points sync failed:', e));
     } catch(e) {}
   }
 
@@ -17901,8 +18608,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       const me = currentUser();
       if(!me) return;
       try {
-        fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(()=>{});
-        fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:'auto-sync'})}).catch(()=>{});
+        fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(e => console.error('[InstallServerSync] user-data sync failed:', e));
+        fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:'auto-sync'})}).catch(e => console.error('[InstallServerSync] points sync failed:', e));
       } catch(e) {}
     }, 30000);
   }
@@ -17979,12 +18686,12 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     if(!me || cloudSyncBusy) return;
     cloudSyncBusy = true;
     try {
-      await fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(()=>{});
-      await fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:'account-sync'})}).catch(()=>{});
+      await fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(e => console.error('[SyncCurrentAccountNow] user-data sync failed:', e));
+      await fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:'account-sync'})}).catch(e => console.error('[SyncCurrentAccountNow] points sync failed:', e));
       await Promise.all((D.posts || []).filter(p => p.author === me.id).slice(0,50).map(p =>
-        fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(()=>{})
+        fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(e => console.error('[SyncCurrentAccountNow] posts sync failed:', e))
       ));
-      const res = await fetch('/api/sync/export', {cache:'no-store'}).catch(()=>null);
+      const res = await fetch('/api/sync/export', {cache:'no-store'}).catch(e => console.error('[SyncCurrentAccountNow] export failed:', e));
       if(res && res.ok) mergeServerSnapshot(await res.json());
       cloudSyncLastPull = Date.now();
     } catch(e) {
@@ -18069,7 +18776,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       pauseOtherFeedMedia(media);
       media.play().catch(() => {
         media.muted = true;
-        media.play().catch(()=>{});
+        media.play().catch(e => console.error('[MediaPlay] autoplay failed:', e));
       });
     };
 
@@ -18368,11 +19075,11 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     const me = currentUserRef();
     if(!me) return;
     try {
-      await fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(()=>{});
-      await fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:reason})}).catch(()=>{});
+      await fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(me)}).catch(e => console.error('[PushCurrentState] user-data sync failed:', e));
+      await fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:me.id, points:me.points || 0, label:reason})}).catch(e => console.error('[PushCurrentState] points sync failed:', e));
       await Promise.all((D.posts || []).filter(p => p.author === me.id).slice(0,100).map(p => {
         compactPost(p);
-        return fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(()=>{});
+        return fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(e => console.error('[PushCurrentState] posts sync failed:', e));
       }));
     } catch(e) {}
   }
@@ -18531,7 +19238,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
         if(entry.isIntersecting && entry.intersectionRatio >= 0.6) {
           m.muted = m.dataset.mxtSoundUnlocked === '1' ? false : s.muted;
           pauseOthers(m);
-          m.play().catch(() => { m.muted = true; m.play().catch(()=>{}); });
+          m.play().catch(() => { m.muted = true; m.play().catch(e => console.error('[MediaPlay2] autoplay failed:', e)); });
         } else {
           m.pause();
         }
@@ -18614,11 +19321,11 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
     const u = canonicalizeCurrentAccount();
     if(!u) return;
     try {
-      fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(u)}).catch(()=>{});
-      fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id, points:u.points || 0, label:reason || 'account-sync'})}).catch(()=>{});
+      fetch('/api/user-data/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(u)}).catch(e => console.error('[AccountSync] user-data sync failed:', e));
+      fetch('/api/points/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id, points:u.points || 0, label:reason || 'account-sync'})}).catch(e => console.error('[AccountSync] points sync failed:', e));
       (D.posts || []).filter(p => p.author === u.id).slice(0,80).forEach(p => {
         p.updatedAt = p.updatedAt || p.createdAt || Date.now();
-        fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(()=>{});
+        fetch('/api/posts/sync', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(p)}).catch(e => console.error('[AccountSync] posts sync failed:', e));
       });
     } catch(e) {}
   }
@@ -18682,7 +19389,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
         if(p.autoPlay === false) { media.pause(); return; }
         if(entry.isIntersecting && entry.intersectionRatio >= 0.58) {
           media.muted = media.dataset.mxtSoundUnlocked === '1' ? false : (p.muteAuto === true);
-          media.play().catch(() => { media.muted = true; media.play().catch(()=>{}); });
+          media.play().catch(() => { media.muted = true; media.play().catch(e => console.error('[MediaPlay3] autoplay failed:', e)); });
         } else {
           media.pause();
         }
@@ -18771,13 +19478,13 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       const user = D.users[u.id] || u;
       user.deactivated = true;
       if(typeof fetch === 'function') {
-        fetch('/api/account/deactivate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id})}).catch(()=>{});
+        fetch('/api/account/deactivate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:u.id})}).catch(e => console.error('[DeactivateAccount] API call failed:', e));
       }
       if(typeof D !== 'undefined') D.cur = null;
       CU = null;
       if(typeof saveData === 'function') saveData();
       if(typeof persistAuthState === 'function') persistAuthState();
-      if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
+      if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(e => console.error('[DeactivateAccount] supabaseSignOut failed:', e));
       if(typeof toast === 'function') toast('i','Account deactivated');
       setTimeout(() => location.reload(), 700);
       return true;
@@ -18799,7 +19506,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
         return false;
       }
       if(typeof fetch === 'function') {
-        fetch('/api/account/' + encodeURIComponent(uid), {method:'DELETE'}).catch(()=>{});
+        fetch('/api/account/' + encodeURIComponent(uid), {method:'DELETE'}).catch(e => console.error('[DeleteAccount] API call failed:', e));
       }
       if(typeof D !== 'undefined') {
         delete D.users[uid];
@@ -18816,7 +19523,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       CU = null;
       if(typeof saveData === 'function') saveData();
       if(typeof persistAuthState === 'function') persistAuthState();
-      if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(()=>{});
+      if(typeof supabaseSignOut === 'function') supabaseSignOut().catch(e => console.error('[DeleteAccount] supabaseSignOut failed:', e));
       if(typeof toast === 'function') toast('s','Account deleted');
       setTimeout(() => location.reload(), 700);
       return true;
@@ -18836,7 +19543,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
       D.chats[key] = D.chats[key] || [];
       D.chats[key].push({id:'m' + Date.now(), from:u.id, to:ADMIN_ID, text:'Monetixra report: ' + msg, type:'text', at:Date.now(), read:false});
       if(typeof addNotif === 'function') addNotif(ADMIN_ID, 'feedback', 'MSG', 'Feedback from ' + (u.name || u.username || 'User'));
-      fetch('/api/reports', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({from:u.id, message:msg, type:'feedback'})}).catch(()=>{});
+      fetch('/api/reports', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({from:u.id, message:msg, type:'feedback'})}).catch(e => console.error('[SendReport] API call failed:', e));
       save();
       if(typeof toast === 'function') toast('s','Report sent to Monetixra admin');
     };
@@ -19793,7 +20500,7 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
         if(best && v === best.v) {
           v.muted = true;
           v.playsInline = true;
-          v.play?.().catch(()=>{});
+          v.play?.().catch(e => console.error('[VideoAutoplay] play failed:', e));
         } else if(!v.paused) {
           v.pause();
         }

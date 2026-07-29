@@ -10,9 +10,9 @@ const CONFIG = {
   // Leave as '' to use same origin (for local testing)
   SERVER_URL: '',
   
-  // Supabase (already configured)
-  SUPABASE_URL: 'https://rgximkhnhxgaonrxzzxl.supabase.co',
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU',
+  // Supabase (overridden by env vars in production; safe fallback for local/dev)
+  SUPABASE_URL: process.env.SUPABASE_URL || 'https://rgximkhnhxgaonrxzzxl.supabase.co',
+  SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU',
   
   // Feature flags
   ENABLE_SOCKET_IO: true,

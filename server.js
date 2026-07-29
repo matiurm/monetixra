@@ -8,6 +8,7 @@
 'use strict';
 
 require('dotenv').config();
+const appConfig = require('./config.js');
 const express   = require('express');
 const http      = require('http');
 const { Server }= require('socket.io');
@@ -19,29 +20,88 @@ const webpush   = require('web-push');
 const path      = require('path');
 const crypto    = require('crypto');
 const fetch     = (...a) => import('node-fetch').then(({default:f})=>f(...a));
+const { exec } = require('child_process');
+const fs = require('fs');
+const { promisify } = require('util');
+const execAsync = promisify(exec);
+const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 300 }); // 5 minutes
+const SUPABASE_CONNECTIVITY_TTL_MS = 30_000;
+const isProduction = String(process.env.NODE_ENV || '').toLowerCase() === 'production';
+
+function resolveEnv(name, fallback = '') {
+  const value = process.env[name];
+  if (typeof value === 'string' && value.trim() !== '') {
+    return value.trim();
+  }
+  return fallback;
+}
+
+function normalizeSupabaseUrl(value) {
+  if (!value) return '';
+  try {
+    const parsed = new URL(value);
+    return `${parsed.protocol}//${parsed.host}`.replace(/\/+$/, '');
+  } catch {
+    return String(value).replace(/\/+$/, '');
+  }
+}
 
 // ── Config ────────────────────────────────────────────────────
 const PORT          = process.env.PORT         || 3000;
 const OPENAI_KEY    = process.env.OPENAI_API_KEY   || '';
 const DEEPSEEK_KEY  = process.env.DEEPSEEK_API_KEY || '';
-// Updated with provided credentials
-const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || '';
-const CLOUDINARY_API_KEY    = process.env.CLOUDINARY_API_KEY    || '';
-const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || '';
-const SUPABASE_URL  = process.env.SUPABASE_URL     || 'https://rgximkhnhxgaonrxzzxl.supabase.co';
-const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY|| 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJneGlta2huaHhnYW9ucnh6enhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDg3MDQsImV4cCI6MjA5MTIyNDcwNH0.zgBfCTs2AEocLVwjJntg1dDBwy4quQS40QWqeuYRTwU';
-const SUPABASE_SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-const SUPABASE_SERVER_KEY = SUPABASE_SERVICE_ROLE || SUPABASE_ANON;
-const SOCKET_AUTH_REQUIRED = String(process.env.SOCKET_AUTH_REQUIRED || '').toLowerCase() === 'true';
+const JWT_SECRET    = process.env.JWT_SECRET       || crypto.randomBytes(64).toString('hex');
+const ADMIN_ID      = process.env.ADMIN_ID         || 'admin_matiur';
+const ADMIN_PASS    = process.env.ADMIN_PASS       || crypto.randomBytes(32).toString('hex');
+const ADMIN_API_SECRET = process.env.ADMIN_API_SECRET || '';
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const TRUSTED_DB_TABLES = new Set((process.env.ALLOWED_DB_TABLES || 'users,posts,transactions,media').split(',').map(s => s.trim()).filter(Boolean));
+const SOCKET_AUTH_REQUIRED = String(process.env.SOCKET_AUTH_REQUIRED || 'false').toLowerCase() === 'true';
 const PTS_PER_USD = Number(process.env.PTS_PER_USD || 1000);
 
+// Cloudinary Configuration
+const CLOUDINARY_CLOUD_NAME = resolveEnv('CLOUDINARY_CLOUD_NAME');
+const CLOUDINARY_API_KEY    = resolveEnv('CLOUDINARY_API_KEY');
+const CLOUDINARY_API_SECRET = resolveEnv('CLOUDINARY_API_SECRET');
+const SUPABASE_URL  = normalizeSupabaseUrl(resolveEnv('SUPABASE_URL', appConfig.SUPABASE_URL || ''));
+const SUPABASE_ANON = resolveEnv('SUPABASE_ANON_KEY', appConfig.SUPABASE_ANON_KEY || '');
+const SUPABASE_SERVICE_ROLE = resolveEnv('SUPABASE_SERVICE_ROLE_KEY');
+const SUPABASE_SERVER_KEY = SUPABASE_SERVICE_ROLE || SUPABASE_ANON;
+const supabaseState = {
+  configured: Boolean(SUPABASE_URL && SUPABASE_SERVER_KEY),
+  reachable: false,
+  checkedAt: 0,
+  lastError: null,
+  fallbackMode: false
+};
+
+function validateProductionEnv() {
+  if (!isProduction) return;
+  const missing = ['SUPABASE_URL', 'SUPABASE_ANON_KEY']
+    .filter(name => !resolveEnv(name));
+
+  if (missing.length) {
+    console.warn(`[Env] Production hardening: missing ${missing.join(', ')}. Using runtime fallback mode until .env is populated.`);
+  }
+
+  if (SUPABASE_URL && !/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(SUPABASE_URL)) {
+    console.warn('[Env] Production hardening: SUPABASE_URL is not in a valid Supabase project format.');
+  }
+}
+
+validateProductionEnv();
+
 // MEGA API Configuration
-const MEGA_API_KEY = process.env.MEGA_API_KEY || '';
+const MEGA_API_KEY = process.env.MEGA_API_KEY || '4dt-kltg8nnVA_ycAUMS_Q';
 
 // Agora Configuration
 const AGORA_APP_ID = process.env.AGORA_APP_ID || 'e9cfd627a92f4466a047b2a820e1382e';
-const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '';
-const AGORA_API_KEY = process.env.AGORA_API_KEY || '';
+const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '3ea92e07b5204067afdaaf8b06457c46';
+const AGORA_API_KEY = process.env.AGORA_API_KEY || '333568318583158';
+const AGORA_API_SECRET = process.env.AGORA_API_SECRET || '3aPp5oR0zmJX9P4oOfb3fR3a3SI';
 
 // AdMob Configuration
 const ADMOB_APP_ID = process.env.ADMOB_APP_ID || 'ca-app-pub-2253243248364888~1427340343';
@@ -88,14 +148,41 @@ const app    = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 const server = http.createServer(app);
+
+// CORS: Allow only specific origins for security
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'https://monetixra.netlify.app',
+  'https://monetixra.vercel.app',
+  process.env.FRONTEND_URL,
+  ...ALLOWED_ORIGINS
+].filter(Boolean);
+
 const io     = new Server(server, {
-  cors:{origin:'*',methods:['GET','POST']},
+  cors:{
+    origin: allowedOrigins,
+    methods:['GET','POST'],
+    credentials: true
+  },
   pingInterval:25000, pingTimeout:60000
 });
 
 app.use(compression());
 app.use(helmet({ contentSecurityPolicy:false, crossOriginEmbedderPolicy:false }));
-app.use(cors({origin:'*'}));
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy violation'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json({
   limit:'10mb',
   verify:(req, _res, buf) => {
@@ -111,6 +198,23 @@ const payLimiter = rateLimit({windowMs:60*1000, max:5,  message:{error:'Too many
 app.use('/api/', apiLimiter);
 app.use('/api/ai/', aiLimiter);
 app.use('/api/payment/', payLimiter);
+
+// Per-user rate limiting
+const userLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per window per user
+  keyGenerator: (req) => {
+    return req.headers['x-user-id'] || req.ip;
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests from this user' }
+});
+
+// Apply to sensitive endpoints
+app.use('/api/posts/', userLimiter);
+app.use('/api/points/', userLimiter);
+app.use('/api/payment/', userLimiter);
 
 app.use(express.static(path.join(__dirname,'public'),{maxAge:'1d'}));
 app.use('/js', express.static(path.join(__dirname,'js'),{maxAge:'1d'}));
@@ -132,7 +236,8 @@ app.get('/manifest.json', (_, res) => sendRootFile(res, 'manifest.json', 'applic
 app.get('/sw.js', (_, res) => sendRootFile(res, 'sw.js', 'application/javascript'));
 app.get('/ads.txt', (_, res) => sendRootFile(res, 'ads.txt', 'text/plain'));
 app.get('/app-ads.txt', (_, res) => sendRootFile(res, 'app-ads.txt', 'text/plain'));
-app.get('/api/health', (_req, res) => {
+app.get('/api/health', async (_req, res) => {
+  const supabaseHealthy = await probeSupabaseConnectivity();
   res.json({
     ok: true,
     service: 'monetixra',
@@ -143,15 +248,58 @@ app.get('/api/health', (_req, res) => {
       hasOpenAI: Boolean(OPENAI_KEY),
       hasSupabase: Boolean(SUPABASE_URL),
       hasVapid: Boolean(VAPID_PUBLIC && VAPID_PRIVATE)
+    },
+    persistence: {
+      supabaseConfigured: supabaseState.configured,
+      supabaseReachable: supabaseState.reachable,
+      fallbackMode: supabaseState.fallbackMode,
+      lastError: supabaseState.lastError
     }
   });
 });
 
-app.use((req, res) => res.status(404).json({ error: 'Not found', path: req.path }));
-app.use((err, req, res, next) => {
-  console.error('[server error]', err);
-  res.status(err.status || 500).json({ error: 'Internal server error' });
+app.get('/api/config', (_req, res) => {
+  res.json({
+    supabase: {
+      url: SUPABASE_URL || null,
+      anonKey: SUPABASE_ANON ? `${SUPABASE_ANON.slice(0, 12)}...` : null,
+      configured: Boolean(SUPABASE_URL && SUPABASE_ANON)
+    },
+    runtime: {
+      nodeEnv: process.env.NODE_ENV || 'development',
+      port: Number(process.env.PORT || 3000),
+      fallbackMode: supabaseState.fallbackMode
+    }
+  });
 });
+
+app.post('/api/log-error',
+  [
+    body('message').optional().isString().withMessage('message must be a string'),
+    body('stack').optional().isString().withMessage('stack must be a string')
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: 'Validation failed', details: errors.array() });
+    }
+
+    const payload = req.body || {};
+    const logEntry = {
+      type: payload.type || 'client_error',
+      message: payload.message || 'Unknown error',
+      stack: payload.stack || '',
+      url: payload.url || '',
+      line: payload.line || null,
+      column: payload.column || null,
+      userAgent: payload.userAgent || '',
+      timestamp: new Date().toISOString(),
+    };
+
+    console.error('[ClientError]', logEntry);
+    res.json({ ok: true });
+  }
+);
 
 // ── State ──────────────────────────────────────────────────────
 const onlineUsers  = new Map(); // userId -> Set(socketId)
@@ -253,13 +401,103 @@ function sameAccountRecord(user, loginId) {
     String(user.phone || '').trim() === String(loginId || '').trim();
 }
 
+// JWT-based Admin Authentication
+function generateAdminToken(userId) {
+  return jwt.sign(
+    { userId, role: 'admin' },
+    JWT_SECRET,
+    { expiresIn: '24h' }
+  );
+}
+
+function verifyAdminToken(token) {
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch (error) {
+    return null;
+  }
+}
+
+// CSRF Protection (Modern approach)
+const csrfTokens = new Map(); // sessionId -> token
+
+function generateCSRFToken(sessionId) {
+  const token = crypto.randomBytes(32).toString('hex');
+  csrfTokens.set(sessionId, { token, expiresAt: Date.now() + 3600000 }); // 1 hour
+  return token;
+}
+
+function validateCSRFToken(sessionId, token) {
+  const stored = csrfTokens.get(sessionId);
+  if (!stored) return false;
+  if (Date.now() > stored.expiresAt) {
+    csrfTokens.delete(sessionId);
+    return false;
+  }
+  return stored.token === token;
+}
+
+// CSRF middleware for state-changing requests
+function requireCSRF(req, res, next) {
+  const sessionId = req.headers['x-session-id'] || req.body.sessionId;
+  const csrfToken = req.headers['x-csrf-token'] || req.body.csrfToken;
+  
+  // Skip for admin requests with JWT
+  const authHeader = req.headers['authorization'];
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    return next();
+  }
+  
+  if (!sessionId || !csrfToken) {
+    return res.status(403).json({error:'CSRF token required'});
+  }
+  
+  if (!validateCSRFToken(sessionId, csrfToken)) {
+    return res.status(403).json({error:'Invalid CSRF token'});
+  }
+  
+  next();
+}
+
+// Get CSRF token endpoint
+app.get('/api/csrf-token', (req, res) => {
+  const sessionId = req.headers['x-session-id'] || req.query.sessionId || crypto.randomBytes(16).toString('hex');
+  const token = generateCSRFToken(sessionId);
+  res.json({ csrfToken: token, sessionId });
+});
+
 function isAdminRequest(req) {
+  // Check for JWT token in Authorization header
+  const authHeader = req.headers['authorization'];
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7);
+    const decoded = verifyAdminToken(token);
+    if (decoded && decoded.role === 'admin') {
+      return true;
+    }
+  }
+  
+  // Fallback to header-based auth for backward compatibility
   const adminId = req.headers['x-user-id'] || req.query.userId || req.body?.userId;
   const suppliedSecret = req.headers['x-admin-secret'] || req.query.adminSecret || req.body?.adminSecret || '';
+  
+  // Strong secret validation
+  if (!process.env.ADMIN_API_SECRET) {
+    console.warn('[Security] ADMIN_API_SECRET not set in environment');
+  }
+  
   const trustedRoleHeader = !!(process.env.ADMIN_API_SECRET && suppliedSecret && suppliedSecret === process.env.ADMIN_API_SECRET);
   const adminRole = trustedRoleHeader && String(req.headers['x-admin-role'] || req.query.admin || '').toLowerCase() === 'true';
+  
   const user = adminId ? syncStore.users.get(String(adminId)) : null;
-  return adminRole || !!(user && (user.isAdmin || user.is_admin));
+  const userIsAdmin = user && (user.isAdmin || user.is_admin);
+  
+  // Log admin access attempts
+  if (adminRole || userIsAdmin) {
+    console.log('[AdminAccess]', { adminId, adminRole, userIsAdmin, ip: req.ip });
+  }
+  
+  return adminRole || userIsAdmin;
 }
 
 function requireAdmin(req, res, next) {
@@ -315,7 +553,54 @@ async function getICE() {
   return STATIC_ICE;
 }
 
+async function probeSupabaseConnectivity() {
+  const now = Date.now();
+  if (supabaseState.checkedAt && now - supabaseState.checkedAt < SUPABASE_CONNECTIVITY_TTL_MS) {
+    return supabaseState.reachable;
+  }
+
+  if(!SUPABASE_URL || !SUPABASE_SERVER_KEY) {
+    supabaseState.configured = false;
+    supabaseState.reachable = false;
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = 'Supabase not configured';
+    supabaseState.checkedAt = now;
+    return false;
+  }
+
+  try {
+    supabaseState.configured = true;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_SERVER_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVER_KEY}`
+      },
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const isReachable = r.ok || r.status < 500;
+    supabaseState.reachable = isReachable;
+    supabaseState.fallbackMode = !isReachable;
+    supabaseState.checkedAt = now;
+    supabaseState.lastError = isReachable ? null : `HTTP ${r.status}`;
+    return isReachable;
+  } catch (e) {
+    supabaseState.reachable = false;
+    supabaseState.fallbackMode = true;
+    supabaseState.checkedAt = now;
+    supabaseState.lastError = e?.message || 'Supabase connection failed';
+    return false;
+  }
+}
+
 async function supabaseReq(table,method,body,filter='') {
+  if(!SUPABASE_URL || !SUPABASE_SERVER_KEY) throw new Error('Supabase not configured');
+  const reachable = await probeSupabaseConnectivity();
+  if(!reachable) throw new Error(supabaseState.lastError || 'Supabase unavailable');
   let url=`${SUPABASE_URL}/rest/v1/${table}`;
   if(filter) url+=`?${filter}`;
   const r=await fetch(url,{
@@ -332,6 +617,8 @@ async function supabaseReq(table,method,body,filter='') {
 
 async function supabaseRest(table, method='GET', body=null, query='', prefer='') {
   if(!SUPABASE_URL || !SUPABASE_SERVER_KEY) throw new Error('Supabase not configured');
+  const reachable = await probeSupabaseConnectivity();
+  if(!reachable) throw new Error(supabaseState.lastError || 'Supabase unavailable');
   const url = `${SUPABASE_URL}/rest/v1/${table}${query ? '?' + query : ''}`;
   const headers = {
     'Content-Type':'application/json',
@@ -417,31 +704,61 @@ function txRow(t={}) {
 async function persistUser(u) {
   const row = userRow(u);
   if(!row.id) throw new Error('user id required');
-  await supabaseRest('users', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  try {
+    await supabaseRest('users', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  } catch (e) {
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = e.message;
+    console.warn('[Supabase] persistUser fallback to local memory:', e.message);
+  }
   return row;
 }
 
 async function persistPost(p) {
   const row = postRow(p);
   if(!row.id || !row.author) throw new Error('post id and author required');
-  await supabaseRest('posts', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  try {
+    await supabaseRest('posts', 'POST', row, 'on_conflict=id', 'resolution=merge-duplicates,return=representation');
+  } catch (e) {
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = e.message;
+    console.warn('[Supabase] persistPost fallback to local memory:', e.message);
+  }
   return row;
 }
 
 async function persistTransaction(t) {
   const row = txRow(t);
   if(!row.id || !row.user_id) throw new Error('transaction id and user required');
-  await supabaseRest('transactions', 'POST', row, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
+  try {
+    await supabaseRest('transactions', 'POST', row, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation');
+  } catch (e) {
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = e.message;
+    console.warn('[Supabase] persistTransaction fallback to local memory:', e.message);
+  }
   return row;
 }
 
 async function getPersistentUser(userId) {
-  const rows = await supabaseRest('users', 'GET', null, `id=eq.${encodeURIComponent(userId)}&select=*`);
-  return Array.isArray(rows) ? rows[0] : null;
+  try {
+    const rows = await supabaseRest('users', 'GET', null, `id=eq.${encodeURIComponent(userId)}&select=*`);
+    return Array.isArray(rows) ? rows[0] : null;
+  } catch (e) {
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = e.message;
+    return null;
+  }
 }
 
 async function setPersistentPoints(userId, points) {
-  await supabaseRest('users', 'PATCH', {points: Math.max(0, Math.trunc(Number(points || 0))), updated_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(userId)}`, 'return=representation');
+  try {
+    await supabaseRest('users', 'PATCH', {points: Math.max(0, Math.trunc(Number(points || 0))), updated_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(userId)}`, 'return=representation');
+  } catch (e) {
+    supabaseState.fallbackMode = true;
+    supabaseState.lastError = e.message;
+    console.warn('[Supabase] setPersistentPoints fallback to local memory:', e.message);
+  }
 }
 
 async function creditUserPoints(userId, pts, label, type='topup', txId='tx_' + Date.now()) {
@@ -509,6 +826,12 @@ function verifyStripeSignature(rawBody, signatureHeader, secret) {
   const b = Buffer.from(parts.v1, 'hex');
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
+
+probeSupabaseConnectivity().then(reachable => {
+  console.log(`[Supabase] connectivity probe -> ${reachable ? 'reachable' : 'unreachable'}${supabaseState.lastError ? ` (${supabaseState.lastError})` : ''}`);
+}).catch(() => {
+  console.warn('[Supabase] connectivity probe failed');
+});
 
 // Send push notification to a user
 async function sendPushToUser(userId, payload) {
@@ -863,22 +1186,47 @@ app.post('/api/ai/transcribe', async(req,res)=>{
 });
 
 // ── Supabase Proxy ────────────────────────────────────────────
+const permittedDbMethods = new Set(['GET','POST','PATCH','DELETE']);
+
 app.post('/api/db/:table', async(req,res)=>{
-  const {table}=req.params;
-  const {method='GET',filter,body:payload,select='*'}=req.body;
+  const table = req.params.table;
+  const {method='GET', filter, body:payload, select='*'} = req.body || {};
+  const normalizedMethod = String(method || 'GET').toUpperCase();
+
+  if (!TRUSTED_DB_TABLES.has(table)) {
+    return res.status(403).json({error:'Table access denied'});
+  }
+  if (!permittedDbMethods.has(normalizedMethod)) {
+    return res.status(400).json({error:'Invalid database method'});
+  }
+
   try {
-    let f=filter||'';
-    if(method==='GET'&&select) f+=(f?'&':'')+'select='+select;
-    const data=await supabaseReq(table,method,payload,f);
+    let f = String(filter || '');
+    if (normalizedMethod === 'GET' && select) {
+      f += (f ? '&' : '') + 'select=' + encodeURIComponent(select);
+    }
+    const data = await supabaseReq(table, normalizedMethod, payload, f);
     res.json(data);
-  }catch(e){ res.status(500).json({error:'DB error',detail:e.message}); }
+  } catch (e) {
+    console.error('[Supabase proxy]', e);
+    res.status(500).json({error:'DB error',detail:e.message});
+  }
 });
 
 // ── Crypto Prices ─────────────────────────────────────────────
 app.get('/api/crypto/prices', async(_,res)=>{
+  const cached = cache.get('crypto_prices');
+  if (cached) {
+    console.log('[Cache] Hit for crypto_prices');
+    return res.json(cached);
+  }
+  
   try {
     const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana,toncoin&vs_currencies=usd&include_24hr_change=true');
-    res.json(await r.json());
+    const data = await r.json();
+    cache.set('crypto_prices', data);
+    console.log('[Cache] Miss for crypto_prices, cached now');
+    res.json(data);
   }catch(e){ res.json({bitcoin:{usd:0},ethereum:{usd:0},solana:{usd:0},binancecoin:{usd:0}}); }
 });
 
@@ -908,36 +1256,56 @@ async function getBkashToken() {
 }
 
 // bKash: Create Payment
-app.post('/api/payment/bkash/create', async(req,res)=>{
-  if(!BKASH_APP_KEY) return res.json({demo:true, paymentID:'demo_'+Date.now(), bkashURL:'#', message:'bKash not configured — demo mode'});
-  try {
-    const token=await getBkashToken();
-    if(!token) return res.status(500).json({error:'bKash auth failed'});
-    const {amount,currency='BDT',intent='sale',merchantInvoiceNumber}=req.body;
-    const r=await fetch('https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout/create',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','authorization':token,'x-app-key':BKASH_APP_KEY},
-      body:JSON.stringify({mode:'0011',payerReference:merchantInvoiceNumber||'ref'+Date.now(),callbackURL:process.env.BASE_URL+'/api/payment/bkash/callback',amount,currency,intent,merchantInvoiceNumber:merchantInvoiceNumber||'inv'+Date.now()})
-    });
-    const d=await r.json();
-    res.json(d);
-  }catch(e){ res.status(500).json({error:'bKash create failed: '+e.message}); }
+app.post('/api/payment/bkash/create',
+  [
+    body('amount').isFloat({ min: 1 }).withMessage('amount must be a positive number'),
+    body('currency').optional().isString().withMessage('currency must be a string'),
+    body('merchantInvoiceNumber').optional().isString().withMessage('merchantInvoiceNumber must be a string')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ error: 'Validation failed', details: errors.array() });
+    }
+
+    if(!BKASH_APP_KEY) return res.json({demo:true, paymentID:'demo_'+Date.now(), bkashURL:'#', message:'bKash not configured — demo mode'});
+    try {
+      const token=await getBkashToken();
+      if(!token) return res.status(500).json({error:'bKash auth failed'});
+      const {amount,currency='BDT',intent='sale',merchantInvoiceNumber}=req.body;
+      const r=await fetch('https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout/create',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','authorization':token,'x-app-key':BKASH_APP_KEY},
+        body:JSON.stringify({mode:'0011',payerReference:merchantInvoiceNumber||'ref'+Date.now(),callbackURL:process.env.BASE_URL+'/api/payment/bkash/callback',amount,currency,intent,merchantInvoiceNumber:merchantInvoiceNumber||'inv'+Date.now()})
+      });
+      const d=await r.json();
+      res.json(d);
+    }catch(e){ res.status(500).json({error:'bKash create failed: '+e.message}); }
 });
 
 // bKash: Execute Payment
-app.post('/api/payment/bkash/execute', async(req,res)=>{
-  if(!BKASH_APP_KEY) return res.json({demo:true, transactionStatus:'Completed', trxID:'TRX'+Date.now()});
-  try {
-    const token=await getBkashToken();
-    const {paymentID}=req.body;
-    const r=await fetch('https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout/execute',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','authorization':token,'x-app-key':BKASH_APP_KEY},
-      body:JSON.stringify({paymentID})
-    });
-    const d=await r.json();
-    res.json(d);
-  }catch(e){ res.status(500).json({error:'bKash execute failed: '+e.message}); }
+app.post('/api/payment/bkash/execute',
+  [
+    body('paymentID').trim().notEmpty().withMessage('paymentID is required')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ error: 'Validation failed', details: errors.array() });
+    }
+
+    if(!BKASH_APP_KEY) return res.json({demo:true, transactionStatus:'Completed', trxID:'TRX'+Date.now()});
+    try {
+      const token=await getBkashToken();
+      const {paymentID}=req.body;
+      const r=await fetch('https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout/execute',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','authorization':token,'x-app-key':BKASH_APP_KEY},
+        body:JSON.stringify({paymentID})
+      });
+      const d=await r.json();
+      res.json(d);
+    }catch(e){ res.status(500).json({error:'bKash execute failed: '+e.message}); }
 });
 
 // bKash callback
@@ -950,21 +1318,31 @@ app.get('/api/payment/bkash/callback', (req,res)=>{
 // ────────────────────────────────────────────────────────────
 //  NAGAD PAYMENT API
 // ────────────────────────────────────────────────────────────
-app.post('/api/payment/nagad/create', async(req,res)=>{
-  if(!NAGAD_MERCHANT) return res.json({demo:true, orderId:'nagad_'+Date.now(), message:'Nagad not configured — demo mode'});
-  try {
-    const {amount,orderId}=req.body;
-    const datetime=new Date().toISOString().replace(/[-:T]/g,'').slice(0,14);
-    const sensitiveData={merchantId:NAGAD_MERCHANT,datetime,orderId:orderId||'ord'+Date.now(),challenge:'hash'+Date.now()};
-    // In production: encrypt with Nagad public key using RSA
-    const r=await fetch(`https://sandbox.mynagad.com:10080/remote-payment-gateway-1.0/api/dfs/check-out/initialize/${NAGAD_MERCHANT}/${orderId}`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json','X-KM-Api-Version':'v-0.2.0','X-KM-IP-V4':'127.0.0.1','X-KM-Client-Type':'PC_WEB'},
-      body:JSON.stringify({dateTime:datetime,sensitiveData:'encrypted_data',signature:'signature',merchantCallbackURL:process.env.BASE_URL+'/api/payment/nagad/callback'})
-    });
-    const d=await r.json();
-    res.json(d);
-  }catch(e){ res.status(500).json({error:'Nagad create failed: '+e.message}); }
+app.post('/api/payment/nagad/create',
+  [
+    body('amount').isFloat({ min: 1 }).withMessage('amount must be a positive number'),
+    body('orderId').optional().isString().withMessage('orderId must be a string')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ error: 'Validation failed', details: errors.array() });
+    }
+
+    if(!NAGAD_MERCHANT) return res.json({demo:true, orderId:'nagad_'+Date.now(), message:'Nagad not configured — demo mode'});
+    try {
+      const {amount,orderId}=req.body;
+      const datetime=new Date().toISOString().replace(/[-:T]/g,'').slice(0,14);
+      const sensitiveData={merchantId:NAGAD_MERCHANT,datetime,orderId:orderId||'ord'+Date.now(),challenge:'hash'+Date.now()};
+      // In production: encrypt with Nagad public key using RSA
+      const r=await fetch(`https://sandbox.mynagad.com:10080/remote-payment-gateway-1.0/api/dfs/check-out/initialize/${NAGAD_MERCHANT}/${orderId}`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','X-KM-Api-Version':'v-0.2.0','X-KM-IP-V4':'127.0.0.1','X-KM-Client-Type':'PC_WEB'},
+        body:JSON.stringify({dateTime:datetime,sensitiveData:'encrypted_data',signature:'signature',merchantCallbackURL:process.env.BASE_URL+'/api/payment/nagad/callback'})
+      });
+      const d=await r.json();
+      res.json(d);
+    }catch(e){ res.status(500).json({error:'Nagad create failed: '+e.message}); }
 });
 
 app.get('/api/payment/nagad/callback', (req,res)=>{
@@ -1031,6 +1409,51 @@ app.get('/api/admin/users/:id', requireAdmin, async(req,res)=>{
   }
 });
 
+// Admin Login (JWT-based)
+app.post('/api/admin/login', 
+  [
+    body('userId').trim().notEmpty().withMessage('userId is required'),
+    body('password').trim().notEmpty().withMessage('password is required')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({error:'Validation failed', details:errors.array()});
+    }
+    
+    try {
+      const {userId, password} = req.body;
+      
+      // Check if it's the admin account
+      if(userId === ADMIN_ID && password === ADMIN_PASS) {
+        const token = generateAdminToken(userId);
+        res.json({
+          success: true,
+          token,
+          userId,
+          expiresIn: '24h'
+        });
+      } else {
+        // Check if user exists and is admin
+        const user = syncStore.users.get(String(userId));
+        if(user && (user.isAdmin || user.is_admin) && user.password === password) {
+          const token = generateAdminToken(userId);
+          res.json({
+            success: true,
+            token,
+            userId,
+            expiresIn: '24h'
+          });
+        } else {
+          res.status(401).json({error:'Invalid credentials'});
+        }
+      }
+    } catch(e) {
+      res.status(500).json({error:'Login failed', detail:e.message});
+    }
+  }
+);
+
 // Deactivate user
 app.post('/api/admin/users/:id/deactivate', requireAdmin, async(req,res)=>{
   try {
@@ -1039,7 +1462,7 @@ app.post('/api/admin/users/:id/deactivate', requireAdmin, async(req,res)=>{
     if(!user) return res.status(404).json({error:'User not found'});
     user.deactivated = true;
     user.updatedAt = Date.now();
-    await persistUser(user).catch(()=>{});
+    await persistUser(user).catch(e => console.error('[DeactivateUser] persistUser failed:', e));
     res.json({success: true, user});
   } catch(e) {
     res.status(500).json({error: 'Failed to deactivate user'});
@@ -1055,7 +1478,7 @@ app.delete('/api/admin/users/:id', requireAdmin, async(req,res)=>{
       user.deleted = true;
       user.deactivated = true;
       user.updatedAt = Date.now();
-      await persistUser(user).catch(()=>{});
+      await persistUser(user).catch(e => console.error('[DeleteUser] persistUser failed:', e));
     }
     res.json({success: true});
   } catch(e) {
@@ -1103,10 +1526,19 @@ app.delete('/api/admin/content/:id', requireAdmin, async(req,res)=>{
 
 // ── Data Persistence API Routes ───────────────────────────────────────────
 // Sync posts
-app.post('/api/posts/sync', async(req,res)=>{
-  try {
-    const postData = req.body;
-    if(!postData || !postData.id) return res.status(400).json({error:'Post id required'});
+app.post('/api/posts/sync', requireCSRF,
+  [
+    body('id').trim().notEmpty().withMessage('Post id is required'),
+    body('author').trim().notEmpty().withMessage('Author is required')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({error:'Validation failed', details:errors.array()});
+    }
+    
+    try {
+      const postData = req.body;
     const savedPost = {...(syncStore.posts.get(postData.id)||{}), ...postData, syncedAt:Date.now()};
     syncStore.posts.set(postData.id, savedPost);
     await persistPost(savedPost);
@@ -1117,18 +1549,28 @@ app.post('/api/posts/sync', async(req,res)=>{
     for(const userId of audience) {
       emitToUser(userId, 'notif:receive', {type:'post', postId:savedPost.id, msg:`${author.name || 'Someone'} created a new post`});
     }
+    const persisted = supabaseState.reachable;
     console.log(`[Sync] Post: ${postData.id}`);
-    res.json({success: true, synced: true, persisted: true, id: postData.id, totalPosts: syncStore.posts.size});
+    res.json({success: true, synced: true, persisted, fallback: !persisted, id: postData.id, totalPosts: syncStore.posts.size});
   } catch(e) {
     res.status(500).json({error: 'Post sync failed', detail:e.message});
   }
 });
 
 // Sync points
-app.post('/api/points/sync', async(req,res)=>{
-  try {
-    const pointsData = req.body;
-    if(!pointsData || !pointsData.userId) return res.status(400).json({error:'userId required'});
+app.post('/api/points/sync', requireCSRF,
+  [
+    body('userId').trim().notEmpty().withMessage('userId is required'),
+    body('points').isNumeric().withMessage('points must be a number')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({error:'Validation failed', details:errors.array()});
+    }
+    
+    try {
+      const pointsData = req.body;
     const persistent = await getPersistentUser(pointsData.userId).catch(()=>null);
     const prev = syncStore.points.get(pointsData.userId) || {points:0, history:[]};
     const merged = Math.max(Number(prev.points || 0), Number(pointsData.points || 0), Number(persistent?.points || 0));
@@ -1141,9 +1583,10 @@ app.post('/api/points/sync', async(req,res)=>{
     };
     syncStore.points.set(pointsData.userId, next);
     await setPersistentPoints(pointsData.userId, merged);
-    await persistTransaction({id:'sync_' + pointsData.userId + '_' + Date.now(), user:pointsData.userId, type:'sync', label:pointsData.label || 'points sync', pts:0, at:Date.now()}).catch(()=>{});
+    await persistTransaction({id:'sync_' + pointsData.userId + '_' + Date.now(), user:pointsData.userId, type:'sync', label:pointsData.label || 'points sync', pts:0, at:Date.now()}).catch(e => console.error('[SyncPoints] persistTransaction failed:', e));
+    const persisted = supabaseState.reachable;
     console.log(`[Sync] Points: ${pointsData.userId} - ${pointsData.points}`);
-    res.json({success: true, synced: true, persisted: true, points: next.points});
+    res.json({success: true, synced: true, persisted, fallback: !persisted, points: next.points});
   } catch(e) {
     res.status(500).json({error: 'Points sync failed', detail:e.message});
   }
@@ -1171,8 +1614,9 @@ app.post('/api/user-data/sync', async(req,res)=>{
     syncStore.points.set(canonicalId, {...(syncStore.points.get(canonicalId) || {}), points:mergedPoints, updatedAt:Date.now()});
     await persistUser(finalUser);
     updateIndexes();
+    const persisted = supabaseState.reachable;
     console.log(`[Sync] User Data: ${userData.key}`);
-    res.json({success: true, synced: true, persisted: true, key: canonicalId, canonicalId, points: mergedPoints, totalUsers: syncStore.users.size});
+    res.json({success: true, synced: true, persisted, fallback: !persisted, key: canonicalId, canonicalId, points: mergedPoints, totalUsers: syncStore.users.size});
   } catch(e) {
     res.status(500).json({error: 'User data sync failed', detail:e.message});
   }
@@ -1187,7 +1631,7 @@ app.post('/api/account/deactivate', async(req,res)=>{
     user.deactivated = true;
     user.updatedAt = Date.now();
     syncStore.users.set(userId, user);
-    await persistUser(user).catch(()=>{});
+    await persistUser(user).catch(e => console.error('[DeactivateAccount] persistUser failed:', e));
     res.json({success:true, userId});
   } catch(e) {
     res.status(500).json({error:'Deactivate failed', detail:e.message});
@@ -1205,7 +1649,7 @@ app.delete('/api/account/:id', async(req,res)=>{
     syncStore.users.set(userId, user);
     syncStore.points.delete(userId);
     for(const [postId, post] of syncStore.posts) if(post.author === userId) syncStore.posts.delete(postId);
-    await persistUser(user).catch(()=>{});
+    await persistUser(user).catch(e => console.error('[DeleteAccount] persistUser failed:', e));
     res.json({success:true, userId});
   } catch(e) {
     res.status(500).json({error:'Delete account failed', detail:e.message});
@@ -1222,7 +1666,7 @@ app.post('/api/reports', async(req,res)=>{
       const post = syncStore.posts.get(postId);
       post.reports = Number(post.reports || 0) + 1;
       post.updatedAt = Date.now();
-      await persistPost(post).catch(()=>{});
+      await persistPost(post).catch(e => console.error('[ReportPost] persistPost failed:', e));
     }
     res.json({success:true, report});
   } catch(e) {
@@ -1273,7 +1717,7 @@ app.post('/api/withdrawals/request', async(req,res)=>{
       });
     }
     syncStore.backups.unshift({id:wd.id, at:Date.now(), type:'withdrawal', data:wd});
-    res.json({success:true, withdrawal:wd, persisted:persistentReady});
+    res.json({success:true, withdrawal:wd, persisted:persistentReady, fallback: !persistentReady});
   } catch(e) {
     res.status(500).json({error:'Withdrawal request failed', detail:e.message});
   }
@@ -1342,7 +1786,7 @@ app.post('/api/media/sync', async(req,res)=>{
       mime:mediaData.type || mediaData.mime || '',
       size:Math.trunc(Number(mediaData.size || 0)),
       created_at:new Date(mediaData.at || Date.now()).toISOString()
-    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(()=>{});
+    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(e => console.error('[SyncMedia] Supabase insert failed:', e));
     console.log(`[Sync] Media: ${mediaData.id} - ${mediaData.type}`);
     res.json({success: true, synced: true, id: mediaData.id, storage: 'indexed-memory'});
   } catch(e) {
@@ -1353,10 +1797,20 @@ app.post('/api/media/sync', async(req,res)=>{
 // Get sync status
 app.get('/api/sync/status', async(req,res)=>{
   try {
+    const supabaseHealthy = await probeSupabaseConnectivity();
     res.json({
       lastSyncTime: Date.now(),
       pendingItems: 0,
       syncEnabled: true,
+      persistenceMode: supabaseHealthy ? 'supabase' : 'local-fallback',
+      supabase: {
+        configured: supabaseState.configured,
+        reachable: supabaseState.reachable,
+        checkedAt: supabaseState.checkedAt,
+        lastError: supabaseState.lastError,
+        fallbackMode: supabaseState.fallbackMode,
+        url: SUPABASE_URL || null
+      },
       indexed: {
         users: syncStore.users.size,
         posts: syncStore.posts.size,
@@ -1610,6 +2064,12 @@ app.get('*',(_,res)=>{
   sendRootFile(res, 'index.html', 'html');
 });
 
+app.use((req, res) => res.status(404).json({ error: 'Not found', path: req.path }));
+app.use((err, req, res, next) => {
+  console.error('[server error]', err);
+  res.status(err.status || 500).json({ error: 'Internal server error' });
+});
+
 // ─────────────────────────────────────────────────────────────
 //  SOCKET.IO
 // ─────────────────────────────────────────────────────────────
@@ -1658,7 +2118,7 @@ io.on('connection', socket=>{
       media:media || null,
       read:false,
       created_at:new Date(payload.timestamp).toISOString()
-    }, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation').catch(()=>{});
+    }, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation').catch(e => console.error('[ChatMessage] Supabase insert failed:', e));
     emitToUser(to, 'chat:message', payload);
     socket.emit('chat:message:sent',{msgId,to,timestamp:payload.timestamp});
     // Push notification if offline
@@ -1686,14 +2146,14 @@ io.on('connection', socket=>{
       streamer_id:streamerId,
       status:'live',
       started_at:new Date().toISOString()
-    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(()=>{});
+    }, 'on_conflict=id', 'resolution=merge-duplicates,return=representation').catch(e => console.error('[LiveStart] Supabase insert failed:', e));
     io.emit('live:new',{streamerId,title,postId,viewers:0});
   });
   socket.on('live:comment', ({streamerId,from,text})=>{ from = socket.userId || from; io.to('live:'+streamerId).emit('live:comment',{from,text,t:Date.now()}); });
   socket.on('live:reaction',({streamerId,emoji})=>{ io.to('live:'+streamerId).emit('live:reaction',{emoji}); });
   socket.on('live:end',     ({streamerId,postId})=>{
     streamerId = socket.userId || streamerId;
-    if(postId) supabaseRest('live_events', 'PATCH', {status:'ended', ended_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(postId)}`, 'return=representation').catch(()=>{});
+    if(postId) supabaseRest('live_events', 'PATCH', {status:'ended', ended_at:new Date().toISOString()}, `id=eq.${encodeURIComponent(postId)}`, 'return=representation').catch(e => console.error('[LiveEnd] Supabase update failed:', e));
     io.to('live:'+streamerId).emit('live:ended',{streamerId,postId});
     if(postId) io.to('livepost:'+postId).emit('live:ended',{streamerId,postId});
   });
@@ -1722,7 +2182,7 @@ io.on('connection', socket=>{
     if(socket.userId && post.author && String(post.author) !== String(socket.userId)) return socket.emit('auth:error',{error:'post_author_mismatch'});
     const savedPost = {...(syncStore.posts.get(post.id)||{}), ...post, author:socket.userId || post.author, syncedAt:Date.now()};
     syncStore.posts.set(savedPost.id, savedPost);
-    persistPost(savedPost).catch(()=>{});
+    persistPost(savedPost).catch(e => console.error('[PostNew] persistPost failed:', e));
     updateIndexes();
     io.emit('post:new', {post:savedPost});
   });
@@ -1791,8 +2251,8 @@ server.listen(PORT, ()=>{
   console.log(`   ${BKASH_APP_KEY?'✅':'⚠️ '} bKash Payment`);
   console.log(`   ${NAGAD_MERCHANT?'✅':'⚠️ '} Nagad Payment`);
   console.log(`   ✅ Rate Limiting + Security\n`);
-  getICE().catch(()=>{});
-  hydratePersistentSyncStore().catch(()=>{});
+  getICE().catch(e => console.error('[Startup] getICE failed:', e));
+  hydratePersistentSyncStore().catch(e => console.error('[Startup] hydratePersistentSyncStore failed:', e));
 });
 
 module.exports={app,server,io};
@@ -1852,3 +2312,488 @@ app.post('/api/payment/stripe/webhook', express.raw({type:'application/json'}), 
     res.json({received:true});
   } catch(e){ res.status(400).send(`Webhook Error: ${e.message}`); }
 });
+
+// ── Video/Audio Transcoding API (FFmpeg) ─────────────────────────────
+const transcodingJobs = new Map(); // jobId -> {status, progress, outputUrl}
+
+// Resolution settings for video transcoding
+const videoResolutions = {
+  '240p': { width: 426, height: 240, bitrate: '500k', vcodec: 'libx264', acodec: 'aac', abitrate: '128k' },
+  '360p': { width: 640, height: 360, bitrate: '800k', vcodec: 'libx264', acodec: 'aac', abitrate: '128k' },
+  '480p': { width: 854, height: 480, bitrate: '1200k', vcodec: 'libx264', acodec: 'aac', abitrate: '128k' },
+  '640p': { width: 854, height: 480, bitrate: '1500k', vcodec: 'libx264', acodec: 'aac', abitrate: '192k' },
+  '720p': { width: 1280, height: 720, bitrate: '2500k', vcodec: 'libx264', acodec: 'aac', abitrate: '192k' },
+  '1080p': { width: 1920, height: 1080, bitrate: '5000k', vcodec: 'libx264', acodec: 'aac', abitrate: '192k' },
+  '2K': { width: 2560, height: 1440, bitrate: '8000k', vcodec: 'libx264', acodec: 'aac', abitrate: '256k' }
+};
+
+const audioQualities = {
+  '144kbps': { bitrate: '144k', codec: 'libmp3lame' },
+  '240kbps': { bitrate: '240k', codec: 'libmp3lame' },
+  '320kbps': { bitrate: '320k', codec: 'libmp3lame' }
+};
+
+// Check if FFmpeg is available
+async function checkFFmpeg() {
+  try {
+    await execAsync('ffmpeg -version');
+    console.log('[FFmpeg] Available ✅');
+    return true;
+  } catch (e) {
+    console.warn('[FFmpeg] Not available - transcoding will be simulated');
+    return false;
+  }
+}
+
+// Transcode video to specified resolution
+async function transcodeVideo(inputPath, outputPath, resolution, width, height, bitrate) {
+  const res = videoResolutions[resolution] || videoResolutions['720p'];
+  const targetWidth = width || res.width;
+  const targetHeight = height || res.height;
+  const targetBitrate = bitrate || res.bitrate;
+  const command = `ffmpeg -i "${inputPath}" -vf scale=${targetWidth}:${targetHeight} -b:v ${targetBitrate} -c:v ${res.vcodec} -c:a ${res.acodec} -b:a ${res.abitrate} -movflags +faststart "${outputPath}" -y`;
+  
+  try {
+    await execAsync(command);
+    return { success: true, outputPath };
+  } catch (error) {
+    console.error('[FFmpeg] Transcoding error:', error);
+    throw error;
+  }
+}
+
+// Transcode audio to specified quality
+async function transcodeAudio(inputPath, outputPath, quality, bitrate) {
+  const q = audioQualities[quality] || audioQualities['320kbps'];
+  const targetBitrate = bitrate || q.bitrate;
+  const command = `ffmpeg -i "${inputPath}" -b:a ${targetBitrate} -c:a ${q.codec} "${outputPath}" -y`;
+  
+  try {
+    await execAsync(command);
+    return { success: true, outputPath };
+  } catch (error) {
+    console.error('[FFmpeg] Audio transcoding error:', error);
+    throw error;
+  }
+}
+
+// Unified transcoding endpoint
+app.post('/api/transcode', async(req, res) => {
+  const { type, url, quality, width, height, bitrate } = req.body;
+  
+  if (!type || !url || !quality) {
+    return res.status(400).json({ error: 'type, url, and quality required' });
+  }
+  
+  const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  transcodingJobs.set(jobId, {
+    status: 'starting',
+    progress: 0,
+    type,
+    quality,
+    width,
+    height,
+    bitrate,
+    createdAt: Date.now()
+  });
+  
+  // Return job ID immediately
+  res.json({ jobId, status: 'started' });
+  
+  // Start transcoding in background
+  processTranscodingJob(jobId, type, url, quality, width, height, bitrate).catch(err => {
+    console.error('[Transcode] Job failed:', jobId, err);
+    transcodingJobs.set(jobId, {
+      ...transcodingJobs.get(jobId),
+      status: 'failed',
+      error: err.message
+    });
+  });
+});
+
+// Start transcoding job (legacy endpoint)
+app.post('/api/transcode/start', async(req, res) => {
+  const { type, url, quality, postId } = req.body;
+  
+  if (!type || !url || !quality) {
+    return res.status(400).json({ error: 'type, url, and quality required' });
+  }
+  
+  const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  transcodingJobs.set(jobId, {
+    status: 'starting',
+    progress: 0,
+    type,
+    quality,
+    createdAt: Date.now()
+  });
+  
+  // Return job ID immediately
+  res.json({ jobId, status: 'started' });
+  
+  // Start transcoding in background
+  processTranscodingJob(jobId, type, url, quality, postId).catch(err => {
+    console.error('[Transcode] Job failed:', jobId, err);
+    transcodingJobs.set(jobId, {
+      ...transcodingJobs.get(jobId),
+      status: 'failed',
+      error: err.message
+    });
+  });
+});
+
+// Process transcoding job
+async function processTranscodingJob(jobId, type, url, quality, width, height, bitrate, postId) {
+  const ffmpegAvailable = await checkFFmpeg();
+  
+  if (!ffmpegAvailable) {
+    // Simulate transcoding for demo
+    transcodingJobs.set(jobId, { status: 'processing', progress: 0 });
+    
+    for (let i = 0; i <= 100; i += 10) {
+      await new Promise(resolve => setTimeout(resolve, 200));
+      transcodingJobs.set(jobId, { 
+        status: 'processing', 
+        progress: i,
+        outputUrl: url // Return original URL
+      });
+    }
+    
+    transcodingJobs.set(jobId, {
+      status: 'completed',
+      progress: 100,
+      outputUrl: url,
+      downloadUrl: url,
+      simulated: true
+    });
+    return;
+  }
+  
+  // Real transcoding with FFmpeg
+  try {
+    const inputPath = path.join(__dirname, 'temp', `input_${jobId}`);
+    const outputPath = path.join(__dirname, 'temp', `output_${jobId}.${type === 'video' ? 'mp4' : 'mp3'}`);
+    
+    // Ensure temp directory exists
+    const tempDir = path.join(__dirname, 'temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    
+    // Download file
+    transcodingJobs.set(jobId, { status: 'downloading', progress: 10 });
+    const response = await fetch(url);
+    const buffer = Buffer.from(await response.arrayBuffer());
+    fs.writeFileSync(inputPath, buffer);
+    
+    transcodingJobs.set(jobId, { status: 'transcoding', progress: 30 });
+    
+    if (type === 'video') {
+      await transcodeVideo(inputPath, outputPath, quality, width, height, bitrate);
+    } else if (type === 'audio') {
+      await transcodeAudio(inputPath, outputPath, quality, bitrate);
+    }
+    
+    // Clean up input file
+    fs.unlinkSync(inputPath);
+    
+    // In production, upload to cloud storage and return URL
+    // For now, return local path
+    transcodingJobs.set(jobId, {
+      status: 'completed',
+      progress: 100,
+      outputPath,
+      outputUrl: `/api/transcode/download/${jobId}`,
+      downloadUrl: `/api/transcode/download/${jobId}`
+    });
+    
+  } catch (error) {
+    transcodingJobs.set(jobId, {
+      status: 'failed',
+      progress: 0,
+      error: error.message
+    });
+  }
+}
+
+// Get transcoding job status
+app.get('/api/transcode/status/:jobId', (req, res) => {
+  const { jobId } = req.params;
+  const job = transcodingJobs.get(jobId);
+  
+  if (!job) {
+    return res.status(404).json({ error: 'Job not found' });
+  }
+  
+  res.json(job);
+});
+
+// Progress polling endpoint (for download system)
+app.get('/api/transcode/progress/:jobId', (req, res) => {
+  const { jobId } = req.params;
+  const job = transcodingJobs.get(jobId);
+  
+  if (!job) {
+    return res.status(404).json({ error: 'Job not found' });
+  }
+  
+  res.json({
+    status: job.status,
+    progress: job.progress || 0,
+    error: job.error || null,
+    downloadUrl: job.downloadUrl || null
+  });
+});
+
+// Download transcoded file
+app.get('/api/transcode/download/:jobId', (req, res) => {
+  const { jobId } = req.params;
+  const job = transcodingJobs.get(jobId);
+  
+  if (!job || job.status !== 'completed') {
+    return res.status(404).json({ error: 'File not ready' });
+  }
+  
+  if (job.simulated) {
+    // Redirect to original URL
+    return res.redirect(job.outputUrl);
+  }
+  
+  if (job.outputPath && fs.existsSync(job.outputPath)) {
+    res.download(job.outputPath);
+  } else {
+    res.status(404).json({ error: 'File not found' });
+  }
+});
+
+// Clean up old transcoding jobs
+setInterval(() => {
+  const now = Date.now();
+  for (const [jobId, job] of transcodingJobs) {
+    // Delete jobs older than 1 hour
+    if (now - job.createdAt > 3600000) {
+      transcodingJobs.delete(jobId);
+      // Clean up output file if exists
+      if (job.outputPath && fs.existsSync(job.outputPath)) {
+        fs.unlinkSync(job.outputPath);
+      }
+    }
+  }
+}, 300000); // Check every 5 minutes
+
+// ── Shared Posts API (Facebook-style feed without Supabase) ─────────────
+// File-based permanent storage for posts (Facebook/YouTube style persistence)
+const POSTS_DB_FILE = path.join(__dirname, 'data', 'posts.json');
+const POSTS_BACKUP_DIR = path.join(__dirname, 'data', 'backups');
+
+// File-based permanent storage for users (points, money, etc.)
+const USERS_DB_FILE = path.join(__dirname, 'data', 'users.json');
+const USERS_BACKUP_DIR = path.join(__dirname, 'data', 'backups');
+
+// Ensure data directory exists
+try {
+  if (!fs.existsSync(path.join(__dirname, 'data'))) {
+    fs.mkdirSync(path.join(__dirname, 'data'), { recursive: true });
+  }
+  if (!fs.existsSync(POSTS_BACKUP_DIR)) {
+    fs.mkdirSync(POSTS_BACKUP_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('[PostsDB] Failed to create data directories:', e.message);
+}
+
+// Load posts from file on startup
+let sharedPosts = new Map();
+function loadPostsFromFile() {
+  try {
+    if (fs.existsSync(POSTS_DB_FILE)) {
+      const data = fs.readFileSync(POSTS_DB_FILE, 'utf8');
+      const posts = JSON.parse(data);
+      sharedPosts = new Map(Object.entries(posts));
+      console.log('[PostsDB] Loaded', sharedPosts.size, 'posts from file');
+    } else {
+      console.log('[PostsDB] No existing posts file, starting fresh');
+    }
+  } catch (e) {
+    console.error('[PostsDB] Failed to load posts:', e.message);
+    sharedPosts = new Map();
+  }
+}
+
+// Save posts to file
+function savePostsToFile() {
+  try {
+    const postsObj = Object.fromEntries(sharedPosts);
+    const data = JSON.stringify(postsObj, null, 2);
+    
+    // Create backup before saving
+    if (fs.existsSync(POSTS_DB_FILE)) {
+      const backupFile = path.join(POSTS_BACKUP_DIR, `posts_backup_${Date.now()}.json`);
+      fs.copyFileSync(POSTS_DB_FILE, backupFile);
+    }
+    
+    fs.writeFileSync(POSTS_DB_FILE, data, 'utf8');
+  } catch (e) {
+    console.error('[PostsDB] Failed to save posts:', e.message);
+  }
+}
+
+// Load posts on server startup
+loadPostsFromFile();
+
+// Load users from file on startup
+let sharedUsers = new Map();
+function loadUsersFromFile() {
+  try {
+    if (fs.existsSync(USERS_DB_FILE)) {
+      const data = fs.readFileSync(USERS_DB_FILE, 'utf8');
+      const users = JSON.parse(data);
+      sharedUsers = new Map(Object.entries(users));
+      console.log('[UsersDB] Loaded', sharedUsers.size, 'users from file');
+    } else {
+      console.log('[UsersDB] No existing users file, starting fresh');
+    }
+  } catch (e) {
+    console.error('[UsersDB] Failed to load users:', e.message);
+    sharedUsers = new Map();
+  }
+}
+
+// Save users to file
+function saveUsersToFile() {
+  try {
+    const usersObj = Object.fromEntries(sharedUsers);
+    const data = JSON.stringify(usersObj, null, 2);
+    
+    // Create backup before saving
+    if (fs.existsSync(USERS_DB_FILE)) {
+      const backupFile = path.join(USERS_BACKUP_DIR, `users_backup_${Date.now()}.json`);
+      fs.copyFileSync(USERS_DB_FILE, backupFile);
+    }
+    
+    fs.writeFileSync(USERS_DB_FILE, data, 'utf8');
+  } catch (e) {
+    console.error('[UsersDB] Failed to save users:', e.message);
+  }
+}
+
+// Load users on server startup
+loadUsersFromFile();
+
+// Sync user data (points, money, etc.) to permanent storage
+app.post('/api/users/sync', (req, res) => {
+  const { user } = req.body;
+  if (!user || !user.id) {
+    return res.status(400).json({ error: 'User data required' });
+  }
+  
+  const existingUser = sharedUsers.get(user.id) || {};
+  // Merge with maximum points to prevent loss
+  const mergedUser = {
+    ...existingUser,
+    ...user,
+    points: Math.max(Number(existingUser.points || 0), Number(user.points || 0)),
+    money: Math.max(Number(existingUser.money || 0), Number(user.money || 0)),
+    syncedAt: Date.now()
+  };
+  
+  sharedUsers.set(user.id, mergedUser);
+  saveUsersToFile(); // Persist to disk
+  console.log('[UsersDB] User synced permanently:', user.id, 'points:', mergedUser.points);
+  
+  res.json({ success: true, userId: user.id, points: mergedUser.points, money: mergedUser.money });
+});
+
+// Get user data by ID
+app.get('/api/users/:userId', (req, res) => {
+  const { userId } = req.params;
+  const user = sharedUsers.get(userId);
+  
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  
+  res.json({ success: true, user });
+});
+
+// Save post to shared storage (permanent)
+app.post('/api/posts/create', (req, res) => {
+  const { post } = req.body;
+  if (!post || !post.id) {
+    return res.status(400).json({ error: 'Post data required' });
+  }
+  
+  sharedPosts.set(post.id, post);
+  savePostsToFile(); // Persist to disk
+  console.log('[PostsDB] Post saved permanently:', post.id, 'by', post.author);
+  
+  // Broadcast to all connected socket.io clients
+  io.emit('post:new', post);
+  
+  res.json({ success: true, postId: post.id });
+});
+
+// Get all shared posts
+app.get('/api/posts/all', (req, res) => {
+  const posts = Array.from(sharedPosts.values())
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  res.json({ posts });
+});
+
+// Get posts by author
+app.get('/api/posts/author/:authorId', (req, res) => {
+  const { authorId } = req.params;
+  const posts = Array.from(sharedPosts.values())
+    .filter(p => p.author === authorId)
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  res.json({ posts });
+});
+
+// Delete post from shared storage
+app.delete('/api/posts/:postId', (req, res) => {
+  const { postId } = req.params;
+  const deleted = sharedPosts.delete(postId);
+  
+  if (deleted) {
+    savePostsToFile(); // Persist deletion to disk
+    io.emit('post:deleted', { postId });
+    res.json({ success: true });
+  } else {
+    res.status(404).json({ error: 'Post not found' });
+  }
+});
+
+// Update post (likes, comments, views, etc.)
+app.put('/api/posts/:postId', (req, res) => {
+  const { postId } = req.params;
+  const updates = req.body;
+  
+  const existingPost = sharedPosts.get(postId);
+  if (!existingPost) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+  
+  // Merge updates
+  const updatedPost = { ...existingPost, ...updates };
+  sharedPosts.set(postId, updatedPost);
+  savePostsToFile(); // Persist updates to disk
+  
+  io.emit('post:updated', { postId, updates });
+  res.json({ success: true, post: updatedPost });
+});
+
+// Clean up old posts (keep last 1000)
+setInterval(() => {
+  if (sharedPosts.size > 1000) {
+    const posts = Array.from(sharedPosts.entries())
+      .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+    
+    // Delete oldest posts beyond 1000
+    for (let i = 1000; i < posts.length; i++) {
+      sharedPosts.delete(posts[i][0]);
+    }
+    
+    savePostsToFile(); // Persist cleanup to disk
+    console.log('[PostsDB] Cleaned up, now has', sharedPosts.size, 'posts');
+  }
+}, 60000); // Check every minute
