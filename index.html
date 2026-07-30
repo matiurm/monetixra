@@ -2143,6 +2143,14 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       }
     }
 
+    // Load posts from server on page load for all users (even non-logged-in)
+    // This ensures everyone sees all public posts like Facebook/YouTube
+    setTimeout(() => {
+      if(typeof loadPostsFromServer === 'function') {
+        loadPostsFromServer().catch(e => console.warn('[OnReady] Failed to load posts from server:', e));
+      }
+    }, 1000);
+
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 250);
@@ -5627,6 +5635,16 @@ function mount() {
   initBottomNav();
   
   if(!D.users[ADMIN_ID]) seedData();
+  
+  // Load posts from server on mount to ensure all users see all posts
+  loadPostsFromServer().catch(e => console.warn('[Mount] Failed to load posts from server:', e));
+  
+  // Periodic post refresh for real-time sync across devices (every 30 seconds)
+  setInterval(() => {
+    if(typeof loadPostsFromServer === 'function') {
+      loadPostsFromServer().catch(e => console.warn('[Periodic] Failed to load posts from server:', e));
+    }
+  }, 30000); // Refresh every 30 seconds
   
   // Initialize user tracking fields for accurate statistics
   if(typeof initializeUserTracking === 'function') {
