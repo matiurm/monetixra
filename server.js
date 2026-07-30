@@ -2701,6 +2701,9 @@ app.post('/api/users/sync', (req, res) => {
   saveUsersToFile(); // Persist to disk
   console.log('[UsersDB] User synced permanently:', user.id, 'points:', mergedUser.points);
   
+  // Broadcast to all connected socket.io clients for real-time sync across devices
+  io.emit('user:updated', { userId: user.id, points: mergedUser.points, money: mergedUser.money });
+  
   res.json({ success: true, userId: user.id, points: mergedUser.points, money: mergedUser.money });
 });
 
@@ -2778,7 +2781,10 @@ app.put('/api/posts/:postId', (req, res) => {
   sharedPosts.set(postId, updatedPost);
   savePostsToFile(); // Persist updates to disk
   
+  // Broadcast to all connected socket.io clients for real-time sync
   io.emit('post:updated', { postId, updates });
+  console.log('[PostsDB] Post updated and broadcasted:', postId);
+  
   res.json({ success: true, post: updatedPost });
 });
 

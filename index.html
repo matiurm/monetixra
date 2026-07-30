@@ -2788,6 +2788,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
   <!-- OFFLINE & STORAGE -->
   <div class="sett-sec">
     <div class="sett-ttl">📦 Storage & Offline</div>
+    <div class="sett-row" onclick="forceSyncWithServer()"><div class="sett-ico">🔄</div><div><div class="sett-nm">Sync with Server</div><div class="sett-sub">Force sync posts & points across all devices</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence.showPersistenceStatus) enhancedPersistence.showPersistenceStatus()"><div class="sett-ico">📊</div><div><div class="sett-nm">Data Persistence Status</div><div class="sett-sub">View saved posts, media & storage info</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="nav('offline')"><div class="sett-ico">📵</div><div><div class="sett-nm">Offline Content</div><div class="sett-sub" id="cacheInfo">0 items cached</div></div><span class="sett-end">›</span></div>
     <div class="sett-row" onclick="clearCache()"><div class="sett-ico">🧹</div><div><div class="sett-nm">Clear Cache</div><div class="sett-sub" id="cacheSizeLabel">Calculating...</div></div><span class="sett-end">›</span></div>
@@ -5116,6 +5117,17 @@ async function doLogin() {
       console.warn('[Login] Failed to load user data from server:', e);
     }
     
+    // Load posts from server on login to ensure same account shows same data on all devices
+    // Use forceReplace mode for stronger sync - server data completely replaces local data
+    try {
+      if(typeof loadPostsFromServer === 'function') {
+        await loadPostsFromServer(true); // forceReplace = true
+        console.log('[Login] Posts force-synced from server for account consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load posts from server:', e);
+    }
+    
     // PERSISTENCE: Restore points from persistence manager on login
     if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
       const savedPoints = await safeLoadPoints(foundUid);
@@ -5997,6 +6009,32 @@ function autoFriendOnView(postId, userId, authorId, mediaType) {
   window[timerKey] = setTimeout(() => { forceFollow(authorId); let post=D.posts.find(p=>p.id===postId); if(post) { post.autoFollows=post.autoFollows||[]; if(!post.autoFollows.includes(userId)) post.autoFollows.push(userId); saveData(); } }, 5000);
 }
 function registerPostView(postId, authorId, mediaType) { if(!CU || CU.id === authorId) return; autoFriendOnView(postId, CU.id, authorId, mediaType); }
+
+// Enable autoplay with sound for video/audio (Facebook/YouTube style)
+function enableAutoplayWithSound(mediaElement) {
+  if(!mediaElement) return;
+  
+  // Try to play with sound enabled
+  const playPromise = mediaElement.play();
+  
+  if(playPromise !== undefined) {
+    playPromise.then(() => {
+      // Autoplay with sound succeeded
+      console.log('[Autoplay] Playing with sound:', mediaElement.id);
+    }).catch(error => {
+      // Browser blocked autoplay with sound, try muted autoplay
+      console.warn('[Autoplay] Sound autoplay blocked, trying muted:', error);
+      mediaElement.muted = true;
+      mediaElement.play().then(() => {
+        console.log('[Autoplay] Playing muted:', mediaElement.id);
+        // Show toast to user that they can unmute
+        toast('i', '🔊 Click to unmute');
+      }).catch(e => {
+        console.warn('[Autoplay] Even muted autoplay failed:', e);
+      });
+    });
+  }
+}
 function showAutoFriendPopup(user) { document.querySelectorAll('.af-notif').forEach(e=>e.remove()); let el=document.createElement('div'); el.className='af-notif'; el.innerHTML=`<div class="af-av">${user.avatar?`<img src="${user.avatar}" loading="lazy">`:user.name?.charAt(0).toUpperCase()}</div><div class="af-txt"><div class="af-lbl">✨ New Auto Friend!</div><div>${esc(user.name||'User')}</div></div><div class="af-ico">🤝</div>`; document.body.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(20px)'; setTimeout(()=>el.remove(),420); },3500); }
 function updateFriendsBadge() { if(!CU) return; let cnt=(CU.autoFriends||[]).length; let bdg=G('friendBdg'); if(bdg) { bdg.textContent=cnt; bdg.style.display=cnt?'block':'none'; } }
 function renderFriendSuggestions() {
@@ -6198,34 +6236,94 @@ async function loadPostsFromSupabase() {
 }
 
 // Load posts from server's shared posts API (fallback)
-async function loadPostsFromServer() {
+async function loadPostsFromServer(forceReplace = false) {
   try {
     const serverUrl = window.location.origin || 'http://localhost:3000';
     const response = await fetch(`${serverUrl}/api/posts/all`);
     const data = await response.json();
     
     if(data.posts && data.posts.length > 0) {
-      const existingIds = new Set((D.posts||[]).map(p => p.id));
-      let newCount = 0;
-      
-      data.posts.forEach(serverPost => {
-        if(!existingIds.has(serverPost.id)) {
-          D.posts = D.posts || [];
-          D.posts.push(serverPost);
-          newCount++;
-        }
-      });
+      if(forceReplace) {
+        // Force replace: completely replace local posts with server posts (stronger sync)
+        D.posts = data.posts;
+        console.log('[Server] Posts replaced with server data:', data.posts.length);
+      } else {
+        // Merge mode: update existing posts and add new ones
+        D.posts = D.posts || [];
+        const existingIds = new Set(D.posts.map(p => p.id));
+        let updatedCount = 0;
+        
+        data.posts.forEach(serverPost => {
+          if(existingIds.has(serverPost.id)) {
+            // Update existing post with server data (server takes precedence)
+            const idx = D.posts.findIndex(p => p.id === serverPost.id);
+            if(idx >= 0) {
+              D.posts[idx] = {...serverPost}; // Server data completely replaces local
+              updatedCount++;
+            }
+          } else {
+            // Add new post
+            D.posts.push(serverPost);
+            updatedCount++;
+          }
+        });
+        
+        // Remove posts that don't exist on server (cleanup local-only posts)
+        const serverIds = new Set(data.posts.map(p => p.id));
+        const beforeCount = D.posts.length;
+        D.posts = D.posts.filter(p => serverIds.has(p.id));
+        const removedCount = beforeCount - D.posts.length;
+        
+        console.log('[Server] Posts synced - updated:', updatedCount, 'removed:', removedCount);
+      }
       
       // Sort by creation time
       D.posts.sort((a,b) => b.createdAt - a.createdAt);
       
-      if(newCount > 0) {
-        // New posts loaded from shared feed
-        saveData();
-      }
+      saveData();
+      
+      // Refresh feed to show updated posts
+      if(typeof rFeed === 'function') rFeed(false);
+      
+    } else {
+      console.log('[Server] No posts on server yet');
     }
   } catch(err) {
     console.warn('[Server] Failed to load posts:', err);
+  }
+}
+
+// Force sync with server - completely replaces local data with server data
+// This ensures 100% consistency across all devices
+async function forceSyncWithServer() {
+  toast('i', '🔄 Syncing with server...');
+  
+  try {
+    // Sync posts with force replace
+    await loadPostsFromServer(true);
+    
+    // Sync user data
+    if(CU) {
+      const serverUrl = window.location.origin || 'http://localhost:3000';
+      const response = await fetch(`${serverUrl}/api/users/${CU.id}`);
+      if(response.ok) {
+        const data = await response.json();
+        if(data.success && data.user) {
+          CU.points = data.user.points || 0;
+          CU.money = data.user.money || 0;
+          D.users[CU.id].points = CU.points;
+          D.users[CU.id].money = CU.money;
+          saveData();
+          console.log('[ForceSync] User data synced:', CU.id, 'points:', CU.points);
+        }
+      }
+    }
+    
+    toast('s', '✅ Synced with server successfully!');
+    console.log('[ForceSync] Complete sync with server finished');
+  } catch(e) {
+    console.warn('[ForceSync] Failed:', e);
+    toast('e', '❌ Sync failed. Check connection.');
   }
 }
 
@@ -6310,8 +6408,8 @@ function mkPost(post) {
   if(post.file) {
     if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
     else if(post.mimetype?.startsWith('image/')) h += `<div class="post-media"><img src="${post.file}" loading="lazy" onclick="window.open('${post.file}')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" onload="registerPostView('${post.id}','${post.author}','image')" title="Hold/right-click to download"><div class="media-overlay"></div></div>`;
-    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video controls playsinline preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
-    else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio controls onplay="registerPostView('${post.id}','${post.author}','audio')"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
+    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video id="vid-${post.id}" controls playsinline autoplay preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')" onloadedmetadata="enableAutoplayWithSound(this)"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
+    else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio id="aud-${post.id}" controls autoplay onplay="registerPostView('${post.id}','${post.author}','audio')" onloadedmetadata="enableAutoplayWithSound(this)"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
   }
   if(post.hashtags?.length) h += `<div class="post-tags">${post.hashtags.map(t=>`<span class="post-tag" onclick="searchTag('${t}')">#${t}</span>`).join('')}</div>`;
   if(post.poll) h += renderPoll(post);
@@ -7641,7 +7739,7 @@ async function submitPost() {
   let isScheduled = schedToggle?.checked && schedTime?.value;
   let scheduledAt = isScheduled ? new Date(schedTime.value).getTime() : null;
   if(scheduledAt && scheduledAt <= Date.now()) { toast('e','Schedule time must be in the future'); return; }
-  let post={ id:pid(), author:CU.id, scheduledAt:scheduledAt||null, published:!scheduledAt, type:pfMime?.startsWith('video')?'video':pfMime?.startsWith('image')?'photo':pfMime?.startsWith('audio')?'audio':pfMime?.includes('360')?'360':'text', text, file:pfData||null, mimetype:pfMime||null, hashtags:tags.map(t=>t.slice(1).toLowerCase()), likedBy:[], reactions:{}, comments:[], views:0, shares:0, pts:20, pinned:false, createdAt:Date.now(), visibility:privacy, isNFT:false };
+  let post={ id:pid(), author:CU.id, scheduledAt:scheduledAt||null, published:!scheduledAt, type:pfMime?.startsWith('video')?'video':pfMime?.startsWith('image')?'photo':pfMime?.startsWith('audio')?'audio':pfMime?.includes('360')?'360':'text', text, file:pfData||null, mimetype:pfMime||null, hashtags:tags.map(t=>t.slice(1).toLowerCase()), likedBy:[], reactions:{}, comments:[], views:0, shares:0, pts:20, pinned:false, createdAt:Date.now(), visibility:'public', isNFT:false };
   D.posts=D.posts||[];
   D.posts.unshift(post);
   CU.posts=CU.posts||[]; CU.posts.unshift(post.id);
@@ -10754,9 +10852,9 @@ function restorePostDraft() {
         if (draft.mediaMime.startsWith('image/')) {
           prevWrap.innerHTML = `<img src="${pfData}" style="width:100%; border-radius:12px; margin-top:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);">`;
         } else if (draft.mediaMime.startsWith('video/')) {
-          prevWrap.innerHTML = `<video src="${pfData}" controls style="width:100%; border-radius:12px; margin-top:10px;"></video>`;
+          prevWrap.innerHTML = `<video src="${pfData}" controls autoplay style="width:100%; border-radius:12px; margin-top:10px;" onloadedmetadata="enableAutoplayWithSound(this)"></video>`;
         } else if (draft.mediaMime.startsWith('audio/')) {
-          prevWrap.innerHTML = `<div class="audio-prev">🎵 ${escape(pfName || 'Voice note')} (Restored draft)</div>`;
+          prevWrap.innerHTML = `<audio src="${pfData}" controls autoplay onloadedmetadata="enableAutoplayWithSound(this)" style="width:100%; margin-top:10px;"></audio>`;
         }
       }
     }
@@ -10936,9 +11034,9 @@ function previewPostFile(inp) {
     if(file.type.startsWith('image/')) {
       prevWrap.innerHTML = `<img src="${pfData}" style="width:100%; border-radius:12px; margin-top:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);">`;
     } else if(file.type.startsWith('video/')) {
-      prevWrap.innerHTML = `<video src="${pfData}" controls style="width:100%; border-radius:12px; margin-top:10px;"></video>`;
+      prevWrap.innerHTML = `<video src="${pfData}" controls autoplay style="width:100%; border-radius:12px; margin-top:10px;" onloadedmetadata="enableAutoplayWithSound(this)"></video>`;
     } else if(file.type.startsWith('audio/')) {
-      prevWrap.innerHTML = `<div class="audio-prev">🎵 ${file.name} (Ready to post)</div>`;
+      prevWrap.innerHTML = `<audio src="${pfData}" controls autoplay onloadedmetadata="enableAutoplayWithSound(this)" style="width:100%; margin-top:10px;"></audio>`;
     }
     setTimeout(()=>{ try{ aiGenerateCaption(true); aiSuggestHashtags(); }catch(e){} }, 300);
     schedulePostDraftAutosave();
@@ -13423,6 +13521,38 @@ function initSocket() {
     if(typeof rFeed === 'function') rFeed(false);
     if(CU && post.author !== CU.id) toast('i','New post is available');
   });
+  
+  // Sync post updates (likes, comments, reactions) across all devices
+  socket.on('post:updated', ({postId, updates}) => {
+    if(!postId || !updates) return;
+    D.posts = D.posts || [];
+    const idx = D.posts.findIndex(p => p.id === postId);
+    if(idx >= 0) {
+      D.posts[idx] = {...D.posts[idx], ...updates};
+      saveData();
+      // Refresh the specific post to show updated likes/comments/reactions
+      if(typeof refreshPost === 'function') refreshPost(postId);
+      if(typeof refreshReacts === 'function') refreshReacts(postId, D.posts[idx]);
+      console.log('[Socket] Post updated:', postId, updates);
+    }
+  });
+  
+  // Sync user data (points, money) across all devices
+  socket.on('user:updated', ({userId, points, money}) => {
+    if(!userId) return;
+    if(CU && CU.id === userId) {
+      // Update current user's points and money
+      CU.points = Math.max(Number(CU.points || 0), Number(points || 0));
+      CU.money = Math.max(Number(CU.money || 0), Number(money || 0));
+      if(D.users[userId]) {
+        D.users[userId].points = CU.points;
+        D.users[userId].money = CU.money;
+      }
+      saveData();
+      syncUI();
+      console.log('[Socket] User data synced:', userId, 'points:', CU.points, 'money:', CU.money);
+    }
+  });
   socket.on('live:new', ({postId, streamerId, title}) => {
     if(!CU || streamerId === CU.id || !postId) return;
     const existing = (D.posts || []).some(p => p.id === postId);
@@ -13738,6 +13868,14 @@ document.addEventListener('keydown', e => {
 setInterval(() => { if(CU){ syncCU(); saveData(); saveSession(); } }, 30000);
 setInterval(() => { if(CU) checkScheduledPosts(); }, 60000);
 setTimeout(loadCryptoPrices, 2000);
+
+// Periodic auto-sync with server to maintain data consistency across devices
+// Syncs posts every 30 seconds to ensure all devices show the same data
+setInterval(() => {
+  if(typeof loadPostsFromServer === 'function') {
+    loadPostsFromServer(false); // Use merge mode for periodic sync
+  }
+}, 30000);
 
 window.addEventListener('pageshow', () => {
   try {
@@ -16395,7 +16533,7 @@ window.onunhandledrejection = function(event) {
 // ═══════════════════════════════════════════════════════════════════
 // GLOBAL LOADING STATES
 // ═══════════════════════════════════════════════════════════════════
-let isLoading = false;
+// isLoading variable already declared at line 4870
 
 function showLoading(message = 'Loading...') {
   if (isLoading) return;
@@ -18512,8 +18650,8 @@ console.log('[Debug] rSettings exists:', typeof rSettings === 'function');
         }
         const item = s.items[i];
         if(item.type === 'image') G('svBody').innerHTML = `<img src="${item.url}" style="max-width:100%;max-height:70vh;">`;
-        else if(item.type === 'video') G('svBody').innerHTML = `<video src="${item.url}" controls autoplay style="max-width:100%;max-height:70vh;"></video>`;
-        else if(item.type === 'audio') G('svBody').innerHTML = `<audio src="${item.url}" controls autoplay style="width:90%;"></audio>`;
+        else if(item.type === 'video') G('svBody').innerHTML = `<video src="${item.url}" controls autoplay style="max-width:100%;max-height:70vh;" onloadedmetadata="enableAutoplayWithSound(this)"></video>`;
+        else if(item.type === 'audio') G('svBody').innerHTML = `<audio src="${item.url}" controls autoplay onloadedmetadata="enableAutoplayWithSound(this)" style="width:90%;"></audio>`;
         else G('svBody').innerHTML = `<div style="color:#fff;font-size:24px;">${esc(item.text || '')}</div>`;
         const fill = G('svf-'+i);
         if(fill) { fill.style.transition='transform 5s linear'; fill.style.transform='scaleX(1)'; }
