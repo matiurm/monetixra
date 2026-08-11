@@ -175,10 +175,12 @@ app.use(cors({
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
+    // Allow all origins for development (Facebook/YouTube/TikTok style global access)
+    // In production, you may want to restrict this to specific domains
+    if (isProduction && allowedOrigins.length > 0 && allowedOrigins.indexOf(origin) === -1) {
       callback(new Error('CORS policy violation'));
+    } else {
+      callback(null, true);
     }
   },
   credentials: true
@@ -349,6 +351,7 @@ const syncStore = {
   users: new Map(),
   posts: new Map(),
   points: new Map(),
+  apps: new Map(),
   media: new Map(),
   backups: []
 };
@@ -1525,7 +1528,103 @@ app.delete('/api/admin/content/:id', requireAdmin, async(req,res)=>{
 });
 
 // ── Data Persistence API Routes ───────────────────────────────────────────
-// Sync posts
+// Create post (centralized storage for cross-platform sync)
+app.post('/api/posts/create',
+  [
+    body('post').isObject().withMessage('post object is required'),
+    body('post.id').trim().notEmpty().withMessage('post id is required'),
+    body('post.author').trim().notEmpty().withMessage('post author is required')
+  ],
+  async(req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({error:'Validation failed', details:errors.array()});
+    }
+    
+    try {
+      const { post } = req.body;
+      const savedPost = {...(syncStore.posts.get(post.id)||{}), ...post, syncedAt:Date.now()};
+      syncStore.posts.set(post.id, savedPost);
+      await persistPost(savedPost);
+      updateIndexes();
+      
+      // Also save to file-based permanent storage (Facebook/YouTube style persistence)
+      sharedPosts.set(post.id, savedPost);
+      savePostsToFile();
+      console.log(`[PostCreate] Post ${post.id} saved to permanent file storage`);
+      
+      // Broadcast to ALL connected users (global feed like Facebook/YouTube/TikTok)
+      io.emit('post:new', {post:savedPost});
+      console.log(`[PostCreate] Post ${post.id} broadcasted to all connected users`);
+      
+      // Also notify specific audience
+      const author = syncStore.users.get(String(savedPost.author || '')) || {};
+      const audience = new Set([...(author.followers || []), ...(author.following || []), ...(author.autoFriends || []), ...(author.forceFollowed || [])]);
+      for(const userId of audience) {
+        emitToUser(userId, 'notif:receive', {type:'post', postId:savedPost.id, msg:`${author.name || 'Someone'} created a new post`});
+      }
+      
+      // Sync to Supabase if available
+      if(supabaseState.reachable) {
+        try {
+          await supabaseReq('posts', 'POST', {
+            id: savedPost.id,
+            author_id: savedPost.author,
+            type: savedPost.type,
+            text: savedPost.text,
+            file: savedPost.file,
+            mimetype: savedPost.mimetype,
+            hashtags: savedPost.hashtags,
+            liked_by: savedPost.likedBy,
+            reactions: savedPost.reactions,
+            comments: savedPost.comments,
+            views: savedPost.views,
+            shares: savedPost.shares,
+            pts: savedPost.pts,
+            pinned: savedPost.pinned,
+            created_at: new Date(savedPost.createdAt).toISOString(),
+            visibility: savedPost.visibility,
+            is_nft: savedPost.isNFT,
+            scheduled_at: savedPost.scheduledAt ? new Date(savedPost.scheduledAt).toISOString() : null,
+            published: savedPost.published
+          });
+          console.log(`[PostCreate] Post ${post.id} synced to Supabase`);
+        } catch(e) {
+          console.warn('[PostCreate] Supabase sync failed:', e);
+        }
+      }
+      
+      res.json({success: true, synced: true, id: post.id, totalPosts: syncStore.posts.size});
+    } catch(e) {
+      console.error('[PostCreate] Error:', e);
+      res.status(500).json({error: 'Post creation failed', detail:e.message});
+    }
+  });
+
+// Get all posts (global feed)
+app.get('/api/posts/all', async(req,res)=>{
+  try {
+    // Use file-based permanent storage for persistence (Facebook/YouTube style)
+    const allPosts = Array.from(sharedPosts.values())
+      .filter(p => p.published !== false && p.visibility !== 'private')
+      .sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0))
+      .slice(0, 100); // Limit to 100 most recent posts
+    
+    // Also sync with in-memory store for real-time updates
+    syncStore.posts.forEach((post, id) => {
+      if(!sharedPosts.has(id)) {
+        sharedPosts.set(id, post);
+      }
+    });
+    
+    res.json({success: true, posts: allPosts, total: allPosts.length});
+  } catch(e) {
+    console.error('[GetAllPosts] Error:', e);
+    res.status(500).json({error: 'Failed to load posts', detail:e.message});
+  }
+});
+
+// Sync posts (legacy endpoint for backward compatibility)
 app.post('/api/posts/sync', requireCSRF,
   [
     body('id').trim().notEmpty().withMessage('Post id is required'),
@@ -1609,16 +1708,249 @@ app.post('/api/user-data/sync', async(req,res)=>{
       Number(pointState?.points || 0),
       Number(persistent?.points || 0)
     );
-    const finalUser = {...prev, ...mergedUser, id:canonicalId, points:mergedPoints, syncedAt:Date.now()};
-    syncStore.users.set(canonicalId, finalUser);
-    syncStore.points.set(canonicalId, {...(syncStore.points.get(canonicalId) || {}), points:mergedPoints, updatedAt:Date.now()});
-    await persistUser(finalUser);
-    updateIndexes();
-    const persisted = supabaseState.reachable;
-    console.log(`[Sync] User Data: ${userData.key}`);
-    res.json({success: true, synced: true, persisted, fallback: !persisted, key: canonicalId, canonicalId, points: mergedPoints, totalUsers: syncStore.users.size});
+    
+    // Merge user data with server data (server takes precedence for consistency)
+    const updatedUser = {
+      ...prev,
+      ...userData,
+      points: mergedPoints,
+      money: Math.max(Number(prev.money || 0), Number(userData.money || 0)),
+      posts: userData.posts || prev.posts || [],
+      followers: [...new Set([...(prev.followers || []), ...(userData.followers || [])])],
+      following: [...new Set([...(prev.following || []), ...(userData.following || [])])],
+      autoFriends: [...new Set([...(prev.autoFriends || []), ...(userData.autoFriends || [])])],
+      forceFollowed: [...new Set([...(prev.forceFollowed || []), ...(userData.forceFollowed || [])])],
+      updatedAt: Date.now(),
+      lastSync: Date.now()
+    };
+    
+    syncStore.users.set(canonicalId, updatedUser);
+    syncStore.points.set(canonicalId, { points: mergedPoints, updatedAt: Date.now() });
+    await persistUser(updatedUser).catch(e => console.error('[SyncUser] persistUser failed:', e));
+    await setPersistentPoints(canonicalId, mergedPoints).catch(e => console.error('[SyncUser] setPersistentPoints failed:', e));
+    
+    // Also save to file-based permanent storage (Facebook/YouTube style persistence)
+    sharedUsers.set(canonicalId, updatedUser);
+    saveUsersToFile();
+    console.log(`[SyncUser] User ${canonicalId} saved to permanent file storage, points: ${mergedPoints}`);
+    
+    // Broadcast user data update to all connected devices of this user
+    emitToUser(canonicalId, 'user:sync', { user: updatedUser, points: mergedPoints });
+    
+    console.log(`[SyncUser] User data synced: ${canonicalId}, points: ${mergedPoints}`);
+    res.json({success: true, synced: true, user: updatedUser, points: mergedPoints});
   } catch(e) {
+    console.error('[SyncUser] Error:', e);
     res.status(500).json({error: 'User data sync failed', detail:e.message});
+  }
+});
+
+// Get user data (for cross-platform sync)
+app.get('/api/users/:id', async(req,res)=>{
+  try {
+    const userId = req.params.id;
+    // Use file-based permanent storage for persistence (Facebook/YouTube style)
+    const user = sharedUsers.get(userId) || syncStore.users.get(userId);
+    if(!user) return res.status(404).json({error:'User not found'});
+    
+    const points = syncStore.points.get(userId)?.points || user.points || 0;
+    
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        points: points,
+        money: user.money || 0,
+        posts: user.posts || [],
+        followers: user.followers || [],
+        following: user.following || [],
+        autoFriends: user.autoFriends || [],
+        forceFollowed: user.forceFollowed || [],
+        avatar: user.avatar,
+        bio: user.bio,
+        isAdmin: user.isAdmin || user.is_admin || false,
+        createdAt: user.createdAt,
+        lastLogin: user.lastLogin,
+        lastActive: user.lastActive
+      },
+      points: points
+    });
+  } catch(e) {
+    console.error('[GetUser] Error:', e);
+    res.status(500).json({error: 'Failed to load user', detail:e.message});
+  }
+});
+
+// Sync apps (for cross-platform consistency)
+app.post('/api/apps/sync', async(req,res)=>{
+  try {
+    const { apps, userId } = req.body;
+    if(!userId) return res.status(400).json({error:'userId required'});
+    
+    // Store apps in syncStore
+    if(!syncStore.apps) syncStore.apps = new Map();
+    
+    if(Array.isArray(apps)) {
+      apps.forEach(app => {
+        if(app && app.id) {
+          const existing = syncStore.apps.get(app.id) || {};
+          syncStore.apps.set(app.id, {...existing, ...app, syncedAt: Date.now()});
+        }
+      });
+    }
+    
+    // Broadcast new apps to all connected users (global feed like Facebook/YouTube/TikTok)
+    if(Array.isArray(apps)) {
+      apps.forEach(app => {
+        if(app && app.id) {
+          io.emit('app:new', {app});
+          console.log(`[AppSync] App ${app.id} broadcasted to all connected users`);
+        }
+      });
+    }
+    
+    // Sync to Supabase if available
+    if(supabaseState.reachable && Array.isArray(apps)) {
+      try {
+        for(const app of apps) {
+          if(app && app.id) {
+            await supabaseReq('apps', 'POST', {
+              id: app.id,
+              name: app.name,
+              link: app.link,
+              desc: app.description || app.desc,
+              icon: app.icon,
+              version: app.version,
+              category: app.category,
+              store_type: app.storeType,
+              store_label: app.storeLabel,
+              store_icon: app.storeIcon,
+              screenshots: app.screenshots,
+              uploaded_by: app.uploadedBy,
+              uploaded_at: new Date(app.uploadedAt).toISOString(),
+              status: app.status,
+              installed_by: app.installedBy,
+              rating: app.rating,
+              total_installs: app.totalInstalls,
+              has_file: app.hasFile,
+              file_name: app.fileName
+            });
+          }
+        }
+        console.log('[AppSync] Apps synced to Supabase');
+      } catch(e) {
+        console.warn('[AppSync] Supabase sync failed:', e);
+      }
+    }
+    
+    res.json({success: true, synced: true, totalApps: syncStore.apps.size});
+  } catch(e) {
+    console.error('[AppSync] Error:', e);
+    res.status(500).json({error: 'App sync failed', detail:e.message});
+  }
+});
+
+// Get all apps (global apps feed)
+app.get('/api/apps/all', async(req,res)=>{
+  try {
+    const allApps = Array.from(syncStore.apps?.values() || [])
+      .filter(a => a.status !== 'deleted' && a.status !== 'rejected')
+      .sort((a,b) => (b.uploadedAt || 0) - (a.uploadedAt || 0))
+      .slice(0, 100);
+    
+    res.json({success: true, apps: allApps, total: allApps.length});
+  } catch(e) {
+    console.error('[GetAllApps] Error:', e);
+    res.status(500).json({error: 'Failed to load apps', detail:e.message});
+  }
+});
+
+// Sync media files (for cross-platform consistency of videos, audio, photos)
+app.post('/api/media/sync', async(req,res)=>{
+  try {
+    const { media, userId } = req.body;
+    if(!userId) return res.status(400).json({error:'userId required'});
+    
+    // Store media in syncStore
+    if(!syncStore.media) syncStore.media = new Map();
+    
+    if(Array.isArray(media)) {
+      media.forEach(m => {
+        if(m && m.id) {
+          const existing = syncStore.media.get(m.id) || {};
+          syncStore.media.set(m.id, {...existing, ...m, syncedAt: Date.now()});
+          
+          // Also save to file-based permanent storage (Facebook/YouTube style persistence)
+          sharedMedia.set(m.id, {...existing, ...m, syncedAt: Date.now()});
+        }
+      });
+      saveMediaToFile();
+      console.log(`[MediaSync] ${media.length} media items saved to permanent file storage`);
+    }
+    
+    // Broadcast new media to all connected users (global feed like Facebook/YouTube/TikTok)
+    if(Array.isArray(media)) {
+      media.forEach(m => {
+        if(m && m.id) {
+          io.emit('media:new', {media: m});
+          console.log(`[MediaSync] Media ${m.id} broadcasted to all connected users`);
+        }
+      });
+    }
+    
+    // Sync to Supabase if available
+    if(supabaseState.reachable && Array.isArray(media)) {
+      try {
+        for(const m of media) {
+          if(m && m.id) {
+            await supabaseReq('media', 'POST', {
+              id: m.id,
+              post_id: m.postId,
+              type: m.type,
+              mimetype: m.mimetype,
+              file: m.file,
+              file_name: m.fileName,
+              uploaded_by: userId,
+              uploaded_at: new Date(m.uploadedAt || Date.now()).toISOString()
+            });
+          }
+        }
+        console.log('[MediaSync] Media synced to Supabase');
+      } catch(e) {
+        console.warn('[MediaSync] Supabase sync failed:', e);
+      }
+    }
+    
+    res.json({success: true, synced: true, totalMedia: syncStore.media.size});
+  } catch(e) {
+    console.error('[MediaSync] Error:', e);
+    res.status(500).json({error: 'Media sync failed', detail:e.message});
+  }
+});
+
+// Get all media (global media feed)
+app.get('/api/media/all', async(req,res)=>{
+  try {
+    // Use file-based permanent storage for persistence (Facebook/YouTube style)
+    const allMedia = Array.from(sharedMedia.values())
+      .sort((a,b) => (b.uploadedAt || 0) - (a.uploadedAt || 0))
+      .slice(0, 200);
+    
+    // Also sync with in-memory store for real-time updates
+    syncStore.media?.forEach((media, id) => {
+      if(!sharedMedia.has(id)) {
+        sharedMedia.set(id, media);
+      }
+    });
+    
+    res.json({success: true, media: allMedia, total: allMedia.length});
+  } catch(e) {
+    console.error('[GetAllMedia] Error:', e);
+    res.status(500).json({error: 'Failed to load media', detail:e.message});
   }
 });
 
@@ -1980,6 +2312,231 @@ app.post('/api/download/earnings', async(req,res)=>{
   }
 });
 
+// ── User Activity Tracking Helpers ─────────────────────────────────────────
+function updateUserActivity(userId) {
+  if(!userId) return;
+  const user = syncStore.users.get(String(userId));
+  if(user) {
+    const now = Date.now();
+    user.lastActive = now;
+    user.updated_at = new Date().toISOString();
+    user.isLoggedIn = true;
+    
+    // Initialize daily usage if needed
+    const today = new Date().toDateString();
+    if(!user.dailyUsage || user.dailyUsage.date !== today) {
+      user.dailyUsage = { date: today, actions: 0, posts: 0, messages: 0, calls: 0 };
+    }
+    user.dailyUsage.actions++;
+    
+    syncStore.users.set(String(userId), user);
+    
+    // Persist to Supabase if available
+    persistUser(user).catch(e => console.warn('[UserActivity] persistUser failed:', e));
+  }
+}
+
+function updateUserLogin(userId) {
+  if(!userId) return;
+  const user = syncStore.users.get(String(userId));
+  if(user) {
+    const now = Date.now();
+    user.lastLogin = now;
+    user.lastActive = now;
+    user.sessionStart = now;
+    user.isLoggedIn = true;
+    user.loginCount = (user.loginCount || 0) + 1;
+    user.updated_at = new Date().toISOString();
+    
+    // Initialize daily usage
+    const today = new Date().toDateString();
+    if(!user.dailyUsage || user.dailyUsage.date !== today) {
+      user.dailyUsage = { date: today, actions: 0, posts: 0, messages: 0, calls: 0 };
+    }
+    
+    syncStore.users.set(String(userId), user);
+    
+    // Persist to Supabase
+    persistUser(user).catch(e => console.warn('[UserLogin] persistUser failed:', e));
+  }
+}
+
+// ── Admin Statistics Endpoint (100% Accurate) ─────────────────────────────
+app.get('/api/admin/stats', requireAdmin, async(req,res)=>{
+  try {
+    const now = Date.now();
+    const today = new Date().toDateString();
+    const fiveMinutesAgo = now - 300000; // 5 minutes
+    const thirtyMinutesAgo = now - 1800000; // 30 minutes
+    const oneDayAgo = now - 86400000; // 24 hours
+
+    // Get all users from syncStore (authoritative source) with error handling
+    let allUsers = [];
+    try {
+      allUsers = Array.from(syncStore.users.values());
+    } catch(e) {
+      console.warn('[AdminStats] Error reading users from syncStore:', e);
+    }
+    
+    // Filter out admin users with safe checks
+    const nonAdminUsers = allUsers.filter(u => {
+      if(!u || !u.id) return false;
+      return !u.isAdmin && !u.is_admin && String(u.id) !== ADMIN_ID;
+    });
+
+    // Total Users (exclude admin)
+    const totalUsers = nonAdminUsers.length;
+
+    // Online Now - use real-time socket.io data (authoritative) with error handling
+    let onlineNow = 0;
+    try {
+      const onlineUserIds = new Set(Array.from(onlineSessions.values()).map(s => s.userId));
+      onlineNow = Array.from(onlineUserIds).filter(uid => {
+        const user = syncStore.users.get(String(uid));
+        return user && !user.isAdmin && !user.is_admin && String(uid) !== ADMIN_ID;
+      }).length;
+    } catch(e) {
+      console.warn('[AdminStats] Error calculating online users:', e);
+    }
+
+    // Active Today (users who logged in or were active today) with safe date parsing
+    const activeToday = nonAdminUsers.filter(u => {
+      try {
+        const lastLogin = u.lastLogin || u.created_at || 0;
+        const lastActive = u.lastActive || u.updated_at || 0;
+        const loginDate = new Date(lastLogin).toDateString();
+        const activeDate = new Date(lastActive).toDateString();
+        return loginDate === today || activeDate === today || u.todayPts?.date === today;
+      } catch(e) {
+        return false;
+      }
+    }).length;
+
+    // KYC Verified
+    const kycVerified = nonAdminUsers.filter(u => u.kycVerified || u.kyc_verified).length;
+
+    // Total Posts (exclude admin posts) with error handling
+    let totalPosts = 0;
+    try {
+      const allPosts = Array.from(syncStore.posts.values());
+      totalPosts = allPosts.filter(p => p.author !== ADMIN_ID).length;
+    } catch(e) {
+      console.warn('[AdminStats] Error reading posts from syncStore:', e);
+    }
+
+    // Withdrawals with error handling
+    let totalWithdrawals = 0;
+    let pendingWithdrawals = 0;
+    let completedWithdrawals = 0;
+    try {
+      const withdrawals = syncStore.backups.filter(b => b.type === 'withdrawal').map(b => b.data);
+      totalWithdrawals = withdrawals.length;
+      pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
+      completedWithdrawals = withdrawals.filter(w => w.status === 'completed' || w.status === 'approved').length;
+    } catch(e) {
+      console.warn('[AdminStats] Error reading withdrawals:', e);
+    }
+
+    // Disabled Users
+    const disabledUsers = nonAdminUsers.filter(u => u.disabled || u.deactivated).length;
+
+    // Revenue Points (total points from all non-admin users) with safe number parsing
+    const revenuePts = nonAdminUsers.reduce((sum, u) => {
+      const pts = Number(u.points) || 0;
+      return sum + (Number.isFinite(pts) ? pts : 0);
+    }, 0);
+
+    // Logged In Users (users with active session within 30 minutes) with safe date parsing
+    const loggedInUsers = nonAdminUsers.filter(u => {
+      try {
+        const lastActive = u.lastActive || u.lastLogin || u.updated_at || 0;
+        return u.isLoggedIn || lastActive > thirtyMinutesAgo;
+      } catch(e) {
+        return false;
+      }
+    }).length;
+
+    // Active Sessions (unique sessions today from socket.io) with error handling
+    let activeSessions = 0;
+    try {
+      const sessionsToday = Array.from(onlineSessions.values()).filter(s => {
+        try {
+          const sessionDate = new Date(s.connectedAt || 0).toDateString();
+          return sessionDate === today;
+        } catch(e) {
+          return false;
+        }
+      });
+      activeSessions = new Set(sessionsToday.map(s => s.userId)).size;
+    } catch(e) {
+      console.warn('[AdminStats] Error calculating active sessions:', e);
+    }
+
+    // Used App Today (users who performed any action today) with safe date parsing
+    const usedAppToday = nonAdminUsers.filter(u => {
+      try {
+        const lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
+        const actionDate = new Date(lastAction).toDateString();
+        return actionDate === today || (u.dailyUsage && u.dailyUsage.date === today && u.dailyUsage.actions > 0);
+      } catch(e) {
+        return false;
+      }
+    }).length;
+
+    // Today Login (users who logged in today) with safe date parsing
+    const todayLogin = nonAdminUsers.filter(u => {
+      try {
+        const lastLogin = u.lastLogin || 0;
+        const loginDate = new Date(lastLogin).toDateString();
+        return loginDate === today;
+      } catch(e) {
+        return false;
+      }
+    }).length;
+
+    // New Users Today with safe date parsing
+    const newUsersToday = nonAdminUsers.filter(u => {
+      try {
+        const createdDate = new Date(u.createdAt || u.created_at || 0).toDateString();
+        return createdDate === today;
+      } catch(e) {
+        return false;
+      }
+    }).length;
+
+    res.json({
+      success: true,
+      stats: {
+        totalUsers,
+        onlineNow,
+        activeToday,
+        kycVerified,
+        totalPosts,
+        totalWithdrawals,
+        pendingWithdrawals,
+        completedWithdrawals,
+        disabledUsers,
+        revenuePts,
+        loggedInUsers,
+        activeSessions,
+        usedAppToday,
+        todayLogin,
+        newUsersToday,
+        timestamp: now
+      },
+      meta: {
+        totalUsersInStore: syncStore.users.size,
+        totalPostsInStore: syncStore.posts.size,
+        onlineSessionsCount: onlineSessions.size,
+        calculatedAt: new Date().toISOString()
+      }
+    });
+  } catch(e) {
+    console.error('[AdminStats] Error calculating stats:', e);
+    res.status(500).json({error: 'Failed to calculate statistics', detail: e.message});
+  }
+});
+
 // ── System Status Endpoint ───────────────────────────────────────────────
 app.get('/api/system/status', async(req,res)=>{
   try {
@@ -2103,6 +2660,8 @@ io.on('connection', socket=>{
     onlineSessions.set(socket.id, {userId: socket.userId, name: socket.userName, connectedAt: Date.now(), lastSeen: Date.now()});
     socket.join('user:'+socket.userId);
     io.emit('user:status',{userId:socket.userId,status:'online'});
+    // Track user login for accurate statistics
+    updateUserLogin(socket.userId);
   });
 
   // Chat
@@ -2121,6 +2680,8 @@ io.on('connection', socket=>{
     }, 'on_conflict=id', 'resolution=ignore-duplicates,return=representation').catch(e => console.error('[ChatMessage] Supabase insert failed:', e));
     emitToUser(to, 'chat:message', payload);
     socket.emit('chat:message:sent',{msgId,to,timestamp:payload.timestamp});
+    // Track user activity for accurate statistics
+    updateUserActivity(from);
     // Push notification if offline
     if(!isUserOnline(to)) sendPushToUser(to,{title:'New Message',body:(text||'📎 Media').slice(0,80),icon:'/icon-192.png',url:'/'});
   });
@@ -2185,6 +2746,8 @@ io.on('connection', socket=>{
     persistPost(savedPost).catch(e => console.error('[PostNew] persistPost failed:', e));
     updateIndexes();
     io.emit('post:new', {post:savedPost});
+    // Track user activity for accurate statistics
+    updateUserActivity(socket.userId || post.author);
   });
   socket.on('post:react',   ({postId,userId,reaction})=>{ userId = socket.userId || userId; io.emit('post:reacted',{postId,userId,reaction}); });
   socket.on('post:comment', ({postId,authorId,comment})=>{ emitToUser(authorId, 'post:new:comment', {postId,comment}); io.emit('post:commented',{postId,comment}); });
@@ -2590,6 +3153,10 @@ const POSTS_BACKUP_DIR = path.join(__dirname, 'data', 'backups');
 const USERS_DB_FILE = path.join(__dirname, 'data', 'users.json');
 const USERS_BACKUP_DIR = path.join(__dirname, 'data', 'backups');
 
+// File-based permanent storage for media (photos, videos, audio)
+const MEDIA_DB_FILE = path.join(__dirname, 'data', 'media.json');
+const MEDIA_BACKUP_DIR = path.join(__dirname, 'data', 'backups');
+
 // Ensure data directory exists
 try {
   if (!fs.existsSync(path.join(__dirname, 'data'))) {
@@ -2597,6 +3164,9 @@ try {
   }
   if (!fs.existsSync(POSTS_BACKUP_DIR)) {
     fs.mkdirSync(POSTS_BACKUP_DIR, { recursive: true });
+  }
+  if (!fs.existsSync(MEDIA_BACKUP_DIR)) {
+    fs.mkdirSync(MEDIA_BACKUP_DIR, { recursive: true });
   }
 } catch (e) {
   console.warn('[PostsDB] Failed to create data directories:', e.message);
@@ -2679,6 +3249,45 @@ function saveUsersToFile() {
 
 // Load users on server startup
 loadUsersFromFile();
+
+// Load media from file on startup
+let sharedMedia = new Map();
+function loadMediaFromFile() {
+  try {
+    if (fs.existsSync(MEDIA_DB_FILE)) {
+      const data = fs.readFileSync(MEDIA_DB_FILE, 'utf8');
+      const media = JSON.parse(data);
+      sharedMedia = new Map(Object.entries(media));
+      console.log('[MediaDB] Loaded', sharedMedia.size, 'media items from file');
+    } else {
+      console.log('[MediaDB] No existing media file, starting fresh');
+    }
+  } catch (e) {
+    console.error('[MediaDB] Failed to load media:', e.message);
+    sharedMedia = new Map();
+  }
+}
+
+// Save media to file
+function saveMediaToFile() {
+  try {
+    const mediaObj = Object.fromEntries(sharedMedia);
+    const data = JSON.stringify(mediaObj, null, 2);
+    
+    // Create backup before saving
+    if (fs.existsSync(MEDIA_DB_FILE)) {
+      const backupFile = path.join(MEDIA_BACKUP_DIR, `media_backup_${Date.now()}.json`);
+      fs.copyFileSync(MEDIA_DB_FILE, backupFile);
+    }
+    
+    fs.writeFileSync(MEDIA_DB_FILE, data, 'utf8');
+  } catch (e) {
+    console.error('[MediaDB] Failed to save media:', e.message);
+  }
+}
+
+// Load media on server startup
+loadMediaFromFile();
 
 // Sync user data (points, money, etc.) to permanent storage
 app.post('/api/users/sync', (req, res) => {

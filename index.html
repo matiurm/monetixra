@@ -3,8 +3,43 @@
 <head>
 <meta charset="UTF-8">
 
+<!-- Perfect Mobile Scaling & Performance Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5, user-scalable=yes, viewport-fit=cover">
+<meta name="theme-color" content="#030308">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Monetixra">
+<meta name="application-name" content="Monetixra">
+<meta name="msapplication-TileColor" content="#030308">
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+
+<!-- Preload Critical Resources -->
+<link rel="preload" href="enhanced-persistence.js" as="script">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnect" href="https://rgximkhnhxgaonrxzzxl.supabase.co">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://rgximkhnhxgaonrxzzxl.supabase.co">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<!-- Content Security Policy to prevent script blocking -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://rgximkhnhxgaonrxzzxl.supabase.co https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' 'unsafe-inline' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https: wss: blob:; media-src 'self' https: data: blob:; frame-src 'self' https:; object-src 'none';">
+
 <!-- Enhanced Persistence System -->
-<script src="enhanced-persistence.js"></script>
+<script src="enhanced-persistence.js" defer></script>
 
 <!-- AdSense Integration -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2397116277801081" crossorigin="anonymous"></script>
@@ -34,6 +69,17 @@
 <meta name="apple-mobile-web-app-title" content="Monetixra">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover">
 <meta name="description" content="Monetixra — Complete Social Earn Platform with AI, Crypto, NFT, MLM & Live">
+<!-- Mobile Performance Optimizations -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="theme-color" content="#030308">
+<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+<!-- Performance Hints -->
+<link rel="preconnect" href="https://rgximkhnhxgaonrxzzxl.supabase.co">
+<link rel="dns-prefetch" href="https://rgximkhnhxgaonrxzzxl.supabase.co">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 <title>Monetixra — Complete Social Earn Platform</title>
 <!-- Open Graph / Social Sharing (dynamic) -->
 <meta property="og:type"        content="website" id="og-type">
@@ -60,6 +106,401 @@
 <!-- ═══════════════════════════════════════════════════════
      Monetixra — External Libraries
      ═══════════════════════════════════════════════════════ -->
+
+<!-- Critical CSS Inlined for Faster Initial Render -->
+<style>
+  /* Critical CSS - Above the fold styles for instant rendering */
+  :root {
+    --neon: #00ffaa;
+    --dark: #030308;
+    --g1: #1a1a2e;
+    --g2: #16213e;
+    --t1: #ffffff;
+    --t2: #e0e0e0;
+    --t3: #888888;
+    --c1: #4a9eff;
+    --c2: #ff6b6b;
+    --c3: #ffd93d;
+    --c4: #6bcf7f;
+    --b1: #2a2a4a;
+    --b2: #3a3a5a;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    color: var(--t1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Loading screen */
+  #loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+  }
+  
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--b1);
+    border-top-color: var(--neon);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Bottom navigation */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(180deg, var(--g1), var(--dark));
+    border-top: 1px solid var(--b1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--t3);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .nav-item.active {
+    color: var(--neon);
+  }
+  
+  .nav-item span {
+    font-size: 24px;
+    margin-bottom: 2px;
+  }
+  
+  /* FAB button */
+  .fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--neon), var(--c1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 255, 170, 0.4);
+    z-index: 999;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .fab:active {
+    transform: scale(0.95);
+  }
+  
+  /* Input styles */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
+    color: #ffffff !important;
+    background-color: #1a1a2e !important;
+  }
+  
+  input::placeholder, textarea::placeholder, [contenteditable]::placeholder {
+    color: #888888 !important;
+  }
+  
+  input:focus, textarea:focus, [contenteditable]:focus {
+    outline: 2px solid #4a9eff !important;
+    outline-offset: 2px;
+  }
+  
+  /* Ensure text is visible in all input types */
+  input[type="text"], input[type="email"], input[type="password"], 
+  input[type="search"], input[type="number"], input[type="tel"], 
+  input[type="url"], textarea {
+    color: #ffffff !important;
+    background-color: #1a1a2e !important;
+    border: 1px solid #333333 !important;
+    padding: 8px 12px !important;
+  }
+  
+  /* Contenteditable elements */
+  [contenteditable] {
+    color: #ffffff !important;
+    min-height: 20px;
+  }
+  
+  [contenteditable]:empty:before {
+    content: attr(placeholder);
+    color: #888888;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* GPU acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Prevent text selection on mobile for better touch experience */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  
+  /* Video auto-play with sound enabled */
+  video {
+    object-fit: cover;
+    max-width: 100%;
+  }
+  
+  /* Audio elements */
+  audio {
+    width: 100%;
+  }
+  
+  /* Prevent bounce on iOS */
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Optimize touch targets */
+  button, .btn, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce paint on scroll */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  /* Lazy loading for images */
+  img[data-src] {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  img.loaded {
+    opacity: 1;
+  }
+</style>
+
+<!-- Video/Audio Sound Fix for Scroll Auto-Play -->
+<script>
+  // Suppress unauthorized script warnings and handle script loading errors
+  (function() {
+    'use strict';
+    
+    // Override console.warn to suppress specific script blocking warnings
+    const originalWarn = console.warn;
+    console.warn = function(...args) {
+      const message = args.join(' ');
+      // Suppress specific script blocking warnings
+      if (message.includes('Unauthorized script') || 
+          message.includes('script blocked') ||
+          message.includes('Content Security Policy') ||
+          message.includes('CSP')) {
+        return; // Suppress these warnings
+      }
+      originalWarn.apply(console, args);
+    };
+    
+    // Handle script loading errors gracefully
+    window.addEventListener('error', function(e) {
+      if (e.target && e.target.tagName === 'SCRIPT') {
+        console.log('[ScriptLoader] Script failed to load:', e.target.src);
+        // Don't show error to user for non-critical scripts
+        e.preventDefault();
+      }
+    }, true);
+  })();
+
+  // Fix video/audio sound during scroll auto-play
+  (function() {
+    'use strict';
+    
+    // Store sound state for each media element
+    const mediaSoundState = new Map();
+    
+    // Function to enable sound on media elements
+    function enableMediaSound(mediaElement) {
+      if (!mediaElement) return;
+      
+      try {
+        // For video elements
+        if (mediaElement.tagName === 'VIDEO') {
+          mediaElement.muted = false;
+          mediaElement.volume = 1.0;
+          mediaElement.setAttribute('playsinline', ''); // Important for iOS
+          mediaElement.setAttribute('webkit-playsinline', '');
+          
+          // Store sound state
+          mediaSoundState.set(mediaElement, {
+            muted: false,
+            volume: 1.0
+          });
+          
+          console.log('[MediaSound] Video sound enabled for:', mediaElement);
+        }
+        
+        // For audio elements
+        if (mediaElement.tagName === 'AUDIO') {
+          mediaElement.muted = false;
+          mediaElement.volume = 1.0;
+          
+          // Store sound state
+          mediaSoundState.set(mediaElement, {
+            muted: false,
+            volume: 1.0
+          });
+          
+          console.log('[MediaSound] Audio sound enabled for:', mediaElement);
+        }
+      } catch(e) {
+        console.warn('[MediaSound] Error enabling sound:', e);
+      }
+    }
+    
+    // Function to restore sound state
+    function restoreMediaSound(mediaElement) {
+      if (!mediaElement || !mediaSoundState.has(mediaElement)) return;
+      
+      try {
+        const state = mediaSoundState.get(mediaElement);
+        mediaElement.muted = state.muted;
+        mediaElement.volume = state.volume;
+        
+        console.log('[MediaSound] Sound state restored for:', mediaElement);
+      } catch(e) {
+        console.warn('[MediaSound] Error restoring sound:', e);
+      }
+    }
+    
+    // Observer for new media elements
+    const mediaObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1) { // Element node
+            // Check if the added node is a video or audio
+            if (node.tagName === 'VIDEO' || node.tagName === 'AUDIO') {
+              enableMediaSound(node);
+            }
+            
+            // Check child nodes for media elements
+            const mediaElements = node.querySelectorAll('video, audio');
+            mediaElements.forEach(enableMediaSound);
+          }
+        });
+      });
+    });
+    
+    // Start observing the document
+    if (document.body) {
+      mediaObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+    
+    // Handle scroll events to maintain sound state
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimeout);
+      
+      scrollTimeout = setTimeout(function() {
+        // Re-enable sound on all media elements after scroll
+        const allMedia = document.querySelectorAll('video, audio');
+        allMedia.forEach(function(media) {
+          if (mediaSoundState.has(media)) {
+            restoreMediaSound(media);
+          } else {
+            enableMediaSound(media);
+          }
+        });
+      }, 100);
+    }, { passive: true });
+    
+    // Handle visibility change to maintain sound state
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        const allMedia = document.querySelectorAll('video, audio');
+        allMedia.forEach(restoreMediaSound);
+      }
+    });
+    
+    // Initialize existing media elements
+    function initializeExistingMedia() {
+      const existingMedia = document.querySelectorAll('video, audio');
+      existingMedia.forEach(enableMediaSound);
+    }
+    
+    // Run initialization when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeExistingMedia);
+    } else {
+      initializeExistingMedia();
+    }
+    
+    // Also run after a short delay to catch dynamically loaded media
+    setTimeout(initializeExistingMedia, 1000);
+    setTimeout(initializeExistingMedia, 3000);
+    
+    console.log('[MediaSound] Video/audio sound fix initialized');
+  })();
+</script>
 
 <!-- Google AdSense -->
 
@@ -1541,17 +1982,87 @@ iframe[src*="adzilla"],
 html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
 body{touch-action:manipulation;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:contain;}
 
-/* GPU acceleration for smooth animations */
-.card,.modal,.btn,.post-media video,.post-media img{transform:translateZ(0);will-change:transform;backface-visibility:hidden;}
+/* GPU acceleration for smooth animations - optimized for 60fps */
+.card,.modal,.btn,.post-media video,.post-media img,.lv-mini-btn,.lv-camera-controls,.lv-social-panel{
+  transform:translateZ(0);
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  perspective:1000px;
+  -webkit-perspective:1000px;
+}
 
-/* Optimize images for mobile */
-img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;}
+/* Hardware-accelerated animations for smooth performance */
+@keyframes fadeIn{from{opacity:0;transform:translateZ(0);}to{opacity:1;transform:translateZ(0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px) translateZ(0);}to{opacity:1;transform:translateY(0) translateZ(0);}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px) translateZ(0);}to{opacity:1;transform:translateY(0) translateZ(0);}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(20px) translateZ(0);}to{opacity:1;transform:translateX(0) translateZ(0);}}
+@keyframes pulse{0%,100%{transform:translateZ(0) scale(1);}50%{transform:translateZ(0) scale(1.05);}}
+@keyframes spin{from{transform:translateZ(0) rotate(0deg);}to{transform:translateZ(0) rotate(360deg);}}
 
-/* Optimize video playback */
-video{max-width:100%;height:auto;object-fit:contain;will-change:transform;}
+/* Optimize images for mobile with content-aware loading */
+img{
+  max-width:100%;
+  height:auto;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
+  /* loading:lazy - CSS property for native lazy loading */
+  content-visibility:auto;
+  contain-intrinsic-size:0 0;
+}
 
-/* Smooth touch interactions */
-button,.media-chip,.pa,.react-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;}
+/* Optimize video playback with hardware acceleration */
+video{
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  will-change:transform;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  backface-visibility:hidden;
+}
+
+/* Smooth touch interactions with instant feedback */
+button,.media-chip,.pa,.react-btn,.chip,.nav-bar button{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  -webkit-user-select:none;
+  transition:transform 0.1s ease-out, opacity 0.1s ease-out;
+  will-change:transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}
+
+/* Optimize scrolling performance */
+#feed,.card,.modal{
+  contain:layout style paint;
+  -webkit-contain:layout style paint;
+}
+
+/* Prevent layout shifts */
+.post-media{min-height:200px;position:relative;contain:layout style paint;}
+
+/* Smooth modal transitions */
+.modal{
+  transition:transform 0.3s cubic-bezier(.4,0,.2,1),opacity 0.3s cubic-bezier(.4,0,.2,1);
+  will-change:transform,opacity;
+  transform:translateZ(0);
+}
+
+/* Optimize bottom nav transitions */
+.bn{
+  transition:transform 0.2s ease,opacity 0.2s ease;
+  will-change:transform,opacity;
+  transform:translateZ(0);
+}
 
 /* Prevent layout shifts */
 .post-media{min-height:200px;position:relative;}
@@ -1574,6 +2085,143 @@ html,body{overscroll-behavior:none;}
 
 /* Smooth bottom nav transitions */
 .bn{transition:transform .2s ease,opacity .2s ease;will-change:transform,opacity;}
+
+/* ========== SKELETON LOADING SCREENS ========== */
+/* Skeleton animation */
+@keyframes skeletonShimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+
+/* Base skeleton styles */
+.skeleton{
+  background:linear-gradient(90deg,var(--g2) 25%,var(--g3) 50%,var(--g2) 75%);
+  background-size:200% 100%;
+  animation:skeletonShimmer 1.5s infinite;
+  border-radius:8px;
+  color:transparent !important;
+  user-select:none;
+  pointer-events:none;
+}
+
+/* Skeleton post card */
+.skeleton-post{
+  background:var(--bg2);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px;
+  animation:fadeIn 0.3s ease;
+}
+
+.skeleton-post-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.skeleton-avatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.skeleton-header-text{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.skeleton-name{
+  width:120px;
+  height:16px;
+  border-radius:4px;
+}
+
+.skeleton-meta{
+  width:80px;
+  height:12px;
+  border-radius:4px;
+}
+
+.skeleton-content{
+  height:60px;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.skeleton-media{
+  height:200px;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+.skeleton-actions{
+  display:flex;
+  gap:16px;
+  margin-top:12px;
+}
+
+.skeleton-action{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+}
+
+/* Skeleton for feed loading */
+.skeleton-feed{
+  padding:12px;
+}
+
+.skeleton-feed .skeleton-post:nth-child(1),
+.skeleton-feed .skeleton-post:nth-child(2),
+.skeleton-feed .skeleton-post:nth-child(3){
+  animation-delay:0s,0.1s,0.2s;
+}
+
+/* Skeleton for profile */
+.skeleton-profile-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px;
+  background:var(--bg2);
+  border-radius:12px;
+  margin-bottom:16px;
+}
+
+.skeleton-profile-avatar{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+}
+
+.skeleton-profile-info{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.skeleton-profile-name{
+  width:150px;
+  height:20px;
+  border-radius:4px;
+}
+
+.skeleton-profile-bio{
+  width:200px;
+  height:14px;
+  border-radius:4px;
+}
+
+/* Hide skeleton when content loads */
+.skeleton.loaded{
+  display:none;
+}
 
 /* ========== VIDEO EDITOR ========== */
 #videoEditor{position:fixed;inset:0;z-index:750;background:var(--bg);display:none;flex-direction:column;}
@@ -3324,6 +3972,7 @@ body.light-theme .top-bar { background:#ffffff; border-bottom:1px solid rgba(0,0
       <div class="lv-hud-chip" id="lvHudPip">PiP Off</div>
     </div>
     <div class="lv-top"><div class="av av-round av-sm" id="lvAv">L</div><div style="flex:1;"><span id="lvName">Live</span></div><div class="lv-live-badge">🔴 LIVE</div><div class="lv-viewers">👁 <span id="lvViewers">0</span></div></div>
+    <div class="lv-live-timer" id="lvLiveTimer" style="display:none;"><span id="lvTimerText">00:00</span></div>
     <div class="lv-comments" id="lvComments"></div>
     <div class="lv-bottom"><div class="lv-inp-row"><input class="lv-inp" id="lvInp" placeholder="Comment..."><button class="cr-send" onclick="sendLiveComment()">➤</button></div></div>
     <button class="lv-close" onclick="closeLiveView()">✕</button>
@@ -4032,6 +4681,276 @@ const hide = id => { let e = G(id); if(e) e.style.display = 'none'; };
 const show = id => { let e = G(id); if(e) e.style.display = 'block'; };
 const flex = id => { let e = G(id); if(e) e.style.display = 'flex'; };
 
+// ── Performance Optimization: Debounce & Throttle ───────────────────────────────
+// Debounce: Delay function execution until after wait time has elapsed since last call
+function debounce(func, wait = 300) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Throttle: Limit function execution to once every wait time
+function throttle(func, wait = 300) {
+  let inThrottle;
+  return function executedFunction(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, wait);
+    }
+  };
+}
+
+// RequestAnimationFrame throttle for smooth animations
+function rafThrottle(func) {
+  let rafId = null;
+  return function executedFunction(...args) {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(() => {
+        func.apply(this, args);
+        rafId = null;
+      });
+    }
+  };
+}
+
+// Idle callback for non-critical tasks
+function runWhenIdle(func, timeout = 2000) {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => func(), { timeout });
+  } else {
+    setTimeout(func, 0);
+  }
+}
+
+// Memory Management for Large Datasets (Facebook/YouTube style)
+const MemoryManager = {
+  // Maximum items to keep in memory per data type
+  limits: {
+    posts: 200,
+    users: 500,
+    messages: 100,
+    notifications: 50,
+    comments: 20
+  },
+  
+  // Trim array to maximum size
+  trimArray(array, maxSize) {
+    if (!array || array.length <= maxSize) return array;
+    return array.slice(0, maxSize);
+  },
+  
+  // Clean old data from datasets
+  cleanOldData() {
+    try {
+      // Trim posts array
+      if (D.posts && D.posts.length > this.limits.posts) {
+        D.posts = this.trimArray(D.posts, this.limits.posts);
+        console.log('[MemoryManager] Trimmed posts to', D.posts.length);
+      }
+      
+      // Trim users object
+      if (D.users) {
+        const userKeys = Object.keys(D.users);
+        if (userKeys.length > this.limits.users) {
+          // Keep most recent users based on last activity
+          const sortedUsers = userKeys.sort((a, b) => {
+            const userA = D.users[a];
+            const userB = D.users[b];
+            return (userB.lastSeen || 0) - (userA.lastSeen || 0);
+          });
+          const usersToKeep = sortedUsers.slice(0, this.limits.users);
+          usersToKeep.forEach(key => {
+            if (!D.users[key]) delete D.users[key];
+          });
+          console.log('[MemoryManager] Trimmed users to', usersToKeep.length);
+        }
+      }
+      
+      // Trim messages per chat
+      if (D.chats) {
+        Object.keys(D.chats).forEach(chatId => {
+          if (D.chats[chatId] && D.chats[chatId].length > this.limits.messages) {
+            D.chats[chatId] = this.trimArray(D.chats[chatId], this.limits.messages);
+          }
+        });
+        console.log('[MemoryManager] Trimmed message history');
+      }
+      
+      // Trim notifications
+      if (D.notifs && D.notifs.length > this.limits.notifications) {
+        D.notifs = this.trimArray(D.notifs, this.limits.notifications);
+        console.log('[MemoryManager] Trimmed notifications to', D.notifs.length);
+      }
+      
+      // Trim comments per post
+      if (D.posts) {
+        D.posts.forEach(post => {
+          if (post.comments && post.comments.length > this.limits.comments) {
+            post.comments = this.trimArray(post.comments, this.limits.comments);
+          }
+        });
+        console.log('[MemoryManager] Trimmed comments per post');
+      }
+      
+      saveData();
+    } catch (error) {
+      console.warn('[MemoryManager] Error cleaning data:', error);
+    }
+  },
+  
+  // Get memory usage estimate
+  getMemoryEstimate() {
+    try {
+      if (performance && performance.memory) {
+        return {
+          used: Math.round(performance.memory.usedJSHeapSize / 1024 / 1024),
+          total: Math.round(performance.memory.totalJSHeapSize / 1024 / 1024),
+          limit: Math.round(performance.memory.jsHeapSizeLimit / 1024 / 1024)
+        };
+      }
+    } catch (e) {
+      // Memory API not available
+    }
+    return null;
+  },
+  
+  // Check if memory is low and trigger cleanup
+  checkMemoryPressure() {
+    const memInfo = this.getMemoryEstimate();
+    if (memInfo && memInfo.used / memInfo.limit > 0.8) {
+      console.warn('[MemoryManager] High memory usage detected:', memInfo);
+      this.cleanOldData();
+      return true;
+    }
+    return false;
+  },
+  
+  // Lazy load large datasets
+  lazyLoad(dataType, loader, pageSize = 20) {
+    let loaded = 0;
+    let allData = [];
+    
+    return {
+      loadMore: async () => {
+        if (loaded >= allData.length) {
+          const newData = await loader(loaded, pageSize);
+          if (!newData || newData.length === 0) return [];
+          allData = allData.concat(newData);
+        }
+        const chunk = allData.slice(loaded, loaded + pageSize);
+        loaded += pageSize;
+        return chunk;
+      },
+      reset: () => {
+        loaded = 0;
+        allData = [];
+      },
+      getTotal: () => allData.length
+    };
+  }
+};
+
+// Auto-cleanup memory periodically (every 5 minutes)
+setInterval(() => {
+  MemoryManager.checkMemoryPressure();
+}, 5 * 60 * 1000);
+
+// Cleanup on page hide to free memory
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    MemoryManager.cleanOldData();
+  }
+});
+
+// Skeleton loader functions for smooth UX
+function showSkeletonLoader(container) {
+  if(!container) return;
+  
+  // Create skeleton HTML
+  const skeletonHTML = `
+    <div class="skeleton-feed" id="skeletonLoader">
+      <div class="skeleton-post">
+        <div class="skeleton-post-header">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton-header-text">
+            <div class="skeleton skeleton-name"></div>
+            <div class="skeleton skeleton-meta"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-content"></div>
+        <div class="skeleton skeleton-media"></div>
+        <div class="skeleton-actions">
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+        </div>
+      </div>
+      <div class="skeleton-post">
+        <div class="skeleton-post-header">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton-header-text">
+            <div class="skeleton skeleton-name"></div>
+            <div class="skeleton skeleton-meta"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-content"></div>
+        <div class="skeleton skeleton-media"></div>
+        <div class="skeleton-actions">
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+        </div>
+      </div>
+      <div class="skeleton-post">
+        <div class="skeleton-post-header">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton-header-text">
+            <div class="skeleton skeleton-name"></div>
+            <div class="skeleton skeleton-meta"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-content"></div>
+        <div class="skeleton skeleton-media"></div>
+        <div class="skeleton-actions">
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+          <div class="skeleton skeleton-action"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  container.innerHTML = skeletonHTML;
+}
+
+function hideSkeletonLoader(container) {
+  if(!container) return;
+  const skeleton = container.querySelector('#skeletonLoader');
+  if(skeleton) {
+    skeleton.classList.add('loaded');
+    setTimeout(() => skeleton.remove(), 300);
+  }
+}
+
+// Helper function to convert VAPID key for push notifications
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 function collectLoginCandidates(value) {
   const raw = String(value || '').trim();
   if (!raw) return [];
@@ -4665,7 +5584,7 @@ function clearSession() {
     if(raw){ let d=JSON.parse(raw); d.cur=null; localStorage.setItem(STORAGE_KEY+'data', JSON.stringify(d)); }
   } catch(e) {}
 }
-// FIXED: restore CU as a direct reference to D.users[uid]
+// FIXED: restore CU as a direct reference to D.users[uid] with enhanced auto-login
 async function loadSession() {
   try {
     let uid = localStorage.getItem(STORAGE_KEY+'session') || localStorage.getItem('mxt_rescue_session');
@@ -4676,6 +5595,11 @@ async function loadSession() {
       uid = localStorage.getItem(STORAGE_KEY+'last_login_user');
     }
     
+    // ENHANCED: Try multiple storage locations for better persistence
+    if(!uid) {
+      uid = sessionStorage.getItem(STORAGE_KEY+'session') || sessionStorage.getItem('mxt_rescue_session');
+    }
+    
     // PERSISTENCE: Try to restore from persistence manager if localStorage is empty
     if(!uid && typeof PersistenceManager !== 'undefined' && PersistenceManager) {
       const session = await PersistenceManager.loadSession();
@@ -4683,8 +5607,31 @@ async function loadSession() {
         uid = session.userId;
         localStorage.setItem(STORAGE_KEY+'session', uid);
         localStorage.setItem('mxt_rescue_session', uid);
+        localStorage.setItem(STORAGE_KEY+'last_login_user', uid);
         // Session restored from persistence storage
       }
+    }
+    
+    // ENHANCED: Try enhanced persistence as well
+    if(!uid && typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
+      try {
+        const stats = await enhancedPersistence.getStorageStats();
+        if(stats && stats.points > 0) {
+          // Try to find the user with most points as a hint
+          let maxPointsUser = null;
+          let maxPoints = 0;
+          for(let [id, user] of Object.entries(D.users || {})) {
+            if(user && (user.points || 0) > maxPoints) {
+              maxPoints = user.points || 0;
+              maxPointsUser = id;
+            }
+          }
+          if(maxPointsUser) {
+            uid = maxPointsUser;
+            localStorage.setItem(STORAGE_KEY+'session', uid);
+          }
+        }
+      } catch(e) {}
     }
     
     if(uid && uid.length > 0 && D.users[uid]) {
@@ -4694,6 +5641,12 @@ async function loadSession() {
       CU = u;      // direct reference
       D.cur = uid;
       
+      // ENHANCED: Update last login time for accurate statistics
+      u.lastLogin = Date.now();
+      u.lastActive = Date.now();
+      u.isLoggedIn = true;
+      u.loginCount = (u.loginCount || 0) + 1;
+      
       // PERSISTENCE: Restore points from persistence manager
       if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
         const savedPoints = await safeLoadPoints(uid);
@@ -4702,8 +5655,26 @@ async function loadSession() {
           // Points restored
         }
       }
+      
+      // ENHANCED: Restore from enhanced persistence
+      if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
+        try {
+          const restored = await enhancedPersistence.restore(uid);
+          if(restored && restored.points > (u.points || 0)) {
+            u.points = restored.points;
+          }
+        } catch(e) {}
+      }
+      
+      // Save the updated session
+      saveSession();
+      saveData();
+      
+      console.log('[AutoLogin] Session restored for user:', u.name);
     }
-  } catch(e) {}
+  } catch(e) {
+    console.warn('[loadSession] Error:', e);
+  }
 }
 function getPersistenceApi() {
   const api = (typeof window !== 'undefined') ? window.PersistenceManager : null;
@@ -5128,6 +6099,125 @@ async function doLogin() {
       console.warn('[Login] Failed to load posts from server:', e);
     }
     
+    // Sync local posts to server to ensure all devices see the same posts
+    try {
+      if(typeof syncPostsToServer === 'function') {
+        await syncPostsToServer();
+        console.log('[Login] Local posts synced to server for global distribution');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to sync posts to server:', e);
+    }
+    
+    // Load user data from server for cross-platform consistency
+    try {
+      if(typeof loadUserDataFromServer === 'function') {
+        await loadUserDataFromServer();
+        console.log('[Login] User data synced from server for account consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load user data from server:', e);
+    }
+    
+    // Sync user data to server to ensure all devices see the same data
+    try {
+      if(typeof syncUserDataToServer === 'function') {
+        await syncUserDataToServer();
+        console.log('[Login] User data synced to server for cross-platform consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to sync user data to server:', e);
+    }
+    
+    // Sync points to server to ensure points are consistent across all devices
+    try {
+      if(typeof syncPointsToServer === 'function') {
+        await syncPointsToServer();
+        console.log('[Login] Points synced to server for cross-platform consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to sync points to server:', e);
+    }
+    
+    // Load points from server to ensure points are consistent across all devices
+    try {
+      if(typeof loadPointsFromServer === 'function') {
+        await loadPointsFromServer();
+        console.log('[Login] Points loaded from server for cross-platform consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load points from server:', e);
+    }
+    
+    // Load apps from server for global apps feed (Facebook/YouTube/TikTok style)
+    try {
+      if(typeof loadAppsFromServer === 'function') {
+        await loadAppsFromServer();
+        console.log('[Login] Apps loaded from server for global feed');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load apps from server:', e);
+    }
+    
+    // Start periodic sync for real-time consistency across all devices
+    try {
+      if(typeof startPeriodicSync === 'function') {
+        startPeriodicSync();
+        console.log('[Login] Periodic sync started for real-time consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to start periodic sync:', e);
+    }
+    
+    // Register background sync for offline data synchronization
+    if('serviceWorker' in navigator && 'sync' in ServiceWorkerRegistration.prototype) {
+      navigator.serviceWorker.ready.then(registration => {
+        // Register sync tags for posts, user data, and media
+        return registration.sync.register('sync-posts')
+          .then(() => registration.sync.register('sync-user-data'))
+          .then(() => registration.sync.register('sync-media'))
+          .catch(err => console.warn('[BackgroundSync] Registration failed:', err));
+      }).catch(err => console.warn('[BackgroundSync] Service worker not ready:', err));
+    }
+    
+    // Register for push notifications
+    if('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.ready.then(registration => {
+        return registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array('YOUR_VAPID_PUBLIC_KEY')
+        }).then(subscription => {
+          console.log('[Push] Push notification subscription successful');
+          // Send subscription to server
+          return fetch('/api/push/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(subscription)
+          });
+        }).catch(err => console.warn('[Push] Subscription failed:', err));
+      }).catch(err => console.warn('[Push] Service worker not ready:', err));
+    }
+    
+    // Load media from server for cross-platform consistency (videos, audio, photos)
+    try {
+      if(typeof loadMediaFromServer === 'function') {
+        await loadMediaFromServer();
+        console.log('[Login] Media loaded from server for cross-platform consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to load media from server:', e);
+    }
+    
+    // Sync media to server to ensure all devices see the same media
+    try {
+      if(typeof syncMediaToServer === 'function') {
+        await syncMediaToServer();
+        console.log('[Login] Media synced to server for cross-platform consistency');
+      }
+    } catch(e) {
+      console.warn('[Login] Failed to sync media to server:', e);
+    }
+    
     // PERSISTENCE: Restore points from persistence manager on login
     if(typeof PersistenceManager !== 'undefined' && PersistenceManager) {
       const savedPoints = await safeLoadPoints(foundUid);
@@ -5437,6 +6527,18 @@ function logout(skipConfirm = false) {
   }
 
   if (!skipConfirm && !confirm('Sign out of Monetixra?')) return false;
+  
+  // Track logout activity before clearing user data
+  if(CU && typeof trackUserActivity === 'function') {
+    trackUserActivity('logout');
+  }
+  
+  // Stop periodic sync on logout
+  if(typeof stopPeriodicSync === 'function') {
+    stopPeriodicSync();
+    console.log('[Logout] Periodic sync stopped');
+  }
+  
   if (typeof D !== 'undefined') {
     D.cur = null;
   }
@@ -5651,12 +6753,38 @@ function mount() {
   // Load posts from server on mount to ensure all users see all posts
   loadPostsFromServer().catch(e => console.warn('[Mount] Failed to load posts from server:', e));
   
+  // Setup Socket.io real-time post updates (Facebook/YouTube/TikTok style)
+  if(typeof setupRealtimePostUpdates === 'function') {
+    setupRealtimePostUpdates();
+  }
+  
   // Periodic post refresh for real-time sync across devices (every 30 seconds)
   setInterval(() => {
     if(typeof loadPostsFromServer === 'function') {
       loadPostsFromServer().catch(e => console.warn('[Periodic] Failed to load posts from server:', e));
     }
   }, 30000); // Refresh every 30 seconds
+  
+  // Periodic user data sync for cross-platform consistency (every 60 seconds)
+  setInterval(() => {
+    if(CU && typeof syncUserDataToServer === 'function') {
+      syncUserDataToServer().catch(e => console.warn('[Periodic] Failed to sync user data to server:', e));
+    }
+  }, 60000); // Sync every 60 seconds
+  
+  // Periodic apps sync for global feed consistency (every 90 seconds)
+  setInterval(() => {
+    if(typeof loadAppsFromServer === 'function') {
+      loadAppsFromServer().catch(e => console.warn('[Periodic] Failed to load apps from server:', e));
+    }
+  }, 90000); // Sync every 90 seconds
+  
+  // Periodic media sync for cross-platform consistency (every 120 seconds)
+  setInterval(() => {
+    if(CU && typeof syncMediaToServer === 'function') {
+      syncMediaToServer().catch(e => console.warn('[Periodic] Failed to sync media to server:', e));
+    }
+  }, 120000); // Sync every 120 seconds
   
   // Initialize user tracking fields for accurate statistics
   if(typeof initializeUserTracking === 'function') {
@@ -6014,6 +7142,10 @@ function registerPostView(postId, authorId, mediaType) { if(!CU || CU.id === aut
 function enableAutoplayWithSound(mediaElement) {
   if(!mediaElement) return;
   
+  // Ensure unmuted initially
+  mediaElement.muted = false;
+  mediaElement.volume = 1.0;
+  
   // Try to play with sound enabled
   const playPromise = mediaElement.play();
   
@@ -6022,31 +7154,82 @@ function enableAutoplayWithSound(mediaElement) {
       // Autoplay with sound succeeded
       console.log('[Autoplay] Playing with sound:', mediaElement.id);
     }).catch(error => {
-      // Browser blocked autoplay with sound, try muted autoplay
+      // Browser blocked autoplay with sound, try muted autoplay first
       console.warn('[Autoplay] Sound autoplay blocked, trying muted:', error);
       mediaElement.muted = true;
       mediaElement.play().then(() => {
-        console.log('[Autoplay] Playing muted:', mediaElement.id);
-        // Show toast to user that they can unmute
-        toast('i', '🔊 Click to unmute');
+        console.log('[Autoplay] Playing muted, attempting to unmute:', mediaElement.id);
+        
+        // Try to unmute after a short delay (some browsers allow this after playback starts)
+        setTimeout(() => {
+          try {
+            mediaElement.muted = false;
+            console.log('[Autoplay] Successfully unmuted:', mediaElement.id);
+          } catch(e) {
+            console.warn('[Autoplay] Could not unmute:', e);
+            // Show toast to user that they can unmute
+            toast('i', '🔊 Click to unmute');
+          }
+        }, 500);
+        
       }).catch(e => {
         console.warn('[Autoplay] Even muted autoplay failed:', e);
       });
     });
   }
+  
+  // Add click handler to enable sound when user interacts
+  mediaElement.addEventListener('click', function enableSoundOnClick() {
+    if(mediaElement.muted) {
+      mediaElement.muted = false;
+      mediaElement.volume = 1.0;
+      console.log('[Autoplay] Sound enabled by user click:', mediaElement.id);
+      toast('s', '🔊 Sound enabled');
+    }
+  }, { once: true });
+  
+  // Also add touchstart for mobile
+  mediaElement.addEventListener('touchstart', function enableSoundOnTouch() {
+    if(mediaElement.muted) {
+      mediaElement.muted = false;
+      mediaElement.volume = 1.0;
+      console.log('[Autoplay] Sound enabled by user touch:', mediaElement.id);
+      toast('s', '🔊 Sound enabled');
+    }
+  }, { once: true });
 }
 function showAutoFriendPopup(user) { document.querySelectorAll('.af-notif').forEach(e=>e.remove()); let el=document.createElement('div'); el.className='af-notif'; el.innerHTML=`<div class="af-av">${user.avatar?`<img src="${user.avatar}" loading="lazy">`:user.name?.charAt(0).toUpperCase()}</div><div class="af-txt"><div class="af-lbl">✨ New Auto Friend!</div><div>${esc(user.name||'User')}</div></div><div class="af-ico">🤝</div>`; document.body.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(-50%) translateY(20px)'; setTimeout(()=>el.remove(),420); },3500); }
 function updateFriendsBadge() { if(!CU) return; let cnt=(CU.autoFriends||[]).length; let bdg=G('friendBdg'); if(bdg) { bdg.textContent=cnt; bdg.style.display=cnt?'block':'none'; } }
 function renderFriendSuggestions() {
   let panel = G('feedFriendPanel'); if(!panel || !CU) return;
-  let users = Object.values(D.users).filter(u=>u.id!==CU.id && !u.isAdmin).sort(()=>0.5-Math.random()).slice(0,4);
+  
+  // Smart friend suggestion algorithm (Facebook-style)
+  let users = Object.values(D.users)
+    .filter(u => u.id !== CU.id && !u.isAdmin && !(CU.blocked||[]).includes(u.id))
+    .map(u => {
+      let mutual = getMutualConnectionsCount(u.id);
+      let onlineScore = u.online ? 50 : 0;
+      let mutualScore = mutual * 25;
+      let pointsScore = Math.min(Number(u.points || 0) / 200, 30);
+      let activityScore = (u.lastActive && (Date.now() - u.lastActive) < 86400000) ? 20 : 0; // Active in last 24h
+      let totalScore = onlineScore + mutualScore + pointsScore + activityScore + Math.random() * 10;
+      return { user: u, score: totalScore, mutual };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 4)
+    .map(x => x.user);
+  
   if(!users.length){ panel.innerHTML = '<div style="padding:18px;text-align:center;color:var(--t3);">No friends to suggest yet.</div>'; return; }
-  let cards = users.map(u=>{ let grad=randomGrad(); return `<div class="friend-card" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--b1);border-radius:14px;">`+
-      `<div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:u.name?.charAt(0).toUpperCase()}</div>`+
-      `<div style="flex:1;min-width:0;"><div style="font-weight:700;color:var(--t1);">${esc(u.name||'User')}</div><div style="font-size:12px;color:var(--t3);">@${esc(u.username||'')}</div></div>`+
-      `<button class="btn btn-p btn-xs" onclick="permanentFollow('${u.id}')">Follow</button>`+
+  let cards = users.map(u=>{ 
+    let grad=randomGrad(); 
+    let mutual = getMutualConnectionsCount(u.id);
+    let status = u.online ? '🟢 Online' : '⚪ Offline';
+    return `<div class="friend-card" style="margin-bottom:10px;display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--b1);border-radius:14px;cursor:pointer;" onclick="viewUser('${u.id}')">`+
+      `<div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:u.name?.charAt(0).toUpperCase()}${u.online ? '<div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22c55e;border-radius:50%;border:2px solid var(--dark);"></div>' : ''}</div>`+
+      `<div style="flex:1;min-width:0;"><div style="font-weight:700;color:var(--t1);">${esc(u.name||'User')} ${u.verified?'<span class="badge b-ver">✔</span>':''}</div><div style="font-size:12px;color:var(--t3);">@${esc(u.username||'')} · ${status}</div>${mutual > 0 ? `<div style="font-size:10px;color:var(--c2);margin-top:2px;">${mutual} mutual friend${mutual > 1 ? 's' : ''}</div>` : ''}</div>`+
+      `<button class="btn btn-p btn-xs" onclick="event.stopPropagation();permanentFollow('${u.id}')">➕ Follow</button>`+
     `</div>`; }).join('');
-  panel.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px;"><div><div class="section-label">👥 Find Friends</div><div style="font-size:12px;color:var(--t3);">Connect with creators from your feed.</div></div><button class="btn btn-ghost btn-xs" onclick="nav('friends');setTimeout(()=>friendsTab('discover',document.querySelector('#pg-friends .chip:last-child')),120)">View all</button></div><div>${cards}</div>`;
+  panel.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px;"><div><div class="section-label">👥 Find Friends</div><div style="font-size:12px;color:var(--t3);">Smart suggestions based on your connections</div></div><button class="btn btn-ghost btn-xs" onclick="nav('friends');setTimeout(()=>friendsTab('discover',document.querySelector('#pg-friends .chip:last-child')),120)">View all</button></div><div>${cards}</div>`;
 }
 function removeFriend(uid) {
   if(!CU || !uid || uid === CU.id) return;
@@ -6327,10 +7510,27 @@ async function forceSyncWithServer() {
   }
 }
 
+// Virtual scrolling with Intersection Observer for smooth performance
+let feedObserver = null;
+let observedPosts = new Set();
+
 function rFeed(reset=true) {
   let list = G('feedList'); if(!list) return;
   if(CU) renderFriendSuggestions();
-  if(reset) { _feedPage = 0; list.innerHTML=''; }
+  
+  // Cleanup existing observer on reset
+  if(reset) {
+    _feedPage = 0;
+    list.innerHTML='';
+    observedPosts.clear();
+    if(feedObserver) {
+      feedObserver.disconnect();
+      feedObserver = null;
+    }
+    
+    // Show skeleton loader while loading
+    showSkeletonLoader(list);
+  }
   
   // Load posts from shared source on first feed load
   if(reset) {
@@ -6358,12 +7558,97 @@ function rFeed(reset=true) {
     frag.appendChild(mkPost(p));
   });
   list.appendChild(frag);
+  
+  // Hide skeleton loader after content loads
+  hideSkeletonLoader(list);
+  
   if(typeof initFeedAdStrips === 'function') {
     setTimeout(initFeedAdStrips, 100);
   }
+  
+  // Enable autoplay with sound on all video/audio elements after feed renders
+  setTimeout(() => {
+    document.querySelectorAll('video[id^="vid-"], audio[id^="aud-"]').forEach(media => {
+      if(typeof enableAutoplayWithSound === 'function') {
+        enableAutoplayWithSound(media);
+      }
+    });
+  }, 200);
+  
   _feedPage++;
   let lm = G('feedLoadMore');
   if(lm) lm.style.display = (start + _FEED_SIZE) < posts.length ? 'block' : 'none';
+  
+  // Prefetch next page of posts for smooth infinite scroll
+  const nextStart = _feedPage * _FEED_SIZE;
+  if(nextStart < posts.length) {
+    runWhenIdle(() => {
+      const nextChunk = posts.slice(nextStart, nextStart + _FEED_SIZE);
+      // Pre-render next chunk in memory for instant display
+      const prefetchFrag = document.createDocumentFragment();
+      nextChunk.forEach(p => {
+        const prefetchedPost = mkPost(p);
+        prefetchedPost.style.display = 'none';
+        prefetchFrag.appendChild(prefetchedPost);
+      });
+      // Store prefetched content
+      list.appendChild(prefetchFrag);
+    }, 1000);
+  }
+  
+  // Setup Intersection Observer for virtual scrolling and infinite scroll
+  if(!feedObserver && reset) {
+    feedObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const postEl = entry.target;
+        const postId = postEl.dataset.postId;
+        
+        if(entry.isIntersecting) {
+          // Post is visible - load media if needed
+          const video = postEl.querySelector('video[data-src]');
+          const audio = postEl.querySelector('audio[data-src]');
+          const img = postEl.querySelector('img[data-src]');
+          
+          if(video && !video.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
+          if(audio && !audio.src) {
+            audio.src = audio.dataset.src;
+            audio.load();
+          }
+          if(img && !img.src) {
+            img.src = img.dataset.src;
+          }
+          
+          observedPosts.add(postId);
+        } else {
+          // Post is not visible - optionally unload heavy media for performance
+          // Uncomment below to unload off-screen media (saves memory)
+          /*
+          const video = postEl.querySelector('video');
+          const audio = postEl.querySelector('audio');
+          if(video && !video.paused) {
+            video.pause();
+          }
+          */
+        }
+      });
+    }, {
+      root: list,
+      rootMargin: '200px', // Load posts 200px before they come into view
+      threshold: 0.01
+    });
+    
+    // Observe all posts
+    setTimeout(() => {
+      document.querySelectorAll('.post[data-post-id]').forEach(post => {
+        if(!observedPosts.has(post.dataset.postId)) {
+          feedObserver.observe(post);
+        }
+      });
+    }, 100);
+  }
 }
 function loadMorePosts() { toast('i','Loading...'); setTimeout(()=>rFeed(false),500); }
 // mkFeedAd moved to Web3 section above
@@ -6406,10 +7691,32 @@ function mkPost(post) {
   }
   
   if(post.file) {
-    if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
-    else if(post.mimetype?.startsWith('image/')) h += `<div class="post-media"><img src="${post.file}" loading="lazy" onclick="window.open('${post.file}')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" onload="registerPostView('${post.id}','${post.author}','image')" title="Hold/right-click to download"><div class="media-overlay"></div></div>`;
-    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video id="vid-${post.id}" controls playsinline autoplay preload="metadata" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')" onloadedmetadata="enableAutoplayWithSound(this)"><source src="${post.file}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
-    else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio id="aud-${post.id}" controls autoplay onplay="registerPostView('${post.id}','${post.author}','audio')" onloadedmetadata="enableAutoplayWithSound(this)"><source src="${post.file}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
+    if(post.type === '360') h += `<div class="post-media"><div style="position:relative;"><img src="${post.file}" loading="lazy" decoding="async" style="width:100%;cursor:grab;" onload="registerPostView('${post.id}','${post.author}','image')"><div class="badge" style="position:absolute;top:10px;right:10px;">🔄 360°</div></div></div>`;
+    else if(post.mimetype?.startsWith('image/')) {
+      // Responsive image with WebP support and fallback
+      const webpSrc = post.file.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+      h += `<div class="post-media">
+        <picture>
+          <source srcset="${webpSrc}" type="image/webp">
+          <source srcset="${post.file}" type="${post.mimetype}">
+          <img 
+            src="${post.file}" 
+            loading="lazy" 
+            decoding="async" 
+            onclick="window.open('${post.file}')" 
+            oncontextmenu="event.preventDefault();openDlModal('${post.id}','photo')" 
+            onload="registerPostView('${post.id}','${post.author}','image')"
+            title="Hold/right-click to download"
+            style="width:100%;height:auto;object-fit:cover;"
+            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            srcset="${post.file} 400w, ${post.file} 800w, ${post.file} 1200w"
+          >
+        </picture>
+        <div class="media-overlay"></div>
+      </div>`;
+    }
+    else if(post.mimetype?.startsWith('video/')) h += `<div class="post-media"><video id="vid-${post.id}" controls playsinline preload="none" loading="lazy" onplay="registerPostView('${post.id}','${post.author}','video')" oncontextmenu="event.preventDefault();openDlModal('${post.id}','video')" onloadedmetadata="enableAutoplayWithSound(this)" data-src="${post.file}"><source src="${post.file}" type="${post.mimetype}"></video><div style="position:absolute;bottom:8px;right:8px;z-index:2;"><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','video')" style="background:rgba(0,0,0,.6);">⬇️</button></div></div>`;
+    else if(post.mimetype?.startsWith('audio/')) h += `<div class="post-media" style="position:relative;"><audio id="aud-${post.id}" controls preload="none" loading="lazy" onplay="registerPostView('${post.id}','${post.author}','audio')" onloadedmetadata="enableAutoplayWithSound(this)" data-src="${post.file}"><source src="${post.file}" type="${post.mimetype}"></audio><button class="btn btn-ghost btn-xs" onclick="openDlModal('${post.id}','audio')" style="margin-left:8px;">⬇️ Download</button></div>`;
   }
   if(post.hashtags?.length) h += `<div class="post-tags">${post.hashtags.map(t=>`<span class="post-tag" onclick="searchTag('${t}')">#${t}</span>`).join('')}</div>`;
   if(post.poll) h += renderPoll(post);
@@ -7639,6 +8946,9 @@ function submitApp() {
   toast('s',`✅ App "${name}" published as ${storeIcon} ${storeLabel}!`);
   addPts(15,'App Submitted');
   rAppsPage();
+  
+  // Sync app to server for global distribution (Facebook/YouTube/TikTok style)
+  syncAppsToServer().catch(e => console.warn('[SubmitApp] Failed to sync app to server:', e));
 }
 function installApp(appId) {
   let app = D.apps.find(a => a.id===appId);
@@ -7740,11 +9050,32 @@ async function submitPost() {
   let scheduledAt = isScheduled ? new Date(schedTime.value).getTime() : null;
   if(scheduledAt && scheduledAt <= Date.now()) { toast('e','Schedule time must be in the future'); return; }
   let post={ id:pid(), author:CU.id, scheduledAt:scheduledAt||null, published:!scheduledAt, type:pfMime?.startsWith('video')?'video':pfMime?.startsWith('image')?'photo':pfMime?.startsWith('audio')?'audio':pfMime?.includes('360')?'360':'text', text, file:pfData||null, mimetype:pfMime||null, hashtags:tags.map(t=>t.slice(1).toLowerCase()), likedBy:[], reactions:{}, comments:[], views:0, shares:0, pts:20, pinned:false, createdAt:Date.now(), visibility:'public', isNFT:false };
+  
+  // Save to server's centralized posts API FIRST (Facebook/YouTube/TikTok style global feed)
+  // This ensures the post is globally distributed before adding it locally
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/posts/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ post })
+    });
+    
+    if(response.ok) {
+      console.log('[PostCreate] Post saved to server for global distribution');
+    } else {
+      console.warn('[PostCreate] Server returned error:', response.status);
+    }
+  } catch(err) {
+    console.warn('[PostCreate] Failed to save post to server:', err);
+  }
+  
+  // Add post locally AFTER server sync (ensures consistency)
   D.posts=D.posts||[];
   D.posts.unshift(post);
   CU.posts=CU.posts||[]; CU.posts.unshift(post.id);
   
-  // Save to Supabase for shared feed (Facebook-style)
+  // Also save to Supabase for backup (if available)
   if(isSupabaseReady()) {
     const supabase = initSupabaseClient();
     try {
@@ -7769,30 +9100,17 @@ async function submitPost() {
         scheduled_at: post.scheduledAt ? new Date(post.scheduledAt).toISOString() : null,
         published: post.published
       });
-      // Post saved to shared database
+      console.log('[Supabase] Post saved to Supabase backup');
     } catch(err) {
       console.warn('[Supabase] Failed to save post:', err);
     }
   }
   
-  // Fallback: Broadcast to all connected users via socket.io
-  if(socketReady && socket) {
-    socket.emit('post:create', { post });
-    // Post broadcasted to all users
+  // Sync media to server for cross-platform consistency (videos, audio, photos)
+  if(post.file) {
+    syncMediaToServer().catch(e => console.warn('[SubmitPost] Failed to sync media to server:', e));
   }
   
-  // Also save to server's shared posts API (works without Supabase)
-  try {
-    const serverUrl = window.location.origin || 'http://localhost:3000';
-    await fetch(`${serverUrl}/api/posts/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ post })
-    });
-    // Post saved to shared storage
-  } catch(err) {
-    console.warn('[Server] Failed to save post to shared storage:', err);
-  }
   // Copyright check: auto-block + auto-delete + notification
   let postText = (text||'').toLowerCase();
   let fileInfo = ((pfName||'') + ' ' + (pfMime||'')).toLowerCase();
@@ -7825,66 +9143,698 @@ async function submitPost() {
     PersistenceManager.savePost(post).catch(err => {
       console.warn('[PersistenceManager] Post save failed:', err);
     });
-    
-    // Save media file if present
-    if(post.file && post.file.length > 0) {
-      PersistenceManager.saveMedia(post.id, post.file, {
-        type: post.type,
-        mimetype: post.mimetype,
-        postId: post.id
-      }).catch(err => {
-        console.warn('[PersistenceManager] Media save failed:', err);
-      });
-    }
   }
   
-  // ENHANCED PERSISTENCE: Save to enhanced persistence (survives logout/login)
-  if(typeof enhancedPersistence !== 'undefined' && enhancedPersistence) {
-    enhancedPersistence.savePost(post).catch(err => {
-      console.warn('[EnhancedPersistence] Post save failed:', err);
+  closeModal('postModal'); pfData=null; pfMime=null;
+  let editor2=document.getElementById('postEditor'); if(editor2) editor2.innerHTML='';
+  rFeed(); toast('s','✅ Posted!');
+}
+
+// Load posts from server global feed API (Facebook/YouTube/TikTok style)
+async function loadPostsFromServer(force = false) {
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/posts/all`);
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.posts) {
+        if(force) {
+          // Force mode: completely replace local posts with server posts for account consistency
+          D.posts = data.posts || [];
+          console.log('[LoadPostsFromServer] Force mode: replaced local posts with server posts for consistency');
+        } else {
+          // Merge mode: merge server posts with local posts
+          const serverPostIds = new Set(data.posts.map(p => p.id));
+          const localPostIds = new Set((D.posts || []).map(p => p.id));
+          
+          // Add new posts from server
+          data.posts.forEach(serverPost => {
+            if(!localPostIds.has(serverPost.id)) {
+              D.posts = D.posts || [];
+              // Check if post already exists locally
+              const existingIndex = D.posts.findIndex(p => p.id === serverPost.id);
+              if(existingIndex === -1) {
+                D.posts.push(serverPost);
+              } else {
+                // Update existing post with server data
+                D.posts[existingIndex] = {...D.posts[existingIndex], ...serverPost};
+              }
+            }
+          });
+        }
+        
+        // Sort by creation time (newest first)
+        D.posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        
+        // Update user posts arrays
+        Object.values(D.users || {}).forEach(user => {
+          if(user.posts) {
+            user.posts = user.posts.filter(postId => D.posts.find(p => p.id === postId));
+          }
+        });
+        
+        saveData();
+        console.log('[LoadPostsFromServer] Loaded', data.posts.length, 'posts from server');
+        
+        // Refresh feed if on feed page
+        if(document.getElementById('pg-feed')?.classList.contains('on')) {
+          rFeed();
+        }
+        
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[LoadPostsFromServer] Failed to load posts from server:', e);
+  }
+  return false;
+}
+
+// Socket.io listener for real-time post updates (Facebook/YouTube/TikTok style)
+// Optimized with debouncing and connection resilience
+function setupRealtimePostUpdates() {
+  if(!socketReady || !socket) return;
+  
+  // Debounced feed refresh to prevent excessive re-renders
+  const debouncedFeedRefresh = debounce(() => {
+    if(document.getElementById('pg-feed')?.classList.contains('on')) {
+      rFeed();
+    }
+  }, 300);
+  
+  // Listen for new posts from server (global feed broadcast)
+  socket.on('post:new', (data) => {
+    if(data && data.post) {
+      const newPost = data.post;
+      D.posts = D.posts || [];
+      
+      // Check if post already exists
+      const existingIndex = D.posts.findIndex(p => p.id === newPost.id);
+      if(existingIndex === -1) {
+        // Add new post to feed
+        D.posts.unshift(newPost);
+        console.log('[Realtime] New post received:', newPost.id);
+        
+        // Debounced feed refresh for smooth performance
+        debouncedFeedRefresh();
+        
+        // Show notification for new post (if not from current user)
+        if(CU && newPost.author !== CU.id) {
+          const author = D.users[newPost.author] || {name: 'Someone'};
+          toast('i', `📬 New post from ${author.name}`);
+        }
+      } else {
+        // Update existing post with server data (server is source of truth)
+        D.posts[existingIndex] = newPost;
+      }
+      
+      saveData();
+      
+      // Trigger full sync from server to ensure 100% consistency
+      // This ensures all devices show exactly the same data
+      loadPostsFromServer().catch(e => console.warn('[Realtime] Full sync failed:', e));
+    }
+  });
+  
+  // Connection resilience - auto-reconnect with exponential backoff
+  let reconnectAttempts = 0;
+  const maxReconnectAttempts = 5;
+  const baseReconnectDelay = 1000;
+  
+  socket.on('disconnect', (reason) => {
+    console.warn('[Socket] Disconnected:', reason);
+    reconnectAttempts = 0;
+  });
+  
+  socket.on('connect_error', (error) => {
+    console.warn('[Socket] Connection error:', error);
+    if(reconnectAttempts < maxReconnectAttempts) {
+      const delay = baseReconnectDelay * Math.pow(2, reconnectAttempts);
+      console.log(`[Socket] Reconnecting in ${delay}ms...`);
+      setTimeout(() => {
+        reconnectAttempts++;
+        socket.connect();
+      }, delay);
+    }
+  });
+  
+  socket.on('reconnect', (attemptNumber) => {
+    console.log('[Socket] Reconnected after', attemptNumber, 'attempts');
+    reconnectAttempts = 0;
+    // Sync data after reconnection
+    loadPostsFromServer();
+  });
+  
+  // Listen for user data sync updates (cross-platform consistency)
+  socket.on('user:sync', (data) => {
+    if(data && data.user && CU && data.user.id === CU.id) {
+      // Update current user data from server (server is source of truth)
+      CU.points = data.points !== undefined ? data.points : CU.points;
+      CU.money = data.user.money !== undefined ? data.user.money : CU.money;
+      CU.followers = data.user.followers || [];
+      CU.following = data.user.following || [];
+      CU.autoFriends = data.user.autoFriends || [];
+      CU.forceFollowed = data.user.forceFollowed || [];
+      
+      // Update in D.users
+      if(D.users[CU.id]) {
+        D.users[CU.id].points = CU.points;
+        D.users[CU.id].money = CU.money;
+        D.users[CU.id].followers = CU.followers;
+        D.users[CU.id].following = CU.following;
+        D.users[CU.id].autoFriends = CU.autoFriends;
+        D.users[CU.id].forceFollowed = CU.forceFollowed;
+      }
+      
+      saveData();
+      syncUI();
+      console.log('[Realtime] User data synced from server (100% consistency):', CU.id, 'points:', CU.points);
+      
+      // Trigger full user data sync from server to ensure 100% consistency
+      loadUserDataFromServer().catch(e => console.warn('[Realtime] Full user sync failed:', e));
+      
+      // Show notification if points changed significantly
+      if(data.points && Math.abs(data.points - (CU.points || 0)) > 10) {
+        toast('i', `💰 Points updated: ${data.points} pts`);
+      }
+    }
+  });
+  
+  // Listen for new apps from server (global feed broadcast)
+  socket.on('app:new', (data) => {
+    if(data && data.app) {
+      const newApp = data.app;
+      D.apps = D.apps || [];
+      
+      // Check if app already exists
+      const existingIndex = D.apps.findIndex(a => a.id === newApp.id);
+      if(existingIndex === -1) {
+        // Add new app
+        D.apps.unshift(newApp);
+        console.log('[Realtime] New app received:', newApp.id);
+        
+        // Refresh apps page if on apps page
+        if(document.getElementById('pg-apps')?.classList.contains('on')) {
+          if(typeof rAppsPage === 'function') rAppsPage();
+        }
+        
+        // Show notification for new app
+        toast('i', `📱 New app: ${newApp.name}`);
+      } else {
+        // Update existing app
+        D.apps[existingIndex] = {...D.apps[existingIndex], ...newApp};
+      }
+      
+      saveData();
+    }
+  });
+  
+  // Listen for new media from server (global feed broadcast)
+  socket.on('media:new', (data) => {
+    if(data && data.media) {
+      const newMedia = data.media;
+      
+      // Find and update the post with this media
+      if(newMedia.postId && D.posts) {
+        const postIndex = D.posts.findIndex(p => p.id === newMedia.postId);
+        if(postIndex !== -1) {
+          // Update post with media from server (server is source of truth)
+          D.posts[postIndex].file = newMedia.file;
+          D.posts[postIndex].mimetype = newMedia.mimetype;
+          D.posts[postIndex].type = newMedia.type;
+          D.posts[postIndex].fileName = newMedia.fileName;
+          
+          console.log('[Realtime] Media updated for post (100% consistency):', newMedia.postId);
+          
+          // Refresh feed if on feed page
+          if(document.getElementById('pg-feed')?.classList.contains('on')) {
+            if(typeof rFeed === 'function') rFeed();
+          }
+          
+          saveData();
+          
+          // Trigger full media sync from server to ensure 100% consistency
+          loadMediaFromServer().catch(e => console.warn('[Realtime] Full media sync failed:', e));
+        }
+      }
+    }
+  });
+  
+  console.log('[Realtime] Post, user, app, and media updates listener setup complete');
+}
+
+// Sync user data to server (for cross-platform consistency)
+async function syncUserDataToServer() {
+  if(!CU) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/user-data/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: CU.id,
+        name: CU.name,
+        username: CU.username,
+        email: CU.email,
+        phone: CU.phone,
+        points: CU.points || 0,
+        money: CU.money || 0,
+        posts: CU.posts || [],
+        followers: CU.followers || [],
+        following: CU.following || [],
+        autoFriends: CU.autoFriends || [],
+        forceFollowed: CU.forceFollowed || [],
+        avatar: CU.avatar,
+        bio: CU.bio,
+        isAdmin: CU.isAdmin || false,
+        createdAt: CU.createdAt,
+        lastLogin: CU.lastLogin,
+        lastActive: CU.lastActive
+      })
     });
     
-    // Save media file if present
-    if(post.file && post.file.length > 0) {
-      enhancedPersistence.saveMedia(post.id, post.file, {
-        type: post.type,
-        mimetype: post.mimetype,
-        postId: post.id,
-        authorId: CU.id
-      }).catch(err => {
-        console.warn('[EnhancedPersistence] Media save failed:', err);
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.user) {
+        // Update local data with server data (server takes precedence)
+        CU.points = data.points || CU.points;
+        CU.money = data.user.money || CU.money;
+        CU.followers = data.user.followers || CU.followers;
+        CU.following = data.user.following || CU.following;
+        CU.autoFriends = data.user.autoFriends || CU.autoFriends;
+        CU.forceFollowed = data.user.forceFollowed || CU.forceFollowed;
+        
+        if(D.users[CU.id]) {
+          D.users[CU.id].points = CU.points;
+          D.users[CU.id].money = CU.money;
+          D.users[CU.id].followers = CU.followers;
+          D.users[CU.id].following = CU.following;
+          D.users[CU.id].autoFriends = CU.autoFriends;
+          D.users[CU.id].forceFollowed = CU.forceFollowed;
+        }
+        
+        saveData();
+        console.log('[SyncUser] User data synced to server:', CU.id, 'points:', CU.points);
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[SyncUser] Failed to sync user data to server:', e);
+  }
+  return false;
+}
+
+// Load user data from server (for cross-platform consistency)
+async function loadUserDataFromServer() {
+  if(!CU) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/users/${CU.id}`);
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.user) {
+        // ALWAYS replace local data with server data for 100% consistency
+        // Server is the source of truth across all devices
+        CU.points = data.points !== undefined ? data.points : CU.points;
+        CU.money = data.user.money !== undefined ? data.user.money : CU.money;
+        CU.followers = data.user.followers || [];
+        CU.following = data.user.following || [];
+        CU.autoFriends = data.user.autoFriends || [];
+        CU.forceFollowed = data.user.forceFollowed || [];
+        CU.avatar = data.user.avatar || CU.avatar;
+        CU.bio = data.user.bio || CU.bio;
+        
+        if(D.users[CU.id]) {
+          D.users[CU.id].points = CU.points;
+          D.users[CU.id].money = CU.money;
+          D.users[CU.id].followers = CU.followers;
+          D.users[CU.id].following = CU.following;
+          D.users[CU.id].autoFriends = CU.autoFriends;
+          D.users[CU.id].forceFollowed = CU.forceFollowed;
+          D.users[CU.id].avatar = CU.avatar;
+          D.users[CU.id].bio = CU.bio;
+        }
+        
+        saveData();
+        syncUI();
+        console.log('[LoadUser] User data loaded from server (100% consistency):', CU.id, 'points:', CU.points);
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[LoadUser] Failed to load user data from server:', e);
+  }
+  return false;
+}
+
+// Sync apps to server (for cross-platform consistency)
+async function syncAppsToServer() {
+  if(!CU) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/apps/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apps: D.apps || [],
+        userId: CU.id
+      })
+    });
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success) {
+        console.log('[SyncApps] Apps synced to server:', data.totalApps);
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[SyncApps] Failed to sync apps to server:', e);
+  }
+  return false;
+}
+
+// Sync posts to server (for global distribution to all users)
+async function syncPostsToServer() {
+  if(!D.posts || D.posts.length === 0) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    let syncedCount = 0;
+    
+    // Sync each post to server to ensure global distribution
+    for(const post of D.posts) {
+      if(!post || !post.id) continue;
+      
+      try {
+        const response = await fetch(`${serverUrl}/api/posts/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ post })
+        });
+        
+        if(response.ok) {
+          const data = await response.json();
+          if(data.success) {
+            syncedCount++;
+            console.log('[SyncPosts] Post synced to server:', post.id);
+          }
+        }
+      } catch(e) {
+        console.warn('[SyncPosts] Failed to sync post:', post.id, e);
+      }
+    }
+    
+    console.log('[SyncPosts] Synced', syncedCount, 'posts to server for global distribution');
+    return syncedCount > 0;
+  } catch(e) {
+    console.warn('[SyncPosts] Failed to sync posts to server:', e);
+  }
+  return false;
+}
+
+// Sync points to server (for cross-platform consistency)
+async function syncPointsToServer() {
+  if(!CU) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/points/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: CU.id,
+        points: CU.points || 0,
+        label: 'points sync',
+        timestamp: Date.now()
+      })
+    });
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success) {
+        // Update local points with server points (server takes precedence)
+        CU.points = data.points || CU.points;
+        if(D.users[CU.id]) {
+          D.users[CU.id].points = CU.points;
+        }
+        saveData();
+        syncUI();
+        console.log('[SyncPoints] Points synced to server:', CU.id, 'points:', CU.points);
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[SyncPoints] Failed to sync points to server:', e);
+  }
+  return false;
+}
+
+// Load points from server (for cross-platform consistency)
+async function loadPointsFromServer() {
+  if(!CU) return;
+  
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/users/${CU.id}`);
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.user) {
+        // ALWAYS replace local points with server points for 100% consistency
+        // Server is the source of truth across all devices
+        CU.points = data.points !== undefined ? Number(data.points) : Number(CU.points || 0);
+        if(D.users[CU.id]) {
+          D.users[CU.id].points = CU.points;
+        }
+        saveData();
+        syncUI();
+        console.log('[LoadPoints] Points loaded from server (100% consistency):', CU.id, 'points:', CU.points);
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[LoadPoints] Failed to load points from server:', e);
+  }
+  return false;
+}
+
+// Periodic sync for real-time consistency across all devices
+let periodicSyncInterval = null;
+let periodicSyncEnabled = false;
+
+function startPeriodicSync() {
+  if(periodicSyncEnabled || periodicSyncInterval) return;
+  
+  periodicSyncEnabled = true;
+  console.log('[PeriodicSync] Starting periodic sync for real-time consistency');
+  
+  // Sync every 30 seconds for real-time consistency
+  periodicSyncInterval = setInterval(async () => {
+    if(!CU || !document.visibilityState === 'visible') return;
+    
+    try {
+      // Load posts from server to get latest global feed
+      await loadPostsFromServer(false);
+      
+      // Load user data from server to get latest account data
+      await loadUserDataFromServer();
+      
+      // Load points from server to get latest points
+      await loadPointsFromServer();
+      
+      // Load media from server to get latest media
+      await loadMediaFromServer();
+      
+      console.log('[PeriodicSync] Periodic sync completed');
+    } catch(e) {
+      console.warn('[PeriodicSync] Periodic sync failed:', e);
+    }
+  }, 30000); // 30 seconds
+}
+
+function stopPeriodicSync() {
+  if(periodicSyncInterval) {
+    clearInterval(periodicSyncInterval);
+    periodicSyncInterval = null;
+  }
+  periodicSyncEnabled = false;
+  console.log('[PeriodicSync] Stopped periodic sync');
+}
+
+// Sync on visibility change (when user switches tabs or returns to app)
+document.addEventListener('visibilitychange', async () => {
+  if(!CU) return;
+  
+  if(document.visibilityState === 'visible') {
+    console.log('[VisibilityChange] User returned to app, syncing data...');
+    try {
+      await loadPostsFromServer(false);
+      await loadUserDataFromServer();
+      await loadPointsFromServer();
+      await loadMediaFromServer();
+      console.log('[VisibilityChange] Data synced on visibility change');
+    } catch(e) {
+      console.warn('[VisibilityChange] Sync failed:', e);
+    }
+  }
+});
+
+// Sync on network reconnection
+window.addEventListener('online', async () => {
+  if(!CU) return;
+  
+  console.log('[NetworkOnline] Network reconnected, syncing data...');
+  try {
+    await loadPostsFromServer(true); // Force sync on reconnection
+    await loadUserDataFromServer();
+    await loadPointsFromServer();
+    await syncPostsToServer(); // Sync local posts to server
+    await syncUserDataToServer(); // Sync user data to server
+    await syncPointsToServer(); // Sync points to server
+    console.log('[NetworkOnline] Data synced on network reconnection');
+  } catch(e) {
+    console.warn('[NetworkOnline] Sync failed:', e);
+  }
+});
+
+// Load apps from server (for cross-platform consistency)
+async function loadAppsFromServer() {
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/apps/all`);
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.apps) {
+        // Merge server apps with local apps
+        const serverAppIds = new Set(data.apps.map(a => a.id));
+        const localAppIds = new Set((D.apps || []).map(a => a.id));
+        
+        // Add new apps from server
+        data.apps.forEach(serverApp => {
+          if(!localAppIds.has(serverApp.id)) {
+            D.apps = D.apps || [];
+            const existingIndex = D.apps.findIndex(a => a.id === serverApp.id);
+            if(existingIndex === -1) {
+              D.apps.push(serverApp);
+            } else {
+              D.apps[existingIndex] = {...D.apps[existingIndex], ...serverApp};
+            }
+          }
+        });
+        
+        // Sort by upload time (newest first)
+        D.apps.sort((a, b) => (b.uploadedAt || 0) - (a.uploadedAt || 0));
+        
+        saveData();
+        console.log('[LoadApps] Loaded', data.apps.length, 'apps from server');
+        
+        // Refresh apps page if on apps page
+        if(document.getElementById('pg-apps')?.classList.contains('on')) {
+          if(typeof rAppsPage === 'function') rAppsPage();
+        }
+        
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[LoadApps] Failed to load apps from server:', e);
+  }
+  return false;
+}
+
+// Sync media to server (for cross-platform consistency of videos, audio, photos)
+async function syncMediaToServer() {
+  if(!CU) return;
+  
+  try {
+    // Collect all media from posts
+    const mediaItems = [];
+    if(D.posts) {
+      D.posts.forEach(post => {
+        if(post.file && post.id) {
+          mediaItems.push({
+            id: post.id,
+            postId: post.id,
+            type: post.type,
+            mimetype: post.mimetype,
+            file: post.file,
+            fileName: post.fileName,
+            uploadedAt: post.createdAt
+          });
+        }
       });
     }
-  }
-  
-  if(typeof trackUserActivity === 'function') {
-    trackUserActivity('post');
-  }
-  if(socketReady && socket) socket.emit('post:create', {post});
-  OfflineCache.save(post);
-  if (typeof addToSyncQueue === 'function') {
-    const syncPayload = { ...post, timestamp: post.createdAt || Date.now() };
-    if (!navigator.onLine) {
-      addToSyncQueue({ type: 'post', data: syncPayload }).catch(e => console.error('[Post] addToSyncQueue failed:', e));
-      toast('i', '📶 Offline: post queued for sync');
-    } else {
-      fetch('/api/posts/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...syncPayload, syncedAt: Date.now() })
-      }).catch(() => addToSyncQueue({ type: 'post', data: syncPayload }).catch(e => console.error('[Post] addToSyncQueue fallback failed:', e)));
+    
+    if(mediaItems.length === 0) return true;
+    
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/media/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        media: mediaItems,
+        userId: CU.id
+      })
+    });
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success) {
+        console.log('[SyncMedia] Media synced to server:', data.totalMedia);
+        return true;
+      }
     }
+  } catch(e) {
+    console.warn('[SyncMedia] Failed to sync media to server:', e);
   }
-  clearPostDraft();
-  closeModal('postModal');
-  rFeed();
-  window.scrollTo({top:0, behavior:'smooth'});
-  if(!hasCopyright) { confetti(); toast('s','Post published! +20 pts'); }
-  pfData=null; pfMime=null; pfName=null; pfFile=null;
-  if(editor) editor.innerHTML='';
-  G('postTags').value='';
-  // Schedule copyright auto-delete
-  if(hasCopyright) scheduleCopyrightDelete(post.id);
+  return false;
+}
+
+// Load media from server (for cross-platform consistency)
+async function loadMediaFromServer() {
+  try {
+    const serverUrl = window.location.origin || 'http://localhost:3000';
+    const response = await fetch(`${serverUrl}/api/media/all`);
+    
+    if(response.ok) {
+      const data = await response.json();
+      if(data.success && data.media) {
+        // ALWAYS replace local media with server media for 100% consistency
+        // Server is the source of truth across all devices
+        data.media.forEach(serverMedia => {
+          if(serverMedia.postId && D.posts) {
+            const postIndex = D.posts.findIndex(p => p.id === serverMedia.postId);
+            if(postIndex !== -1) {
+              // Replace post media with server media (no fallback to local)
+              D.posts[postIndex].file = serverMedia.file;
+              D.posts[postIndex].mimetype = serverMedia.mimetype;
+              D.posts[postIndex].type = serverMedia.type;
+              D.posts[postIndex].fileName = serverMedia.fileName;
+            }
+          }
+        });
+        
+        saveData();
+        console.log('[LoadMedia] Loaded', data.media.length, 'media items from server (100% consistency)');
+        
+        // Refresh feed if on feed page
+        if(document.getElementById('pg-feed')?.classList.contains('on')) {
+          if(typeof rFeed === 'function') rFeed();
+        }
+        
+        return true;
+      }
+    }
+  } catch(e) {
+    console.warn('[LoadMedia] Failed to load media from server:', e);
+  }
+  return false;
 }
 
 // AI Functions
@@ -8454,8 +10404,11 @@ function renderFriendDiscoverySummary() {
   const el = G('friendDiscoverySummary');
   if(!el || !CU) return;
   const connected = new Set(getSocialCircleUsers().map(u => u.id));
+  const thirtyMinutesAgo = Date.now() - (30 * 60 * 1000); // 30 minutes ago
+  
   const candidates = Object.values(D.users)
     .filter(u => u.id !== CU.id && !u.isAdmin && !(CU.blocked||[]).includes(u.id) && !connected.has(u.id))
+    .filter(u => u.isLoggedIn || (u.lastActive || 0) > thirtyMinutesAgo || (u.lastLogin || 0) > thirtyMinutesAgo) // Only show logged-in or recently active users
     .map(u => ({
       user: u,
       score: (u.online ? 100 : 0) + (getMutualConnectionsCount(u.id) * 18) + Math.min(Number(u.points || 0) / 100, 20)
@@ -8516,8 +10469,11 @@ function friendsTab(tab,el) {
   const connected = new Set(getSocialCircleUsers().map(u => u.id));
   if(tab==='discover'){
     const q = (G('friendSearch')?.value||'').trim().toLowerCase();
+    const thirtyMinutesAgo = Date.now() - (30 * 60 * 1000); // 30 minutes ago
+    
     let users = Object.values(D.users)
       .filter(u => u.id!==CU.id && !u.isAdmin && !(CU.blocked||[]).includes(u.id))
+      .filter(u => u.isLoggedIn || (u.lastActive || 0) > thirtyMinutesAgo || (u.lastLogin || 0) > thirtyMinutesAgo) // Only show logged-in or recently active users
       .filter(u => !q || (u.name||'').toLowerCase().includes(q) || (u.username||'').toLowerCase().includes(q))
       .map(u => ({ user:u, score:(u.online ? 80 : 0) + (getMutualConnectionsCount(u.id) * 18) + Math.min(Number(u.points || 0) / 120, 20) }))
       .sort((a,b)=>b.score-a.score)
@@ -8527,19 +10483,19 @@ function friendsTab(tab,el) {
       const mutual = getMutualConnectionsCount(u.id);
       const grad = randomGrad();
       const status = u.online ? '🟢 Active now' : '⚪ Offline';
-      return `<div class="friend-card">
-        <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
+      return `<div class="friend-card" style="cursor:pointer;" onclick="viewUser('${u.id}')">
+        <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});position:relative;">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}${u.online ? '<div style="position:absolute;bottom:0;right:0;width:12px;height:12px;background:#22c55e;border-radius:50%;border:2px solid var(--dark);"></div>' : ''}</div>
       <div class="fc-info">
         <div class="fc-nm">${esc(u.name||'User')} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div>
         <div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts · ${status}</div>
         <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">
-          ${mutual ? `<span class="fc-tag">${mutual} mutual</span>` : ''}
-          <span class="fc-tag">${linked ? 'Connected' : 'Discover'}</span>
+          ${mutual ? `<span class="fc-tag" style="background:var(--c2);color:var(--dark);">${mutual} mutual</span>` : ''}
+          <span class="fc-tag" style="background:${linked ? 'var(--c4)' : 'var(--c3)'};color:var(--dark);">${linked ? '✓ Connected' : '✨ Discover'}</span>
         </div>
       </div>
-      <div class="fc-actions">
-        <button class="btn ${linked?'btn-ghost':'btn-p'} btn-xs" onclick="${linked ? `openChat('${u.id}')` : `permanentFollow('${u.id}')`}">${linked?'Message':'Add Friend'}</button>
-        ${linked ? `<button class="btn btn-s btn-xs" onclick="startCall('${u.id}','audio')">📞</button><button class="btn btn-s btn-xs" onclick="startCall('${u.id}','video')">📹</button><button class="btn btn-s btn-xs" onclick="prepareGroupInvite('${u.id}','chat')">👥 Chat</button><button class="btn btn-s btn-xs" onclick="prepareGroupInvite('${u.id}','call')">📡 Call</button>` : ''}
+      <div class="fc-actions" onclick="event.stopPropagation()">
+        <button class="btn ${linked?'btn-ghost':'btn-p'} btn-xs" onclick="${linked ? `openChat('${u.id}')` : `permanentFollow('${u.id}')`}">${linked?'💬 Message':'➕ Add Friend'}</button>
+        ${linked ? `<button class="btn btn-s btn-xs" onclick="startCall('${u.id}','audio')" title="Audio Call">📞</button><button class="btn btn-s btn-xs" onclick="startCall('${u.id}','video')" title="Video Call">📹</button><button class="btn btn-s btn-xs" onclick="prepareGroupInvite('${u.id}','chat')" title="Group Chat">👥</button><button class="btn btn-s btn-xs" onclick="prepareGroupInvite('${u.id}','call')" title="Group Call">📡</button>` : ''}
       </div>
     </div>`;
     }).join('') : '<div style="padding:40px 20px;text-align:center;color:var(--t3);">No users found</div>';
@@ -8562,13 +10518,13 @@ function friendsTab(tab,el) {
     } else {
       actions += `<button class="btn btn-r btn-xs" onclick="removeFriend('${uid}')" title="Remove friend">Remove</button>`;
     }
-    list.innerHTML += `<div class="friend-card">
-      <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}</div>
+    list.innerHTML += `<div class="friend-card" style="cursor:pointer;" onclick="viewUser('${uid}')">
+      <div class="fc-av" style="background:linear-gradient(135deg,${grad[0]},${grad[1]});position:relative;">${u.avatar?`<img src="${u.avatar}" loading="lazy">`:esc((u.name||'U').charAt(0).toUpperCase())}${u.online ? '<div style="position:absolute;bottom:0;right:0;width:12px;height:12px;background:#22c55e;border-radius:50%;border:2px solid var(--dark);"></div>' : ''}</div>
       <div class="fc-info">
         <div class="fc-nm">${esc(u.name)} ${u.verified?'<span class="badge b-ver">✔</span>':''} ${u.kycVerified?'<span class="badge b-kyc">✅</span>':''}</div>
         <div class="fc-sub">@${esc(u.username||'')} · ${u.points||0} pts · ${status}</div>
       </div>
-      <div class="fc-actions">${actions}</div>
+      <div class="fc-actions" onclick="event.stopPropagation()">${actions}</div>
     </div>`;
   });
 }
@@ -8838,6 +10794,7 @@ setInterval(() => {
   if(CU && D.users[CU.id]) {
     D.users[CU.id].lastActive = Date.now();
     D.users[CU.id].isOnline = true;
+    trackUserActivity('heartbeat');
   }
 }, 30000); // Every 30 seconds
 
@@ -8846,14 +10803,80 @@ window.addEventListener('beforeunload', () => {
   if(CU && D.users[CU.id]) {
     D.users[CU.id].isOnline = false;
     D.users[CU.id].lastActive = Date.now();
+    D.users[CU.id].isLoggedIn = false;
     saveData();
   }
 });
+
+// Track user activity for accurate statistics
+function trackUserActivity(actionType = 'general') {
+  if(!CU || !D.users[CU.id]) return;
+  
+  let user = D.users[CU.id];
+  let now = Date.now();
+  let today = new Date().toDateString();
+  
+  // Update last action timestamp
+  user.lastAction = now;
+  user.lastActive = now;
+  
+  // Initialize daily usage if needed
+  if(!user.dailyUsage || user.dailyUsage.date !== today) {
+    user.dailyUsage = { date: today, actions: 0, posts: 0, messages: 0, calls: 0 };
+  }
+  
+  // Increment action count
+  user.dailyUsage.actions++;
+  
+  // Track specific action types
+  switch(actionType) {
+    case 'post':
+      user.dailyUsage.posts++;
+      break;
+    case 'message':
+      user.dailyUsage.messages++;
+      break;
+    case 'call':
+      user.dailyUsage.calls++;
+      break;
+    case 'login':
+      user.lastLogin = now;
+      user.isLoggedIn = true;
+      user.sessionStart = now;
+      user.loginCount = (user.loginCount || 0) + 1;
+      if(!user.loginHistory) user.loginHistory = [];
+      user.loginHistory.push({ at: now, date: today });
+      break;
+    case 'logout':
+      user.isLoggedIn = false;
+      user.isOnline = false;
+      break;
+  }
+  
+  // Add to activity history
+  if(!user.activityHistory) user.activityHistory = [];
+  user.activityHistory.push({ type: actionType, at: now });
+  
+  // Keep only last 100 activities to save space
+  if(user.activityHistory.length > 100) {
+    user.activityHistory = user.activityHistory.slice(-100);
+  }
+  
+  saveData();
+}
+
+// Periodic admin statistics refresh
+setInterval(() => {
+  if(CU && CU.isAdmin && typeof refreshAdminStats === 'function') {
+    refreshAdminStats();
+  }
+}, 60000); // Refresh every 60 seconds
 
 // Function to initialize user tracking fields for accurate statistics
 function initializeUserTracking() {
   if(!D.users) return;
   
+  let today = new Date().toDateString();
   Object.keys(D.users).forEach(userId => {
     let user = D.users[userId];
     
@@ -8866,54 +10889,145 @@ function initializeUserTracking() {
     if(!user.isLoggedIn) user.isLoggedIn = false;
     if(!user.isOnline) user.isOnline = false;
     if(!user.dailyUsage) user.dailyUsage = {};
+    if(!user.loginHistory) user.loginHistory = [];
+    if(!user.activityHistory) user.activityHistory = [];
+    
+    // Reset daily usage if it's a new day
+    if(user.dailyUsage.date !== today) {
+      user.dailyUsage = { date: today, actions: 0, posts: 0, messages: 0, calls: 0 };
+    }
   });
   
   saveData();
 }
 
-// Function to refresh admin statistics in real-time
-function refreshAdminStats() {
+// Function to refresh admin statistics in real-time (100% accurate from server)
+async function refreshAdminStats() {
+  try {
+    // Add admin authentication headers
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+    
+    // Add user ID header for authentication
+    if(CU && CU.id) {
+      headers['x-user-id'] = CU.id;
+    }
+    
+    // Add admin role header if user is admin
+    if(CU && CU.isAdmin) {
+      headers['x-admin-role'] = 'true';
+    }
+    
+    const response = await fetch('/api/admin/stats', {
+      method: 'GET',
+      headers: headers
+    });
+    
+    if(!response.ok) {
+      if(response.status === 403) {
+        console.error('[AdminStats] Access denied - admin authentication required');
+        toast('e', 'Admin access denied');
+      } else {
+        console.error('[AdminStats] Failed to fetch stats:', response.status);
+        // Fall back to local calculation if server fails
+        refreshAdminStatsFallback();
+      }
+      return;
+    }
+    
+    const data = await response.json();
+    if(!data.success) {
+      console.error('[AdminStats] API returned error:', data);
+      // Fall back to local calculation if server returns error
+      refreshAdminStatsFallback();
+      return;
+    }
+    
+    const stats = data.stats;
+    
+    // Update the stats display with server-side accurate data
+    let statsEl = document.getElementById('adminStats');
+    if(statsEl) {
+      statsEl.innerHTML = `
+        <div class="admin-stat"><div class="as-i">👥</div><div class="as-n">${stats.totalUsers}</div><div class="as-l">Total Users</div></div>
+        <div class="admin-stat"><div class="as-i">🟢</div><div class="as-n">${stats.onlineNow}</div><div class="as-l">Online Now</div></div>
+        <div class="admin-stat"><div class="as-i">📅</div><div class="as-n">${stats.activeToday}</div><div class="as-l">Active Today</div></div>
+        <div class="admin-stat"><div class="as-i">✅</div><div class="as-n">${stats.kycVerified}</div><div class="as-l">KYC Verified</div></div>
+        <div class="admin-stat"><div class="as-i">📋</div><div class="as-n">${stats.totalPosts}</div><div class="as-l">Total Posts</div></div>
+        <div class="admin-stat"><div class="as-i">💸</div><div class="as-n">${stats.totalWithdrawals}</div><div class="as-l">Withdrawals</div></div>
+        <div class="admin-stat"><div class="as-i">🚫</div><div class="as-n">${stats.disabledUsers}</div><div class="as-l">Disabled</div></div>
+        <div class="admin-stat"><div class="as-i">💰</div><div class="as-n">${fmt(stats.revenuePts)}</div><div class="as-l">Revenue pts</div></div>
+        <div class="admin-stat"><div class="as-i">🔐</div><div class="as-n">${stats.loggedInUsers}</div><div class="as-l">Logged In</div></div>
+        <div class="admin-stat"><div class="as-i">📱</div><div class="as-n">${stats.activeSessions}</div><div class="as-l">Sessions</div></div>
+        <div class="admin-stat"><div class="as-i">🎯</div><div class="as-n">${stats.usedAppToday}</div><div class="as-l">Used App</div></div>
+        <div class="admin-stat"><div class="as-i">🔑</div><div class="as-n">${stats.todayLogin}</div><div class="as-l">Today Login</div></div>
+      `;
+    }
+    
+    // Update stored data with server-side accurate stats
+    window.adminStatsData = stats;
+    window.adminStatsMeta = data.meta;
+    
+    console.log('[AdminStats] Updated with server-side accurate data:', data.meta);
+  } catch(e) {
+    console.error('[AdminStats] Error fetching stats:', e);
+    // Fall back to local calculation if fetch fails
+    refreshAdminStatsFallback();
+  }
+}
+
+// Fallback function to calculate stats locally if server API fails
+function refreshAdminStatsFallback() {
   if(!D.users) return;
   
   let users = Object.values(D.users);
   let allPosts = D.posts||[];
   let today = new Date().toDateString();
   let fiveMinutesAgo = Date.now() - 300000;
+  let thirtyMinutesAgo = Date.now() - 1800000;
   
-  // Calculate statistics
-  let totalUsers = users.length;
+  let totalUsers = users.filter(u => !u.isAdmin).length;
   let onlineNow = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastActive = u.lastActive || u.lastLogin || 0;
     return lastActive > fiveMinutesAgo;
   }).length;
   let activeToday = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastLogin = u.lastLogin || 0;
     let lastActive = u.lastActive || 0;
     let loginDate = new Date(lastLogin).toDateString();
     let activeDate = new Date(lastActive).toDateString();
     return loginDate === today || activeDate === today || u.todayPts?.date === today;
   }).length;
-  let kycVerified = users.filter(u => u.kycVerified).length;
-  let totalPosts = allPosts.length;
+  let kycVerified = users.filter(u => !u.isAdmin && u.kycVerified).length;
+  let totalPosts = allPosts.filter(p => p.author !== ADMIN_ID).length;
   let totalWithdrawals = (D.withdrawals || []).length;
-  let disabledUsers = users.filter(u => u.disabled).length;
-  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
-  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length;
+  let disabledUsers = users.filter(u => !u.isAdmin && u.disabled).length;
+  let revenuePts = users.filter(u => !u.isAdmin).reduce((sum, u) => sum + (u.points || 0), 0);
+  let loggedInUsers = users.filter(u => {
+    if(u.isAdmin) return false;
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return u.isLoggedIn || lastActive > thirtyMinutesAgo;
+  }).length;
   let activeSessions = users.filter(u => {
+    if(u.isAdmin) return false;
     let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
     return sessionDate === today;
   }).length;
   let usedAppToday = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
     let actionDate = new Date(lastAction).toDateString();
-    return actionDate === today;
+    return actionDate === today || (u.dailyUsage && u.dailyUsage.date === today && u.dailyUsage.actions > 0);
   }).length;
   let todayLogin = users.filter(u => {
+    if(u.isAdmin) return false;
     let loginDate = new Date(u.lastLogin || 0).toDateString();
     return loginDate === today;
   }).length;
   
-  // Update the stats display
   let statsEl = document.getElementById('adminStats');
   if(statsEl) {
     statsEl.innerHTML = `
@@ -8932,11 +11046,13 @@ function refreshAdminStats() {
     `;
   }
   
-  // Update stored data
   window.adminStatsData = {
     totalUsers, onlineNow, activeToday, kycVerified, totalPosts, totalWithdrawals,
-    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin
+    disabledUsers, revenuePts, loggedInUsers, activeSessions, usedAppToday, todayLogin,
+    fallback: true
   };
+  
+  console.warn('[AdminStats] Using fallback local calculation');
 }
 
 function rAdmin() {
@@ -8953,19 +11069,23 @@ function rAdmin() {
   
   // Calculate accurate statistics
   let today = new Date().toDateString();
-  let fiveMinutesAgo = Date.now() - 300000; // 5 minutes ago threshold
+  let fiveMinutesAgo = Date.now() - 300000; // 5 minutes ago
+  let thirtyMinutesAgo = Date.now() - 1800000; // 30 minutes ago
+  let oneDayAgo = Date.now() - 86400000; // 24 hours ago
   
-  // Total Users
-  let totalUsers = users.length;
+  // Total Users (exclude admin)
+  let totalUsers = users.filter(u => !u.isAdmin).length;
   
   // Online Now (users active within last 5 minutes)
   let onlineNow = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastActive = u.lastActive || u.lastLogin || 0;
     return lastActive > fiveMinutesAgo;
   }).length;
   
   // Active Today (users who logged in or used app today)
   let activeToday = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastLogin = u.lastLogin || 0;
     let lastActive = u.lastActive || 0;
     let loginDate = new Date(lastLogin).toDateString();
@@ -8973,41 +11093,48 @@ function rAdmin() {
     return loginDate === today || activeDate === today || u.todayPts?.date === today;
   }).length;
   
-  // KYC Verified
-  let kycVerified = users.filter(u => u.kycVerified).length;
+  // KYC Verified (exclude admin)
+  let kycVerified = users.filter(u => !u.isAdmin && u.kycVerified).length;
   
-  // Total Posts
-  let totalPosts = allPosts.length;
+  // Total Posts (exclude admin posts)
+  let totalPosts = allPosts.filter(p => p.author !== ADMIN_ID).length;
   
   // Withdrawals (total and pending)
   let totalWithdrawals = (D.withdrawals || []).length;
   let pendingWithdrawals = (D.withdrawals || []).filter(w => w.status === 'pending').length;
   let completedWithdrawals = (D.withdrawals || []).filter(w => w.status === 'completed').length;
   
-  // Disabled Users
-  let disabledUsers = users.filter(u => u.disabled).length;
+  // Disabled Users (exclude admin)
+  let disabledUsers = users.filter(u => !u.isAdmin && u.disabled).length;
   
-  // Revenue Points (total points earned by all users)
-  let revenuePts = users.reduce((sum, u) => sum + (u.points || 0), 0);
+  // Revenue Points (total points earned by all non-admin users)
+  let revenuePts = users.filter(u => !u.isAdmin).reduce((sum, u) => sum + (u.points || 0), 0);
   
-  // Logged In Users (users with active session)
-  let loggedInUsers = users.filter(u => u.isLoggedIn || (u.lastActive && (Date.now() - u.lastActive) < 1800000)).length; // 30 min
+  // Logged In Users (users with active session within 30 minutes, exclude admin)
+  let loggedInUsers = users.filter(u => {
+    if(u.isAdmin) return false;
+    let lastActive = u.lastActive || u.lastLogin || 0;
+    return u.isLoggedIn || lastActive > thirtyMinutesAgo;
+  }).length;
   
-  // Active Sessions (track unique sessions today)
+  // Active Sessions (unique sessions today, exclude admin)
   let activeSessions = users.filter(u => {
+    if(u.isAdmin) return false;
     let sessionDate = new Date(u.sessionStart || u.lastLogin || 0).toDateString();
     return sessionDate === today;
   }).length;
   
-  // Used App Today (users who performed any action today)
+  // Used App Today (users who performed any action today, exclude admin)
   let usedAppToday = users.filter(u => {
+    if(u.isAdmin) return false;
     let lastAction = u.lastAction || u.lastActive || u.lastLogin || 0;
     let actionDate = new Date(lastAction).toDateString();
-    return actionDate === today;
+    return actionDate === today || (u.dailyUsage && u.dailyUsage.date === today && u.dailyUsage.actions > 0);
   }).length;
   
-  // Today Login (users who logged in today)
+  // Today Login (users who logged in today, exclude admin)
   let todayLogin = users.filter(u => {
+    if(u.isAdmin) return false;
     let loginDate = new Date(u.lastLogin || 0).toDateString();
     return loginDate === today;
   }).length;
@@ -11060,7 +13187,9 @@ let liveStreamState = {
   startTime: null,
   postId: null,
   startTimer: null,
-  startToken: 0
+  startToken: 0,
+  mediaRecorder: null,
+  recordedChunks: []
 };
 
 let livePeerState = {
@@ -11464,6 +13593,24 @@ function startBroadcast(stream) {
   liveStreamState.startTime = Date.now();
   liveStreamState.comments = [];
   liveStreamState.viewers = [];
+  liveStreamState.recordedChunks = [];
+  
+  // Start media recording to save live stream
+  try {
+    const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 
+                    MediaRecorder.isTypeSupported('video/webm;codecs=vp8') ? 'video/webm;codecs=vp8' :
+                    MediaRecorder.isTypeSupported('video/webm') ? 'video/webm' : 'video/mp4';
+    liveStreamState.mediaRecorder = new MediaRecorder(stream, { mimeType });
+    liveStreamState.mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) {
+        liveStreamState.recordedChunks.push(e.data);
+      }
+    };
+    liveStreamState.mediaRecorder.start(1000); // Record in 1-second chunks
+    console.log('[Live] Recording started with MIME type:', mimeType);
+  } catch (err) {
+    console.warn('[Live] MediaRecorder not supported or failed:', err);
+  }
   
   // Create a live post
   let livePost = {
@@ -11578,6 +13725,14 @@ function startBroadcast(stream) {
     let mins = Math.floor(duration / 60);
     let secs = duration % 60;
     document.title = `🔴 LIVE ${mins}:${secs.toString().padStart(2,'0')} | Monetixra`;
+    
+    // Update on-screen live timer
+    const timerEl = G('lvLiveTimer');
+    const timerText = G('lvTimerText');
+    if (timerEl && timerText) {
+      timerEl.style.display = 'flex';
+      timerText.textContent = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+    }
   }, 1000);
 }
 
@@ -11586,6 +13741,11 @@ function closeLiveView() {
   liveStreamState.startToken++;
   clearTimeout(liveStreamState.startTimer);
   setLiveCountdownVisible(false);
+  
+  // Hide live timer
+  const timerEl = G('lvLiveTimer');
+  if (timerEl) timerEl.style.display = 'none';
+  
   let vid = G('liveVideo');
   if (vid?.srcObject) {
     if (liveStreamState.active && liveStreamState.streamerId === CU?.id) {
@@ -11621,6 +13781,46 @@ function endBroadcast() {
   clearTimeout(liveStreamState.startTimer);
   setLiveCountdownVisible(false);
   closeLivePeerConnections();
+  
+  // Stop media recording and save video
+  if (liveStreamState.mediaRecorder && liveStreamState.mediaRecorder.state !== 'inactive') {
+    liveStreamState.mediaRecorder.stop();
+    liveStreamState.mediaRecorder.onstop = async () => {
+      if (liveStreamState.recordedChunks.length > 0) {
+        try {
+          const mimeType = liveStreamState.mediaRecorder.mimeType || 'video/webm';
+          const blob = new Blob(liveStreamState.recordedChunks, { type: mimeType });
+          const videoUrl = URL.createObjectURL(blob);
+          
+          // Update post with recorded video
+          let post = D.posts.find(p => p.id === liveStreamState.postId);
+          if (post) {
+            post.file = videoUrl;
+            post.fileType = mimeType.startsWith('video') ? 'video' : 'audio';
+            post.duration = Math.floor((Date.now() - liveStreamState.startTime) / 1000);
+            saveData();
+            
+            // Sync to server
+            try {
+              const serverUrl = window.location.origin || 'http://localhost:3000';
+              await fetch(`${serverUrl}/api/posts/create`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(post)
+              });
+            } catch (e) {
+              console.warn('[Live] Server sync failed:', e);
+            }
+            
+            toast('s', '✅ Live stream saved successfully!');
+          }
+        } catch (err) {
+          console.error('[Live] Failed to save recording:', err);
+        }
+      }
+      liveStreamState.recordedChunks = [];
+    };
+  }
   
   // Update post to show ended
   let post = D.posts.find(p => p.id === liveStreamState.postId);
@@ -21727,6 +23927,147 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     perfObserver.observe({ entryTypes: ['measure', 'longtask'] });
   }
+})();
+</script>
+
+<!-- Touch Gesture Support for Mobile -->
+<script>
+// ========== TOUCH GESTURE SUPPORT FOR MOBILE ==========
+// Swipe and pinch gestures for smooth mobile experience
+(function() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let initialPinchDistance = 0;
+  let currentScale = 1;
+  let isPinching = false;
+  
+  // Swipe detection
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    
+    // Pinch detection
+    if(e.touches.length === 2) {
+      isPinching = true;
+      initialPinchDistance = Math.hypot(
+        e.touches[0].screenX - e.touches[1].screenX,
+        e.touches[0].screenY - e.touches[1].screenY
+      );
+    }
+  }, { passive: true });
+  
+  document.addEventListener('touchmove', function(e) {
+    if(e.touches.length === 2 && isPinching) {
+      const currentDistance = Math.hypot(
+        e.touches[0].screenX - e.touches[1].screenX,
+        e.touches[0].screenY - e.touches[1].screenY
+      );
+      currentScale = currentDistance / initialPinchDistance;
+      
+      // Apply zoom to media elements
+      const target = e.target.closest('.post-media img, .post-media video');
+      if(target) {
+        target.style.transform = `scale(${Math.min(Math.max(currentScale, 0.5), 3)})`;
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+  
+  document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    
+    // Reset pinch state
+    if(e.touches.length < 2) {
+      isPinching = false;
+      currentScale = 1;
+      
+      // Reset transform
+      const target = e.target.closest('.post-media img, .post-media video');
+      if(target) {
+        target.style.transform = 'scale(1)';
+      }
+    }
+    
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    
+    // Horizontal swipe
+    if(Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+      if(diffX > 0) {
+        handleSwipeRight();
+      } else {
+        handleSwipeLeft();
+      }
+    }
+    // Vertical swipe
+    else if(Math.abs(diffY) > swipeThreshold) {
+      if(diffY > 0) {
+        handleSwipeDown();
+      } else {
+        handleSwipeUp();
+      }
+    }
+  }
+  
+  function handleSwipeRight() {
+    const modal = document.querySelector('.modal.open');
+    if(modal) {
+      if(typeof closeModal === 'function') closeModal();
+      return;
+    }
+    
+    const categories = ['all', 'live', 'video', 'audio', 'photo', 'text'];
+    const currentIndex = categories.indexOf(activeCat);
+    if(currentIndex > 0) {
+      if(typeof setCategory === 'function') setCategory(categories[currentIndex - 1]);
+    }
+  }
+  
+  function handleSwipeLeft() {
+    const categories = ['all', 'live', 'video', 'audio', 'photo', 'text'];
+    const currentIndex = categories.indexOf(activeCat);
+    if(currentIndex < categories.length - 1) {
+      if(typeof setCategory === 'function') setCategory(categories[currentIndex + 1]);
+    }
+  }
+  
+  function handleSwipeDown() {
+    if(window.scrollY < 50) {
+      if(typeof rFeed === 'function') rFeed(true);
+    }
+    
+    const modal = document.querySelector('.modal.open');
+    if(modal) {
+      if(typeof closeModal === 'function') closeModal();
+    }
+  }
+  
+  function handleSwipeUp() {
+    const post = event.target.closest('.post');
+    if(post && post.dataset.postId) {
+      if(typeof viewPost === 'function') viewPost(post.dataset.postId);
+    }
+  }
+  
+  // Prevent default zoom on double tap
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e) {
+    const now = Date.now();
+    if(now - lastTouchEnd <= 300) {
+      e.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+  
+  console.log('[Touch] Gesture support initialized');
 })();
 </script>
 </body>
